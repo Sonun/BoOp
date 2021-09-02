@@ -16,6 +16,7 @@ namespace BoOp.Business.Models
         public string Publisher { get; set; } // Verlag
 
         // Obligatory Properties
+        public User LendBy { get; set; }
         public string ShelfNumber { get; set; }
         public List<string> Category { get; set; }
         public List<string> Keywords { get; set; } // Schlagwörter

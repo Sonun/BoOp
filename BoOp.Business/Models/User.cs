@@ -10,10 +10,10 @@ namespace BoOp.Business.Models
     {
         public enum Rights
         {
-            Leser, // Reservieren, Ausleihen, Zurückgeben
-            Schulhelfer, // Ausleihen und Zurückgeben für andere, Bücher und Benutzer anlegen (nicht löschen)
-            BiboTeam, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
-            Admin // Alles (BiboTeam anlegen und löschen)
+            SIMPLEREADER, // Reservieren, Ausleihen, Zurückgeben
+            HELPER, // Ausleihen und Zurückgeben für andere, Bücher und Benutzer anlegen (nicht löschen)
+            BIBOTEAM, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
+            ADMIN // Alles (BiboTeam anlegen und löschen)
         }
 
         public string ID { get; set; }
@@ -21,5 +21,6 @@ namespace BoOp.Business.Models
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public DateTime Birthdate { get; set; }
+        public List<Book> LendedBooks { get; set; }
     }
 }
