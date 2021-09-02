@@ -8,7 +8,9 @@
         xmlns:viewModelUtils="clr-namespace:BoOp.UI.WPF.ViewModels.ViewModelUtils"
         xmlns:local="clr-namespace:BoOp.UI.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}">
         
     <Window.Resources>
@@ -17,9 +19,19 @@
             <views:LoginView/>
         </DataTemplate>
 
+        <DataTemplate x:Key="ScanUserViewTemplate">
+            <views:ScanUserView/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BookViewTemplate">
+            <views:BookView/>
+        </DataTemplate>
+
         <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
-                                        LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
-                                        />
+                                                 ScanUserViewModelTemplate="{StaticResource ScanUserViewTemplate}"
+                                                 LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
+                                                 BookViewModelTemplate="{StaticResource BookViewTemplate}"
+                                                 />
     </Window.Resources>
 
     <Grid>

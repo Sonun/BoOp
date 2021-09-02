@@ -9,5 +9,7 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
     public interface INavigationService
     {
         void ShowLoginView();
+        void ShowScanUserView();
+        void ShowBookView();
     }
 }

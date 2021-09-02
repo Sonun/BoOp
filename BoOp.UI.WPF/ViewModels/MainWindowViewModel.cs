@@ -18,12 +18,22 @@ namespace BoOp.UI.WPF.ViewModels
         public MainWindowViewModel(Dispatcher dispatcher)
         {
             _dispatcher = dispatcher;
-            ShowLoginView();
+            ShowScanUserView();
+        }
+
+        public void ShowScanUserView()
+        {
+            CurrentViewModel = new ScanUserViewModel(this);
         }
 
         public void ShowLoginView()
         {
             CurrentViewModel = new LoginViewModel(this); ;
+        }
+
+        public void ShowBookView()
+        {
+            CurrentViewModel = new BookViewModel(this);
         }
     }
 }

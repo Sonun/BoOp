@@ -40,15 +40,14 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _navigationService = navigationService;
             LoginCommand = new DelegateCommand(
-                (o) =>
+                x =>
                 {
-                    return !string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password);
+                    return !string.IsNullOrEmpty(Password);
                 },
 
-                (o) =>
+                x =>
                 {
-                    Password = "";
-                    Username = "";
+                    _navigationService.ShowBookView();
                 }
             );
 
