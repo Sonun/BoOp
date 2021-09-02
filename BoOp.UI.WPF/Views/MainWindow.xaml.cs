@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoOp.UI.WPF.ViewModels;
+using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BoOp.UI.WPF
 {
@@ -20,9 +9,14 @@ namespace BoOp.UI.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public INavigationService NavigationService { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            NavigationService = new MainWindowViewModel(Dispatcher);
+            DataContext = NavigationService;
         }
     }
 }
