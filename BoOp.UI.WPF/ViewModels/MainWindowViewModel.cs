@@ -1,58 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoOp.UI.WPF.ViewModels.ViewModelUtils;
+using System;
+using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-    class MainWindowViewModel : ViewModel
+    class MainWindowViewModel : ViewModel, INavigationService
     {
-        private string _bookname;
-        private string _username;
+        private readonly Dispatcher _dispatcher; 
+        private ViewModel _currentViewModel;
 
-        public DelegateCommand ClearCommand { get; set; }
-
-        public string Bookname { 
-            get => _bookname; 
-            set
-            {
-                _bookname = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(UserOwnsBook));
-                ClearCommand.OnExecuteChanged();
-            }
-        }
-        public string Username {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(UserOwnsBook));
-                ClearCommand.OnExecuteChanged();
-            }
-        }
-
-        public string UserOwnsBook => $"{Username} gehört {Bookname}";
-
-        public MainWindowViewModel()
+        public ViewModel CurrentViewModel
         {
-            ClearCommand = new DelegateCommand(
-                (o) =>
-                {
-                    return !string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Bookname);
-                },
+            get { return _currentViewModel; }
+            private set { SetValue(ref _currentViewModel, value); }
+        }
 
-                (o) =>
-                {
-                    Bookname = "";
-                    Username = "";
-                }
-            );
+        public MainWindowViewModel(Dispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+            ShowLoginView();
+        }
 
-            Bookname = "book";
-            Username = "user";
+        public void ShowLoginView()
+        {
+            CurrentViewModel = new LoginViewModel(this); ;
         }
     }
 }

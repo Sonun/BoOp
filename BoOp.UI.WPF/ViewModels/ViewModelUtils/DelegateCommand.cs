@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-    class DelegateCommand : ICommand
+    public class DelegateCommand : ICommand
     {
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;

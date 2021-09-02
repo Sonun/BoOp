@@ -12,6 +12,20 @@ namespace BoOp.UI.WPF.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected bool SetValue<T>(ref T backingField, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingField, newValue))
+            {
+                return false;
+            }
+
+            backingField = newValue;
+
+            // ReSharper disable once ExplicitCallerInfoArgument
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if(!string.IsNullOrEmpty(propertyName))

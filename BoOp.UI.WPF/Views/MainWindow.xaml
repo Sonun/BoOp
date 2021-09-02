@@ -3,17 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:views="clr-namespace:BoOp.UI.WPF.Views"
         xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
+        xmlns:viewModelUtils="clr-namespace:BoOp.UI.WPF.ViewModels.ViewModelUtils"
         xmlns:local="clr-namespace:BoOp.UI.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <viewmodels:MainWindowViewModel/>
-    </Window.DataContext>
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}">
+        
+    <Window.Resources>
+
+        <DataTemplate x:Key="LoginViewTemplate">
+            <views:LoginView/>
+        </DataTemplate>
+
+        <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
+                                        LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
+                                        />
+    </Window.Resources>
+
     <Grid>
-        <TextBox Width="100" Height="100" HorizontalAlignment="Right" Text="{Binding Bookname}"/>
-        <TextBox Width="100" Height="100" HorizontalAlignment="Left" Text="{Binding Username}"/>
-        <TextBlock Height="100" HorizontalAlignment="Center" Text="{Binding UserOwnsBook}"/>
-        <Button VerticalAlignment="Bottom" Content="Clear" Command="{Binding ClearCommand}"/>
+        <ContentPresenter Content="{Binding CurrentViewModel}" ContentTemplateSelector="{StaticResource MainDataTemplateSelector}" />
     </Grid>
 </Window>
