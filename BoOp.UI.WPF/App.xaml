@@ -1,9 +1,23 @@
 ﻿<Application x:Class="BoOp.UI.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BoOp.UI.WPF"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <!--
+        Primary color #82D5EF: use as background for big elements like navbar
+        Secondary color #70C6E1: use inside primary color
+        Drop shadow color #ccc: shadow under elements like buttons, searchbar
+        Available color #4ADB72: for available books
+        Unavailable color #EA3E3E: for unavailable books
+        PS: use white in places where theres too much primary color
+        -->
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/ApplicationAssets.xaml" />
+                <!-- <ResourceDictionary Source="Controls.Controls.xaml" /> -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
