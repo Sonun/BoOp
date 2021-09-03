@@ -16,6 +16,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _status;
         private Scanner _scanner;
         private Dispatcher _dispatcher;
+        private bool _isScanning;
 
         public DelegateCommand TestButtonCommand { get; set; }
 
@@ -52,19 +53,21 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void _scanner_BarcodeScanned(Barcode barcode)
         {
-            Status = "Barcode gescannt!";
-            Thread.Sleep(1000);
+            Status = "Barcode gescannt mit ID: \n" + barcode.Text;
+            Thread.Sleep(2000);
             _navigationService.ShowBookView();
+            _isScanning = false;
 
         }
 
         public void Scan()
         {
+            _isScanning = true;
             _dispatcher.Invoke(() =>
             {
                 Task.Run(() =>
                 {
-                    while (true)
+                    while (_isScanning)
                     {
                         _scanner.Scan();
                     }
