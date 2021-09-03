@@ -23,12 +23,12 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowScanUserView()
         {
-            CurrentViewModel = new ScanUserViewModel(this);
+            CurrentViewModel = new ScanUserViewModel(this, _dispatcher);
         }
 
         public void ShowLoginView()
         {
-            CurrentViewModel = new LoginViewModel(this); ;
+            CurrentViewModel = new LoginViewModel(this, 1); ;
         }
 
         public void ShowBookView()
