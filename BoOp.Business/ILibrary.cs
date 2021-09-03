@@ -1,4 +1,5 @@
-﻿using BoOp.Business.Models;
+﻿using BoOp.Business.Books;
+using BoOp.Business.Users;
 
 namespace BoOp.Business
 {

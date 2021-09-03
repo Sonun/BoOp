@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoOp.Business.IO;
+using System;
 
 namespace BoOp.UIConsole
 {
@@ -6,7 +7,15 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Scanner scanner = new Scanner();
+
+            scanner.BarcodeScanned += Scanner_BarcodeScanned;
+
+        }
+
+        private static void Scanner_BarcodeScanned(Barcode barcode)
+        {
+            Console.WriteLine("Barcode gefunden mit Text: {0}", barcode.Text);
         }
     }
 }
