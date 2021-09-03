@@ -136,7 +136,9 @@ namespace BoOp.Business
 
         public void AddBook(Book book)
         {
-            throw new NotImplementedException();
+            _loggedInUnser = null;
+            if(_loggedInUnser != null)
+                throw new NotImplementedException();
         }
 
         public void LendBook(User user, Book book)
