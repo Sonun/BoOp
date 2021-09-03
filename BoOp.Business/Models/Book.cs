@@ -21,7 +21,7 @@ namespace BoOp.Business.Models
         public List<string> Category { get; set; }
         public List<string> Keywords { get; set; } // Schlagwörter
         public int Version { get; set; } // Auflage
-        public int RecommendedAge { get; set; }
+        public string RecommendedAge { get; set; }
         public List<BookReference> References {get; set;}
 
     }

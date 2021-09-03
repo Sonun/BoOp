@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoOp.Business;
+using System;
 
 namespace BoOp.UIConsole
 {
@@ -6,7 +7,8 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine(SQLDataAccess.GetConncetionString());
+            Console.ReadLine();
         }
     }
 }
