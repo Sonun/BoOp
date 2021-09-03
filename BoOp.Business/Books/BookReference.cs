@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoOp.Business.Models
+namespace BoOp.Business.Books
 {
     public class BookReference
     {
