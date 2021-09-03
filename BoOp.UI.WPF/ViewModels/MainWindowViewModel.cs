@@ -28,7 +28,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowLoginView()
         {
-            CurrentViewModel = new LoginViewModel(this); ;
+            CurrentViewModel = new LoginViewModel(this, 1); ;
         }
 
         public void ShowBookView()
