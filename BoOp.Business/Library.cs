@@ -1,4 +1,5 @@
-﻿using BoOp.Business.Models;
+﻿using BoOp.DBAccessor;
+using BoOp.DBAccessor.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,24 @@ namespace BoOp.Business
 {
     public class Library : ILibrary
     {
-        private User _loggedInUnser;
+        private UserModel _loggedInUnser;
 
         private readonly string _connectionString;
-        private SQLDataAccess _db;
+        private SQLDataAccessor _db;
 
 
 
         public Library(string connectionString)
         {
             _connectionString = connectionString;
-            _db = new SQLDataAccess();
+            _db = new SQLDataAccessor();
         }
 
-        public List<Book> GetAllBooks()
+        public List<BuchModel> GetAllBooks()
         {
             string sql = "select * from dbo.Buecher";
 
-            return _db.LoadData<Book, dynamic>(sql, new { }, _connectionString);
+            return _db.LoadData<BuchModel, dynamic>(sql, new { }, _connectionString);
         }
 
         //public Book GetBookById(int id)
@@ -134,19 +135,19 @@ namespace BoOp.Business
         //}
 
 
-        public void AddBook(Book book)
+        public void AddBook(BuchModel book)
         {
             _loggedInUnser = null;
             if(_loggedInUnser != null)
                 throw new NotImplementedException();
         }
 
-        public void LendBook(User user, Book book)
+        public void LendBook(UserModel user, BuchModel book)
         {
             throw new NotImplementedException();
         }
 
-        public void ReturnBook(Book book)
+        public void ReturnBook(BuchModel book)
         {
             throw new NotImplementedException();
         }

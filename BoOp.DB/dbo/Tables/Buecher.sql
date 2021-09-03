@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [BuchGenre_ID] INT NULL, 
-    [BuchSchlagwörter_ID] INT NULL, 
+    [BuchSchlagwoerter_ID] INT NULL, 
     [Person_ID] INT NULL, 
     [Titel] NVARCHAR(50) NOT NULL, 
     [Author] NVARCHAR(50) NOT NULL, 

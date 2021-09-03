@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoOp.Business
+namespace BoOp.DBAccessor
 {
-    public class SQLDataAccess
+    public class SQLDataAccessor
     {
         public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionString)
         {
