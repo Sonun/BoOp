@@ -25,18 +25,13 @@ namespace BoOp.Business.IO
 
         public bool IsScanning { get; private set; }
 
-        private Thread scanTask;
-
         public Scanner()
         {
             IsScanning = false;
         }
-
-
-
         public void Scan()
         {
-            //BarcodeScanned.Invoke(new Barcode("Test"));
+            BarcodeScanned.Invoke(new Barcode("Test"));
         }
 
     }

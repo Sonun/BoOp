@@ -18,7 +18,7 @@ namespace BoOp.Business.IO
         public Barcode(string text)
         {
             ScanDate = DateTime.Now;
-            Text = text ?? throw new ArgumentNullException(nameof(text));
+            Text = text;
         }
     }
 }
