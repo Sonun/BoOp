@@ -24,5 +24,10 @@ namespace BoOp.UI.WPF.Views
         {
             InitializeComponent();
         }
+
+    private void TextBox_TextChanged()
+    {
+
     }
+  }
 }
