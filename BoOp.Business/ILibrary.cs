@@ -1,18 +1,17 @@
-﻿using BoOp.Business.Books;
-using BoOp.Business.Users;
+﻿using BoOp.DBAccessor.Models;
 
 namespace BoOp.Business
 {
     public interface ILibrary
     {
         // Dependent on login
-        public void LendBook(User user, Book book);
+        public void LendBook(UserModel user, BuchModel book);
 
         // Independent on login
-        public void ReturnBook(Book book);
+        public void ReturnBook(BuchModel book);
 
         // Dependent on User Rights
-        public void AddBook(Book book);
+        public void AddBook(BuchModel book);
 
     }
 }

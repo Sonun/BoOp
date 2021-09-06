@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Schlagwoerter]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Wort] NVARCHAR(50) NOT NULL
+
+)

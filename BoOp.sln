@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoOp.UIConsole", "BoOp.UICo
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BoOp.DB", "BoOp.DB\BoOp.DB.sqlproj", "{4E50A8BC-37EF-48ED-93B8-71E13CA3B102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoOp.DBAccessor", "BoOp.DBAccessor\BoOp.DBAccessor.csproj", "{A6D112C6-EEAA-4972-8948-E4DF0A99BF8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{4E50A8BC-37EF-48ED-93B8-71E13CA3B102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E50A8BC-37EF-48ED-93B8-71E13CA3B102}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E50A8BC-37EF-48ED-93B8-71E13CA3B102}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A6D112C6-EEAA-4972-8948-E4DF0A99BF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D112C6-EEAA-4972-8948-E4DF0A99BF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D112C6-EEAA-4972-8948-E4DF0A99BF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D112C6-EEAA-4972-8948-E4DF0A99BF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
