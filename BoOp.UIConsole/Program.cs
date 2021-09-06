@@ -1,4 +1,5 @@
-﻿using BoOp.Business.IO;
+﻿using BoOp.Business;
+using BoOp.Business.IO;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +10,9 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
+            var lib = new Library();
+            var books = lib.GetAllBooks();
+            
             string pass = "myPassword";
 
             Console.WriteLine(pass);
