@@ -44,7 +44,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i <= bookList.Count - 2; i++)
                 {
-                    int comparison = String.Compare(bookList[i].Titel, bookList[i + 1].Titel, comparisonType: StringComparison.OrdinalIgnoreCase);
+                    int comparison = string.Compare(bookList[i].Titel, bookList[i + 1].Titel, comparisonType: StringComparison.InvariantCulture);
 
                     if (comparison > 0)
                     {
@@ -59,7 +59,7 @@ namespace BoOp.Business
 
         public static List<BuchModel> SearchForWordInBooklist(List<BuchModel> bookList, string searchWord)
         {
-            List<BuchModel> temp = bookList
+            List<BuchModel> temp = SortedBookListByTitel(bookList)
                 .Where(x => x.Titel.ToLower()
                 .Contains(searchWord.ToLower()))
                 .ToList();
@@ -80,7 +80,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i <= bookList.Count - 2; i++)
                 {
-                    int comparison = String.Compare(bookList[i].Author, bookList[i + 1].Author, comparisonType: StringComparison.OrdinalIgnoreCase);
+                    int comparison = string.Compare(bookList[i].Author, bookList[i + 1].Author, comparisonType: StringComparison.OrdinalIgnoreCase);
 
                     if (comparison > 0)
                     {

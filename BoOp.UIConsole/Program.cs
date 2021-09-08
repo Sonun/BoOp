@@ -21,7 +21,7 @@ namespace BoOp.UIConsole
                 bl.Add(bm);
             }
 
-            bl = Utils.SearchForWordInBooklist(bl, "jk");
+            bl = Utils.SearchForWordInBooklist(bl, "wli");
 
             foreach(var book in bl)
             {
