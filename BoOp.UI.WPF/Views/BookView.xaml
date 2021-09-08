@@ -4,57 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="920" d:DesignWidth="1080"
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="18*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#82D5EF">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="170" />
             </Grid.ColumnDefinitions>
-            <!--TODO: icon should disappear when user clicks on the bar
-            alternatively: dont show searchbar and make icon a button, user clicks on button, searchbar fades in from left to right PS: animation-->
-            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxBaseControlTemplate}" />
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource RoundedButtonStyle}" Margin="0, 0, 10, 0" Content="Loeschen" />
-                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Margin="0, 0, 10, 0" Content="Hinzufuegen" />
-                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Margin="0, 0, 10, 0" Content="Reservieren" />
-                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Margin="0, 0, 10, 0" Content="Admin" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="38"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <!--TODO: icon should disappear when user clicks on the bar
+                alternatively: dont show searchbar and make icon a button, user clicks on button, searchbar fades in from left to right PS: animation-->
+                <Button Grid.Column="0" Style="{StaticResource IconButton}">
+                    <Image HorizontalAlignment="Left" Source="{StaticResource SearchIcon}" Width="32" Height="32"/>
+                </Button>
+                <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}"  Template="{StaticResource TextBoxControlTemplate}"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  >
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" />
             </StackPanel>
-            <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" />
         </Grid>
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.35*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" />
-            <Button Grid.Column="1" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" />
-            <Button Grid.Column="2" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" />
-            <Button Grid.Column="3" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" />
+            <Button Grid.Column="0" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Name"/>
+            <Button Grid.Column="1" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Author"/>
+            <Button Grid.Column="2" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="ISBN"/>
+            <Button Grid.Column="3" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Rating"/>
         </Grid>
         <!--Books info-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="5" />
             </Grid.RowDefinitions>
             <!--Examples for books-->
             <Grid Grid.Row="0" Background="#4ADB72">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1.35*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Content="Harry Potter and the Philosopher's Stone" />
@@ -64,9 +69,9 @@
             </Grid>
             <Grid Grid.Row="1" Background="#EA3E3E">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1.35*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Content="Harry Potter and the Philosopher's Stone" />
