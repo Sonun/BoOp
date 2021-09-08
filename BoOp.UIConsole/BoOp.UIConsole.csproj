@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BoOp.Business\BoOp.Business.csproj" />
+    <ProjectReference Include="..\BoOp.DBAccessor\BoOp.DBAccessor.csproj" />
   </ItemGroup>
 
 </Project>

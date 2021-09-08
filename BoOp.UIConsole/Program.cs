@@ -1,6 +1,8 @@
 ﻿using BoOp.Business;
 using BoOp.Business.IO;
+using BoOp.DBAccessor.Models;
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,9 +12,23 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
-            var lib = new Library();
-            var books = lib.GetAllBooks();
-            
+            var bl = new List<BuchModel>();
+            BuchModel bm;
+            for (int i = 0; i < 10; i++)
+            {
+                bm = new BuchModel();
+                bm.Titel = i % 2 == 0 ? "JK Rowling" : "Walter Tevis";
+                bl.Add(bm);
+            }
+
+            var sortedList = Utils.SortedBookListByTitel(bl);
+
+            for (int i = 0; i < sortedList.Count; i++)
+                Console.WriteLine(sortedList[i].Titel);
+        }
+
+        static void TestHash()
+        {
             string pass = "myPassword";
 
             Console.WriteLine(pass);
@@ -20,7 +36,7 @@ namespace BoOp.UIConsole
             string pass2 = "notmyPass";
             Console.WriteLine(pass2);
 
-            if(Hash(pass) == Hash(pass2))
+            if (Hash(pass) == Hash(pass2))
             {
                 Console.WriteLine("the hashes are equal");
             }
@@ -45,10 +61,6 @@ namespace BoOp.UIConsole
 
                 return sb.ToString();
             }
-            Scanner scanner = new Scanner();
-
-            scanner.BarcodeScanned += Scanner_BarcodeScanned;
-
         }
 
         private static void Scanner_BarcodeScanned(Barcode barcode)
