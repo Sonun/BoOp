@@ -19,6 +19,6 @@ namespace BoOp.DBAccessor.Models
         public string ISBN { get; set; }
         public string Altersvorschlag { get; set; }
         public string Regal { get; set; }
-
+        public List<RezensionModel> Rezensionen {get; set;}
     }
 }
