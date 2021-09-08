@@ -17,14 +17,16 @@ namespace BoOp.UIConsole
             for (int i = 0; i < 10; i++)
             {
                 bm = new BuchModel();
-                bm.Titel = i % 2 == 0 ? "JK Rowling" : "Walter Tevis";
+                bm.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i*2;
                 bl.Add(bm);
             }
 
-            var sortedList = Utils.SortedBookListByTitel(bl);
+            bl = Utils.SearchForWordInBooklist(bl, "jk");
 
-            for (int i = 0; i < sortedList.Count; i++)
-                Console.WriteLine(sortedList[i].Titel);
+            foreach(var book in bl)
+            {
+                Console.WriteLine(book.Titel);
+            }
         }
 
         static void TestHash()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using BoOp.DBAccessor.Models;
@@ -54,6 +55,16 @@ namespace BoOp.Business
                 }
             }
             return bookList;
+        }
+
+        public static List<BuchModel> SearchForWordInBooklist(List<BuchModel> bookList, string searchWord)
+        {
+            List<BuchModel> temp = bookList
+                .Where(x => x.Titel.ToLower()
+                .Contains(searchWord.ToLower()))
+                .ToList();
+
+            return temp;
         }
 
         /// <summary>
