@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace BoOp.UI.WPF.Views
 {
-    /// <summary>
-    /// Interaktionslogik für Login.xaml
-    /// </summary>
-    public partial class LoginView : UserControl
+  /// <summary>
+  /// Interaktionslogik für Login.xaml
+  /// </summary>
+  public partial class LoginView : Window
+  {
+    public LoginView()
     {
-        public LoginView()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
     }
+  }
 }

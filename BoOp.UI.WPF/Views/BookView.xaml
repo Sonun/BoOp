@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:BoOp.UI.WPF.Views"
              mc:Ignorable="d"
              d:DesignHeight="920" d:DesignWidth="1080"
              Background="White">
@@ -16,23 +17,25 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="38"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="38" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!--TODO: icon should disappear when user clicks on the bar
                 alternatively: dont show searchbar and make icon a button, user clicks on button, searchbar fades in from left to right PS: animation-->
                 <Button Grid.Column="0" Style="{StaticResource IconButton}">
-                    <Image HorizontalAlignment="Left" Source="{StaticResource SearchIcon}" Width="32" Height="32"/>
+                    <Image HorizontalAlignment="Left" Source="{StaticResource SearchIcon}" Width="32" Height="32" />
                 </Button>
-                <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}"  Template="{StaticResource TextBoxControlTemplate}"/>
+                <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}"  Template="{StaticResource TextBoxControlTemplate}" />
             </Grid>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  >
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" />
             </StackPanel>
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" Click="Button_ClickLoginPage" />
         </Grid>
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">
@@ -42,10 +45,10 @@
                 <ColumnDefinition Width="1.35*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Name"/>
-            <Button Grid.Column="1" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Author"/>
-            <Button Grid.Column="2" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="ISBN"/>
-            <Button Grid.Column="3" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Rating"/>
+            <Button Grid.Column="0" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Name" />
+            <Button Grid.Column="1" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Author" />
+            <Button Grid.Column="2" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="ISBN" />
+            <Button Grid.Column="3" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Rating" />
         </Grid>
         <!--Books info-->
         <Grid Grid.Row="2">
