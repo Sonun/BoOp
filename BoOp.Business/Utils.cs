@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using BoOp.DBAccessor.Models;
+using IronBarCode;
 
 namespace BoOp.Business
 {
@@ -133,6 +134,16 @@ namespace BoOp.Business
                 }
             }
             return bookList;
+        }
+
+        public static string GenerateUniqueBarcode(string bookname)
+        {
+            var barcodeAsString = "boop" + DateTime.Now.Ticks.ToString();
+
+            GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
+            MyBarCode.SaveAsPdf(bookname + ".pdf");
+
+            return barcodeAsString;
         }
     }
 }

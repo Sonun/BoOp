@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}">
-
+    
     <Window.Resources>
 
         <DataTemplate x:Key="LoginViewTemplate">
