@@ -12,18 +12,29 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
+            testbarcode();
+        }
+
+        static void testbarcode()
+        {
+            var temp = Utils.GenerateUniqueBarcode("herr der ringe");
+            Console.WriteLine(temp);
+        }
+
+        static void testsortign()
+        {
             var bl = new List<BuchModel>();
             BuchModel bm;
             for (int i = 0; i < 10; i++)
             {
                 bm = new BuchModel();
-                bm.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i*2;
+                bm.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i * 2;
                 bl.Add(bm);
             }
 
             bl = Utils.SearchForWordInBooklist(bl, "wli");
 
-            foreach(var book in bl)
+            foreach (var book in bl)
             {
                 Console.WriteLine(book.Titel);
             }
