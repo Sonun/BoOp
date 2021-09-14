@@ -12,7 +12,10 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
-            testbarcode();
+            var lib = new Library();
+            var books = lib.GetAllBooks();
+
+            Console.ReadLine();
         }
 
         static void testbarcode()
@@ -28,7 +31,7 @@ namespace BoOp.UIConsole
             for (int i = 0; i < 10; i++)
             {
                 bm = new BuchModel();
-                bm.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i * 2;
+                bm.BasicInfos.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i * 2;
                 bl.Add(bm);
             }
 
@@ -36,7 +39,7 @@ namespace BoOp.UIConsole
 
             foreach (var book in bl)
             {
-                Console.WriteLine(book.Titel);
+                Console.WriteLine(book.BasicInfos.Titel);
             }
         }
 

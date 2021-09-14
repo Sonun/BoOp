@@ -29,13 +29,7 @@ namespace BoOp.DBAccessor.Models
             ADMIN // Alles (BiboTeam anlegen und löschen)
         }
 
-        public int Id { get; set; }
-        public string Vorname { get; set; }
-        public string Nachname { get; set; }
-        public DateTime Geburtsdatum { get; set; }
-        public string Telefonnummer { get; set; }
-        public string EMail { get; set; }
+        public BasicPersonenModel BasicInfos { get; set; }
         public Rechtelevel Rechte { get; set; }
-
     }
 }

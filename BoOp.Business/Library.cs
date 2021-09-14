@@ -29,14 +29,37 @@ namespace BoOp.Business
             }
         }
 
-        public List<BuchModel> GetAllBooks()
+        public List<BasicBuchModel> GetAllBooks()
         {
             // ToDo: Map the references, genres, and key words to the books as wel
-            string sql = "SELECT Id, Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal FROM dbo.Buecher";           
-            return _db.LoadData<BuchModel, dynamic>(sql, new { }, _connectionString);
-        }
+            string sqlBasicBooks = "SELECT Id, Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal FROM dbo.Buecher";           
+            var basicBooks = _db.LoadData<BasicBuchModel, dynamic>(sqlBasicBooks, new { }, _connectionString);
 
-        
+            string sqlBasicBuchGenres = "SELECT * FROM dbo.BuchGenres";
+            var basicBuchGenres = _db.LoadData<BasicBuchGenresModel, dynamic>(sqlBasicBuchGenres, new { }, _connectionString);
+
+            string sqlBasicBuchSchlagwoerter = "SELECT * FROM dbo.BuchSchlagwoerter";
+            var basicBuchSchlagwoerter = _db.LoadData<BasicBuchSchlagwoerterModel, dynamic>(sqlBasicBuchSchlagwoerter, new { }, _connectionString);
+
+            string sqlBasicGenres = "SELECT * FROM dbo.Genre";
+            var basicGenres = _db.LoadData<BasicGenreModel, dynamic>(sqlBasicGenres, new { }, _connectionString);
+
+            string sqlBasicPersonen = "SELECT * FROM dbo.Personen";
+            var basicPersonen = _db.LoadData<BasicPersonenModel, dynamic>(sqlBasicPersonen, new { }, _connectionString);
+
+            string sqlBasicRezensionen = "SELECT * FROM dbo.Rezensionen";
+            var basicRezensionen = _db.LoadData<BasicRezensionenModel, dynamic>(sqlBasicRezensionen, new { }, _connectionString);
+
+            string sqlBasicSchlagwoerter = "SELECT * FROM dbo.Schlagwoerter";
+            var basicSchlagwoerter = _db.LoadData<BasicSchlagwoerterModel, dynamic>(sqlBasicSchlagwoerter, new { }, _connectionString);
+
+            // ToDo: Create List of BuchModel, RezensionenModel, UserModel
+
+
+            return basicBooks;
+    }
+
+
 
 
         public void AddBook(BuchModel book)
