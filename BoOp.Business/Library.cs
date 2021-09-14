@@ -32,7 +32,7 @@ namespace BoOp.Business
         public List<BasicBuchModel> GetAllBooks()
         {
             // ToDo: Map the references, genres, and key words to the books as wel
-            string sqlBasicBooks = "SELECT Id, Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal FROM dbo.Buecher";           
+            string sqlBasicBooks = "SELECT Id, Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal FROM dbo.Buecher";
             var basicBooks = _db.LoadData<BasicBuchModel, dynamic>(sqlBasicBooks, new { }, _connectionString);
 
             string sqlBasicBuchGenres = "SELECT * FROM dbo.BuchGenres";
@@ -55,6 +55,15 @@ namespace BoOp.Business
 
             // ToDo: Create List of BuchModel, RezensionenModel, UserModel
 
+            var allBooks = new List<BuchModel>();
+            basicBooks.ForEach(x => new BuchModel()
+            {
+                BasicInfos = x,
+                Genres = (from buchgenres in basicBuchGenres
+                          join book in basicBooks on buchgenres.BuchID equals book.Id
+                          join genre in basicGenres on buchgenres.GenreID equals genre.Id
+                          select genre.Genrename).ToList()
+            });
 
             return basicBooks;
     }
