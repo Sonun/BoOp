@@ -56,14 +56,14 @@ namespace BoOp.Business
             // ToDo: Create List of BuchModel, RezensionenModel, UserModel
 
             var allBooks = new List<BuchModel>();
-            basicBooks.ForEach(x => new BuchModel()
+            basicBooks.ForEach(x => allBooks.Add(new BuchModel()
             {
                 BasicInfos = x,
                 Genres = (from buchgenres in basicBuchGenres
                           join book in basicBooks on buchgenres.BuchID equals book.Id
                           join genre in basicGenres on buchgenres.GenreID equals genre.Id
                           select genre.Genrename).ToList()
-            });
+            }));
 
             return basicBooks;
     }
