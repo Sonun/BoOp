@@ -62,8 +62,23 @@ namespace BoOp.Business
                 Genres = (from buchgenres in basicBuchGenres
                           join book in basicBooks on buchgenres.BuchID equals book.Id
                           join genre in basicGenres on buchgenres.GenreID equals genre.Id
-                          select genre.Genrename).ToList()
-            }));
+                          select genre.Genrename).ToList(),
+                LendBy = new UserModel()
+                {
+                    BasicInfos = basicPersonen.Where(z => z.Id == x.Person_ID).FirstOrDefault()
+                },
+                Rezensionen = (from buchrezensionen in basicRezensionen
+                               join book in basicBooks on buchrezensionen.BuchID equals book.Id
+                               select new RezensionModel() {
+                                   BasicInfos = new BasicRezensionenModel() { BuchID = buchrezensionen.BuchID, PersonID = buchrezensionen.PersonID, Id = buchrezensionen.Id, Rezensionstext = buchrezensionen.Rezensionstext, Sterne = buchrezensionen.Sterne },
+                                   Author = basicPersonen.Where(z => z.Id == buchrezensionen.PersonID).FirstOrDefault()
+                               }).ToList(),
+                Schlagwoerter = (from buchschlagwoerter in basicBuchSchlagwoerter
+                                 join book in basicBooks on buchschlagwoerter.BuchID equals book.Id
+                                 join schlagwoerter in basicSchlagwoerter on buchschlagwoerter.SchlagwortID equals schlagwoerter.Id
+                                 select schlagwoerter.Wort).ToList()
+
+            })) ;
 
             return basicBooks;
     }

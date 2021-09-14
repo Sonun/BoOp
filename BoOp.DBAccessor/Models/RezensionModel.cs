@@ -9,7 +9,6 @@ namespace BoOp.DBAccessor.Models
     public class RezensionModel
     {
         public BasicRezensionenModel BasicInfos { get; set; }
-        public BuchModel Buch { get; set; }
-        public UserModel Author { get; set; }
+        public BasicPersonenModel Author { get; set; }
     }
 }
