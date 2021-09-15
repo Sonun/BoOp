@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:BoOp.UI.WPF.Views"
+             xmlns:views="clr-namespace:BoOp.UI.WPF.Views" xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BookViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="920" d:DesignWidth="1080"
              Background="White">
@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="18*" />
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0" Background="#82D5EF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -35,7 +36,7 @@
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" />
             </StackPanel>
-            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" Click="Button_ClickLoginPage" />
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding OpenLoginView}" />
         </Grid>
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">

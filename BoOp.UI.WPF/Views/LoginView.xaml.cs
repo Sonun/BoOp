@@ -18,11 +18,12 @@ namespace BoOp.UI.WPF.Views
   /// <summary>
   /// Interaktionslogik für Login.xaml
   /// </summary>
-  public partial class LoginView : Window
+  public partial class LoginView : UserControl
   {
     public LoginView()
     {
-      InitializeComponent();
+      InitializeComponent(); 
     }
+
   }
 }
