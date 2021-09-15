@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-    public class BookViewModel : ViewModel
+  public class BookViewModel : ViewModel
+  {
+    private INavigationService _navigationService;
+    public DelegateCommand OpenLoginView { get; set; }
+    public BookViewModel(INavigationService navigationService)
     {
-        private INavigationService _navigationService;
-
-        public BookViewModel(INavigationService navigationService)
+      _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+      OpenLoginView = new DelegateCommand(
+        x =>
         {
-            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-        }
+          _navigationService.ShowLoginView();
+        });
     }
+  }
 }

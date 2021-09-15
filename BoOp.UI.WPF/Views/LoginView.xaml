@@ -1,28 +1,44 @@
-﻿<Window x:Class="BoOp.UI.WPF.Views.LoginView"
+﻿<UserControl x:Class="BoOp.UI.WPF.Views.LoginView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
+      xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
       mc:Ignorable="d"
-      d:DesignHeight="380" d:DesignWidth="280"
-      xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
-      d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}"
-      Background="#82D5EF">
+      d:DesignHeight="920" d:DesignWidth="1080"
+      Background="{StaticResource Primary}">
 
-    <Grid>
+    <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="380"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Bottom">
-            <StackPanel Orientation="Vertical" Grid.Row="0">
-                <Label Content="Username:" FontSize="16" />
-                <TextBox Text="Test" Style="{StaticResource SearchIconTextBoxTemplate}" />
-                <Label Content="Password:" FontSize="16" />
-                <TextBox Text="Test" Style="{StaticResource SearchIconTextBoxTemplate}" />
-            </StackPanel>
-        </Grid>
-        <Button Grid.Row="1" Style="{StaticResource RoundedButtonStyle}" Content="Login" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border  Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Secondary}" BorderBrush="{StaticResource Secondary}" Padding="2">
+            <Grid Background="{StaticResource Secondary}">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Grid.Row="0">
+                        <Label Content="Username:" FontSize="16" />
+                        <TextBox Style="{StaticResource LoginTextBoxTemplate}"  Text="{Binding Username}"/>
+                        <Label Content="Password:" FontSize="16" />
+                        <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Password}"/>
+                    </StackPanel>
+                </Grid>
+                <Button Grid.Row="1" Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding LoginCommand}"/>
+            </Grid>
+        </Border>     
     </Grid>
-</Window>
+</UserControl>
