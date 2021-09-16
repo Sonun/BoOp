@@ -9,7 +9,7 @@ namespace BoOp.DBAccessor.Models
     public class BasicBuchModel
     {
         public int Id { get; set; }
-        public int Person_ID { get; set; }
+        public int PersonID { get; set; }
         public string Titel { get; set; }
         public string Author { get; set; }
         public string Verlag { get; set; }
