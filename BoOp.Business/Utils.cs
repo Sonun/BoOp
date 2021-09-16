@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -33,11 +34,33 @@ namespace BoOp.Business
         }
 
         /// <summary>
+        /// search for all books containing a string
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        public static ObservableCollection<BuchModel> SearchForWordInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
+        {
+            var temp = SortedBookListByTitel(bookList)
+                .Where(x => x.BasicInfos.Titel.ToLower()
+                .Contains(searchWord.ToLower()))
+                .ToList();
+
+            ObservableCollection<BuchModel> outList = new ObservableCollection<BuchModel>();
+            foreach (var each in temp)
+            {
+                outList.Add(each);
+            }
+
+            return outList;
+        }
+
+        /// <summary>
         /// sorted with bubblesort
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static List<BuchModel> SortedBookListByTitel(List<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByTitel(ObservableCollection<BuchModel> bookList)
         {
             BuchModel tempBook;
 
@@ -58,22 +81,12 @@ namespace BoOp.Business
             return bookList;
         }
 
-        public static List<BuchModel> SearchForWordInBooklist(List<BuchModel> bookList, string searchWord)
-        {
-            List<BuchModel> temp = SortedBookListByTitel(bookList)
-                .Where(x => x.BasicInfos.Titel.ToLower()
-                .Contains(searchWord.ToLower()))
-                .ToList();
-
-            return temp;
-        }
-
         /// <summary>
         /// sorted with bubblesort
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static List<BuchModel> SortedBookListByAuthor(List<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByAuthor(ObservableCollection<BuchModel> bookList)
         {
             BuchModel tempBook;
 
@@ -99,7 +112,7 @@ namespace BoOp.Business
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static List<BuchModel> SortedBookListByRating(List<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByRating(ObservableCollection<BuchModel> bookList)
         {
             BuchModel tempBook;
 
@@ -136,9 +149,20 @@ namespace BoOp.Business
             return bookList;
         }
 
+        /// <summary>
+        /// create a unique abrcode and save pdf file in projet directory
+        /// </summary>
+        /// <param name="bookname"></param>
+        /// <returns></returns>
         public static string GenerateUniqueBarcode(string bookname)
         {
-            var barcodeAsString = "boop" + DateTime.Now.Ticks.ToString();
+            var barcodeAsString = "BOOP";
+
+            DateTimeOffset now = DateTimeOffset.UtcNow;
+            long unixTimeMilliseconds = now.ToUnixTimeMilliseconds();
+            Console.WriteLine(unixTimeMilliseconds);
+
+            barcodeAsString += unixTimeMilliseconds;
 
             GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
             MyBarCode.SaveAsPdf(bookname + ".pdf");

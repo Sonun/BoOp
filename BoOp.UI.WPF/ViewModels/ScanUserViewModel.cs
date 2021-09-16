@@ -55,7 +55,7 @@ namespace BoOp.UI.WPF.ViewModels
         {
             Status = "Barcode gescannt mit ID: \n" + barcode.Text;
             Thread.Sleep(2000);
-            _navigationService.ShowBookView();
+            _navigationService.ShowLibraryView();
             _isScanning = false;
         }
 

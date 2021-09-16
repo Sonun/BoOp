@@ -55,7 +55,7 @@ namespace BoOp.UI.WPF.ViewModels
                     if (Utils.HashSHA(_password).Equals(_userPasswordHash))
                     {
                         //passwort richtig
-                        _navigationService.ShowBookView();
+                        _navigationService.ShowLibraryView();
                     }
                     else
                     {

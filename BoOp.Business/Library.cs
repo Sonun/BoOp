@@ -3,6 +3,7 @@ using BoOp.DBAccessor.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace BoOp.Business
             }
         }
 
-        public List<BuchModel> GetAllBooks()
+        public ObservableCollection<BuchModel> GetAllBooks()
         {
             // ToDo: Map the references, genres, and key words to the books as wel
             string sqlBasicBooks = "SELECT * FROM dbo.Buecher";
@@ -53,7 +54,7 @@ namespace BoOp.Business
             string sqlBasicSchlagwoerter = "SELECT * FROM dbo.Schlagwoerter";
             var basicSchlagwoerter = _db.LoadData<BasicSchlagwoerterModel, dynamic>(sqlBasicSchlagwoerter, new { }, _connectionString);
 
-            var allBooks = new List<BuchModel>();
+            var allBooks = new ObservableCollection<BuchModel>();
             basicBooks.ForEach(x => allBooks.Add(new BuchModel()
             {
                 BasicInfos = x,
@@ -88,7 +89,7 @@ namespace BoOp.Business
             })) ;
 
             return allBooks;
-    }
+        }
 
 
 

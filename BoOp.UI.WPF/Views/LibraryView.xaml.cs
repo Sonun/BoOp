@@ -18,19 +18,11 @@ namespace BoOp.UI.WPF.Views
   /// <summary>
   /// Interaktionslogik für BookView.xaml
   /// </summary>
-  public partial class BookView : UserControl
+  public partial class LibraryView : UserControl
   {
-    public BookView()
+    public LibraryView()
     {
       InitializeComponent();
-    }
-
-    private void TextBox_TextChanged()
-    {
-    }
-    private void OpenLoginView(object sender, RoutedEventArgs e)
-    { 
-
     }
   }
 }
