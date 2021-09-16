@@ -3,6 +3,7 @@ using BoOp.Business.IO;
 using BoOp.DBAccessor.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,10 +13,7 @@ namespace BoOp.UIConsole
     {
         static void Main(string[] args)
         {
-            var lib = new Library();
-            var books = lib.GetAllBooks();
-
-            Console.ReadLine();
+            testsortign();
         }
 
         static void testbarcode()
@@ -26,7 +24,7 @@ namespace BoOp.UIConsole
 
         static void testsortign()
         {
-            var bl = new List<BuchModel>();
+            var bl = new ObservableCollection<BuchModel>();
             BuchModel bm;
             for (int i = 0; i < 10; i++)
             {
