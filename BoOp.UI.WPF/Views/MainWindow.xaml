@@ -10,8 +10,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
-        d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}">
+        WindowState="Maximized">
     
     <Window.Resources>
 

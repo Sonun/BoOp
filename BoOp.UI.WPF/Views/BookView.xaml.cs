@@ -28,13 +28,9 @@ namespace BoOp.UI.WPF.Views
     private void TextBox_TextChanged()
     {
     }
+    private void OpenLoginView(object sender, RoutedEventArgs e)
+    { 
 
-    private void Button_ClickLoginPage(object sender, RoutedEventArgs e)
-    {
-      var win = new LoginView();
-      win.Width = 280;
-      win.Height = 380;
-      win.Show();
     }
   }
 }
