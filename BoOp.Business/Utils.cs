@@ -45,7 +45,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i <= bookList.Count - 2; i++)
                 {
-                    int comparison = string.Compare(bookList[i].Titel, bookList[i + 1].Titel, comparisonType: StringComparison.InvariantCulture);
+                    int comparison = string.Compare(bookList[i].BasicInfos.Titel, bookList[i + 1].BasicInfos.Titel, comparisonType: StringComparison.InvariantCulture);
 
                     if (comparison > 0)
                     {
@@ -61,7 +61,7 @@ namespace BoOp.Business
         public static List<BuchModel> SearchForWordInBooklist(List<BuchModel> bookList, string searchWord)
         {
             List<BuchModel> temp = SortedBookListByTitel(bookList)
-                .Where(x => x.Titel.ToLower()
+                .Where(x => x.BasicInfos.Titel.ToLower()
                 .Contains(searchWord.ToLower()))
                 .ToList();
 
@@ -81,7 +81,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i <= bookList.Count - 2; i++)
                 {
-                    int comparison = string.Compare(bookList[i].Author, bookList[i + 1].Author, comparisonType: StringComparison.OrdinalIgnoreCase);
+                    int comparison = string.Compare(bookList[i].BasicInfos.Author, bookList[i + 1].BasicInfos.Author, comparisonType: StringComparison.OrdinalIgnoreCase);
 
                     if (comparison > 0)
                     {
@@ -111,7 +111,7 @@ namespace BoOp.Business
 
                     foreach (var eachRez in bookList[i].Rezensionen)
                     {
-                        throughCut1 += eachRez.Sterne;
+                        throughCut1 += eachRez.BasicInfos.Sterne;
                     }
 
                     throughCut1 = throughCut1 / bookList[i].Rezensionen.Count;
@@ -120,7 +120,7 @@ namespace BoOp.Business
 
                     foreach (var eachRez in bookList[i].Rezensionen)
                     {
-                        throughCut2 += eachRez.Sterne;
+                        throughCut2 += eachRez.BasicInfos.Sterne;
                     }
 
                     throughCut2 = throughCut2 / bookList[i].Rezensionen.Count;

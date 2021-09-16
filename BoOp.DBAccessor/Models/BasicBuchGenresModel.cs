@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
-    public class RezensionModel
+    public class BasicBuchGenresModel
     {
-        public BasicRezensionenModel BasicInfos { get; set; }
-        public PersonModel Author { get; set; }
+        public int Id { get; set; }
+        public int BuchID { get; set; }
+        public int GenreID { get; set; }
     }
 }

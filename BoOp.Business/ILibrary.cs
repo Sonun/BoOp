@@ -5,7 +5,7 @@ namespace BoOp.Business
     public interface ILibrary
     {
         // Dependent on login
-        public void LendBook(UserModel user, BuchModel book);
+        public void LendBook(PersonModel user, BuchModel book);
 
         // Independent on login
         public void ReturnBook(BuchModel book);
