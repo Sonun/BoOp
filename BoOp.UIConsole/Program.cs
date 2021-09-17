@@ -24,16 +24,10 @@ namespace BoOp.UIConsole
 
         static void testsortign()
         {
-            var bl = new ObservableCollection<BuchModel>();
-            BuchModel bm;
-            for (int i = 0; i < 10; i++)
-            {
-                bm = new BuchModel();
-                bm.BasicInfos.Titel = i % 2 == 0 ? "JK Rowling " + i : "Walter Tevis " + i * 2;
-                bl.Add(bm);
-            }
+            Library l = new Library();
+            var bl = l.GetAllBooks();
 
-            bl = Utils.SearchForWordInBooklist(bl, "wli");
+            bl = Utils.SortedBookListByRating(bl);
 
             foreach (var book in bl)
             {

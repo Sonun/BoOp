@@ -138,6 +138,7 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Template" Value="{StaticResource LoginTextBoxControlTemplate}" />
     </Style>
+    
     <ControlTemplate x:Key="SortButtonTemplate" TargetType="Button">
         <Button Style="{StaticResource IconButton}">
             <Grid HorizontalAlignment="Center">
@@ -145,7 +146,7 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Background="Transparent" Text="{TemplateBinding Name}" HorizontalAlignment="Left" Margin="0, 0, 6, 0" />
+                <TextBlock Grid.Column="0" Background="Transparent" Text="{TemplateBinding Content}" HorizontalAlignment="Left" Margin="0, 0, 6, 0" />
                 <Image Grid.Column="1" Source="{StaticResource SortIcon}" Width="16" Height="16" HorizontalAlignment="Right" />
             </Grid>
         </Button>
@@ -155,12 +156,18 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
     <Style x:Key="SortButton" TargetType="Button">
         <Setter Property="Height" Value="26" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="Nirmala UI" />
         <Setter Property="FontWeight" Value="ExtraLight" />
-        <Setter Property="Template" Value="{StaticResource SortButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="BooklistBookStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="LabelBookStyle" TargetType="Label">

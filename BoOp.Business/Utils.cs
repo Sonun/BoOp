@@ -60,7 +60,7 @@ namespace BoOp.Business
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static ObservableCollection<BuchModel> SortedBookListByTitel(ObservableCollection<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByTitel(ObservableCollection<BuchModel> bookList, bool reverse = false)
         {
             BuchModel tempBook;
 
@@ -70,11 +70,23 @@ namespace BoOp.Business
                 {
                     int comparison = string.Compare(bookList[i].BasicInfos.Titel, bookList[i + 1].BasicInfos.Titel, comparisonType: StringComparison.InvariantCulture);
 
-                    if (comparison > 0)
+                    if (!reverse)
                     {
-                        tempBook = bookList[i + 1];
-                        bookList[i + 1] = bookList[i];
-                        bookList[i] = tempBook;
+                        if (comparison > 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
                     }
                 }
             }
@@ -86,7 +98,7 @@ namespace BoOp.Business
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static ObservableCollection<BuchModel> SortedBookListByAuthor(ObservableCollection<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByAuthor(ObservableCollection<BuchModel> bookList, bool reverse = false)
         {
             BuchModel tempBook;
 
@@ -96,11 +108,23 @@ namespace BoOp.Business
                 {
                     int comparison = string.Compare(bookList[i].BasicInfos.Author, bookList[i + 1].BasicInfos.Author, comparisonType: StringComparison.OrdinalIgnoreCase);
 
-                    if (comparison > 0)
+                    if (!reverse)
                     {
-                        tempBook = bookList[i + 1];
-                        bookList[i + 1] = bookList[i];
-                        bookList[i] = tempBook;
+                        if (comparison > 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
                     }
                 }
             }
@@ -112,7 +136,7 @@ namespace BoOp.Business
         /// </summary>
         /// <param name="bookList"></param>
         /// <returns></returns>
-        public static ObservableCollection<BuchModel> SortedBookListByRating(ObservableCollection<BuchModel> bookList)
+        public static ObservableCollection<BuchModel> SortedBookListByRating(ObservableCollection<BuchModel> bookList, bool reverse = false)
         {
             BuchModel tempBook;
 
@@ -127,23 +151,76 @@ namespace BoOp.Business
                         throughCut1 += eachRez.BasicInfos.Sterne;
                     }
 
-                    throughCut1 = throughCut1 / bookList[i].Rezensionen.Count;
+                    if (bookList[i].Rezensionen.Count != 0)
+                        throughCut1 /= bookList[i].Rezensionen.Count;
 
                     int throughCut2 = 0;
 
-                    foreach (var eachRez in bookList[i].Rezensionen)
+                    foreach (var eachRez in bookList[i + 1].Rezensionen)
                     {
                         throughCut2 += eachRez.BasicInfos.Sterne;
                     }
 
-                    throughCut2 = throughCut2 / bookList[i].Rezensionen.Count;
+                    if (bookList[i + 1].Rezensionen.Count != 0)
+                        throughCut2 /= bookList[i + 1].Rezensionen.Count;
 
-                    if (throughCut1 > throughCut2)
+                    if (!reverse)
                     {
-                        tempBook = bookList[i + 1];
-                        bookList[i + 1] = bookList[i];
-                        bookList[i] = tempBook;
+                        if (throughCut2 > throughCut1)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
                     }
+                    else
+                    {
+                        if (throughCut2 < throughCut1)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
+                    }
+                }
+            }
+            return bookList;
+        }
+
+        /// <summary>
+        /// sorted with bubblesort
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <returns></returns>
+        public static ObservableCollection<BuchModel> SortedBookListByISBN(ObservableCollection<BuchModel> bookList, bool reverse = false)
+        {
+            BuchModel tempBook;
+
+            for (int j = 0; j <= bookList.Count - 2; j++)
+            {
+                for (int i = 0; i <= bookList.Count - 2; i++)
+                {
+                    int comparison = string.Compare(bookList[i].BasicInfos.ISBN, bookList[i + 1].BasicInfos.ISBN, comparisonType: StringComparison.OrdinalIgnoreCase);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempBook = bookList[i + 1];
+                            bookList[i + 1] = bookList[i];
+                            bookList[i] = tempBook;
+                        }
+                    }
+                        
                 }
             }
             return bookList;

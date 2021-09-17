@@ -49,10 +49,10 @@
                 <ColumnDefinition Width="1.35*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Name" />
-            <Button Grid.Column="1" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Author" />
-            <Button Grid.Column="2" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="ISBN" />
-            <Button Grid.Column="3" Style="{StaticResource SortButton}" Template="{StaticResource SortButtonTemplate}" Name="Rating" />
+            <Button Grid.Column="0" Command="{Binding SortTitleCommand}" Style="{StaticResource SortButton}" Content="Titel" />
+            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" Style="{StaticResource SortButton}" Content="Author" />
+            <Button Grid.Column="2" Command="{Binding SortISBNCommand}" Style="{StaticResource SortButton}" Content="ISBN" />
+            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" Style="{StaticResource SortButton}" Content="Rating" />
         </Grid>
         <!--Books info-->
         <Grid Grid.Row="2">
@@ -61,17 +61,17 @@
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
-                            <Grid>
+                            <Grid Background="HotPink" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Background="HotPink" Text="{Binding Model.BasicInfos.Titel}"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Model.BasicInfos.ISBN}"/>
-                                <TextBlock Grid.Column="2" Text="{Binding Model.BasicInfos.Author}"/>
-                                <TextBlock Grid.Column="3" Text="{Binding Model.RezensionenDurschschnitt}"/>
+                                <TextBlock Grid.Column="0" Style="{Binding BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
+                                <TextBlock Grid.Column="1" Style="{Binding BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
+                                <TextBlock Grid.Column="2" Style="{Binding BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
+                                <TextBlock Grid.Column="3" Style="{Binding BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>
