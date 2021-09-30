@@ -14,8 +14,17 @@ namespace BoOp.UI.WPF.ViewModels
     public class LibraryViewModel : ViewModel
     {
         private INavigationService _navigationService;
+        private ILibrary _library;
+
+        //bookviewmodel booklist (binded by the view)
         private ObservableCollection<BookViewModel> _bookList;
+
+        //buch model booklists, original and current
+        private ObservableCollection<BuchModel> _currentList;
         private ObservableCollection<BuchModel> _originalList;
+        private string _searchWord;
+
+        //flags to enable reverse sorting
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
 
         public DelegateCommand OpenLoginView { get; set; }
@@ -23,19 +32,32 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortAuthorCommand { get; set; }
         public DelegateCommand SortISBNCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
+        public DelegateCommand SearchCommand { get; set; }
+        public DelegateCommand ClearSearchCommand { get; set; }
+
+        public string SearchWord {
+            get
+            {
+                return _searchWord;
+            }
+            set 
+            {
+                _searchWord = value;
+                OnPropertyChanged();
+            }}
 
         public ObservableCollection<BookViewModel> BookList { 
-                get 
-                { 
-                    return _bookList; 
-                } 
-                set
-                {
-                    _bookList = value;
-                    OnPropertyChanged();
-                }}
+            get 
+            { 
+                return _bookList;
+            } 
+            set
+            {
+                _bookList = value;
+                OnPropertyChanged();
+            }}
 
-        public LibraryViewModel(INavigationService navigationService)
+        public LibraryViewModel(INavigationService navigationService, ILibrary library)
         {
             SetSortingFlagsFlase();
 
@@ -50,8 +72,9 @@ namespace BoOp.UI.WPF.ViewModels
                 });
 
             //create booklist from library
-            Library lib = new Library();
-            _originalList = lib.GetAllBooks();
+            _library = library;
+            _originalList = _library.GetAllBooks();
+            _currentList = _originalList;
 
             //fill boolist first time
             UpdateBooklist(_originalList);
@@ -62,12 +85,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_titleFlag)
                     {
-                        UpdateBooklist(Utils.SortedBookListByTitel(_originalList));
+                        UpdateBooklist(Utils.SortedBookListByTitel(_currentList));
                         _titleFlag = true;
                     }
                     else
                     {
-                        UpdateBooklist(Utils.SortedBookListByTitel(_originalList, true));
+                        UpdateBooklist(Utils.SortedBookListByTitel(_currentList, true));
                         SetSortingFlagsFlase();
                         _titleFlag = false;
                     }
@@ -79,12 +102,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_authorFlag)
                     {
-                        UpdateBooklist(Utils.SortedBookListByAuthor(_originalList));
+                        UpdateBooklist(Utils.SortedBookListByAuthor(_currentList));
                         _authorFlag = true;
                     }
                     else
                     {
-                        UpdateBooklist(Utils.SortedBookListByAuthor(_originalList, true));
+                        UpdateBooklist(Utils.SortedBookListByAuthor(_currentList, true));
                         SetSortingFlagsFlase();
                         _authorFlag = false;
                     }
@@ -96,12 +119,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_isbnFlag)
                     {
-                        UpdateBooklist(Utils.SortedBookListByISBN(_originalList));
+                        UpdateBooklist(Utils.SortedBookListByISBN(_currentList));
                         _isbnFlag = true;
                     }
                     else
                     {
-                        UpdateBooklist(Utils.SortedBookListByISBN(_originalList, true));
+                        UpdateBooklist(Utils.SortedBookListByISBN(_currentList, true));
                         SetSortingFlagsFlase();
                         _isbnFlag = false;
                     }
@@ -113,15 +136,28 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_ratingFlag)
                     {
-                        UpdateBooklist(Utils.SortedBookListByRating(_originalList));
+                        UpdateBooklist(Utils.SortedBookListByRating(_currentList));
                         _ratingFlag = true;
                     }
                     else
                     {
-                        UpdateBooklist(Utils.SortedBookListByRating(_originalList, true));
+                        UpdateBooklist(Utils.SortedBookListByRating(_currentList, true));
                         SetSortingFlagsFlase();
                         _ratingFlag = false;
                     }
+                });
+
+            SearchCommand = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
+                });
+
+            ClearSearchCommand = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(_originalList);
+                    SearchWord = "";
                 });
         }
 

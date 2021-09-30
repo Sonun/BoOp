@@ -25,19 +25,23 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="38" />
+                    <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="45"/>
                 </Grid.ColumnDefinitions>
                 <!--TODO: icon should disappear when user clicks on the bar
                 alternatively: dont show searchbar and make icon a button, user clicks on button, searchbar fades in from left to right PS: animation-->
-                <Button Grid.Column="0" Style="{StaticResource IconButton}">
-                    <Image HorizontalAlignment="Left" Source="{StaticResource SearchIcon}" Width="32" Height="32" />
+                <Button Grid.Column="0" Style="{StaticResource IconButton}" Command="{Binding SearchCommand}">
+                    <Image Source="{StaticResource SearchIcon}" Width="32" Height="32" />
                 </Button>
-                <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}"  Template="{StaticResource TextBoxControlTemplate}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxControlTemplate}" Text="{Binding SearchWord}" />
+                <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchCommand}">
+                    <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
+                </Button>
             </Grid>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
-                <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausleihen" />
             </StackPanel>
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding OpenLoginView}" />
         </Grid>
@@ -49,10 +53,27 @@
                 <ColumnDefinition Width="1.35*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Command="{Binding SortTitleCommand}" Style="{StaticResource SortButton}" Content="Titel" />
-            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" Style="{StaticResource SortButton}" Content="Author" />
-            <Button Grid.Column="2" Command="{Binding SortISBNCommand}" Style="{StaticResource SortButton}" Content="ISBN" />
-            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" Style="{StaticResource SortButton}" Content="Rating" />
+            <Button Grid.Column="0" Command="{Binding SortTitleCommand}" Style="{StaticResource SortButton}">
+                <TextBlock Text="Titel">
+                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                </TextBlock>
+            </Button>
+
+            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" Style="{StaticResource SortButton}">
+                <TextBlock Text="Author">
+                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                </TextBlock>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding SortISBNCommand}" Style="{StaticResource SortButton}">
+                <TextBlock Text="ISBN">
+                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                </TextBlock>
+            </Button>
+            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" Style="{StaticResource SortButton}">
+                <TextBlock Text="Bewertung">
+                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                </TextBlock>
+            </Button>
         </Grid>
         <!--Books info-->
         <Grid Grid.Row="2">

@@ -18,8 +18,6 @@ namespace BoOp.Business
         private readonly string _connectionString;
         private SQLDataAccessor _db;
 
-
-
         public Library(string connectionString = null)
         {
             _db = new SQLDataAccessor();
@@ -107,6 +105,11 @@ namespace BoOp.Business
         }
 
         public void ReturnBook(BuchModel book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetUserByID(int id)
         {
             throw new NotImplementedException();
         }

@@ -9,7 +9,8 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         private string _password;
         private string _username;
-        private string _userPasswordHash;
+        private string _userPasswordHash; 
+        private ILibrary _library;
 
         public DelegateCommand LoginCommand { get; set; }
 
@@ -36,9 +37,10 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public LoginViewModel(INavigationService navigationService, int userID)
+        public LoginViewModel(INavigationService navigationService, ILibrary library, int userID)
         {
             _navigationService = navigationService;
+            _library = library;
             _password = "";
             Password = "";
 
@@ -55,7 +57,7 @@ namespace BoOp.UI.WPF.ViewModels
                     if (Utils.HashSHA(_password).Equals(_userPasswordHash))
                     {
                         //passwort richtig
-                        _navigationService.ShowLibraryView();
+                        _navigationService.ShowAdminView();
                     }
                     else
                     {
