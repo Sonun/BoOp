@@ -17,6 +17,6 @@ namespace BoOp.DBAccessor.Models
         public string ISBN { get; set; }
         public string Altersvorschlag { get; set; }
         public string Regal { get; set; }
-        public string BuchBarcode { get; set; }
+        public string Barcode { get; set; }
     }
 }
