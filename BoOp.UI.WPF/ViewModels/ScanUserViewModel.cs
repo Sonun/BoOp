@@ -38,9 +38,9 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _navigationService = navigationService;
             _dispatcher = dispatcher;
-            _scanner = new Scanner();
+//            _scanner = new Scanner();
             _library = library;
-            _scanner.BarcodeScanned += _scanner_BarcodeScanned;
+//            _scanner.BarcodeScanned += _scanner_BarcodeScanned;
             Status = "Bitte Scann deine Karte\n   mit dem Kartenleser!";
 
             TestButtonCommand = new DelegateCommand
@@ -51,15 +51,17 @@ namespace BoOp.UI.WPF.ViewModels
                      }
                 );
 
-            Scan();
+//            Scan();
         }
 
         private void _scanner_BarcodeScanned(Barcode barcode)
         {
+            /*
             Status = "Barcode gescannt mit ID: \n" + barcode.Text;
             Thread.Sleep(2000);
             _navigationService.ShowLibraryView();
             _isScanning = false;
+            */
         }
 
         public void Scan()

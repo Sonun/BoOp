@@ -43,7 +43,7 @@
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausleihen" />
             </StackPanel>
-            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding OpenLoginView}" />
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
         </Grid>
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">
