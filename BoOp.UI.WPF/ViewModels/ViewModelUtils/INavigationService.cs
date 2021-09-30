@@ -12,5 +12,6 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         void ShowScanUserView();
         void ShowLibraryView();
         void ShowAdminView();
+        void ShowAddPersonView();
     }
 }

@@ -30,11 +30,16 @@
             <views:AdminView />
         </DataTemplate>
 
+        <DataTemplate x:Key="AddPersonViewTemplate">
+            <views:AddPersonView />
+        </DataTemplate>
+
         <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
                                                  ScanUserViewModelTemplate="{StaticResource ScanUserViewTemplate}"
                                                  LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
                                                  LibraryViewModelTemplate="{StaticResource LibraryViewTemplate}" 
-                                                 AdminViewModelTemplate="{StaticResource AdminViewTemplate}"/>
+                                                 AdminViewModelTemplate="{StaticResource AdminViewTemplate}"
+                                                 AddPersonViewModelTemplate="{StaticResource AddPersonViewTemplate}"/>
     </Window.Resources>
 
     <Grid>

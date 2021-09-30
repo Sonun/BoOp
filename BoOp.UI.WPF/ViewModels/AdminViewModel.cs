@@ -14,6 +14,7 @@ namespace BoOp.UI.WPF.ViewModels
         private ILibrary _library;
 
         public DelegateCommand BackCommand { get; set; }
+        public DelegateCommand AddPersonCommand { get; set; }
 
         public AdminViewModel(INavigationService navigationService, ILibrary library)
         {
@@ -24,6 +25,12 @@ namespace BoOp.UI.WPF.ViewModels
                 x =>
                 {
                     _navigationService.ShowLibraryView();
+                });
+
+            AddPersonCommand = new DelegateCommand( 
+                x =>
+                {
+                    _navigationService.ShowAddPersonView();
                 });
         }
     }

@@ -43,5 +43,10 @@ namespace BoOp.UI.WPF.ViewModels
         {
             CurrentViewModel = new LibraryViewModel(this, _library);
         }
+
+        public void ShowAddPersonView()
+        {
+            CurrentViewModel = new AddPersonViewModel(this, _library);
+        }
     }
 }
