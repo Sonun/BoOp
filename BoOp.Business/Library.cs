@@ -16,40 +16,40 @@ namespace BoOp.Business
         private PersonModel _loggedInUnser;
 
         private readonly string _connectionString;
-        private SQLDataAccessor _db;
+        private SQLiteDataAccessor _db;
 
         public Library(string connectionString = null)
         {
-            _db = new SQLDataAccessor();
+            _db = new SQLiteDataAccessor();
 
             if (connectionString == null)
             {
-                _connectionString = SQLDataAccessor.GetConncetionString();
+                _connectionString = SQLiteDataAccessor.GetConncetionString();
             }
         }
 
         public ObservableCollection<BuchModel> GetAllBooks()
         {
             // ToDo: Map the references, genres, and key words to the books as wel
-            string sqlBasicBooks = "SELECT * FROM dbo.Buecher";
+            string sqlBasicBooks = "SELECT * FROM Buecher";
             var basicBooks = _db.LoadData<BasicBuchModel, dynamic>(sqlBasicBooks, new { }, _connectionString);
 
-            string sqlBasicBuchGenres = "SELECT * FROM dbo.BuchGenres";
+            string sqlBasicBuchGenres = "SELECT * FROM BuchGenres";
             var basicBuchGenres = _db.LoadData<BasicBuchGenresModel, dynamic>(sqlBasicBuchGenres, new { }, _connectionString);
 
-            string sqlBasicBuchSchlagwoerter = "SELECT * FROM dbo.BuchSchlagwoerter";
+            string sqlBasicBuchSchlagwoerter = "SELECT * FROM BuchSchlagwoerter";
             var basicBuchSchlagwoerter = _db.LoadData<BasicBuchSchlagwoerterModel, dynamic>(sqlBasicBuchSchlagwoerter, new { }, _connectionString);
 
-            string sqlBasicGenres = "SELECT * FROM dbo.Genre";
+            string sqlBasicGenres = "SELECT * FROM Genre";
             var basicGenres = _db.LoadData<BasicGenreModel, dynamic>(sqlBasicGenres, new { }, _connectionString);
 
-            string sqlBasicPersonen = "SELECT * FROM dbo.Personen";
+            string sqlBasicPersonen = "SELECT * FROM Personen";
             var basicPersonen = _db.LoadData<PersonModel, dynamic>(sqlBasicPersonen, new { }, _connectionString);
 
-            string sqlBasicRezensionen = "SELECT * FROM dbo.Rezensionen";
+            string sqlBasicRezensionen = "SELECT * FROM Rezensionen";
             var basicRezensionen = _db.LoadData<BasicRezensionenModel, dynamic>(sqlBasicRezensionen, new { }, _connectionString);
 
-            string sqlBasicSchlagwoerter = "SELECT * FROM dbo.Schlagwoerter";
+            string sqlBasicSchlagwoerter = "SELECT * FROM Schlagwoerter";
             var basicSchlagwoerter = _db.LoadData<BasicSchlagwoerterModel, dynamic>(sqlBasicSchlagwoerter, new { }, _connectionString);
 
             var allBooks = new ObservableCollection<BuchModel>();
@@ -110,6 +110,36 @@ namespace BoOp.Business
         }
 
         public void GetUserByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBook(BuchModel book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditBookDetails(BuchModel book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddReview(RezensionModel review)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUser(PersonModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveUser(PersonModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditUserDetails(PersonModel user)
         {
             throw new NotImplementedException();
         }
