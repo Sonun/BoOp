@@ -41,7 +41,10 @@ namespace BoOp.Business
         /// <returns></returns>
         public static ObservableCollection<BuchModel> SearchForWordInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
         {
-            var temp = SortedBookListByTitel(bookList)
+            //get rid of the reference
+            var useList = new ObservableCollection<BuchModel>(bookList);
+
+            var temp = useList
                 .Where(x => x.BasicInfos.Titel.ToLower()
                 .Contains(searchWord.ToLower()))
                 .ToList();
@@ -50,9 +53,20 @@ namespace BoOp.Business
             foreach (var each in temp)
             {
                 outList.Add(each);
+                useList.Remove(each);
             }
 
-            return outList;
+            temp = useList
+                .Where(x => x.BasicInfos.Author.ToLower()
+                .Contains(searchWord.ToLower()))
+                .ToList();
+
+            foreach (var each in temp)
+            {
+                outList.Add(each);
+            }
+
+            return SortedBookListByTitel(outList);
         }
 
         /// <summary>

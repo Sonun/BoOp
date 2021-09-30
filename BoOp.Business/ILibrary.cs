@@ -1,4 +1,5 @@
 ﻿using BoOp.DBAccessor.Models;
+using System.Collections.ObjectModel;
 
 namespace BoOp.Business
 {
@@ -12,6 +13,12 @@ namespace BoOp.Business
 
         // Dependent on User Rights
         public void AddBook(BuchModel book);
+
+        // get user by id
+        public void GetUserByID(int id);
+
+        //return a List of all books in the database
+        public ObservableCollection<BuchModel> GetAllBooks();
 
     }
 }

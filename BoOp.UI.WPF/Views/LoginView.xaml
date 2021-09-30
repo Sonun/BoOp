@@ -31,9 +31,9 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" Grid.Row="0">
-                        <Label Content="Username:" FontSize="16" />
-                        <TextBox Style="{StaticResource LoginTextBoxTemplate}"  Text="{Binding Username}"/>
-                        <Label Content="Password:" FontSize="16" />
+                        <Label Content="Benutzer:" FontSize="16" />
+                        <Label Content="{Binding Username}"/>
+                        <Label Content="Passwort:" FontSize="16" />
                         <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Password}"/>
                     </StackPanel>
                 </Grid>

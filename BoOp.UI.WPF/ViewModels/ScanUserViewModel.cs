@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using BoOp.Business;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -17,6 +18,7 @@ namespace BoOp.UI.WPF.ViewModels
         private Scanner _scanner;
         private Dispatcher _dispatcher;
         private bool _isScanning;
+        private ILibrary _library;
 
         public DelegateCommand TestButtonCommand { get; set; }
 
@@ -32,11 +34,12 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public ScanUserViewModel(INavigationService navigationService, Dispatcher dispatcher)
+        public ScanUserViewModel(INavigationService navigationService, ILibrary library, Dispatcher dispatcher)
         {
             _navigationService = navigationService;
             _dispatcher = dispatcher;
             _scanner = new Scanner();
+            _library = library;
             _scanner.BarcodeScanned += _scanner_BarcodeScanned;
             Status = "Bitte Scann deine Karte\n   mit dem Kartenleser!";
 
@@ -44,7 +47,7 @@ namespace BoOp.UI.WPF.ViewModels
                 (
                      x =>
                      {
-                         _navigationService.ShowLoginView();
+                         _navigationService.ShowLibraryView();
                      }
                 );
 

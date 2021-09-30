@@ -9,6 +9,7 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         public DataTemplate ScanUserViewModelTemplate { get; set; }
         public DataTemplate LoginViewModelTemplate { get; set; }
         public DataTemplate LibraryViewModelTemplate { get; set; }
+        public DataTemplate AdminViewModelTemplate { get; set; }
 
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -18,6 +19,7 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
                 ScanUserViewModel _ => ScanUserViewModelTemplate,
                 LoginViewModel _ => LoginViewModelTemplate,
                 LibraryViewModel _ => LibraryViewModelTemplate,
+                AdminViewModel _ => AdminViewModelTemplate,
                 _ => base.SelectTemplate(item, container),
             };
         }
