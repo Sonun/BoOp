@@ -150,7 +150,16 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _library = library;
             _navigationService = navigationService;
+
+            Vorname = "";
+            Nachname = "";
+            Passwort = "";
             Rechte = "Leser";
+            GebTag = "";
+            GebMonat = "";
+            GebJahr = "";
+            Telefon = "";
+            Email = "";
 
             CancelCommand = new DelegateCommand(
                 x => 
@@ -161,7 +170,6 @@ namespace BoOp.UI.WPF.ViewModels
             SaveCommand = new DelegateCommand(
                 x =>
                 {
-                    _rechteAsInt = 1;
                     switch (_rechte.ToLower())
                     {
                         case "leser":
@@ -171,11 +179,16 @@ namespace BoOp.UI.WPF.ViewModels
                             _rechteAsInt = 2;
                             break;
                         case "biboteam":
-                            _rechteAsInt = 3;
-                            break;
-                        case "admin":
                             _rechteAsInt = 4;
                             break;
+                        case "admin":
+                            _rechteAsInt = 8;
+                            break;
+                    }
+
+                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
+                    {
+                        return;
                     }
 
                     var newUser = new PersonModel

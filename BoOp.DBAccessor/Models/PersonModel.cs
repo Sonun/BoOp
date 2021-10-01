@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
+    [Flags]
     public enum Rechtelevel
     {
         /// <summary>
@@ -20,11 +21,11 @@ namespace BoOp.DBAccessor.Models
         /// <summary>
         /// Gibt dem Benutzer die Rechte von GUIDANCE und darf die Bücherdatendank anlegen
         /// </summary>
-        BIBOTEAM = 3, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
+        BIBOTEAM = 4, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
         /// <summary>
         /// Gibt de, Benutzer die Rechte von Staff und darf Rechte verwalten, sowie neue Mitarbeiter anlegen
         /// </summary>
-        ADMIN = 4 // Alles (BiboTeam anlegen und löschen)
+        ADMIN = 8 // Alles (BiboTeam anlegen und löschen)
     }
 
     public class PersonModel
