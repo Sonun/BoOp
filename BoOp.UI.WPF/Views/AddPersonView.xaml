@@ -36,12 +36,11 @@
         <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Nicht erforderlich):"/>
         <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Email:"/>
 
-        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" HorizontalAlignment="Left"/>
 
-        <ComboBox Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="left" Width="100">
-            
+        <ComboBox Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="left" Width="100" Text="{Binding Rechte}">
             <ComboBoxItem Content="Leser"/>
             <ComboBoxItem Content="Helfer"/>
             <ComboBoxItem Content="Lehrer"/>
@@ -59,15 +58,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Tag:"/>
-            <TextBox Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
+            <TextBox Grid.Column="1" Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45"/>
             <Label Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Monat:"/>
-            <TextBox Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="3" Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45"/>
             <Label Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Jahr:"/>
-            <TextBox Grid.Column="5" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="5" Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45"/>
         </Grid>
 
-        <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" HorizontalAlignment="Left"/>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="7" Grid.Column="3">
             <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen"/>

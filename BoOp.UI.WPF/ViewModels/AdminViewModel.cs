@@ -15,6 +15,13 @@ namespace BoOp.UI.WPF.ViewModels
 
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
+        public DelegateCommand LendBookCommand { get; set; }
+        public DelegateCommand ReturnBookCommand { get; set; }
+        public DelegateCommand RemoveBookCommand { get; set; }
+        public DelegateCommand EditBookCommand { get; set; }
+        public DelegateCommand AddUserCommand { get; set; }
+        public DelegateCommand RemoveUserCommand { get; set; }
+        public DelegateCommand EditUserCommand { get; set; }
 
         public AdminViewModel(INavigationService navigationService, ILibrary library)
         {
