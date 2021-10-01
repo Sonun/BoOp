@@ -97,6 +97,55 @@ namespace BoOp.Business
             _loggedInUnser = null;
             if(_loggedInUnser != null)
                 throw new NotImplementedException();
+
+
+            // Save the basic book
+            string sql = $"insert into Buecher (Titel, Author, Verlag, PersonID, Auflage, ISBN, Altersvorschlag, Regal, Barcode) values ('{book.BasicInfos.Titel}', '{book.BasicInfos.Author}', '{book.BasicInfos.Verlag}', '{book.BasicInfos.PersonID}', '{book.BasicInfos.Auflage}', '{book.BasicInfos.ISBN}', '{book.BasicInfos.Altersvorschlag}', '{book.BasicInfos.Regal}', '{book.BasicInfos.Barcode}');";
+            _db.SaveData(sql,
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.PersonID, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Barcode},
+                        _connectionString);
+
+
+           // Get the ID number of the newly added book
+           sql = $"select Id from Buecher where Titel = '{book.BasicInfos.Titel}' and Author = '{book.BasicInfos.Author}' and Barcode = '{book.BasicInfos.Barcode}';";
+            int bookID = _db.LoadData<BasicBuchModel, dynamic>(
+                sql,
+                new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Barcode },
+                _connectionString).First().Id;
+
+            Console.WriteLine("");
+            //foreach (var review in book.Rezensionen)
+            //{
+            //    if (phoneNumber.Id == 0)
+            //    {
+            //        sql = "insert into PhoneNumbers (PhoneNumber) values (@PhoneNumber);";
+            //        db.SaveData(sql, new { phoneNumber.PhoneNumber }, _connectionString);
+
+            //        sql = "select Id from PhoneNumbers where PhoneNumber = @PhoneNumber;";
+            //        phoneNumber.Id = db.LoadData<IdLookupModel, dynamic>(sql,
+            //            new { phoneNumber.PhoneNumber },
+            //            _connectionString).First().Id;
+            //    }
+
+            //    sql = "insert into ContactPhoneNumbers (ContactId, PhoneNumberId) values (@ContactId, @PhoneNumberId);";
+            //    db.SaveData(sql, new { ContactId = contactId, PhoneNumberId = phoneNumber.Id }, _connectionString);
+            //}
+
+            //foreach (var email in contact.EmailAddresses)
+            //{
+            //    if (email.Id == 0)
+            //    {
+            //        sql = "insert into EmailAddresses (EmailAddress) values (@EmailAddress);";
+            //        db.SaveData(sql, new { email.EmailAddress }, _connectionString);
+
+            //        sql = "select Id from EmailAddresses where EmailAddress = @EmailAddress;";
+            //        email.Id = db.LoadData<IdLookupModel, dynamic>(sql, new { email.EmailAddress }, _connectionString).First().Id;
+            //    }
+
+            //    sql = "insert into ContactEmail (ContactId, EmailAddressId) values (@ContactId, @EmailAddressId);";
+            //    db.SaveData(sql, new { ContactId = contactId, EmailAddressId = email.Id }, _connectionString);
+            //}
+
         }
 
         public void LendBook(PersonModel user, BuchModel book)
