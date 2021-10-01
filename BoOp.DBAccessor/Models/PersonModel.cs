@@ -12,19 +12,19 @@ namespace BoOp.DBAccessor.Models
         /// Gibt dem Benutzer die Rechte Bücher zu reservieren, auszuleihen oder
         /// zurückzugeben
         /// </summary>
-        LESER, // Reservieren, Ausleihen, Zurückgeben
+        LESER = 1, // Reservieren, Ausleihen, Zurückgeben
         /// <summary>
         /// Gibt dem Benutzer die Rechte von Reader und kann diese Rechte auch für andere Ausführen
         /// </summary>
-        HELFER, // Ausleihen und Zurückgeben für andere, Bücher und Benutzer anlegen (nicht löschen)
+        HELFER = 2, // Ausleihen und Zurückgeben für andere, Bücher und Benutzer anlegen (nicht löschen)
         /// <summary>
         /// Gibt dem Benutzer die Rechte von GUIDANCE und darf die Bücherdatendank anlegen
         /// </summary>
-        BIBOTEAM, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
+        BIBOTEAM = 3, // wie Schulhelfer + Löschen von Büchern und Benutzer möglich
         /// <summary>
         /// Gibt de, Benutzer die Rechte von Staff und darf Rechte verwalten, sowie neue Mitarbeiter anlegen
         /// </summary>
-        ADMIN // Alles (BiboTeam anlegen und löschen)
+        ADMIN = 4 // Alles (BiboTeam anlegen und löschen)
     }
 
     public class PersonModel
@@ -32,6 +32,7 @@ namespace BoOp.DBAccessor.Models
         public int Id { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
+        public string PasswortHash { get; set; }
         public string Geburtsdatum { get; set; }
         public string Telefonnummer { get; set; }
         public Rechtelevel Rechte { get; set; }

@@ -32,7 +32,7 @@ namespace BoOp.Business
         // User related:
 
         // get user by id
-        public void GetUserByID(int id);
+        public PersonModel GetUserByID(int id);
 
         // Add User to DB
         public void AddUser(PersonModel user);

@@ -11,9 +11,31 @@ namespace BoOp.UIConsole
 {
     class Program
     {
+        static private ILibrary _library;
         static void Main(string[] args)
         {
-            testsortign();
+            //let this be
+            _library = new Library();
+            //let this be
+
+
+            Console.WriteLine( _library.GetUserByID(8).Vorname);
+        }
+
+        static void testAddPerson()
+        {
+            var newUser = new PersonModel
+            {
+                Vorname = "Dominik",
+                Nachname = "v. M.",
+                PasswortHash = Utils.HashSHA("qwe"),
+                Rechte = Rechtelevel.ADMIN,
+                Geburtsdatum = "20" + "-" + "07" + "-" + "1996",
+                Telefonnummer = "123",
+                EMail = "sad@sad.sad"
+            };
+
+            _library.AddUser(newUser);
         }
 
         static void testbarcode()
