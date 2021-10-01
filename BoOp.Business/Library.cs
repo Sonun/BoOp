@@ -158,9 +158,13 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-        public void GetUserByID(int id)
+        public PersonModel GetUserByID(int id)
         {
-            throw new NotImplementedException();
+            string sId = id + "";
+            string sql = "SELECT * FROM Personen WHERE Id = " + sId;
+            var person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString);
+
+            return person.FirstOrDefault();
         }
 
         public void RemoveBook(BuchModel book)
@@ -180,7 +184,10 @@ namespace BoOp.Business
 
         public void AddUser(PersonModel user)
         {
-            throw new NotImplementedException();
+            string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email) " +
+                "VALUES('" + user.Vorname + "','" + user.Nachname + "','" + user.Geburtsdatum + "','" + user.Telefonnummer + "','" + user.Rechte + "','" + user.EMail + "');";
+
+            _db.SaveData(sqlString, new { }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)

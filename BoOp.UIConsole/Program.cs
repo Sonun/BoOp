@@ -11,6 +11,7 @@ namespace BoOp.UIConsole
 {
     class Program
     {
+        static private ILibrary _library;
         static void Main(string[] args)
         {
             testAddBook();
