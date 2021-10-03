@@ -52,6 +52,9 @@ namespace BoOp.Business
             string sqlBasicSchlagwoerter = "SELECT * FROM dbo.Schlagwoerter";
             var basicSchlagwoerter = _db.LoadData<BasicSchlagwoerterModel, dynamic>(sqlBasicSchlagwoerter, new { }, _connectionString);
 
+            string sqlBasicExemplare = "SELECT * FROM dbo.Exemplare";
+            var basicExemplare = _db.LoadData<BasicExemplarModel, dynamic>(sqlBasicExemplare, new { }, _connectionString);
+
             var allBooks = new ObservableCollection<BuchModel>();
             basicBooks.ForEach(x => allBooks.Add(new BuchModel()
             {
@@ -61,14 +64,33 @@ namespace BoOp.Business
                           join genre in basicGenres on buchgenres.GenreID equals genre.Id
                           where x.Id == buchgenres.BuchID
                           select genre.Genrename).ToList(),
-                LendBy = (from personen in basicPersonen
-                            join book in basicBooks on personen.Id equals book.Id
-                            where x.PersonID == personen.Id
-                            select new PersonModel() 
-                            { 
-                                Id = personen.Id, EMail = personen.EMail, Geburtsdatum = personen.Geburtsdatum, Nachname = personen.Nachname, Rechte = personen.Rechte, Telefonnummer = personen.Telefonnummer, Vorname = personen.Vorname 
-                            }).FirstOrDefault()
-                ,
+                Exemplare = (from exemplare in basicExemplare
+                             join book in basicBooks on exemplare.BuchID equals book.Id
+                             where x.Id == book.Id
+                             select new ExemplarModel() 
+                             { 
+                                 BasicInfos = new BasicExemplarModel() 
+                                 { 
+                                     Id = exemplare.Id, 
+                                     Barcode = exemplare.Barcode, 
+                                     BuchID = exemplare.BuchID, 
+                                     LendByUserID = exemplare.LendByUserID
+                                 },
+                                 LendBy = (from personen in basicPersonen
+                                           join exemplar in basicExemplare on personen.Id equals exemplar.LendByUserID
+                                           where exemplare.LendByUserID == personen.Id
+                                           select new PersonModel()
+                                           {
+                                               Id = personen.Id,
+                                               EMail = personen.EMail,
+                                               Geburtsdatum = personen.Geburtsdatum,
+                                               Nachname = personen.Nachname,
+                                               Rechte = personen.Rechte,
+                                               Telefonnummer = personen.Telefonnummer,
+                                               Vorname = personen.Vorname
+                                           }).FirstOrDefault()
+                             }).ToList(),
+
                 Rezensionen = (from buchrezensionen in basicRezensionen
                                join book in basicBooks on buchrezensionen.BuchID equals book.Id
                                where x.Id == buchrezensionen.BuchID
@@ -98,23 +120,29 @@ namespace BoOp.Business
             if(_loggedInUnser != null)
                 throw new NotImplementedException();
 
+            // ToDO: Check if book is already in DB
 
             // Save the basic book
-            string sql = "insert into dbo.Buecher (Titel, Author, Verlag, PersonID, Auflage, ISBN, Altersvorschlag, Regal, Barcode) values (@Titel, @Author, @Verlag, @PersonID, @Auflage, @ISBN, @Altersvorschlag, @Regal, @Barcode);";
+            string sql = "insert into dbo.Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal );";
             _db.SaveData(sql,
-                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.PersonID, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Barcode},
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal},
                         _connectionString);
 
+            sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
+            book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
+                 sql,
+                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
+                 _connectionString).FirstOrDefault().Id;
+
             // Add Barcodes to DB
-
-
-           // Get the ID number of the newly added book
-           sql = $"select Id from dbo.Buecher where Titel = @Titel and Author = @Author and Barcode = @Barcode;";
-           book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
-                sql,
-                new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Barcode },
-                _connectionString).FirstOrDefault().Id;
-
+            if (book.Exemplare != null)
+            {
+                foreach (var exemplar in book.Exemplare)
+                {
+                    sql = "INSERT INTO dbo.Exemplare (BuchID, Barcode) VALUES (@BuchID, @Barcode)";
+                    _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode }, _connectionString);
+                }
+            }
 
 
             if (book.Rezensionen != null)

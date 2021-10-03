@@ -46,12 +46,17 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     library.AddBook(new BuchModel()
                     {
-                        BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", Barcode = "BoOp.asdsdasdasd", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A" },
-                        Rezensionen = new List<RezensionModel>() { new RezensionModel() { BasicInfos = new BasicRezensionenModel() { BuchID = 1, PersonID = 5, Rezensionstext ="schlechts buch.", Sterne = 5 }}},
+                        BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Author = "Domi", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A", ISBN = "123213-123123-123" },
                         Schlagwoerter = new List<string>() { "Easy", "Krass" },
-                        Genres = new List<string>() { "Drama", "Horror"}
-                        
-                    });
+                        Genres = new List<string>() { "Drama", "Horror" },
+                        Exemplare = new List<ExemplarModel>()
+                        {
+                            new ExemplarModel(){ BasicInfos = new BasicExemplarModel(){ Barcode = "BoOp.12123.213213" }},
+                            new ExemplarModel(){ BasicInfos = new BasicExemplarModel(){ Barcode = "BoOp.987654321" }}
+
+                        }
+
+                    }) ;
                 });
         }
     }
