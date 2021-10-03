@@ -11,7 +11,7 @@ namespace BoOp.DBAccessor.Models
         public BasicBuchModel BasicInfos { get; set; }
         public List<string> Genres { get; set; }
         public List<string> Schlagwoerter { get; set; }
-        public PersonModel LendBy { get; set; }
+        public List<ExemplarModel> Exemplare { get; set; }
         public List<RezensionModel> Rezensionen {get; set;}
         public double? RezensionenDurschschnitt
         {
@@ -32,6 +32,5 @@ namespace BoOp.DBAccessor.Models
                 return Math.Round(temp, 2);
             }
         }
-        public string BuchBarcode { get; set; }
     }
 }

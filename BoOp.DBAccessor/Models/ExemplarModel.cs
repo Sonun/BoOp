@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
-    public class BasicSchlagwoerterModel
+    public class ExemplarModel
     {
-        public int? Id { get; set; }
-        public string Wort { get; set; }
+        public BasicExemplarModel BasicInfos { get; set; }
+        public PersonModel LendBy { get; set; }
     }
 }

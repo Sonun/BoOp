@@ -14,29 +14,20 @@ namespace BoOp.UIConsole
         static private ILibrary _library;
         static void Main(string[] args)
         {
-            //let this be
-            _library = new Library();
-            //let this be
-
-
-            Console.WriteLine( _library.GetUserByID(8).Vorname);
+            testAddBook();
         }
 
-        static void testAddPerson()
+        static void testAddBook()
         {
-            var newUser = new PersonModel
-            {
-                Vorname = "Dominik",
-                Nachname = "v. M.",
-                PasswortHash = Utils.HashSHA("qwe"),
-                Rechte = Rechtelevel.ADMIN,
-                Geburtsdatum = "20" + "-" + "07" + "-" + "1996",
-                Telefonnummer = "123",
-                EMail = "sad@sad.sad"
-            };
+            var lib = new Library();
+            var book = new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", Barcode = "BoOp.asdsdasdasd", ISBN="213231-3123", Titel="Das Leben.", Verlag="Selfmade", Regal= "5A", PersonID = 1 } };
+            lib.AddBook(book);
+            Console.WriteLine("Book added.");
+            var books = lib.GetAllBooks();
+            Console.ReadLine();
 
-            _library.AddUser(newUser);
         }
+
 
         static void testbarcode()
         {

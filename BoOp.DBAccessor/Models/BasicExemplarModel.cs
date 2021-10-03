@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
-    public class BasicSchlagwoerterModel
+    public class BasicExemplarModel
     {
         public int? Id { get; set; }
-        public string Wort { get; set; }
+        public int BuchID { get; set; }
+        public string Barcode { get; set; }
+        public int? LendByUserID { get; set; }
     }
 }

@@ -30,11 +30,11 @@ namespace BoOp.DBAccessor.Models
 
     public class PersonModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public string PasswortHash { get; set; }
-        public string Geburtsdatum { get; set; }
+        public DateTime Geburtsdatum { get; set; }
         public string Telefonnummer { get; set; }
         public Rechtelevel Rechte { get; set; }
         public string EMail { get; set; }

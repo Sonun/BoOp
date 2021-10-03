@@ -197,10 +197,12 @@ namespace BoOp.UI.WPF.ViewModels
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = _gebTag + "-" + _gebMonat + "-" + _gebJahr,
+                        Geburtsdatum = new DateTime(int.Parse(_gebJahr), int.Parse(_gebMonat), int.Parse(_gebTag)),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
+
+                    //_gebTag + "-" + _gebMonat + "-" + _gebJahr
 
                     _library.AddUser(newUser);
 
