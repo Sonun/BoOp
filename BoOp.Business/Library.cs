@@ -16,40 +16,40 @@ namespace BoOp.Business
         private PersonModel _loggedInUnser;
 
         private readonly string _connectionString;
-        private SQLiteDataAccessor _db;
+        private SQLDataAccessor _db;
 
         public Library(string connectionString = null)
         {
-            _db = new SQLiteDataAccessor();
+            _db = new SQLDataAccessor();
 
             if (connectionString == null)
             {
-                _connectionString = SQLiteDataAccessor.GetConncetionString();
+                _connectionString = SQLDataAccessor.GetConncetionString();
             }
         }
 
         public ObservableCollection<BuchModel> GetAllBooks()
         {
             // ToDo: Map the references, genres, and key words to the books as wel
-            string sqlBasicBooks = "SELECT * FROM Buecher";
+            string sqlBasicBooks = "SELECT * FROM dbo.Buecher";
             var basicBooks = _db.LoadData<BasicBuchModel, dynamic>(sqlBasicBooks, new { }, _connectionString);
 
-            string sqlBasicBuchGenres = "SELECT * FROM BuchGenres";
+            string sqlBasicBuchGenres = "SELECT * FROM dbo.BuchGenres";
             var basicBuchGenres = _db.LoadData<BasicBuchGenresModel, dynamic>(sqlBasicBuchGenres, new { }, _connectionString);
 
-            string sqlBasicBuchSchlagwoerter = "SELECT * FROM BuchSchlagwoerter";
+            string sqlBasicBuchSchlagwoerter = "SELECT * FROM dbo.BuchSchlagwoerter";
             var basicBuchSchlagwoerter = _db.LoadData<BasicBuchSchlagwoerterModel, dynamic>(sqlBasicBuchSchlagwoerter, new { }, _connectionString);
 
-            string sqlBasicGenres = "SELECT * FROM Genre";
+            string sqlBasicGenres = "SELECT * FROM dbo.Genre";
             var basicGenres = _db.LoadData<BasicGenreModel, dynamic>(sqlBasicGenres, new { }, _connectionString);
 
-            string sqlBasicPersonen = "SELECT * FROM Personen";
+            string sqlBasicPersonen = "SELECT * FROM dbo.Personen";
             var basicPersonen = _db.LoadData<PersonModel, dynamic>(sqlBasicPersonen, new { }, _connectionString);
 
-            string sqlBasicRezensionen = "SELECT * FROM Rezensionen";
+            string sqlBasicRezensionen = "SELECT * FROM dbo.Rezensionen";
             var basicRezensionen = _db.LoadData<BasicRezensionenModel, dynamic>(sqlBasicRezensionen, new { }, _connectionString);
 
-            string sqlBasicSchlagwoerter = "SELECT * FROM Schlagwoerter";
+            string sqlBasicSchlagwoerter = "SELECT * FROM dbo.Schlagwoerter";
             var basicSchlagwoerter = _db.LoadData<BasicSchlagwoerterModel, dynamic>(sqlBasicSchlagwoerter, new { }, _connectionString);
 
             var allBooks = new ObservableCollection<BuchModel>();
@@ -100,51 +100,77 @@ namespace BoOp.Business
 
 
             // Save the basic book
-            string sql = $"insert into Buecher (Titel, Author, Verlag, PersonID, Auflage, ISBN, Altersvorschlag, Regal, Barcode) values ('{book.BasicInfos.Titel}', '{book.BasicInfos.Author}', '{book.BasicInfos.Verlag}', '{book.BasicInfos.PersonID}', '{book.BasicInfos.Auflage}', '{book.BasicInfos.ISBN}', '{book.BasicInfos.Altersvorschlag}', '{book.BasicInfos.Regal}', '{book.BasicInfos.Barcode}');";
+            string sql = "insert into dbo.Buecher (Titel, Author, Verlag, PersonID, Auflage, ISBN, Altersvorschlag, Regal, Barcode) values (@Titel, @Author, @Verlag, @PersonID, @Auflage, @ISBN, @Altersvorschlag, @Regal, @Barcode);";
             _db.SaveData(sql,
                         new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.PersonID, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Barcode},
                         _connectionString);
 
+            // Add Barcodes to DB
+
 
            // Get the ID number of the newly added book
-           sql = $"select Id from Buecher where Titel = '{book.BasicInfos.Titel}' and Author = '{book.BasicInfos.Author}' and Barcode = '{book.BasicInfos.Barcode}';";
-            int bookID = _db.LoadData<BasicBuchModel, dynamic>(
+           sql = $"select Id from dbo.Buecher where Titel = @Titel and Author = @Author and Barcode = @Barcode;";
+           book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
                 sql,
                 new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Barcode },
-                _connectionString).First().Id;
+                _connectionString).FirstOrDefault().Id;
 
-            Console.WriteLine("");
-            //foreach (var review in book.Rezensionen)
-            //{
-            //    if (phoneNumber.Id == 0)
-            //    {
-            //        sql = "insert into PhoneNumbers (PhoneNumber) values (@PhoneNumber);";
-            //        db.SaveData(sql, new { phoneNumber.PhoneNumber }, _connectionString);
 
-            //        sql = "select Id from PhoneNumbers where PhoneNumber = @PhoneNumber;";
-            //        phoneNumber.Id = db.LoadData<IdLookupModel, dynamic>(sql,
-            //            new { phoneNumber.PhoneNumber },
-            //            _connectionString).First().Id;
-            //    }
 
-            //    sql = "insert into ContactPhoneNumbers (ContactId, PhoneNumberId) values (@ContactId, @PhoneNumberId);";
-            //    db.SaveData(sql, new { ContactId = contactId, PhoneNumberId = phoneNumber.Id }, _connectionString);
-            //}
+            if (book.Rezensionen != null)
+            {
+                foreach (var review in book.Rezensionen)
+                {
+                    sql = "INSERT INTO dbo.Rezensionen (BuchID, Sterne, Rezensionstext, PersonID) VALUES (@Id, @Sterne, @Rezensionstext, @PersonID)";
+                    _db.SaveData(sql, new { book.BasicInfos.Id, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
+                }
+            }
 
-            //foreach (var email in contact.EmailAddresses)
-            //{
-            //    if (email.Id == 0)
-            //    {
-            //        sql = "insert into EmailAddresses (EmailAddress) values (@EmailAddress);";
-            //        db.SaveData(sql, new { email.EmailAddress }, _connectionString);
 
-            //        sql = "select Id from EmailAddresses where EmailAddress = @EmailAddress;";
-            //        email.Id = db.LoadData<IdLookupModel, dynamic>(sql, new { email.EmailAddress }, _connectionString).First().Id;
-            //    }
+            if (book.Schlagwoerter != null)
+            {
+                foreach (var word in book.Schlagwoerter)
+                {
+                    // Check if word is already in DB
+                    sql = "SELECT * FROM dbo.Schlagwoerter WHERE Wort = @Wort;";
+                    var schlagwort = _db.LoadData<BasicSchlagwoerterModel, dynamic>(
+                        sql,
+                        new { Wort = word },
+                        _connectionString).FirstOrDefault();
 
-            //    sql = "insert into ContactEmail (ContactId, EmailAddressId) values (@ContactId, @EmailAddressId);";
-            //    db.SaveData(sql, new { ContactId = contactId, EmailAddressId = email.Id }, _connectionString);
-            //}
+                    // Add word if it's not entered already
+                    if (schlagwort == null)
+                    {
+                        sql = "INSERT INTO dbo.Schlagwoerter (Wort) VALUES (@Wort);";
+                        _db.SaveData(sql, new { Wort = word }, _connectionString);
+
+                        sql = "SELECT * FROM dbo.Schlagwoerter WHERE Wort = @Wort;";
+                        schlagwort = _db.LoadData<BasicSchlagwoerterModel, dynamic>(
+                            sql,
+                            new { Wort = word },
+                            _connectionString).FirstOrDefault();
+                    }
+
+                    // Check if word is already marked as Schlagwort for that book
+                    if (schlagwort != null)
+                    {
+                        sql = "SELECT * FROM dbo.BuchSchlagwoerter WHERE BuchID = @BuchID AND SchlagwortID = @SchlagwortID;";
+                        var buchSchlagwort = _db.LoadData<BasicBuchSchlagwoerterModel, dynamic>(
+                        sql,
+                        new { BuchID = book.BasicInfos.Id, SchlagwortID = schlagwort.Id },
+                        _connectionString).FirstOrDefault();
+
+                        if (buchSchlagwort == null)
+                        {
+                            // Create reference between word and book
+                            sql = "INSERT INTO dbo.BuchSchlagwoerter (BuchID, SchlagwortID) VALUES (@BuchID, @SchlagwortID)";
+                            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, SchlagwortID = schlagwort.Id }, _connectionString);
+                        }
+                    }
+                }
+            }
+
+
 
         }
 

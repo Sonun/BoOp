@@ -8,7 +8,7 @@ namespace BoOp.DBAccessor.Models
 {
     public class BasicBuchSchlagwoerterModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int BuchID { get; set; }
         public int SchlagwortID { get; set; }
     }

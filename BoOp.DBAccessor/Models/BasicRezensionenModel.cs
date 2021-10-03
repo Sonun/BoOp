@@ -8,7 +8,7 @@ namespace BoOp.DBAccessor.Models
 {
     public class BasicRezensionenModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int BuchID { get; set; }
         public int Sterne { get; set; }
         public string Rezensionstext { get; set; }

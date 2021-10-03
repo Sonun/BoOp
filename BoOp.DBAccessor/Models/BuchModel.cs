@@ -32,6 +32,5 @@ namespace BoOp.DBAccessor.Models
                 return Math.Round(temp, 2);
             }
         }
-        public string BuchBarcode { get; set; }
     }
 }

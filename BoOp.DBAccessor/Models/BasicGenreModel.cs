@@ -8,7 +8,7 @@ namespace BoOp.DBAccessor.Models
 {
     public class BasicGenreModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Genrename { get; set; }
     }
 }

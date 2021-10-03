@@ -8,7 +8,7 @@ namespace BoOp.DBAccessor.Models
 {
     public class BasicSchlagwoerterModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Wort { get; set; }
     }
 }
