@@ -245,7 +245,7 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-        public void EditBookDetails(string bookBarcode)
+        public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
         {
             string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag WHERE Id = @Id; ";
             _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag }, _connectionString );
