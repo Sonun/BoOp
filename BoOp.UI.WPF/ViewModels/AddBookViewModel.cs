@@ -81,7 +81,15 @@ namespace BoOp.UI.WPF.ViewModels
 
                     var bookModel = new BuchModel { BasicInfos = basicModel, Exemplare = exList};
 
-                    _library.AddBook(bookModel);
+                    try
+                    {
+                        _library.AddBook(bookModel);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                        return;
+                    }
                     _navigationService.ShowAdminView();
                 });
 
