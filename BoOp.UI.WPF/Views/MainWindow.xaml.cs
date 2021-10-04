@@ -10,7 +10,6 @@ namespace BoOp.UI.WPF
     public partial class MainWindow : Window
     {
         public INavigationService NavigationService { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
