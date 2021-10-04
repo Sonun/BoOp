@@ -273,8 +273,6 @@ namespace BoOp.Business
 
         }
 
-       
-
         public void ReturnBook(string bookBarcode)
         {
             string sql = "SELECT Id " +
