@@ -273,19 +273,7 @@ namespace BoOp.Business
 
         }
 
-        public void LendBook(PersonModel user, BuchModel book)
-        {
-            string sql = "SELECT Id " +
-                "FROM Exemplare " +
-                "WHERE Barcode = @bookBarcode";
-            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
-
-            string sqlString = "UPDATE Exemplare " +
-                "SET LendByUserID = @userId " +
-                "WHERE Id = @buchId";
-
-            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
-        }
+       
 
         public void ReturnBook(string bookBarcode)
         {
@@ -381,6 +369,20 @@ namespace BoOp.Business
         public void EditBookDetails ( BuchModel bookModel )
         {
             throw new NotImplementedException();
+        }
+
+        public void LendBook(int userId, string bookBarcode)
+        {
+            string sql = "SELECT Id " +
+                            "FROM Exemplare " +
+                            "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = @userId " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
         }
     }
 }
