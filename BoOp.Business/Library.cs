@@ -206,31 +206,48 @@ namespace BoOp.Business
 
         }
 
-        public void LendBook(PersonModel user, BuchModel book)
+        public void LendBook(int userId, string bookBarcode)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT Id " +
+                "FROM Exemplare " +
+                "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = @userId " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
         }
 
-        public void ReturnBook(BuchModel book)
+        public void ReturnBook(string bookBarcode)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT Id " +
+               "FROM Exemplare " +
+               "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = NULL " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { buchId = bookId }, _connectionString);
         }
 
         public PersonModel GetUserByID(int id)
         {
-            string sId = id + "";
-            string sql = "SELECT * FROM Personen WHERE Id = " + sId;
-            var person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString);
+            string sql = "SELECT * FROM Personen WHERE Id = @id";
+            var person = _db.LoadData<PersonModel, dynamic>(sql, new { id }, _connectionString);
 
             return person.FirstOrDefault();
         }
 
-        public void RemoveBook(BuchModel book)
+        public void RemoveBook(string bookBarcode)
         {
             throw new NotImplementedException();
         }
 
-        public void EditBookDetails(BuchModel book)
+        public void EditBookDetails(string bookBarcode)
         {
             throw new NotImplementedException();
         }
@@ -245,7 +262,7 @@ namespace BoOp.Business
             string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email) " +
                 "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, Rechte = user.Rechte, user.EMail }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)
