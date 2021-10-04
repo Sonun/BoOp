@@ -250,12 +250,14 @@ namespace BoOp.Business
 
         public void RemoveUser(PersonModel user)
         {
-            throw new NotImplementedException();
+            string sqlstring = $"DELETE From Personen Where id=@Id";
+            _db.SaveData( sqlstring, new { user.Id }, _connectionString );
         }
 
         public void EditUserDetails(PersonModel user)
         {
-            throw new NotImplementedException();
+            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, Geburtsdatum=@Geburtsdatum, Telefonnummer=@Telefonnumer, Rechte=@Rechte, EMail=@EMail WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString );
         }
     }
 }
