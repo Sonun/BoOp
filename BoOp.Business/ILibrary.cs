@@ -11,19 +11,19 @@ namespace BoOp.Business
         public ObservableCollection<BuchModel> GetAllBooks();
 
         // Dependent on login
-        public void LendBook(PersonModel user, BuchModel book);
+        public void LendBook(int userId, string bookBarcode);
 
         // Independent on login
-        public void ReturnBook(BuchModel book);
+        public void ReturnBook(string bookBarcode);
 
         // Dependent on User Rights
         public void AddBook(BuchModel book);
 
         // Remove book
-        public void RemoveBook(BuchModel book);
+        public void RemoveBook(string bookBarcode);
 
         // Edit book
-        public void EditBookDetails(BuchModel book);
+        public void EditBookDetails(string bookBarcode);
 
         // Add review to a book
         public void AddReview(RezensionModel review);

@@ -12,15 +12,37 @@ namespace BoOp.UIConsole
     class Program
     {
         static private ILibrary _library;
+
         static void Main(string[] args)
         {
-            testAddBook();
+            //make library
+            _library = new Library();
+
+            _library.LendBook(1, "BoOp.987654321");
+            _library.ReturnBook("BoOp.12123.213213");
+
+            foreach (var eachBook in _library.GetAllBooks())
+            {
+                foreach (var eachExemplar in eachBook.Exemplare)
+                {
+                    Console.WriteLine(eachExemplar.BasicInfos.BuchID + ", " + eachExemplar.BasicInfos.LendByUserID + ", " + eachExemplar.BasicInfos.Barcode);
+                }
+            }
+        }
+
+        static void testaddUser()
+        {
+            var geb = new DateTime(1996, 07, 20);
+
+            var model = new PersonModel { Vorname="Dominik", Nachname="v.M.", EMail="sad@sad.sad", Geburtsdatum=geb, PasswortHash=Utils.HashSHA("qwe"), Rechte=Rechtelevel.ADMIN, Telefonnummer="123" };
+
+            _library.AddUser(model);
         }
 
         static void testAddBook()
         {
             var lib = new Library();
-            var book = new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", Barcode = "BoOp.asdsdasdasd", ISBN="213231-3123", Titel="Das Leben.", Verlag="Selfmade", Regal= "5A", PersonID = 1 } };
+            var book = new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN="213231-3123", Titel="Das Leben.", Verlag="Selfmade", Regal= "5A"} };
             lib.AddBook(book);
             Console.WriteLine("Book added.");
             var books = lib.GetAllBooks();
