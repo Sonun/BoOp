@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -44,19 +45,7 @@ namespace BoOp.UI.WPF.ViewModels
             AddBookCommand = new DelegateCommand(
                 x =>
                 {
-                    library.AddBook(new BuchModel()
-                    {
-                        BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Author = "Domi", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A", ISBN = "123213-123123-123" },
-                        Schlagwoerter = new List<string>() { "Easy", "Krass" },
-                        Genres = new List<string>() { "Drama", "Horror" },
-                        Exemplare = new List<ExemplarModel>()
-                        {
-                            new ExemplarModel(){ BasicInfos = new BasicExemplarModel(){ Barcode = "BoOp.12123.213213" }},
-                            new ExemplarModel(){ BasicInfos = new BasicExemplarModel(){ Barcode = "BoOp.987654321" }}
-
-                        }
-
-                    }) ;
+                    _navigationService.ShowAddBookView();
                 });
         }
     }

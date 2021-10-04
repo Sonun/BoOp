@@ -11,7 +11,7 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         public DataTemplate LibraryViewModelTemplate { get; set; }
         public DataTemplate AdminViewModelTemplate { get; set; }
         public DataTemplate AddPersonViewModelTemplate { get; set; }
-
+        public DataTemplate AddBookViewModelTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -22,6 +22,7 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
                 LibraryViewModel _ => LibraryViewModelTemplate,
                 AdminViewModel _ => AdminViewModelTemplate,
                 AddPersonViewModel _ => AddPersonViewModelTemplate,
+                AddBookViewModel _ => AddBookViewModelTemplate,
                 _ => base.SelectTemplate(item, container),
             };
         }

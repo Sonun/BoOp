@@ -22,6 +22,7 @@ namespace BoOp.UI.WPF.ViewModels
             _dispatcher = dispatcher;
             _library = new Library();
             ShowScanUserView();
+
         }
 
         public void ShowScanUserView()
@@ -47,6 +48,11 @@ namespace BoOp.UI.WPF.ViewModels
         public void ShowAddPersonView()
         {
             CurrentViewModel = new AddPersonViewModel(this, _library);
+        }
+
+        public void ShowAddBookView()
+        {
+            CurrentViewModel = new AddBookViewModel(this, _library);
         }
     }
 }
