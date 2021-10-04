@@ -308,5 +308,10 @@ namespace BoOp.Business
             string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, Geburtsdatum=@Geburtsdatum, Telefonnummer=@Telefonnumer, Rechte=@Rechte, EMail=@EMail WHERE Id = @Id; ";
             _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString );
         }
+
+        public void EditBookDetails ( BuchModel bookModel )
+        {
+            throw new NotImplementedException();
+        }
     }
 }
