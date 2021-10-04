@@ -43,7 +43,7 @@ namespace BoOp.UIConsole
         static void testAddBook()
         {
             var lib = new Library();
-            var book = new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN="213231-3123", Titel="Das Leben.", Verlag="Selfmade", Regal= "5A"} };
+            var book = new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi",  ISBN="213231-3123", Titel="Das Leben.", Verlag="Selfmade", Regal= "5A" } };
             lib.AddBook(book);
             Console.WriteLine("Book added.");
             var books = lib.GetAllBooks();

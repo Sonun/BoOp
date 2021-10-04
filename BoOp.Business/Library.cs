@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -120,13 +121,27 @@ namespace BoOp.Business
             if(_loggedInUnser != null)
                 throw new NotImplementedException();
 
-            // ToDO: Check if book is already in DB
+            // Check if book is already in DB
+            string sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
+            var bookCheck  = _db.LoadData<BasicBuchModel, dynamic>(
+                 sql,
+                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
+                 _connectionString).FirstOrDefault();
 
-            // Save the basic book
-            string sql = "insert into dbo.Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal );";
-            _db.SaveData(sql,
-                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal},
-                        _connectionString);
+            if (bookCheck == null)
+            {
+                // Save the basic book
+                sql = "insert into dbo.Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal );";
+                _db.SaveData(sql,
+                            new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal },
+                            _connectionString);
+            }
+            else
+            {
+                // throw new Exception("Book with same Titel, Author and ISBN exists already in DB.");
+
+                Debug.WriteLine("Book with same Titel, Author and ISBN exists already in DB.");
+            }
 
             sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
             book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
@@ -139,17 +154,23 @@ namespace BoOp.Business
             {
                 foreach (var exemplar in book.Exemplare)
                 {
-                    sql = "INSERT INTO dbo.Exemplare (BuchID, Barcode) VALUES (@BuchID, @Barcode)";
-                    _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode }, _connectionString);
-                }
-            }
+                    // Check if Barcode already exists in DB
+                    sql = "SELECT * FROM dbo.Exemplare WHERE Barcode = @Barcode;";
+                    var exemplarCheck = _db.LoadData<BasicExemplarModel, dynamic>(
+                         sql,
+                         new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode },
+                         _connectionString).FirstOrDefault();
 
-            if (book.Rezensionen != null)
-            {
-                foreach (var review in book.Rezensionen)
-                {
-                    sql = "INSERT INTO dbo.Rezensionen (BuchID, Sterne, Rezensionstext, PersonID) VALUES (@Id, @Sterne, @Rezensionstext, @PersonID)";
-                    _db.SaveData(sql, new { book.BasicInfos.Id, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
+                    if (exemplarCheck == null)
+                    {
+                        sql = "INSERT INTO dbo.Exemplare (BuchID, Barcode) VALUES (@BuchID, @Barcode)";
+                        _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode }, _connectionString);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Barcode is already used for a book in DB.");
+                    }
+                    
                 }
             }
 
@@ -197,26 +218,62 @@ namespace BoOp.Business
                 }
             }
 
-            // ToDo: Add Genres to DB
+            // Add Genres to DB
             if (book.Genres != null)
             {
+                foreach (var genre in book.Genres)
+                {
+                    // Check if word is already in DB
+                    sql = "SELECT * FROM dbo.Genre WHERE Genrename = @Genrename;";
+                    var basicGenre = _db.LoadData<BasicGenreModel, dynamic>(
+                        sql,
+                        new { Genrename = genre },
+                        _connectionString).FirstOrDefault();
 
+                    // Add word if it's not entered already
+                    if (basicGenre == null)
+                    {
+                        sql = "INSERT INTO dbo.Genre (Genrename) VALUES (@Genrename);";
+                        _db.SaveData(sql, new { Genrename = genre }, _connectionString);
+
+                        sql = "SELECT * FROM dbo.Genre WHERE Genrename = @Genrename;";
+                        basicGenre = _db.LoadData<BasicGenreModel, dynamic>(
+                            sql,
+                            new { Genrename = genre },
+                            _connectionString).FirstOrDefault();
+                    }
+
+                    // Check if word is already marked as Schlagwort for that book
+                    if (basicGenre != null)
+                    {
+                        sql = "SELECT * FROM dbo.BuchGenres WHERE BuchID = @BuchID AND GenreID = @GenreID;";
+                        var buchGenre = _db.LoadData<BasicBuchGenresModel, dynamic>(
+                        sql,
+                        new { BuchID = book.BasicInfos.Id, GenreID = basicGenre.Id },
+                        _connectionString).FirstOrDefault();
+
+                        if (buchGenre == null)
+                        {
+                            // Create reference between word and book
+                            sql = "INSERT INTO dbo.BuchGenres (BuchID, GenreID) VALUES (@BuchID, @GenreID)";
+                            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, GenreID = basicGenre.Id }, _connectionString);
+                        }
+                    }
+                }
             }
+
+            //if (book.Rezensionen != null)
+            //{
+            //    foreach (var review in book.Rezensionen)
+            //    {
+            //        sql = "INSERT INTO dbo.Rezensionen (BuchID, Sterne, Rezensionstext, PersonID) VALUES (@Id, @Sterne, @Rezensionstext, @PersonID)";
+            //        _db.SaveData(sql, new { book.BasicInfos.Id, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
+            //    }
+            //}
+
         }
 
-        public void LendBook(int userId, string bookBarcode)
-        {
-            string sql = "SELECT Id " +
-                "FROM Exemplare " +
-                "WHERE Barcode = @bookBarcode";
-            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
-
-            string sqlString = "UPDATE Exemplare " +
-                "SET LendByUserID = @userId " +
-                "WHERE Id = @buchId";
-
-            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
-        }
+       
 
         public void ReturnBook(string bookBarcode)
         {
@@ -312,6 +369,20 @@ namespace BoOp.Business
         public void EditBookDetails ( BuchModel bookModel )
         {
             throw new NotImplementedException();
+        }
+
+        public void LendBook(int userId, string bookBarcode)
+        {
+            string sql = "SELECT Id " +
+                            "FROM Exemplare " +
+                            "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = @userId " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
         }
     }
 }
