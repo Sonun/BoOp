@@ -144,7 +144,6 @@ namespace BoOp.Business
                 }
             }
 
-
             if (book.Rezensionen != null)
             {
                 foreach (var review in book.Rezensionen)
@@ -203,7 +202,6 @@ namespace BoOp.Business
             {
 
             }
-
         }
 
         public void LendBook(int userId, string bookBarcode)
@@ -247,7 +245,7 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-        public void EditBookDetails(string bookBarcode)
+        public void EditBookDetails(BuchModel bookModel)
         {
             throw new NotImplementedException();
         }

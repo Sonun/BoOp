@@ -23,7 +23,7 @@ namespace BoOp.Business
         public void RemoveBook(string bookBarcode);
 
         // Edit book
-        public void EditBookDetails(string bookBarcode);
+        public void EditBookDetails(BuchModel bookModel);
 
         // Add review to a book
         public void AddReview(RezensionModel review);
