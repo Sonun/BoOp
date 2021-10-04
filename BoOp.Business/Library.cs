@@ -138,9 +138,8 @@ namespace BoOp.Business
             }
             else
             {
-                // throw new Exception("Book with same Titel, Author and ISBN exists already in DB.");
-
                 Debug.WriteLine("Book with same Titel, Author and ISBN exists already in DB.");
+                throw new Exception("Buch mit dem Titel, Author und der ISBN Nummer existiert bereits in der Datenbank.");
             }
 
             sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
