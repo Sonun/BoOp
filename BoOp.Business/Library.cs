@@ -144,7 +144,6 @@ namespace BoOp.Business
                 }
             }
 
-
             if (book.Rezensionen != null)
             {
                 foreach (var review in book.Rezensionen)
@@ -203,7 +202,6 @@ namespace BoOp.Business
             {
 
             }
-
         }
 
         public void LendBook(int userId, string bookBarcode)
@@ -247,7 +245,7 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-        public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
+        public void EditBookDetails(string bookBarcode)
         {
             string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag WHERE Id = @Id; ";
             _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag }, _connectionString );
@@ -255,7 +253,40 @@ namespace BoOp.Business
 
         public void AddReview(RezensionModel review)
         {
-            throw new NotImplementedException();
+            //keep it in range
+            if (review.BasicInfos.Sterne > 5) review.BasicInfos.Sterne = 5;
+            if (review.BasicInfos.Sterne < 0) review.BasicInfos.Sterne = 0;
+
+            string sql = "SELECT BuchID FROM Rezensionen WHERE PersonID = @id";
+            var bookIdsOfPerson = _db.LoadData<int, dynamic>(sql, new { id = review.BasicInfos.PersonID }, _connectionString);
+
+            bool personAlreadyRatedThisBook = false;
+
+            foreach (var bookId in bookIdsOfPerson)
+            {
+                if (bookId == review.BasicInfos.BuchID)
+                {
+                    //person alrdy made a rez for this book
+                    personAlreadyRatedThisBook = true;
+                    break;
+                }
+            }
+
+            string sqlString = "";
+            if (personAlreadyRatedThisBook)
+            {
+                sqlString = "UPDATE Rezensionen " +
+                    "SET RezensionsText = @RezensionsText, " +
+                    "Sterne = @Sterne " +
+                    "WHERE BuchID = @BuchID AND PersonID = @PersonID";
+            }
+            else
+            {
+                sqlString = "INSERT INTO Rezensionen(BuchID, Sterne, RezensionsText, PersonID) " +
+                    "VALUES(@BuchID, @Sterne, @RezensionsText, @PersonID);";
+            }
+
+            _db.SaveData(sqlString, new { review.BasicInfos.BuchID, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
         }
 
         public void AddUser(PersonModel user)

@@ -18,14 +18,15 @@ namespace BoOp.UIConsole
             //make library
             _library = new Library();
 
-            _library.LendBook(1, "BoOp.987654321");
-            _library.ReturnBook("BoOp.12123.213213");
+            var rez = new RezensionModel { BasicInfos = new BasicRezensionenModel() { PersonID = 1, BuchID = 1, Sterne = 5, Rezensionstext = "good book" } };
 
-            foreach (var eachBook in _library.GetAllBooks())
+            _library.AddReview(rez);
+
+            foreach (var book in _library.GetAllBooks())
             {
-                foreach (var eachExemplar in eachBook.Exemplare)
+                foreach (var eachRez in book.Rezensionen)
                 {
-                    Console.WriteLine(eachExemplar.BasicInfos.BuchID + ", " + eachExemplar.BasicInfos.LendByUserID + ", " + eachExemplar.BasicInfos.Barcode);
+                    Console.WriteLine("Buch: " + book.BasicInfos.Titel + ", person: " + eachRez.BasicInfos.PersonID + ", sterne: " + eachRez.BasicInfos.Sterne + ", Rezension: " + eachRez.BasicInfos.Rezensionstext);
                 }
             }
         }

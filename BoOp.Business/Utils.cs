@@ -250,13 +250,12 @@ namespace BoOp.Business
             var barcodeAsString = "BOOP";
 
             DateTimeOffset now = DateTimeOffset.UtcNow;
-            long unixTimeMilliseconds = now.ToUnixTimeMilliseconds();
-            Console.WriteLine(unixTimeMilliseconds);
+            long unixTimeMilliseconds = now.ToUnixTimeSeconds();
 
             barcodeAsString += unixTimeMilliseconds;
 
             GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
-            MyBarCode.SaveAsPdf(bookname + ".pdf");
+            MyBarCode.SaveAsPdf(bookname);
 
             return barcodeAsString;
         }
