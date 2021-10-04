@@ -12,9 +12,32 @@ namespace BoOp.UIConsole
     class Program
     {
         static private ILibrary _library;
+
         static void Main(string[] args)
         {
-            testAddBook();
+            //make library
+            _library = new Library();
+
+            var rez = new RezensionModel { BasicInfos = new BasicRezensionenModel() { PersonID = 1, BuchID = 1, Sterne = 5, Rezensionstext = "good book" } };
+
+            _library.AddReview(rez);
+
+            foreach (var book in _library.GetAllBooks())
+            {
+                foreach (var eachRez in book.Rezensionen)
+                {
+                    Console.WriteLine("Buch: " + book.BasicInfos.Titel + ", person: " + eachRez.BasicInfos.PersonID + ", sterne: " + eachRez.BasicInfos.Sterne + ", Rezension: " + eachRez.BasicInfos.Rezensionstext);
+                }
+            }
+        }
+
+        static void testaddUser()
+        {
+            var geb = new DateTime(1996, 07, 20);
+
+            var model = new PersonModel { Vorname="Dominik", Nachname="v.M.", EMail="sad@sad.sad", Geburtsdatum=geb, PasswortHash=Utils.HashSHA("qwe"), Rechte=Rechtelevel.ADMIN, Telefonnummer="123" };
+
+            _library.AddUser(model);
         }
 
         static void testAddBook()

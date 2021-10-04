@@ -41,5 +41,9 @@ namespace BoOp.DBAccessor
 
             return output;
         }
+        public void RemoveData( string sqlStatement, string connectionString)
+        {
+
+        }
     }
 }

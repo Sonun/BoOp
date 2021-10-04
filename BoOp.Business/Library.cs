@@ -275,36 +275,87 @@ namespace BoOp.Business
 
         public void LendBook(PersonModel user, BuchModel book)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT Id " +
+                "FROM Exemplare " +
+                "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = @userId " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
         }
 
-        public void ReturnBook(BuchModel book)
+        public void ReturnBook(string bookBarcode)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT Id " +
+               "FROM Exemplare " +
+               "WHERE Barcode = @bookBarcode";
+            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+
+            string sqlString = "UPDATE Exemplare " +
+                "SET LendByUserID = NULL " +
+                "WHERE Id = @buchId";
+
+            _db.SaveData(sqlString, new { buchId = bookId }, _connectionString);
         }
 
         public PersonModel GetUserByID(int id)
         {
-            string sId = id + "";
-            string sql = "SELECT * FROM Personen WHERE Id = " + sId;
-            var person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString);
+            string sql = "SELECT * FROM Personen WHERE Id = @id";
+            var person = _db.LoadData<PersonModel, dynamic>(sql, new { id }, _connectionString);
 
             return person.FirstOrDefault();
         }
 
-        public void RemoveBook(BuchModel book)
+        public void RemoveBook(string bookBarcode)
         {
             throw new NotImplementedException();
         }
 
-        public void EditBookDetails(BuchModel book)
+        public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
         {
-            throw new NotImplementedException();
+            string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag }, _connectionString );
         }
 
         public void AddReview(RezensionModel review)
         {
-            throw new NotImplementedException();
+            //keep it in range
+            if (review.BasicInfos.Sterne > 5) review.BasicInfos.Sterne = 5;
+            if (review.BasicInfos.Sterne < 0) review.BasicInfos.Sterne = 0;
+
+            string sql = "SELECT BuchID FROM Rezensionen WHERE PersonID = @id";
+            var bookIdsOfPerson = _db.LoadData<int, dynamic>(sql, new { id = review.BasicInfos.PersonID }, _connectionString);
+
+            bool personAlreadyRatedThisBook = false;
+
+            foreach (var bookId in bookIdsOfPerson)
+            {
+                if (bookId == review.BasicInfos.BuchID)
+                {
+                    //person alrdy made a rez for this book
+                    personAlreadyRatedThisBook = true;
+                    break;
+                }
+            }
+
+            string sqlString = "";
+            if (personAlreadyRatedThisBook)
+            {
+                sqlString = "UPDATE Rezensionen " +
+                    "SET RezensionsText = @RezensionsText, " +
+                    "Sterne = @Sterne " +
+                    "WHERE BuchID = @BuchID AND PersonID = @PersonID";
+            }
+            else
+            {
+                sqlString = "INSERT INTO Rezensionen(BuchID, Sterne, RezensionsText, PersonID) " +
+                    "VALUES(@BuchID, @Sterne, @RezensionsText, @PersonID);";
+            }
+
+            _db.SaveData(sqlString, new { review.BasicInfos.BuchID, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
         }
 
         public void AddUser(PersonModel user)
@@ -312,123 +363,24 @@ namespace BoOp.Business
             string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email) " +
                 "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, Rechte = user.Rechte, user.EMail }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)
         {
-            throw new NotImplementedException();
+            string sqlstring = $"DELETE From Personen Where id=@Id";
+            _db.SaveData( sqlstring, new { user.Id }, _connectionString );
         }
 
         public void EditUserDetails(PersonModel user)
         {
-            throw new NotImplementedException();
+            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, Geburtsdatum=@Geburtsdatum, Telefonnummer=@Telefonnumer, Rechte=@Rechte, EMail=@EMail WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString );
         }
 
-
-        ////////////////////
-        ///
-
-        //public FullContactModel GetFullContactById(int id)
-        //{
-        //    string sql = "select Id, FirstName, LastName from Contacts where Id = @Id";
-        //    FullContactModel output = new FullContactModel();
-
-        //    output.BasicInfo = db.LoadData<BasicContactModel, dynamic>(sql, new { Id = id }, _connectionString).FirstOrDefault();
-
-        //    if (output.BasicInfo == null)
-        //    {
-        //        // do something to tell the user that the record was not found
-        //        return null;
-        //    }
-
-        //    sql = @"select e.*
-        //            from EmailAddresses e
-        //            inner
-        //            join ContactEmail ce on ce.EmailAddressId = e.Id
-        //            where ce.ContactId = @Id";
-
-        //    output.EmailAddresses = db.LoadData<EmailAddressModel, dynamic>(sql, new { Id = id }, _connectionString);
-
-        //    sql = @"select p.*
-        //            from PhoneNumbers p
-        //            inner join ContactPhoneNumbers cp on cp.PhoneNumberId = p.Id
-        //            where cp.ContactId = @Id";
-
-        //    output.PhoneNumbers = db.LoadData<PhoneNumberModel, dynamic>(sql, new { Id = id }, _connectionString);
-
-        //    return output;
-        //}
-
-        //public void CreateContact(FullContactModel contact)
-        //{
-        //    // Save the basic contact
-        //    string sql = "insert into Contacts (FirstName, LastName) values (@FirstName, @LastName);";
-        //    db.SaveData(sql,
-        //                new { contact.BasicInfo.FirstName, contact.BasicInfo.LastName },
-        //                _connectionString);
-
-        //    // Get the ID number of the contact
-        //    sql = "select Id from Contacts where FirstName = @FirstName and LastName = @LastName;";
-        //    int contactId = db.LoadData<IdLookupModel, dynamic>(
-        //        sql,
-        //        new { contact.BasicInfo.FirstName, contact.BasicInfo.LastName },
-        //        _connectionString).First().Id;
-
-        //    foreach (var phoneNumber in contact.PhoneNumbers)
-        //    {
-        //        if (phoneNumber.Id == 0)
-        //        {
-        //            sql = "insert into PhoneNumbers (PhoneNumber) values (@PhoneNumber);";
-        //            db.SaveData(sql, new { phoneNumber.PhoneNumber }, _connectionString);
-
-        //            sql = "select Id from PhoneNumbers where PhoneNumber = @PhoneNumber;";
-        //            phoneNumber.Id = db.LoadData<IdLookupModel, dynamic>(sql,
-        //                new { phoneNumber.PhoneNumber },
-        //                _connectionString).First().Id;
-        //        }
-
-        //        sql = "insert into ContactPhoneNumbers (ContactId, PhoneNumberId) values (@ContactId, @PhoneNumberId);";
-        //        db.SaveData(sql, new { ContactId = contactId, PhoneNumberId = phoneNumber.Id }, _connectionString);
-        //    }
-
-        //    foreach (var email in contact.EmailAddresses)
-        //    {
-        //        if (email.Id == 0)
-        //        {
-        //            sql = "insert into EmailAddresses (EmailAddress) values (@EmailAddress);";
-        //            db.SaveData(sql, new { email.EmailAddress }, _connectionString);
-
-        //            sql = "select Id from EmailAddresses where EmailAddress = @EmailAddress;";
-        //            email.Id = db.LoadData<IdLookupModel, dynamic>(sql, new { email.EmailAddress }, _connectionString).First().Id;
-        //        }
-
-        //        sql = "insert into ContactEmail (ContactId, EmailAddressId) values (@ContactId, @EmailAddressId);";
-        //        db.SaveData(sql, new { ContactId = contactId, EmailAddressId = email.Id }, _connectionString);
-        //    }
-        //}
-
-        //public void UpdateContactName(BasicContactModel contact)
-        //{
-        //    string sql = "update Contacts set FirstName = @FirstName, LastName = @LastName where Id = @Id";
-        //    db.SaveData(sql, contact, _connectionString);
-        //}
-
-        //public void RemovePhoneNumberFromContact(int contactId, int phoneNumberId)
-        //{
-        //    string sql = "select Id, ContactId, PhoneNumberId from ContactPhoneNumbers where PhoneNumberId = @PhoneNumberId;";
-        //    var links = db.LoadData<ContactPhoneNumberModel, dynamic>(sql,
-        //        new { PhoneNumberId = phoneNumberId },
-        //        _connectionString);
-
-        //    sql = "delete from ContactPhoneNumbers where PhoneNumberId = @PhoneNumberId and ContactId = @ContactId";
-        //    db.SaveData(sql, new { PhoneNumberId = phoneNumberId, ContactId = contactId }, _connectionString);
-
-        //    if (links.Count == 1)
-        //    {
-        //        sql = "delete from PhoneNumbers where Id = @PhoneNumberId;";
-        //        db.SaveData(sql, new { PhoneNumberId = phoneNumberId }, _connectionString);
-        //    }
-        //}
+        public void EditBookDetails ( BuchModel bookModel )
+        {
+            throw new NotImplementedException();
+        }
     }
 }
