@@ -272,20 +272,14 @@ namespace BoOp.Business
 
         }
 
-       
-
         public void ReturnBook(string bookBarcode)
         {
-            string sql = "SELECT Id " +
-               "FROM Exemplare " +
-               "WHERE Barcode = @bookBarcode";
-            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
+           string sqlString = "UPDATE Exemplare " +
+                "SET AusleiherID = NULL, " +
+                "AusleihDatum = NULL " +
+                "WHERE Barcode = @bookBarcode";
 
-            string sqlString = "UPDATE Exemplare " +
-                "SET LendByUserID = NULL " +
-                "WHERE Id = @buchId";
-
-            _db.SaveData(sqlString, new { buchId = bookId }, _connectionString);
+            _db.SaveData(sqlString, new { bookBarcode }, _connectionString);
         }
 
         public PersonModel GetUserByID(int id)
@@ -372,16 +366,12 @@ namespace BoOp.Business
 
         public void LendBook(int userId, string bookBarcode)
         {
-            string sql = "SELECT Id " +
-                            "FROM Exemplare " +
-                            "WHERE Barcode = @bookBarcode";
-            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
-
             string sqlString = "UPDATE Exemplare " +
-                "SET LendByUserID = @userId " +
-                "WHERE Id = @buchId";
+                "SET AusleiherID = @userId, " +
+                "AusleihDatum = @datum " +
+                "WHERE Barcode = @bookBarcode";
 
-            _db.SaveData(sqlString, new { userId = userId, buchId = bookId }, _connectionString);
+            _db.SaveData(sqlString, new { userId, bookBarcode, datum = DateTime.Now }, _connectionString);
         }
     }
 }
