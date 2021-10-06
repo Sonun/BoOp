@@ -274,17 +274,12 @@ namespace BoOp.Business
 
         public void ReturnBook(string bookBarcode)
         {
-            string sql = "SELECT Id " +
-               "FROM Exemplare " +
-               "WHERE Barcode = @bookBarcode";
-            var bookId = _db.LoadData<int, dynamic>(sql, new { bookBarcode }, _connectionString).FirstOrDefault();
-
-            string sqlString = "UPDATE Exemplare " +
+           string sqlString = "UPDATE Exemplare " +
                 "SET AusleiherID = NULL, " +
                 "AusleihDatum = NULL " +
-                "WHERE Id = @buchId";
+                "WHERE Barcode = @bookBarcode";
 
-            _db.SaveData(sqlString, new { buchId = bookId }, _connectionString);
+            _db.SaveData(sqlString, new { bookBarcode }, _connectionString);
         }
 
         public PersonModel GetUserByID(int id)
