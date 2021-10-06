@@ -245,17 +245,19 @@ namespace BoOp.Business
         /// </summary>
         /// <param name="bookname"></param>
         /// <returns></returns>
-        public static string GenerateUniqueBarcode(string bookname)
+        public static string GenerateUniqueBarcode(BuchModel book)
         {
-            var barcodeAsString = "BOOP";
+            //add leading 0's untill the lenght is 6
+            var barcodeId = book.BasicInfos.Id.ToString();
+            while(barcodeId.Length < 6)
+            {
+                barcodeId = "0" + barcodeId;
+            }
 
-            DateTimeOffset now = DateTimeOffset.UtcNow;
-            long unixTimeMilliseconds = now.ToUnixTimeSeconds();
-
-            barcodeAsString += unixTimeMilliseconds;
+            var barcodeAsString = "BoOp" + barcodeId + book.Exemplare.Count;
 
             GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
-            MyBarCode.SaveAsPdf(bookname);
+            MyBarCode.SaveAsPdf(book.BasicInfos.Titel + ".pdf");
 
             return barcodeAsString;
         }
