@@ -242,11 +242,15 @@ namespace BoOp.Business
 
         /// <summary>
         /// create a unique abrcode and save pdf file in projet directory
+        /// Example for a Barcode: BoOp0000010
         /// </summary>
-        /// <param name="bookname"></param>
-        /// <returns></returns>
+        /// <param BuchModel="book">das buch für das ein neuer barcode erstellt werden soll</param>
+        /// <returns>returns the new barcode for the book</returns>
         public static string GenerateUniqueBarcode(BuchModel book)
         {
+            // Beispiel für einen Barcode:
+            // BoOp0000010
+
             //add leading 0's untill the lenght is 6
             var barcodeId = book.BasicInfos.Id.ToString();
             while(barcodeId.Length < 6)

@@ -38,9 +38,15 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
 
-        public AddBookViewModel(INavigationService navigationservice, ILibrary library)
+        public AddBookViewModel(INavigationService navigationservice, ILibrary library, PersonModel user)
         {
             _navigationService = navigationservice;
+            if (user.Rechte < Rechtelevel.BIBOTEAM)
+            {
+                _navigationService.ShowLibraryView(user);
+                return;
+            }
+
             _library = library;
 
             Titel = "";
@@ -90,13 +96,13 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    _navigationService.ShowAdminView();
+                    _navigationService.ShowAdminView(user);
                 });
 
             CancelCommand = new DelegateCommand(
                 x =>
                 {
-                    _navigationService.ShowAdminView();
+                    _navigationService.ShowAdminView(user);
                 });
         }
     }

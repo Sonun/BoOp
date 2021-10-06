@@ -1,6 +1,7 @@
 ﻿using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using BoOp.Business;
 using System;
+using BoOp.DBAccessor.Models;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -37,18 +38,21 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public LoginViewModel(INavigationService navigationService, ILibrary library, int userID)
+        public LoginViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _navigationService = navigationService;
+            if (user.Rechte < Rechtelevel.BIBOTEAM)
+                _navigationService.ShowLibraryView(user);
+
             _library = library;
             _password = "";
             Password = "";
 
             //this should get the username from the database
-            Username = "Benutzer" + userID;
+            Username = user.Vorname + " " + user.Nachname;
 
             //this should be the databse password of the user
-            _userPasswordHash = Utils.HashSHA("123");
+            _userPasswordHash = user.PasswortHash;
 
             LoginCommand = new DelegateCommand(
                 x =>
@@ -57,7 +61,7 @@ namespace BoOp.UI.WPF.ViewModels
                     if (Utils.HashSHA(_password).Equals(_userPasswordHash))
                     {
                         //passwort richtig
-                        _navigationService.ShowAdminView();
+                        _navigationService.ShowAdminView(user);
                     }
                     else
                     {

@@ -15,6 +15,7 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         private ILibrary _library;
 
+        public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand LendBookCommand { get; set; }
@@ -26,26 +27,46 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
 
-        public AdminViewModel(INavigationService navigationService, ILibrary library)
+        public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _navigationService = navigationService;
             _library = library;
+            UserRights = user.Rechte;
 
             BackCommand = new DelegateCommand( 
                 x =>
                 {
-                    _navigationService.ShowLibraryView();
+                    _navigationService.ShowLibraryView(user);
                 });
 
-            AddPersonCommand = new DelegateCommand( 
+            AddPersonCommand = new DelegateCommand(
                 x =>
                 {
-                    _navigationService.ShowAddPersonView();
+                    _navigationService.ShowAddPersonView(user);
+                }, 
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
+            
             AddBookCommand = new DelegateCommand(
                 x =>
                 {
-                    _navigationService.ShowAddBookView();
+                    _navigationService.ShowAddBookView(user);
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                });
+
+            EditUserCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowEditUserView(user);
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
         }
     }
