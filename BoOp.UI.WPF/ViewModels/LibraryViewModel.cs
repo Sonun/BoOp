@@ -57,7 +57,7 @@ namespace BoOp.UI.WPF.ViewModels
                 OnPropertyChanged();
             }}
 
-        public LibraryViewModel(INavigationService navigationService, ILibrary library)
+        public LibraryViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             SetSortingFlagsFlase();
 
@@ -68,7 +68,11 @@ namespace BoOp.UI.WPF.ViewModels
             OpenLoginView = new DelegateCommand(
                 x =>
                 {
-                  _navigationService.ShowLoginView();
+                  _navigationService.ShowLoginView(user);
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
 
             //create booklist from library

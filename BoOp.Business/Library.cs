@@ -341,10 +341,10 @@ namespace BoOp.Business
 
         public void AddUser(PersonModel user)
         {
-            string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email) " +
-                "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail);";
+            string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email, PasswortHASH, AusweisID) " +
+                "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail, @pass, @bar);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, Rechte = user.Rechte, user.EMail }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, bar="1", Rechte = user.Rechte, user.EMail }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)
@@ -355,8 +355,8 @@ namespace BoOp.Business
 
         public void EditUserDetails(PersonModel user)
         {
-            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, Geburtsdatum=@Geburtsdatum, Telefonnummer=@Telefonnumer, Rechte=@Rechte, EMail=@EMail WHERE Id = @Id; ";
-            _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, user.Rechte, user.EMail }, _connectionString );
+            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, PasswortHASH=@pass, Geburtsdatum=@Geburtsdatum, Telefonnummer=@Telefonnummer, Rechte=@Rechte, AusweisID=@ausweis, EMail=@EMail WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, user.Rechte, user.EMail, ausweis = user.AusweisID}, _connectionString );
         }
 
         public void EditBookDetails ( BuchModel bookModel )
@@ -372,6 +372,11 @@ namespace BoOp.Business
                 "WHERE Barcode = @bookBarcode";
 
             _db.SaveData(sqlString, new { userId, bookBarcode, datum = DateTime.Now }, _connectionString);
+        }
+
+        public PersonModel GetUserByBarcode(string barcode)
+        {
+            throw new NotImplementedException();
         }
     }
 }

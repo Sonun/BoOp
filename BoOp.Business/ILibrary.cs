@@ -34,6 +34,9 @@ namespace BoOp.Business
         // get user by id
         public PersonModel GetUserByID(int id);
 
+        // get user by barcode
+        public PersonModel GetUserByBarcode(string barcode); 
+
         // Add User to DB
         public void AddUser(PersonModel user);
 

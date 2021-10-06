@@ -47,7 +47,7 @@ namespace BoOp.UI.WPF.ViewModels
                 (
                      x =>
                      {
-                         _navigationService.ShowLibraryView();
+                         _navigationService.ShowLibraryView(new DBAccessor.Models.PersonModel { Rechte = DBAccessor.Models.Rechtelevel.ADMIN, AusweisID="1", PasswortHash = Utils.HashSHA("123"), Vorname ="Test", Nachname="User", Id=1, EMail="sad@sad.sad", Telefonnummer="123", Geburtsdatum=new DateTime(1996, 07, 20) });
                      }
                 );
 

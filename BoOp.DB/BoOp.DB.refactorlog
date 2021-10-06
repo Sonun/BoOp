@@ -35,4 +35,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AusleiherID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8f2f6990-fd77-4adc-be34-437b5a66998a" ChangeDateTime="10/06/2021 09:19:55">
+    <Property Name="ElementName" Value="[dbo].[Personen].[PersonBarcode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Personen]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PersonenBarcode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fd3551a0-d230-4518-b90b-dfcdc06de15f" ChangeDateTime="10/06/2021 11:46:17">
+    <Property Name="ElementName" Value="[dbo].[Personen].[PersonenBarcode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Personen]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AusweisID" />
+  </Operation>
 </Operations>

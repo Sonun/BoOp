@@ -6,5 +6,7 @@
     [Geburtsdatum] DATETIME2 NOT NULL, 
     [Telefonnummer] VARCHAR(20) NULL, 
     [Rechte] INT NOT NULL, 
-    [EMail] NVARCHAR(150) NULL
+    [EMail] NVARCHAR(150) NULL, 
+    [AusweisID] TEXT NOT NULL, 
+    [PasswortHASH] TEXT NULL
 )

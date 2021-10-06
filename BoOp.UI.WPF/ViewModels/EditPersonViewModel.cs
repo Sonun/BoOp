@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-    public class AddPersonViewModel : ViewModel
+    public class EditPersonViewModel : ViewModel
     {
         private INavigationService _navigationService;
         private ILibrary _library;
@@ -30,9 +30,14 @@ namespace BoOp.UI.WPF.ViewModels
         private string _telefon;
         private string _email;
 
+        private string _barcode;
+        private PersonModel _user;
+        private PersonModel _userToChange;
+
         //user Info Propertys
-        public string Vorname {
-            get 
+        public string Vorname
+        {
+            get
             {
                 return _vorname;
             }
@@ -147,15 +152,44 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public AddPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public string Barcode
+        {
+            get
+            {
+                return _barcode;
+            }
+            set
+            {
+                _barcode = value;
+
+                //if (_library.GetUserByBarcode(_barcode).Rechte >= _user.Rechte)
+                //{
+                //    BarcodeScanned();
+                //    OnPropertyChanged();
+                //}
+
+                if (_library.GetUserByID(2).Rechte <= _user.Rechte)
+                {
+                    BarcodeScanned();
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    MessageBox.Show("Du darfst diesen Benutzer nicht editieren, oder er existiert nicht");
+                }
+            }
+        }
+
+        public EditPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _library = library;
             _navigationService = navigationService;
+            _user = user;
 
             Vorname = "";
             Nachname = "";
             Passwort = "";
-            Rechte = "Leser";
+            Rechte = "";
             GebTag = "";
             GebMonat = "";
             GebJahr = "";
@@ -163,18 +197,18 @@ namespace BoOp.UI.WPF.ViewModels
             Email = "";
 
             CancelCommand = new DelegateCommand(
-                x => 
+                x =>
                 {
-                    _navigationService.ShowAdminView(user);
+                    _navigationService.ShowAdminView(_user);
                 });
 
             SaveCommand = new DelegateCommand(
                 x =>
                 {
                     //biboteam darf keinen admin hinzufügen
-                    if(_rechteAsInt == 8 && user.Rechte == Rechtelevel.BIBOTEAM)
+                    if (_rechteAsInt == 8 && _user.Rechte <= Rechtelevel.BIBOTEAM)
                     {
-                        MessageBox.Show("du darfst keinen Admin hinzufügen");
+                        MessageBox.Show("du darfst keinen Admin erstellen");
                         return;
                     }
 
@@ -194,28 +228,53 @@ namespace BoOp.UI.WPF.ViewModels
                             break;
                     }
 
-                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
+                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || _telefon.Equals(""))
                     {
+                        MessageBox.Show("Sie müssen alles (bis auf das Passwort) eingeben");
                         return;
                     }
 
-                    var newUser = new PersonModel
+                    var tempModel = new PersonModel
                     {
+                        Id = _userToChange.Id,
+                        AusweisID = _userToChange.AusweisID,
                         Vorname = _vorname,
                         Nachname = _nachname,
-                        PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
                         Geburtsdatum = new DateTime(int.Parse(_gebJahr), int.Parse(_gebMonat), int.Parse(_gebTag)),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
 
-                    //_gebTag + "-" + _gebMonat + "-" + _gebJahr
+                    if (_user.Rechte != Rechtelevel.ADMIN && !_passwort.Equals(""))
+                    {
+                        MessageBox.Show("Nur Admins können passwörter ändern, passwort wurde nicht geändert");
+                        Passwort = "";
+                    }
 
-                    _library.AddUser(newUser);
+                    tempModel.PasswortHash = _passwort != "" ? Utils.HashSHA(_passwort) : _userToChange.PasswortHash;
 
-                    _navigationService.ShowAdminView(user);
+                    _library.EditUserDetails(tempModel);
+                    _navigationService.ShowAdminView(_user);
                 });
         }
+
+        private void BarcodeScanned()
+        {
+            //user info attributes
+
+            //_userToChange = _library.GetUserByBarcode(_barcode);
+            _userToChange = _library.GetUserByID(2);
+
+            Nachname = _userToChange.Nachname;
+            Vorname = _userToChange.Vorname;
+            Email = _userToChange.EMail;
+            Telefon = _userToChange.Telefonnummer;
+            GebJahr = _userToChange.Geburtsdatum.Year.ToString();
+            GebMonat = _userToChange.Geburtsdatum.Month.ToString();
+            GebTag = _userToChange.Geburtsdatum.Day.ToString();
+            Rechte = _userToChange.Rechte.ToString();
+        }
+    
     }
 }

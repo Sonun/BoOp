@@ -12,13 +12,13 @@ namespace BoOp.UI.WPF.ViewModels
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
 
-        public DelegateCommand(Predicate<object> canExecute, Action<object> execute)
+        public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public DelegateCommand(Action<object> execute) : this(null, execute) { }
+        public DelegateCommand(Action<object> execute) : this(execute, null) { }
 
         public event EventHandler CanExecuteChanged;
 

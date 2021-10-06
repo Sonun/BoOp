@@ -38,5 +38,6 @@ namespace BoOp.DBAccessor.Models
         public string Telefonnummer { get; set; }
         public Rechtelevel Rechte { get; set; }
         public string EMail { get; set; }
+        public string AusweisID { get; set; }
     }
 }
