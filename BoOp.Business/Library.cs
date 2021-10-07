@@ -107,7 +107,7 @@ namespace BoOp.Business
                                  where buchschlagwoerter.BuchID == x.Id
                                  select schlagwoerter.Wort).ToList()
 
-            })) ;
+            }));
 
             return allBooks;
         }
@@ -117,7 +117,6 @@ namespace BoOp.Business
             string sql = "SELECT Id FROM dbo.Buecher WHERE ISBN = @ISBN;";
             return _db.LoadData<int, dynamic>(sql, new { book.BasicInfos.ISBN }, _connectionString).FirstOrDefault();
         }
-
 
         public void AddBook(BuchModel book)
         {
@@ -132,8 +131,8 @@ namespace BoOp.Business
                 // Save the basic book
                 sql = "insert into dbo.Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal );";
                 _db.SaveData(sql,
-                            new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal },
-                            _connectionString);
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal },
+                        _connectionString);
             }
             else
             {
@@ -272,12 +271,12 @@ namespace BoOp.Business
 
         public void ReturnBook(string bookBarcode)
         {
-           string sqlString = "UPDATE Exemplare " +
-                "SET AusleiherID = NULL, " +
-                "AusleihDatum = NULL " +
-                "WHERE Barcode = @bookBarcode";
+            string sqlString = "UPDATE Exemplare " +
+                 "SET AusleiherID = NULL, " +
+                 "AusleihDatum = NULL " +
+                 "WHERE Barcode = @bookBarcode";
 
-            _db.SaveData(sqlString, new { bookBarcode }, _connectionString);
+            _db.SaveData(sqlString, new { bookBarcode = bookBarcode }, _connectionString);
         }
 
         public PersonModel GetUserByID(int id)
@@ -362,19 +361,25 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-        public void LendBook(int userId, string bookBarcode)
+        public void LendBook(int? userId, string bookBarcode)
         {
             string sqlString = "UPDATE Exemplare " +
                 "SET AusleiherID = @userId, " +
                 "AusleihDatum = @datum " +
                 "WHERE Barcode = @bookBarcode";
 
-            _db.SaveData(sqlString, new { userId, bookBarcode, datum = DateTime.Now }, _connectionString);
+            _db.SaveData(sqlString, new { userId=userId, datum = DateTime.Now, bookBarcode=bookBarcode }, _connectionString);
         }
 
         public PersonModel GetUserByBarcode(string barcode)
         {
             throw new NotImplementedException();
+        }
+
+        public int? GetBookIdByBarcode(string barcode)
+        {
+            string sql = "SELECT BuchID FROM Exemplare WHERE Barcode = @barcode;";
+            return _db.LoadData<int?, dynamic>(sql, new { barcode }, _connectionString).FirstOrDefault();
         }
     }
 }

@@ -34,6 +34,8 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortRatingCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand ClearSearchCommand { get; set; }
+        public DelegateCommand LendBookCommand { get; set; }
+        public DelegateCommand ReturnBookCommand { get; set; }
 
         public string SearchWord {
             get
@@ -162,6 +164,17 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     UpdateBooklist(_originalList);
                     SearchWord = "";
+                });
+
+            LendBookCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowLendBookView(user);
+                });
+            ReturnBookCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowReturnLendBookView(user);
                 });
         }
 
