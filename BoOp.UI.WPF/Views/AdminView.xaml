@@ -20,8 +20,6 @@
             <Button Content="Edit Person" Command="{Binding EditUserCommand}" Margin="10" Background="AntiqueWhite"/>
             <Button Content="Remove Person" Command="{Binding RemoveUserCommand}" Margin="10" Background="MediumVioletRed"/>
             <Button Content="Add Book" Command="{Binding AddBookCommand}" Margin="10" Background="Green"/>
-            <Button Content="Lend Book" Command="{Binding LendBookCommand}" Margin="10" Background="Yellow"/>
-            <Button Content="Return Book" Command="{Binding ReturnBookCommand}" Margin="10" Background="Orange"/>
             <Button Content="Remove Book" Command="{Binding RemoveBookCommand}" Margin="10" Background="Red"/>
             <Button Content="Edit Book" Command="{Binding EditBookCommand}" Margin="10" Background="Beige"/>
         </StackPanel>

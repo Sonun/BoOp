@@ -28,6 +28,8 @@ namespace BoOp.Business
         // Add review to a book
         public void AddReview(RezensionModel review);
 
+        public int GetIdByISBN(BuchModel book);
+
 
         // User related:
 

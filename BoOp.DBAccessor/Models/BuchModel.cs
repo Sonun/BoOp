@@ -13,6 +13,27 @@ namespace BoOp.DBAccessor.Models
         public List<string> Schlagwoerter { get; set; }
         public List<ExemplarModel> Exemplare { get; set; }
         public List<RezensionModel> Rezensionen {get; set;}
+        public int ExemplarAnzahl { get{ return Exemplare.Count; }}
+        public int NichtVergebeneExemplare { 
+            get 
+            {
+                if (Exemplare == null)
+                    return 0;
+
+                var nichtVergeben = Exemplare.Count;
+                foreach (var ex in Exemplare)
+                {
+                    if(ex.LendBy != null)
+                    {
+                        nichtVergeben--;
+                    }
+                }
+
+                return nichtVergeben;
+            } 
+        }
+        public string ExemplarBindingForSuperAwsomeWPFLibraryView { get { return ExemplarAnzahl + " (" + NichtVergebeneExemplare + ")"; } }
+
         public double? RezensionenDurschschnitt
         {
             get

@@ -253,12 +253,26 @@ namespace BoOp.Business
 
             //add leading 0's untill the lenght is 6
             var barcodeId = book.BasicInfos.Id.ToString();
-            while(barcodeId.Length < 6)
+            while(barcodeId.Length <= 6)
             {
                 barcodeId = "0" + barcodeId;
             }
 
-            var barcodeAsString = "BoOp" + barcodeId + book.Exemplare.Count;
+            int exCount = 0;
+
+            if (book.Exemplare != null)
+            {
+                for (int i = 0; i < book.Exemplare.Count; i++)
+                {
+                    if (book.Exemplare[i].BasicInfos.Barcode == "")
+                    {
+                        exCount = i;
+                        break;
+                    }
+                }
+            }
+
+            var barcodeAsString = "BoOp" + barcodeId + exCount;
 
             GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
             MyBarCode.SaveAsPdf(book.BasicInfos.Titel + ".pdf");

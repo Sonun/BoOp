@@ -79,16 +79,24 @@ namespace BoOp.UI.WPF.ViewModels
                     };
 
                     var exList = new List<ExemplarModel>();
-                    var bookModel = new BuchModel { BasicInfos = basicModel };
+                    var bookModel = new BuchModel { BasicInfos = basicModel, Exemplare = exList};
 
                     for (int i = 1; i <= _exemplare; i++)
                     {
-                        bookModel.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = Utils.GenerateUniqueBarcode(bookModel) } });
+                        bookModel.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = ""} });
                     }
 
                     try
                     {
                         _library.AddBook(bookModel);
+                        bookModel.BasicInfos.Id = _library.GetIdByISBN(bookModel);
+
+                        foreach(var exemplar in bookModel.Exemplare)
+                        {
+                            exemplar.BasicInfos.Barcode = Utils.GenerateUniqueBarcode(bookModel);
+                        }
+
+                        _library.EditBookDetails(bookModel);
                     }
                     catch (Exception e)
                     {
