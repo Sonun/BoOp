@@ -11,6 +11,7 @@ namespace BoOp.DBAccessor.Models
         public int? Id { get; set; }
         public int BuchID { get; set; }
         public string Barcode { get; set; }
-        public int? LendByUserID { get; set; }
+        public int? AusleiherID { get; set; }
+        public DateTime AusleihDatum { get; set; }
     }
 }

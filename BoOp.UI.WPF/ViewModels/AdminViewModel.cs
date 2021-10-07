@@ -3,6 +3,7 @@ using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,14 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveUserCommand { get; set; }
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+
+        public ObservableCollection<BuchModel> AllBooks
+        {
+            get
+            {
+                return _library.GetAllBooks();
+            }
+        }
 
         public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
@@ -67,6 +76,11 @@ namespace BoOp.UI.WPF.ViewModels
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
 
+            EditBookCommand = new DelegateCommand(
+                x => DoSomething()
+
+                ); ;
+
             RemoveBookCommand = new DelegateCommand(
                 x =>
                 {
@@ -77,5 +91,14 @@ namespace BoOp.UI.WPF.ViewModels
                     return user.Rechte >= Rechtelevel.ADMIN;
                 });
         }
+
+        private void DoSomething()
+        {
+            var book = _library.GetAllBooks().First();
+            book.Exemplare.RemoveAt(5);
+            // book.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = "123-123-123-123" } });
+            _library.EditBookDetails(book);
+        }
+
     }
 }

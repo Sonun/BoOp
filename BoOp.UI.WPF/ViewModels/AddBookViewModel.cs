@@ -25,6 +25,8 @@ namespace BoOp.UI.WPF.ViewModels
         private string _altersvorschlag;
         private string _regal;
         private int _exemplare;
+        private string _schlagwoerter;
+        private string _genres;
 
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
@@ -34,6 +36,9 @@ namespace BoOp.UI.WPF.ViewModels
         public string Altersvorschlag { get { return _altersvorschlag; } set { _altersvorschlag = value; OnPropertyChanged(); } }
         public string Regal { get { return _regal; } set { _regal = value; OnPropertyChanged(); } }
         public int Exemplare { get { return _exemplare; } set { _exemplare = value; OnPropertyChanged(); } }
+        public string Schlagwoerter { get { return _schlagwoerter; } set { _schlagwoerter = value; OnPropertyChanged(); } }
+        public string Genres { get { return _genres; } set { _genres = value; OnPropertyChanged(); } }
+
 
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
@@ -52,48 +57,62 @@ namespace BoOp.UI.WPF.ViewModels
             Titel = "";
             Author = "";
             Verlag = "";
-            Auflage = 1;
             ISBN = "";
-            Altersvorschlag = "0";
-            Regal = "";
+            Schlagwoerter = "";
+            Genres = "";
             Exemplare = 1;
 
             SaveCommand = new DelegateCommand( 
                 x =>
                 {
+                    var schlagwoerter = _schlagwoerter.Split(' ', ',', '.', ';').ToList();
+                    schlagwoerter.RemoveAll(x => x == "");
+                    var genres = _genres.Split(' ', ',', '.', ';').ToList();
+                    genres.RemoveAll(x => x == "");
+
                     if (_titel.Equals("") || _author.Equals("") || _verlag.Equals("") || _isbn.Equals(""))
                     {
                         MessageBox.Show("Füllen Sie Alle Felder Aus");
                         return;
                     }
 
-                    var basicModel = new BasicBuchModel
-                    {
-                        Titel = _titel,
-                        Auflage = _auflage,
-                        Author = _author,
-                        Verlag = _verlag, 
-                        ISBN = _isbn,
-                        Altersvorschlag = _altersvorschlag,
-                        Regal = _regal
+                    var bookModel = new BuchModel 
+                    { 
+                        BasicInfos = new BasicBuchModel
+                        {
+                            Titel = _titel,
+                            Auflage = _auflage,
+                            Author = _author,
+                            Verlag = _verlag,
+                            ISBN = _isbn,
+                            Altersvorschlag = _altersvorschlag,
+                            Regal = _regal
+                        }, 
+                        Exemplare = new List<ExemplarModel>(),
                     };
 
-                    var exList = new List<ExemplarModel>();
-                    var bookModel = new BuchModel { BasicInfos = basicModel, Exemplare = exList};
+                    _library.AddBook(bookModel);
+                    bookModel.BasicInfos.Id = _library.GetIdByISBN(bookModel);
+
 
                     for (int i = 1; i <= _exemplare; i++)
                     {
-                        bookModel.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = ""} });
+                        bookModel.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = "" } });
                     }
 
                     try
                     {
-                        _library.AddBook(bookModel);
-                        bookModel.BasicInfos.Id = _library.GetIdByISBN(bookModel);
-
                         foreach(var exemplar in bookModel.Exemplare)
                         {
                             exemplar.BasicInfos.Barcode = Utils.GenerateUniqueBarcode(bookModel);
+                        }
+                        if (schlagwoerter.Count > 0)
+                        {
+                            bookModel.Schlagwoerter = schlagwoerter;
+                        }
+                        if (genres.Count > 0)
+                        {
+                            bookModel.Genres = schlagwoerter;
                         }
 
                         _library.EditBookDetails(bookModel);
