@@ -1,9 +1,5 @@
 ﻿using BoOp.DBAccessor.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
 {
@@ -16,5 +12,8 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         void ShowAddPersonView(PersonModel user);
         void ShowAddBookView(PersonModel user);
         void ShowEditUserView(PersonModel user);
+        void ShowLendBookView(PersonModel user); 
+        void ShowReturnLendBookView(PersonModel user); 
+        void ShowRemoveBookView(PersonModel user);
     }
 }

@@ -2,13 +2,15 @@
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
     class MainWindowViewModel : ViewModel, INavigationService
     {
-        private readonly Dispatcher _dispatcher; 
+        private readonly Dispatcher _dispatcher;
         private ViewModel _currentViewModel;
         private ILibrary _library;
 
@@ -23,7 +25,6 @@ namespace BoOp.UI.WPF.ViewModels
             _dispatcher = dispatcher;
             _library = new Library();
             ShowScanUserView();
-
         }
 
         public void ShowScanUserView()
@@ -60,5 +61,21 @@ namespace BoOp.UI.WPF.ViewModels
         {
             CurrentViewModel = new EditPersonViewModel(this, _library, user);
         }
+
+        public void ShowLendBookView(PersonModel user)
+        {
+            CurrentViewModel = new LendBookViewModel(this, _library, user);
+        }
+
+        public void ShowReturnLendBookView(PersonModel user)
+        {
+            CurrentViewModel = new ReturnBookViewModel(this, _library, user);
+        }
+
+        public void ShowRemoveBookView(PersonModel user)
+        {
+            CurrentViewModel = new RemoveBookViewModel(this, _library, user);
+        }
+
     }
 }

@@ -13,6 +13,9 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         public DataTemplate AddPersonViewModelTemplate { get; set; }
         public DataTemplate AddBookViewModelTemplate { get; set; }
         public DataTemplate EditPersonViewModelTemplate { get; set; }
+        public DataTemplate LendBookViewModelTemplate { get; set; }
+        public DataTemplate ReturnBookViewModelTemplate { get; set; }
+        public DataTemplate RemoveBookViewModelTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -25,6 +28,9 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
                 AddPersonViewModel _ => AddPersonViewModelTemplate,
                 AddBookViewModel _ => AddBookViewModelTemplate,
                 EditPersonViewModel _ => EditPersonViewModelTemplate,
+                LendBookViewModel _ => LendBookViewModelTemplate,
+                ReturnBookViewModel _ => ReturnBookViewModelTemplate,
+                RemoveBookViewModel _ => RemoveBookViewModelTemplate,
                 _ => base.SelectTemplate(item, container),
             };
         }
