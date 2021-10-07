@@ -18,8 +18,6 @@ namespace BoOp.UI.WPF.ViewModels
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
-        public DelegateCommand LendBookCommand { get; set; }
-        public DelegateCommand ReturnBookCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand EditBookCommand { get; set; }
         public DelegateCommand AddUserCommand { get; set; }

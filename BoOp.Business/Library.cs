@@ -112,21 +112,20 @@ namespace BoOp.Business
             return allBooks;
         }
 
-
+        public int GetIdByISBN(BuchModel book)
+        {
+            string sql = "SELECT Id FROM dbo.Buecher WHERE ISBN = @ISBN;";
+            return _db.LoadData<int, dynamic>(sql, new { book.BasicInfos.ISBN }, _connectionString).FirstOrDefault();
+        }
 
 
         public void AddBook(BuchModel book)
         {
-            _loggedInUnser = null;
-            if(_loggedInUnser != null)
-                throw new NotImplementedException();
-
             // Check if book is already in DB
-            string sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
+            string sql = "SELECT * FROM dbo.Buecher WHERE ISBN = @ISBN;";
             var bookCheck  = _db.LoadData<BasicBuchModel, dynamic>(
                  sql,
-                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
-                 _connectionString).FirstOrDefault();
+                 new { book.BasicInfos.ISBN }, _connectionString).FirstOrDefault();
 
             if (bookCheck == null)
             {
@@ -138,8 +137,8 @@ namespace BoOp.Business
             }
             else
             {
-                Debug.WriteLine("Book with same Titel, Author and ISBN exists already in DB.");
-                throw new Exception("Buch mit dem Titel, Author und der ISBN Nummer existiert bereits in der Datenbank.");
+                Debug.WriteLine("Book with same Titel, Author and ISBN exists already in DB. instead of adding, edited the book");
+                EditBookDetails(book);
             }
 
             sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
@@ -269,7 +268,6 @@ namespace BoOp.Business
             //        _db.SaveData(sql, new { book.BasicInfos.Id, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
             //    }
             //}
-
         }
 
         public void ReturnBook(string bookBarcode)
@@ -344,7 +342,7 @@ namespace BoOp.Business
             string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email, PasswortHASH, AusweisID) " +
                 "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail, @pass, @bar);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, bar="1", Rechte = user.Rechte, user.EMail }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, bar=user.AusweisID, Rechte = user.Rechte, user.EMail }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)

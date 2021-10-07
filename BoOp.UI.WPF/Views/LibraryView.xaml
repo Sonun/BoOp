@@ -48,25 +48,24 @@
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1.35*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.7*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Command="{Binding SortTitleCommand}" Style="{StaticResource SortButton}">
                 <TextBlock Text="Titel">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-
             <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" Style="{StaticResource SortButton}">
                 <TextBlock Text="Author">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="2" Command="{Binding SortISBNCommand}" Style="{StaticResource SortButton}">
-                <TextBlock Text="ISBN">
-                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+            <Button Grid.Column="2" Style="{StaticResource SortButton}">
+                <TextBlock Text="Exemplare (verfügbar)">
+                    <Image Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
             <Button Grid.Column="3" Command="{Binding SortRatingCommand}" Style="{StaticResource SortButton}">
@@ -84,14 +83,14 @@
                         <StackPanel>
                             <Grid Background="HotPink" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                                 <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="1.35*"/>
+                                    <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0.7*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
                                 <TextBlock Grid.Column="1" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
-                                <TextBlock Grid.Column="2" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
+                                <TextBlock Grid.Column="2" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
                                 <TextBlock Grid.Column="3" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>
                             </Grid>
                         </StackPanel>

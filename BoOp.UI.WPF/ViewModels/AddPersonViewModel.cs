@@ -29,6 +29,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _gebJahr;
         private string _telefon;
         private string _email;
+        private string _ausweisID;
 
         //user Info Propertys
         public string Vorname {
@@ -147,11 +148,25 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
+        public string AusweisID
+        {
+            get
+            {
+                return _ausweisID;
+            }
+            set
+            {
+                _ausweisID = value;
+                OnPropertyChanged();
+            }
+        }
+
         public AddPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _library = library;
             _navigationService = navigationService;
 
+            AusweisID = "";
             Vorname = "";
             Nachname = "";
             Passwort = "";
@@ -172,7 +187,7 @@ namespace BoOp.UI.WPF.ViewModels
                 x =>
                 {
                     //biboteam darf keinen admin hinzufügen
-                    if(_rechteAsInt == 8 && user.Rechte == Rechtelevel.BIBOTEAM)
+                    if(_rechteAsInt == 8 && user.Rechte <= Rechtelevel.BIBOTEAM)
                     {
                         MessageBox.Show("du darfst keinen Admin hinzufügen");
                         return;
@@ -202,6 +217,7 @@ namespace BoOp.UI.WPF.ViewModels
                     var newUser = new PersonModel
                     {
                         Vorname = _vorname,
+                        AusweisID = _ausweisID,
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
