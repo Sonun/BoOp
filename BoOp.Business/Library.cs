@@ -75,11 +75,12 @@ namespace BoOp.Business
                                      Id = exemplare.Id, 
                                      Barcode = exemplare.Barcode, 
                                      BuchID = exemplare.BuchID, 
-                                     LendByUserID = exemplare.LendByUserID
+                                     AusleiherID = exemplare.AusleiherID,
+                                     AusleihDatum = exemplare.AusleihDatum
                                  },
                                  LendBy = (from personen in basicPersonen
-                                           join exemplar in basicExemplare on personen.Id equals exemplar.LendByUserID
-                                           where exemplare.LendByUserID == personen.Id
+                                           join exemplar in basicExemplare on personen.Id equals exemplar.AusleiherID
+                                           where exemplare.AusleiherID == personen.Id
                                            select new PersonModel()
                                            {
                                                Id = personen.Id,
@@ -139,135 +140,8 @@ namespace BoOp.Business
                 Debug.WriteLine("Book with same Titel, Author and ISBN exists already in DB. instead of adding, edited the book");
                 throw new Exception("Buch mit dem Titel, Author und ISBN existiert bereits in der Datenbank.");
             }
-
-            sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
-            book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
-                 sql,
-                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
-                 _connectionString).FirstOrDefault().Id;
-
-            // Add Barcodes to DB
-            if (book.Exemplare != null)
-            {
-                foreach (var exemplar in book.Exemplare)
-                {
-                    // Check if Barcode already exists in DB
-                    sql = "SELECT * FROM dbo.Exemplare WHERE Barcode = @Barcode;";
-                    var exemplarCheck = _db.LoadData<BasicExemplarModel, dynamic>(
-                         sql,
-                         new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode },
-                         _connectionString).FirstOrDefault();
-
-                    if (exemplarCheck == null)
-                    {
-                        sql = "INSERT INTO dbo.Exemplare (BuchID, Barcode) VALUES (@BuchID, @Barcode)";
-                        _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode }, _connectionString);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Barcode is already used for a book in DB.");
-                    }
-                    
-                }
-            }
-
-            // Add Schlagwoerter to DB
-            if (book.Schlagwoerter != null)
-            {
-                foreach (var word in book.Schlagwoerter)
-                {
-                    // Check if word is already in DB
-                    sql = "SELECT * FROM dbo.Schlagwoerter WHERE Wort = @Wort;";
-                    var schlagwort = _db.LoadData<BasicSchlagwoerterModel, dynamic>(
-                        sql,
-                        new { Wort = word },
-                        _connectionString).FirstOrDefault();
-
-                    // Add word if it's not entered already
-                    if (schlagwort == null)
-                    {
-                        sql = "INSERT INTO dbo.Schlagwoerter (Wort) VALUES (@Wort);";
-                        _db.SaveData(sql, new { Wort = word }, _connectionString);
-
-                        sql = "SELECT * FROM dbo.Schlagwoerter WHERE Wort = @Wort;";
-                        schlagwort = _db.LoadData<BasicSchlagwoerterModel, dynamic>(
-                            sql,
-                            new { Wort = word },
-                            _connectionString).FirstOrDefault();
-                    }
-
-                    // Check if word is already marked as Schlagwort for that book
-                    if (schlagwort != null)
-                    {
-                        sql = "SELECT * FROM dbo.BuchSchlagwoerter WHERE BuchID = @BuchID AND SchlagwortID = @SchlagwortID;";
-                        var buchSchlagwort = _db.LoadData<BasicBuchSchlagwoerterModel, dynamic>(
-                        sql,
-                        new { BuchID = book.BasicInfos.Id, SchlagwortID = schlagwort.Id },
-                        _connectionString).FirstOrDefault();
-
-                        if (buchSchlagwort == null)
-                        {
-                            // Create reference between word and book
-                            sql = "INSERT INTO dbo.BuchSchlagwoerter (BuchID, SchlagwortID) VALUES (@BuchID, @SchlagwortID)";
-                            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, SchlagwortID = schlagwort.Id }, _connectionString);
-                        }
-                    }
-                }
-            }
-
-            // Add Genres to DB
-            if (book.Genres != null)
-            {
-                foreach (var genre in book.Genres)
-                {
-                    // Check if word is already in DB
-                    sql = "SELECT * FROM dbo.Genre WHERE Genrename = @Genrename;";
-                    var basicGenre = _db.LoadData<BasicGenreModel, dynamic>(
-                        sql,
-                        new { Genrename = genre },
-                        _connectionString).FirstOrDefault();
-
-                    // Add word if it's not entered already
-                    if (basicGenre == null)
-                    {
-                        sql = "INSERT INTO dbo.Genre (Genrename) VALUES (@Genrename);";
-                        _db.SaveData(sql, new { Genrename = genre }, _connectionString);
-
-                        sql = "SELECT * FROM dbo.Genre WHERE Genrename = @Genrename;";
-                        basicGenre = _db.LoadData<BasicGenreModel, dynamic>(
-                            sql,
-                            new { Genrename = genre },
-                            _connectionString).FirstOrDefault();
-                    }
-
-                    // Check if word is already marked as Schlagwort for that book
-                    if (basicGenre != null)
-                    {
-                        sql = "SELECT * FROM dbo.BuchGenres WHERE BuchID = @BuchID AND GenreID = @GenreID;";
-                        var buchGenre = _db.LoadData<BasicBuchGenresModel, dynamic>(
-                        sql,
-                        new { BuchID = book.BasicInfos.Id, GenreID = basicGenre.Id },
-                        _connectionString).FirstOrDefault();
-
-                        if (buchGenre == null)
-                        {
-                            // Create reference between word and book
-                            sql = "INSERT INTO dbo.BuchGenres (BuchID, GenreID) VALUES (@BuchID, @GenreID)";
-                            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, GenreID = basicGenre.Id }, _connectionString);
-                        }
-                    }
-                }
-            }
-
-            //if (book.Rezensionen != null)
-            //{
-            //    foreach (var review in book.Rezensionen)
-            //    {
-            //        sql = "INSERT INTO dbo.Rezensionen (BuchID, Sterne, Rezensionstext, PersonID) VALUES (@Id, @Sterne, @Rezensionstext, @PersonID)";
-            //        _db.SaveData(sql, new { book.BasicInfos.Id, review.BasicInfos.Sterne, review.BasicInfos.Rezensionstext, review.BasicInfos.PersonID }, _connectionString);
-            //    }
-            //}
         }
+
 
         public void ReturnBook(string bookBarcode)
         {
@@ -360,13 +234,17 @@ namespace BoOp.Business
 
         public void EditBookDetails (BuchModel book )
         {
-            string sql = "";
+            string sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
+            book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
+                 sql,
+                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
+                 _connectionString).FirstOrDefault().Id;
 
             // Add Barcodes to DB
             if (book.Exemplare != null)
             {
                 sql = "SELECT Barcode FROM dbo.Exemplare WHERE BuchID = @BuchID;";
-                var unnecessaryEntries = _db.LoadData<string, dynamic>(
+                var unnecessaryBarcodes = _db.LoadData<string, dynamic>(
                      sql,
                      new { BuchID = book.BasicInfos.Id },
                      _connectionString);
@@ -380,10 +258,9 @@ namespace BoOp.Business
                          new { BuchID = book.BasicInfos.Id, Barcode = exemplar.BasicInfos.Barcode },
                          _connectionString).FirstOrDefault();
 
-                    // ToDO: Check if if-statement is necessary
-                    if (unnecessaryEntries.Contains(exemplarCheck.Barcode))
+                    if (exemplarCheck != null)
                     {
-                        unnecessaryEntries.Remove(exemplarCheck.Barcode);
+                        unnecessaryBarcodes.Remove(exemplarCheck.Barcode);
                     }
 
                     if (exemplarCheck == null)
@@ -397,13 +274,26 @@ namespace BoOp.Business
                     }
                 }
 
-                // ToDo: Check if book has to many entry in DB --> Remove exemplar - book references
-
+                // Check if book has to many entry in DB --> Remove exemplar - book references
+                if (unnecessaryBarcodes.Count > 0)
+                {
+                    foreach (var barcode in unnecessaryBarcodes)
+                    {
+                        sql = "DELETE FROM dbo.Exemplare WHERE Barcode = @barcode;";
+                        _db.SaveData(sql, new { barcode }, _connectionString);
+                    }
+                }
             }
 
             // Add Schlagwoerter to DB
             if (book.Schlagwoerter != null)
             {
+                sql = "SELECT SchlagwortID FROM dbo.BuchSchlagwoerter WHERE BuchID = @BuchID;";
+                var unnecessarySchlagwortIDs = _db.LoadData<int, dynamic>(
+                     sql,
+                     new { BuchID = book.BasicInfos.Id },
+                     _connectionString);
+
                 foreach (var word in book.Schlagwoerter)
                 {
                     // Check if word is already in DB
@@ -441,15 +331,30 @@ namespace BoOp.Business
                             sql = "INSERT INTO dbo.BuchSchlagwoerter (BuchID, SchlagwortID) VALUES (@BuchID, @SchlagwortID)";
                             _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, SchlagwortID = schlagwort.Id }, _connectionString);
                         }
+
+                        unnecessarySchlagwortIDs.Remove(schlagwort.Id.GetValueOrDefault());
                     }
                 }
-                // ToDo: Check if book has to many entry in DB --> Remove word - book references
-
+                // Check if book has to many entry in DB --> Remove word - book references
+                if (unnecessarySchlagwortIDs.Count > 0)
+                {
+                    foreach (var buchSchlagwortID in unnecessarySchlagwortIDs)
+                    {
+                        sql = "DELETE FROM dbo.BuchSchlagwoerter WHERE BuchID = @BuchID AND SchlagwortID = @SchlagwortID;";
+                        _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, SchlagwortID = buchSchlagwortID }, _connectionString);
+                    }
+                }
             }
 
             // Add Genres to DB
             if (book.Genres != null)
             {
+                sql = "SELECT GenreID FROM dbo.BuchGenres WHERE BuchID = @BuchID;";
+                var unnecessaryGenreIDs = _db.LoadData<int, dynamic>(
+                     sql,
+                     new { BuchID = book.BasicInfos.Id },
+                     _connectionString);
+
                 foreach (var genre in book.Genres)
                 {
                     // Check if word is already in DB
@@ -487,11 +392,20 @@ namespace BoOp.Business
                             sql = "INSERT INTO dbo.BuchGenres (BuchID, GenreID) VALUES (@BuchID, @GenreID)";
                             _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, GenreID = basicGenre.Id }, _connectionString);
                         }
+                        unnecessaryGenreIDs.Remove(basicGenre.Id.GetValueOrDefault());
+
                     }
                 }
 
-                // ToDo: Check if book has to many entry in DB --> Remove genre - book references
-
+                // Check if book has to many entry in DB --> Remove genre - book references
+                if (unnecessaryGenreIDs.Count > 0)
+                {
+                    foreach (var buchGenreID in unnecessaryGenreIDs)
+                    {
+                        sql = "DELETE FROM dbo.BuchGenres WHERE BuchID = @BuchID AND GenreID = @GenreID;";
+                        _db.SaveData(sql, new { BuchID = book.BasicInfos.Id, GenreID = buchGenreID }, _connectionString);
+                    }
+                }
             }
 
         }
