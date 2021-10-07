@@ -15,13 +15,14 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Content="Back" Command="{Binding BackCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+        <!-- Grün = funktionsfähig, Orange = vorhanden, aber geht nicht, Rot = nicht vorhanden -->
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Button Content="Add Person" Command="{Binding AddPersonCommand}" Margin="10" Background="LawnGreen"/>
-            <Button Content="Edit Person" Command="{Binding EditUserCommand}" Margin="10" Background="AntiqueWhite"/>
-            <Button Content="Remove Person" Command="{Binding RemoveUserCommand}" Margin="10" Background="MediumVioletRed"/>
-            <Button Content="Add Book" Command="{Binding AddBookCommand}" Margin="10" Background="Green"/>
-            <Button Content="Remove Book" Command="{Binding RemoveBookCommand}" Margin="10" Background="Red"/>
-            <Button Content="Edit Book" Command="{Binding EditBookCommand}" Margin="10" Background="Beige"/>
+            <Button Content="Edit Person" Command="{Binding EditUserCommand}" Margin="10" Background="LawnGreen"/>
+            <Button Content="Remove Person" Command="{Binding RemoveUserCommand}" Margin="10" Background="Red"/>
+            <Button Content="Add Book" Command="{Binding AddBookCommand}" Margin="10" Background="LawnGreen"/>
+            <Button Content="Remove Book" Command="{Binding RemoveBookCommand}" Margin="10" Background="Orange"/>
+            <Button Content="Edit Book" Command="{Binding EditBookCommand}" Margin="10" Background="Red"/>
         </StackPanel>
     </Grid>
 </UserControl>

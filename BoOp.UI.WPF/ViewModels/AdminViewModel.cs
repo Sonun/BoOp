@@ -66,6 +66,16 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
+
+            RemoveBookCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowRemoveBookView(user);
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.ADMIN;
+                });
         }
     }
 }

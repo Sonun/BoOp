@@ -162,6 +162,7 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 _barcode = value;
 
+                // TODO:
                 //if (_library.GetUserByBarcode(_barcode).Rechte >= _user.Rechte)
                 //{
                 //    BarcodeScanned();
@@ -261,8 +262,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void BarcodeScanned()
         {
-            //user info attributes
-
+            //TODO:
             //_userToChange = _library.GetUserByBarcode(_barcode);
             _userToChange = _library.GetUserByID(2);
 

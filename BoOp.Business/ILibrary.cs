@@ -11,7 +11,7 @@ namespace BoOp.Business
         public ObservableCollection<BuchModel> GetAllBooks();
 
         // Dependent on login
-        public void LendBook(int userId, string bookBarcode);
+        public void LendBook(int? userId, string bookBarcode);
 
         // Independent on login
         public void ReturnBook(string bookBarcode);
@@ -30,6 +30,7 @@ namespace BoOp.Business
 
         public int GetIdByISBN(BuchModel book);
 
+        public int? GetBookIdByBarcode(string barcode);
 
         // User related:
 

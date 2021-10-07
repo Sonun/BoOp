@@ -42,6 +42,18 @@
             <views:EditPersonView />
         </DataTemplate>
 
+        <DataTemplate x:Key="LendBookViewTemplate">
+            <views:LendBookView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ReturnBookViewTemplate">
+            <views:ReturnBookView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="RemoveBookViewTemplate">
+            <views:RemoveBookView />
+        </DataTemplate>
+
         <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
                                                  ScanUserViewModelTemplate="{StaticResource ScanUserViewTemplate}"
                                                  LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
@@ -49,7 +61,9 @@
                                                  AdminViewModelTemplate="{StaticResource AdminViewTemplate}"
                                                  AddPersonViewModelTemplate="{StaticResource AddPersonViewTemplate}" 
                                                  AddBookViewModelTemplate="{StaticResource AddBookViewTemplate}"
-                                                 EditPersonViewModelTemplate="{StaticResource EditPersonViewTemplate}"/>
+                                                 EditPersonViewModelTemplate="{StaticResource EditPersonViewTemplate}"
+                                                 LendBookViewModelTemplate="{StaticResource LendBookViewTemplate}"
+                                                 ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"/>
     </Window.Resources>
 
     <Grid>

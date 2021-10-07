@@ -40,8 +40,8 @@
                 </Button>
             </Grid>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                <Button Style="{StaticResource RoundedButtonStyle}" Content="Reservieren" />
-                <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausleihen" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding ReturnBookCommand}" Content="Zurückgeben" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LendBookCommand}" Content="Ausleihen" />
             </StackPanel>
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
         </Grid>
@@ -88,10 +88,10 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="0.7*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
-                                <TextBlock Grid.Column="1" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
-                                <TextBlock Grid.Column="2" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
-                                <TextBlock Grid.Column="3" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>
+                                <TextBlock Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
+                                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
+                                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>
