@@ -66,6 +66,22 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
+            EditBookCommand = new DelegateCommand(
+                x => _library.EditBookDetails(
+                    new BuchModel()
+                    {
+                        Exemplare = new List<ExemplarModel>()
+                        {
+                            new ExemplarModel()
+                            {
+                                BasicInfos = new BasicExemplarModel()
+                                {
+                                    Barcode = ""
+                                }
+                            }
+                        }
+                    })
+                ) ;
         }
     }
 }
