@@ -14,6 +14,7 @@ namespace BoOp.UI.WPF.ViewModels
         private ILibrary _library;
 
         public DelegateCommand LoginCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
 
         public string Password
         {
@@ -66,12 +67,17 @@ namespace BoOp.UI.WPF.ViewModels
                     else
                     {
                         //falsches passwort
-                        _password = "";
                         Password = "";
                     }
                     
                 }
             );
+
+            CancelCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowLibraryView(user);
+                });
         }
     }
 }

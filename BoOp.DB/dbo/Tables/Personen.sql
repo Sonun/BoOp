@@ -7,6 +7,6 @@
     [Telefonnummer] VARCHAR(20) NULL, 
     [Rechte] INT NOT NULL, 
     [EMail] NVARCHAR(150) NULL, 
-    [AusweisID] TEXT NOT NULL, 
+    [AusweisID] TEXT UNIQUE NOT NULL, 
     [PasswortHASH] TEXT NULL
 )

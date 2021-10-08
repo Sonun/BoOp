@@ -31,10 +31,18 @@ namespace BoOp.UI.WPF.ViewModels
             SaveCommand = new DelegateCommand(
                 x =>
                 {
-                    if(MessageBox.Show("Wollen Sie das Buch " + GetBookname(_barcode)  + " wirklich Löschen?", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    var bookname = GetBookname(_barcode);
+                    if (bookname != null)
                     {
-                        _library.RemoveBook(_barcode);
-                        _navigationService.ShowLibraryView(user);
+                        if (MessageBox.Show("Wollen Sie das Buch " + bookname + " wirklich Löschen?", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            _library.RemoveBook(_barcode);
+                            _navigationService.ShowLibraryView(user);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Barcode wurde nicht gefunden");
                     }
                 });
 
@@ -47,8 +55,14 @@ namespace BoOp.UI.WPF.ViewModels
 
         private string GetBookname(string barcode)
         {
-            var bookId = _library.GetBookIdByBarcode(_barcode);
-            return _library.GetAllBooks().SingleOrDefault(x => { return x.Exemplare.ToList().SingleOrDefault(y => { return y.BasicInfos.Barcode == barcode; }).BasicInfos.BuchID == x.BasicInfos.Id; }).BasicInfos.Titel;
+            try {
+                var bookId = _library.GetBookIdByBarcode(_barcode);
+                return _library.GetAllBooks().SingleOrDefault(x => { return x.Exemplare.ToList().SingleOrDefault(y => { return y.BasicInfos.Barcode == barcode; }).BasicInfos.BuchID == x.BasicInfos.Id; }).BasicInfos.Titel;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

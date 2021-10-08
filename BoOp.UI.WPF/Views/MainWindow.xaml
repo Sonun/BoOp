@@ -63,7 +63,8 @@
                                                  AddBookViewModelTemplate="{StaticResource AddBookViewTemplate}"
                                                  EditPersonViewModelTemplate="{StaticResource EditPersonViewTemplate}"
                                                  LendBookViewModelTemplate="{StaticResource LendBookViewTemplate}"
-                                                 ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"/>
+                                                 ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"
+                                                 RemoveBookViewModelTemplate="{StaticResource RemoveBookViewTemplate}"/>
     </Window.Resources>
 
     <Grid>

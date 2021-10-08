@@ -77,9 +77,10 @@ namespace BoOp.UI.WPF.ViewModels
                 });
 
             EditBookCommand = new DelegateCommand(
-                x => DoSomething()
+                x =>
+                {
 
-                ); ;
+                });
 
             RemoveBookCommand = new DelegateCommand(
                 x =>
@@ -91,14 +92,5 @@ namespace BoOp.UI.WPF.ViewModels
                     return user.Rechte >= Rechtelevel.ADMIN;
                 });
         }
-
-        private void DoSomething()
-        {
-            var book = _library.GetAllBooks().First();
-            book.Exemplare.RemoveAt(5);
-            // book.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = "123-123-123-123" } });
-            _library.EditBookDetails(book);
-        }
-
     }
 }
