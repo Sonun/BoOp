@@ -10,6 +10,9 @@
              mc:Ignorable="d"
              d:DesignHeight="920" d:DesignWidth="1080"
              Background="White">
+
+    
+
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -80,16 +83,14 @@
         <!--Books info-->
         <Grid Grid.Row="2">
             <!--Examples for books-->
-            <ListView x:Name="BookListView" ItemsSource="{Binding BookList}">
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Ansicht"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
+            <ListView x:Name="BookListView" ItemsSource="{Binding BookList}" SelectedItem="{Binding SelectedBook}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
                             <Grid Background="HotPink" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                                <Grid.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowBookCommand}"/>
+                                </Grid.InputBindings>
                                 <Grid.ColumnDefinitions >
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="1*"/>
