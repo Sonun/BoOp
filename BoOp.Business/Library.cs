@@ -142,7 +142,6 @@ namespace BoOp.Business
             }
         }
 
-
         public void ReturnBook(string bookBarcode)
         {
             string sqlString = "UPDATE Exemplare " +
@@ -166,13 +165,11 @@ namespace BoOp.Business
             throw new NotImplementedException();
         }
 
-
         public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
         {
             string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag WHERE Id = @Id; ";
             _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag }, _connectionString );
         }
-
 
         public void AddReview(RezensionModel review)
         {
@@ -420,9 +417,13 @@ namespace BoOp.Business
             _db.SaveData(sqlString, new { userId=userId, datum = DateTime.Now, bookBarcode=bookBarcode }, _connectionString);
         }
 
-        public PersonModel GetUserByBarcode(string barcode)
+        public PersonModel GetUserByBarcode(string ausweisID)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT * FROM Personen";
+            var person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString)
+                .Single(x => { return x.AusweisID.Equals(ausweisID); });
+
+            return person;
         }
 
         public int? GetBookIdByBarcode(string barcode)

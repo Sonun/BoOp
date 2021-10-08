@@ -37,6 +37,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ClearSearchCommand { get; set; }
         public DelegateCommand LendBookCommand { get; set; }
         public DelegateCommand ReturnBookCommand { get; set; }
+        public DelegateCommand LogoutCommand { get; set; }
 
         public BookViewModel SelectedBook
         {
@@ -185,10 +186,17 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     _navigationService.ShowLendBookView(user);
                 });
+
             ReturnBookCommand = new DelegateCommand(
                 x =>
                 {
                     _navigationService.ShowReturnLendBookView(user);
+                });
+
+            LogoutCommand = new DelegateCommand(
+                x =>
+                {
+                    _navigationService.ShowScanUserView();
                 });
         }
 
