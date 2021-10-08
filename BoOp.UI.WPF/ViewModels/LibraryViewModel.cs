@@ -22,11 +22,12 @@ namespace BoOp.UI.WPF.ViewModels
         //buch model booklists, original and current
         private ObservableCollection<BuchModel> _currentList;
         private ObservableCollection<BuchModel> _originalList;
+        
         private string _searchWord;
 
         //flags to enable reverse sorting
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
-
+        private BookViewModel _selectedBook;
         public DelegateCommand OpenLoginView { get; set; }
         public DelegateCommand SortTitleCommand { get; set; }
         public DelegateCommand SortAuthorCommand { get; set; }
@@ -36,6 +37,19 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ClearSearchCommand { get; set; }
         public DelegateCommand LendBookCommand { get; set; }
         public DelegateCommand ReturnBookCommand { get; set; }
+
+        public BookViewModel SelectedBook
+        {
+            get
+            {
+                return _selectedBook;
+            }
+            set
+            {
+                _selectedBook = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string SearchWord {
             get
