@@ -25,8 +25,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(SCANBAR)"/>
-        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="SCAN:"/>
+
+
         <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Vorname:"/>
         <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Nachname:"/>
         <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Passwort:"/>
@@ -39,7 +39,7 @@
         <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Nicht erforderlich):"/>
         <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Email:"/>
 
-        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Barcode}" HorizontalAlignment="Left"/>
+
         <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" HorizontalAlignment="Left"/>

@@ -43,7 +43,10 @@
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding ReturnBookCommand}" Content="Zurückgeben" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LendBookCommand}" Content="Ausleihen" />
             </StackPanel>
-            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausloggen" Command="{Binding LogoutCommand}" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
+            </StackPanel>
         </Grid>
         <!--Sort Bar-->
         <Grid Grid.Row="1" Background="#70C6E1">
@@ -78,6 +81,11 @@
         <Grid Grid.Row="2">
             <!--Examples for books-->
             <ListView x:Name="BookListView" ItemsSource="{Binding BookList}">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Ansicht"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
