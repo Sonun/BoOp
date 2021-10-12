@@ -10,6 +10,10 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:BookDetailsViewModel}">
     
     <Grid>
-            
+        <!--  @Disigner: Please make it pretty :-)  -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="{Binding BuchModel.BasicInfos.Titel}"></Label>
+            <Label Content="{Binding BuchModel.BasicInfos.Author}"></Label>
+        </StackPanel>
     </Grid>
 </UserControl>
