@@ -27,6 +27,12 @@ namespace BoOp.UI.WPF.ViewModels
             ShowScanUserView();
         }
 
+        public MainWindowViewModel(Dispatcher dispatcher, bool showDifferntView)
+        {
+            _dispatcher = dispatcher;
+            _library = new Library();
+        }
+
         public void ShowScanUserView()
         {
             CurrentViewModel = new ScanUserViewModel(this, _library, _dispatcher);
@@ -44,7 +50,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowLibraryView(PersonModel user)
         {
-            CurrentViewModel = new LibraryViewModel(this, _library, user);
+            CurrentViewModel = new LibraryViewModel(this, _library, user, _dispatcher);
         }
 
         public void ShowAddPersonView(PersonModel user)
@@ -77,5 +83,9 @@ namespace BoOp.UI.WPF.ViewModels
             CurrentViewModel = new RemoveBookViewModel(this, _library, user);
         }
 
+        public void ShowBookDetailsView(PersonModel user, BuchModel book)
+        {
+            CurrentViewModel = new BookDetailsViewModel(this, user, book);
+        }
     }
 }

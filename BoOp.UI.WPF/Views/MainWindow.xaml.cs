@@ -17,5 +17,11 @@ namespace BoOp.UI.WPF
             NavigationService = new MainWindowViewModel(Dispatcher);
             DataContext = NavigationService;
         }
+
+        public MainWindow(INavigationService navigationService)
+        {
+            InitializeComponent();
+            DataContext = navigationService;
+        }
     }
 }
