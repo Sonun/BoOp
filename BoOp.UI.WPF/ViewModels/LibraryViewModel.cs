@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -15,7 +16,8 @@ namespace BoOp.UI.WPF.ViewModels
     {
         private INavigationService _navigationService;
         private ILibrary _library;
-
+        private readonly Dispatcher _dispatcher;
+        public PersonModel LoggedInUser { get; set; }
         //bookviewmodel booklist (binded by the view)
         private ObservableCollection<BookViewModel> _bookList;
 
@@ -74,10 +76,10 @@ namespace BoOp.UI.WPF.ViewModels
                 OnPropertyChanged();
             }}
 
-        public LibraryViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public LibraryViewModel(INavigationService navigationService, ILibrary library, PersonModel user, Dispatcher dispatcher)
         {
             SetSortingFlagsFlase();
-
+            LoggedInUser = user;
             //check if navigationservice is null?
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
 
@@ -94,6 +96,7 @@ namespace BoOp.UI.WPF.ViewModels
 
             //create booklist from library
             _library = library;
+            _dispatcher = dispatcher;
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
 
@@ -205,7 +208,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in _booklist)
             {
-                BookList.Add(new BookViewModel(book));
+                BookList.Add(new BookViewModel(book, _dispatcher, LoggedInUser));
             }
         }
 
