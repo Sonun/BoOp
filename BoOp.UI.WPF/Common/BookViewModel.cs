@@ -26,8 +26,16 @@ namespace BoOp.UI.WPF.Common
                     view.ShowBookDetailsView(personModel, model);
 
                     var newWindow = new MainWindow(view);
+                    newWindow.Height = 800;
+                    newWindow.Width = 1200;
+                    newWindow.WindowState = System.Windows.WindowState.Minimized;
+                    newWindow.Topmost = true;
+                    newWindow.Focus();
+                    newWindow.Activate();
+                    newWindow.ShowActivated = true;
                     newWindow.Show();
-                    },
+
+                },
                 y => { return personModel != null; });
         }
 

@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].Personen (Vorname, Nachname, Geburtsdatum, Rechte, AusweisID, PasswortHASH) VALUES ('Admin', 'Admin', convert(datetime,'18-06-12 10:34:09 PM', 5), 8, '1', 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3');
