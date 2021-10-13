@@ -41,7 +41,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowAdminView(PersonModel user)
         {
-            CurrentViewModel = new AdminViewModel(this, _library, user);
+            CurrentViewModel = new AdminViewModel(this, _library, user, _dispatcher);
         }
 
         public void ShowLoginView(PersonModel user)

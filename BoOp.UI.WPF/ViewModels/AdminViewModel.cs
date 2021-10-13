@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -16,7 +17,9 @@ namespace BoOp.UI.WPF.ViewModels
     {
         private INavigationService _navigationService;
         private ILibrary _library;
+        private Dispatcher _dispatcher;
         private ObservableCollection<BookViewModel> _bookList;
+        private PersonModel _user;
 
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
@@ -49,10 +52,12 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user, Dispatcher dispatcher)
         {
             _navigationService = navigationService;
             _library = library;
+            _user = user;
+            _dispatcher = dispatcher;
             UpdateBooklist( _library.GetAllBooks());
             UserRights = user.Rechte;
 
@@ -114,7 +119,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in _booklist)
             {
-                BookList.Add(new BookViewModel(book));
+                BookList.Add(new BookViewModel(book, _dispatcher, _user));
             }
         }
     }
