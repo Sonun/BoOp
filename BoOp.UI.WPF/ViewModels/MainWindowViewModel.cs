@@ -1,5 +1,6 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowAdminView(PersonModel user)
         {
-            CurrentViewModel = new AdminViewModel(this, _library, user);
+            CurrentViewModel = new AdminViewModel(this, _library, user, _dispatcher);
         }
 
         public void ShowLoginView(PersonModel user)

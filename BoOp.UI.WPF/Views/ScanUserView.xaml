@@ -21,6 +21,9 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Content="Bitte Scann deine Karte mit dem Kartenleser!"/>
         <TextBox Grid.Row="4" Margin="200, 5" Text="{Binding PersonBarcoded}"/>
+
+        <Label Grid.Row="6" Content="{Binding LogoutWarning}" FontSize="62" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
         <Button Grid.Row="90" Margin="200, 5" FontSize="32" Content="Weiter" Command="{Binding TestButtonCommand}"/>
     </Grid>
 </UserControl>

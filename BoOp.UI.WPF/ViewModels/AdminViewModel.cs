@@ -1,5 +1,6 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -15,6 +17,9 @@ namespace BoOp.UI.WPF.ViewModels
     {
         private INavigationService _navigationService;
         private ILibrary _library;
+        private Dispatcher _dispatcher;
+        private ObservableCollection<BookViewModel> _bookList;
+        private PersonModel _user;
 
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
@@ -34,10 +39,26 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public ObservableCollection<BookViewModel> BookList
+        {
+            get
+            {
+                return _bookList;
+            }
+            set
+            {
+                _bookList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user, Dispatcher dispatcher)
         {
             _navigationService = navigationService;
             _library = library;
+            _user = user;
+            _dispatcher = dispatcher;
+            UpdateBooklist( _library.GetAllBooks());
             UserRights = user.Rechte;
 
             BackCommand = new DelegateCommand( 
@@ -91,6 +112,15 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     return user.Rechte >= Rechtelevel.ADMIN;
                 });
+        }
+
+        private void UpdateBooklist(ObservableCollection<BuchModel> _booklist)
+        {
+            BookList = new ObservableCollection<BookViewModel>();
+            foreach (var book in _booklist)
+            {
+                BookList.Add(new BookViewModel(book, _dispatcher, _user));
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BoOp.UI.WPF.ViewModels
 {
     public class ScanUserViewModel : ViewModel
     {
-        private readonly int logoutTimespan = 1;
+        private readonly int _logoutTimespan = 12;
         private Timer logoutTimer;
         private bool timeFlag;
 
@@ -21,7 +21,9 @@ namespace BoOp.UI.WPF.ViewModels
         private ILibrary _library;
 
         private string _personBarcode;
+
         public string PersonBarcoded { get { return _personBarcode; } set { _personBarcode = value; OnPropertyChanged(); } }
+        public string LogoutWarning { get { return "Sie werden nach \"Weiter\", nach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
 
         public DelegateCommand TestButtonCommand { get; set; }
 
@@ -43,7 +45,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void StartLogoutTimer()
         {
-            logoutTimer = new Timer(Callback, null, TimeSpan.Zero, TimeSpan.FromMinutes(logoutTimespan));
+            logoutTimer = new Timer(Callback, null, TimeSpan.Zero, TimeSpan.FromMinutes(_logoutTimespan));
         }
 
         private void Callback(object state)
@@ -51,7 +53,7 @@ namespace BoOp.UI.WPF.ViewModels
             if (timeFlag)
             {
                 _navigationService.ShowScanUserView();
-                MessageBox.Show("Du wurdest aus sicherheitsgründen, nach " + logoutTimespan + " minuten eingeloggt sein, ausgeloggt");
+                MessageBox.Show("Du wurdest aus sicherheitsgründen, nach " + _logoutTimespan + " minuten eingeloggt sein, ausgeloggt");
             }
             else
             {
