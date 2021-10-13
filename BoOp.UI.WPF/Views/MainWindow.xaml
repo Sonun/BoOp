@@ -54,6 +54,10 @@
             <views:RemoveBookView />
         </DataTemplate>
 
+        <DataTemplate x:Key="BookDetailsViewTemplate">
+            <views:BookDetailsView/>
+        </DataTemplate>
+        
         <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
                                                  ScanUserViewModelTemplate="{StaticResource ScanUserViewTemplate}"
                                                  LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
@@ -64,7 +68,8 @@
                                                  EditPersonViewModelTemplate="{StaticResource EditPersonViewTemplate}"
                                                  LendBookViewModelTemplate="{StaticResource LendBookViewTemplate}"
                                                  ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"
-                                                 RemoveBookViewModelTemplate="{StaticResource RemoveBookViewTemplate}"/>
+                                                 RemoveBookViewModelTemplate="{StaticResource RemoveBookViewTemplate}"
+                                                 BookDetailsViewModelTemplate="{StaticResource BookDetailsViewTemplate}"/>
     </Window.Resources>
 
     <Grid>

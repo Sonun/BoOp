@@ -16,5 +16,6 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         void ShowLendBookView(PersonModel user); 
         void ShowReturnLendBookView(PersonModel user); 
         void ShowRemoveBookView(PersonModel user);
+        void ShowBookDetailsView(PersonModel user, BuchModel book);
     }
 }

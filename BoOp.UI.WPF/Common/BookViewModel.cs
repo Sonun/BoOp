@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoOp.UI.WPF.Views;
+using System.Windows.Threading;
+using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 
 namespace BoOp.UI.WPF.Common
 {
@@ -14,12 +16,19 @@ namespace BoOp.UI.WPF.Common
         public BuchModel Model { get; set; }
         public DelegateCommand ShowBookCommand { get; set; }
 
-        public BookViewModel(BuchModel model)
+        public BookViewModel(BuchModel model, Dispatcher dispatcher, PersonModel personModel = null)
         {
             Model = model;
 
             ShowBookCommand = new DelegateCommand(
-                x => { new BookDetailsWindow(this).Show(); });
+                x => {
+                    var view = new MainWindowViewModel(dispatcher, true);
+                    view.ShowBookDetailsView(personModel, model);
+
+                    var newWindow = new MainWindow(view);
+                    newWindow.Show();
+                    },
+                y => { return personModel != null; });
         }
 
         
