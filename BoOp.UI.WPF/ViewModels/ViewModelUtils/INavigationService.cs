@@ -1,4 +1,5 @@
 ﻿using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using System.Collections.ObjectModel;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils

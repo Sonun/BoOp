@@ -1,5 +1,6 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace BoOp.UI.WPF.ViewModels
     {
         private INavigationService _navigationService;
         private ILibrary _library;
+        private ObservableCollection<BookViewModel> _bookList;
 
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
@@ -34,10 +36,24 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
+        public ObservableCollection<BookViewModel> BookList
+        {
+            get
+            {
+                return _bookList;
+            }
+            set
+            {
+                _bookList = value;
+                OnPropertyChanged();
+            }
+        }
+
         public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _navigationService = navigationService;
             _library = library;
+            UpdateBooklist( _library.GetAllBooks());
             UserRights = user.Rechte;
 
             BackCommand = new DelegateCommand( 
@@ -91,6 +107,15 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     return user.Rechte >= Rechtelevel.ADMIN;
                 });
+        }
+
+        private void UpdateBooklist(ObservableCollection<BuchModel> _booklist)
+        {
+            BookList = new ObservableCollection<BookViewModel>();
+            foreach (var book in _booklist)
+            {
+                BookList.Add(new BookViewModel(book));
+            }
         }
     }
 }
