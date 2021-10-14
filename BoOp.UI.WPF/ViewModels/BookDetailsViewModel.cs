@@ -15,11 +15,26 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         public DelegateCommand RateBook { get; set; }
 
+        public AddBookViewModel AddBookViewModel { get; set; } 
+        public AddPersonViewModel AddPersonViewModel { get; set; }
+        public int BookDetailsPropertyNameWidth { get; set; } = 130;
+        public string BookCoverPath { get; set; }
+
         public BookDetailsViewModel(INavigationService navigationService,PersonModel user, BuchModel buchModel)
         {
             BuchModel = buchModel;
             PersonModel = user;
             _navigationService = navigationService;
+            AddBookViewModel = new AddBookViewModel(navigationService, null, PersonModel);
+            AddPersonViewModel = new AddPersonViewModel(navigationService, null, user);
+            SetBookCoverPath(buchModel);
+        }
+
+        private void SetBookCoverPath(BuchModel book)
+        {
+            var rawISBNSplit = book.BasicInfos.ISBN.Split(' ', '-', '.', ',');
+            var rawISBN = string.Join("", rawISBNSplit);
+            BookCoverPath = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
         }
     }
 }
