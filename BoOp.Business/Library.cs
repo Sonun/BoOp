@@ -419,10 +419,17 @@ namespace BoOp.Business
 
         public PersonModel GetUserByBarcode(string ausweisID)
         {
-            string sql = "SELECT * FROM Personen";
-            var person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString)
-                .Single(x => { return x.AusweisID.Equals(ausweisID); });
-
+            var person = new PersonModel();
+            try
+            {
+                string sql = "SELECT * FROM Personen";
+                person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString)
+                    .Single(x => { return x.AusweisID.Equals(ausweisID); });
+            }
+            catch (Exception)
+            {
+                throw new Exception("Benutzer konnte mit diesem Barcode nicht ermittelt werden.");
+            }
             return person;
         }
 

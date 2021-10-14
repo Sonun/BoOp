@@ -37,8 +37,15 @@ namespace BoOp.UI.WPF.ViewModels
                 (
                      x =>
                      {
-                         StartLogoutTimer();
-                         _navigationService.ShowLibraryView(_library.GetUserByBarcode(_personBarcode));
+                         try
+                         {
+                             _navigationService.ShowLibraryView(_library.GetUserByBarcode(_personBarcode));
+                             StartLogoutTimer();
+                         }
+                         catch (Exception e)
+                         {
+                             MessageBox.Show(e.Message);
+                         }
                      }
                 );
         }

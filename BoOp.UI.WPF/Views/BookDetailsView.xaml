@@ -8,12 +8,80 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:BookDetailsViewModel}">
-    
+
     <Grid>
         <!--  @Disigner: Please make it pretty :-)  -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="{Binding BuchModel.BasicInfos.Titel}"></Label>
-            <Label Content="{Binding BuchModel.BasicInfos.Author}"></Label>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Background="Beige">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding BookCoverPath}" Margin="10"></Image>
+            
+            <StackPanel Grid.Column="2" Margin="20, 30, 0, 0">
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Titel: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Titel}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Author: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Author}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Verlag: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Verlag}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="ISBN: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.ISBN}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Auflage: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Auflage}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Altersvorschlag: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Altersvorschlag}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Regal: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.BasicInfos.Regal}" />
+                    </StackPanel>
+                </Label>
+                <Label Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Exemplare (verfügbar): " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding BuchModel.ExemplarAnzahl}" />
+                        <TextBlock Text=" ("/>
+                        <TextBlock Text="{Binding BuchModel.NichtVergebeneExemplare}" />
+                        <TextBlock Text=")"/>
+                    </StackPanel>
+                </Label>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </UserControl>

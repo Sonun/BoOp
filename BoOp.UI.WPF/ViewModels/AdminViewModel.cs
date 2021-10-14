@@ -30,6 +30,10 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveUserCommand { get; set; }
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand SortAuthorCommand { get; set; }
+        public DelegateCommand SortTitleCommand { get; set; }
+        public BookViewModel SelectedBook { get; set; }
+
 
         public ObservableCollection<BuchModel> AllBooks
         {
