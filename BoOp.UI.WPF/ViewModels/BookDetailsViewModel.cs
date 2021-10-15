@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -14,13 +15,14 @@ namespace BoOp.UI.WPF.ViewModels
         public PersonModel PersonModel { get; set; }
         private INavigationService _navigationService;
         public DelegateCommand RateBook { get; set; }
+        public DelegateCommand CloseCommand { get; set; }
 
         public AddBookViewModel AddBookViewModel { get; set; } 
         public AddPersonViewModel AddPersonViewModel { get; set; }
         public int BookDetailsPropertyNameWidth { get; set; } = 130;
         public string BookCoverPath { get; set; }
 
-        public BookDetailsViewModel(INavigationService navigationService,PersonModel user, BuchModel buchModel)
+        public BookDetailsViewModel(INavigationService navigationService, PersonModel user, BuchModel buchModel)
         {
             BuchModel = buchModel;
             PersonModel = user;
@@ -28,6 +30,13 @@ namespace BoOp.UI.WPF.ViewModels
             AddBookViewModel = new AddBookViewModel(navigationService, null, PersonModel);
             AddPersonViewModel = new AddPersonViewModel(navigationService, null, user);
             SetBookCoverPath(buchModel);
+
+            CloseCommand = new DelegateCommand(x =>
+            {
+                var currentWindow = (MainWindow)Application.Current.Windows.OfType
+                    <System.Windows.Window>().SingleOrDefault(x => x.IsActive);
+                currentWindow.Close();
+            });
         }
 
         private void SetBookCoverPath(BuchModel book)

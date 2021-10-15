@@ -17,18 +17,28 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" Background="Beige">
+        <!--HEADER-->
+
+        <Grid Grid.ColumnSpan="2" Background="Bisque">
+            <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="DarkBlue"/>
+            <Button Style="{StaticResource RoundedButtonStyle}" Content="Schließen" Command="{Binding CloseCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
+
+        </Grid>
+        
+        <!--BOOK DETAILS-->
+        <Grid Grid.Column="0" Grid.Row="1" Background="Beige">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="{Binding BookCoverPath}" Margin="10"></Image>
+            <Image Source="{Binding BookCoverPath}" Margin="10" VerticalAlignment="Center"></Image>
             
-            <StackPanel Grid.Column="2" Margin="20, 30, 0, 0">
+            <StackPanel Grid.Column="2" Margin="20, 0, 0, 0" VerticalAlignment="Center">
                 <Label Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Titel: " Width="{Binding BookDetailsPropertyNameWidth}"/>
