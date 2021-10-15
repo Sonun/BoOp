@@ -16,33 +16,16 @@ namespace BoOp.UI.WPF.Common
     {
         public BuchModel Model { get; set; }
         public DelegateCommand ShowBookCommand { get; set; }
+        private LibraryViewModel _libraryViewModel;
 
-        public BookViewModel(BuchModel model, Dispatcher dispatcher, PersonModel personModel = null)
+        public BookViewModel(BuchModel model, INavigationService navigationService, LibraryViewModel libraryViewModel, PersonModel personModel = null)
         {
             Model = model;
+            _libraryViewModel = libraryViewModel;
 
             ShowBookCommand = new DelegateCommand(
                 x => {
-                    var view = new MainWindowViewModel(dispatcher, true);
-                    view.ShowBookDetailsView(personModel, model);
-
-                    MainWindow singleOrDefault = (MainWindow)Application.Current.Windows.OfType
-                    <System.Windows.Window>().SingleOrDefault(x => x.IsActive);
-                    singleOrDefault.ShowActivated = false;
-                    //singleOrDefault.Visibility = Visibility.Hidden;
-                    singleOrDefault.Topmost = false;
-
-                    var newWindow = new MainWindow(view);
-                    newWindow.Height = 800;
-                    newWindow.Width = 1200;
-                    newWindow.WindowState = System.Windows.WindowState.Minimized;
-                    newWindow.Topmost = true;
-                    newWindow.Focus();
-                    newWindow.Activate();
-                    newWindow.ShowActivated = true;
-                    newWindow.Visibility = Visibility.Visible;
-                    newWindow.Show();
-
+                    _libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel(navigationService, personModel, model, libraryViewModel);
                 },
                 y => { return personModel != null; });
         }

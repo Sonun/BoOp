@@ -83,10 +83,5 @@ namespace BoOp.UI.WPF.ViewModels
         {
             CurrentViewModel = new RemoveBookViewModel(this, _library, user);
         }
-
-        public void ShowBookDetailsView(PersonModel user, BuchModel book)
-        {
-            CurrentViewModel = new BookDetailsViewModel(this, user, book);
-        }
     }
 }
