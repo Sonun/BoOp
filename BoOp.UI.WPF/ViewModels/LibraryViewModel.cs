@@ -24,7 +24,21 @@ namespace BoOp.UI.WPF.ViewModels
         //buch model booklists, original and current
         private ObservableCollection<BuchModel> _currentList;
         private ObservableCollection<BuchModel> _originalList;
-        
+
+        private BookDetailsViewModel _bookDetailsViewModel;
+        public BookDetailsViewModel BookDetailsViewModel 
+        { 
+            get 
+            { 
+                return _bookDetailsViewModel; 
+            } 
+            set 
+            { 
+                _bookDetailsViewModel = value;  
+                OnPropertyChanged();              
+            } 
+        }
+
         private string _searchWord;
 
         //flags to enable reverse sorting
@@ -102,6 +116,9 @@ namespace BoOp.UI.WPF.ViewModels
 
             //fill boolist first time
             UpdateBooklist(_originalList);
+
+            BookDetailsViewModel = new BookDetailsViewModel();
+
 
             //SortTitleCommand
             SortTitleCommand = new DelegateCommand(
@@ -208,7 +225,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in _booklist)
             {
-                BookList.Add(new BookViewModel(book, _dispatcher, LoggedInUser));
+                BookList.Add(new BookViewModel(book, _navigationService, this , LoggedInUser));
             }
         }
 
