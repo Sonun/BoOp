@@ -229,7 +229,7 @@ namespace BoOp.Business
             _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, user.Rechte, user.EMail, ausweis = user.AusweisID}, _connectionString );
         }
 
-        public void EditBookDetails (BuchModel book )
+        public void EditBookDetails (BuchModel book)
         {
             string sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
             book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(

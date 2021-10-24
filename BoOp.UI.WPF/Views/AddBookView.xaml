@@ -13,7 +13,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" x:Name="TextBoxColumn"/>
+            <ColumnDefinition Width="0.3*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -44,18 +46,20 @@
         <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
         <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
 
-        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="4" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding ISBN}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="7" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="8" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="9" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Left" />
+        <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ISBN}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="8" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="9" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
 
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="3">
+        <Button Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" Margin="10" Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SearchInfosCommand}" Content="Suche Infos"/>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="2">
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Abrechen"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>
