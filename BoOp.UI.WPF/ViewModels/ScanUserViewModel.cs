@@ -1,21 +1,20 @@
-﻿using BoOp.Business.IO;
-using BoOp.UI.WPF.ViewModels.ViewModelUtils;
+﻿using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
-using System.Collections.Generic;
 using System.Windows;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Timers;
+using System.Timers;
 using System.Windows.Threading;
 using BoOp.Business;
+using System.Diagnostics;
 
 namespace BoOp.UI.WPF.ViewModels
 {
     public class ScanUserViewModel : ViewModel
     {
+        //time untill logout in minutes
         private readonly int _logoutTimespan = 12;
-        private Timer logoutTimer;
-        private bool timeFlag;
+        private static Timer _logoutTimer;
+        private bool _timeFlag;
 
         private INavigationService _navigationService;
         private ILibrary _library;
@@ -23,7 +22,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _personBarcode;
 
         public string PersonBarcoded { get { return _personBarcode; } set { _personBarcode = value; OnPropertyChanged(); } }
-        public string LogoutWarning { get { return "Sie werden nach \"Weiter\", nach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
+        public string LogoutWarning { get { return "Sie werden nach \"Weiter\"\nnach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
 
         public DelegateCommand TestButtonCommand { get; set; }
 
@@ -31,7 +30,9 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _navigationService = navigationService;
             _library = library;
-            timeFlag = false;
+            _timeFlag = false;
+            if  (_logoutTimer != null) _logoutTimer.Stop();
+            _logoutTimer = null;
 
             TestButtonCommand = new DelegateCommand
                 (
@@ -52,19 +53,26 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void StartLogoutTimer()
         {
-            logoutTimer = new Timer(Callback, null, TimeSpan.Zero, TimeSpan.FromMinutes(_logoutTimespan));
+            _logoutTimer = new Timer();
+            _logoutTimer.Elapsed += new ElapsedEventHandler(Callback);
+            _logoutTimer.Interval = _logoutTimespan * 30000;
+            _logoutTimer.Start();
+            Debug.WriteLine(DateTime.Now);
         }
 
-        private void Callback(object state)
+        private void Callback(object source, ElapsedEventArgs e)
         {
-            if (timeFlag)
+            if (_timeFlag)
             {
+                Debug.WriteLine(DateTime.Now);
+                _logoutTimer.Stop();
+                _logoutTimer = null;
                 _navigationService.ShowScanUserView();
                 MessageBox.Show("Du wurdest aus sicherheitsgründen, nach " + _logoutTimespan + " minuten eingeloggt sein, ausgeloggt");
             }
             else
             {
-                timeFlag = true;
+                _timeFlag = true;
             }
         }
     }

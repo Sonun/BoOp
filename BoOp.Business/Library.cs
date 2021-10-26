@@ -160,8 +160,9 @@ namespace BoOp.Business
             return person.FirstOrDefault();
         }
 
-        public void RemoveBook(string bookBarcode)
+        public void RemoveBook(BuchModel book)
         {
+            //ToDo remove all copys of this book
             throw new NotImplementedException();
         }
 

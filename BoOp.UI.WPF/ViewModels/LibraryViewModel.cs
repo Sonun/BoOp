@@ -30,12 +30,12 @@ namespace BoOp.UI.WPF.ViewModels
         { 
             get 
             { 
-                return _bookDetailsViewModel; 
+                return _bookDetailsViewModel;
             } 
             set 
             { 
-                _bookDetailsViewModel = value;  
-                OnPropertyChanged();              
+                _bookDetailsViewModel = value;
+                OnPropertyChanged();
             } 
         }
 

@@ -9,11 +9,14 @@
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels" 
             d:DataContext="{d:DesignInstance Type=viewmodels:RemoveBookViewModel}">
     <Grid Background="{StaticResource DropShadow}">
-        <StackPanel Margin="10">
-            <Label Margin="10" Content="Buch Löschen" HorizontalAlignment="Center"/>
-            <Label Margin="10" Content="Bitte scanne den Barcode:" HorizontalAlignment="Center"/>
-            <TextBox Margin="10" Text="{Binding Barcode}"/>
-            <Button Margin="10" Content="BUCH LÖSCHEN" Command="{Binding SaveCommand}"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Primary}">
+            <TextBlock Margin="10" Text="{Binding Book.BasicInfos.Titel, StringFormat=Titel: {0}}" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Book.BasicInfos.Author, StringFormat=Author: {0}}" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Book.BasicInfos.Auflage, StringFormat=Auflage: {0}}" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Book.BasicInfos.ISBN, StringFormat=ISBN: {0}}" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="{Binding Book.BasicInfos.Verlag, StringFormat=Verlag: {0}}" HorizontalAlignment="Center"/>
+            
+            <Button Margin="10" Content="BUCH LÖSCHEN" Command="{Binding DeleteCommand}"/>
             <Button Margin="10" Content="abbrechen" Command="{Binding CancelCommand}"/>
         </StackPanel>
     </Grid>

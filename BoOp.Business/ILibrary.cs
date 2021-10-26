@@ -20,7 +20,7 @@ namespace BoOp.Business
         public void AddBook(BuchModel book);
 
         // Remove book
-        public void RemoveBook(string bookBarcode);
+        public void RemoveBook(BuchModel book);
 
         // Edit book
         public void EditBookDetails(BuchModel bookModel);
