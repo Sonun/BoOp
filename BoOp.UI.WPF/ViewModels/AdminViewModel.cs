@@ -19,7 +19,10 @@ namespace BoOp.UI.WPF.ViewModels
         private ILibrary _library;
         private Dispatcher _dispatcher;
         private ObservableCollection<BookViewModel> _bookList;
+        private ObservableCollection<BuchModel> _currentList, _originalList;
         private PersonModel _user;
+        private string _searchWord;
+        private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
 
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
@@ -30,6 +33,25 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveUserCommand { get; set; }
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand SortTitleCommand { get; set; }
+        public DelegateCommand SortAuthorCommand { get; set; }
+        public DelegateCommand SortISBNCommand { get; set; }
+        public DelegateCommand SortRatingCommand { get; set; }
+        public DelegateCommand SearchCommand { get; set; }
+        public DelegateCommand ClearSearchCommand { get; set; }
+
+        public string SearchWord
+        {
+            get
+            {
+                return _searchWord;
+            }
+            set
+            {
+                _searchWord = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<BuchModel> AllBooks
         {
@@ -58,7 +80,9 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _user = user;
             _dispatcher = dispatcher;
-            UpdateBooklist( _library.GetAllBooks());
+            _originalList = _library.GetAllBooks();
+            _currentList = _originalList;
+            UpdateBooklist(_originalList);
             UserRights = user.Rechte;
 
             BackCommand = new DelegateCommand( 
@@ -97,20 +121,68 @@ namespace BoOp.UI.WPF.ViewModels
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
 
-            EditBookCommand = new DelegateCommand(
+            //SortTitleCommand
+            SortTitleCommand = new DelegateCommand(
                 x =>
                 {
-
+                    if (!_titleFlag)
+                    {
+                        UpdateBooklist(Utils.SortedBookListByTitel(_currentList));
+                        _titleFlag = true;
+                    }
+                    else
+                    {
+                        UpdateBooklist(Utils.SortedBookListByTitel(_currentList, true));
+                        SetSortingFlagsFlase();
+                        _titleFlag = false;
+                    }
                 });
 
-            RemoveBookCommand = new DelegateCommand(
+            //SortAuthorCommand
+            SortAuthorCommand = new DelegateCommand(
                 x =>
                 {
-                    _navigationService.ShowRemoveBookView(user);
-                },
-                y =>
+                    if (!_authorFlag)
+                    {
+                        UpdateBooklist(Utils.SortedBookListByAuthor(_currentList));
+                        _authorFlag = true;
+                    }
+                    else
+                    {
+                        UpdateBooklist(Utils.SortedBookListByAuthor(_currentList, true));
+                        SetSortingFlagsFlase();
+                        _authorFlag = false;
+                    }
+                });
+
+            //SortISBNCommand
+            SortISBNCommand = new DelegateCommand(
+                x =>
                 {
-                    return user.Rechte >= Rechtelevel.ADMIN;
+                    if (!_isbnFlag)
+                    {
+                        UpdateBooklist(Utils.SortedBookListByISBN(_currentList));
+                        _isbnFlag = true;
+                    }
+                    else
+                    {
+                        UpdateBooklist(Utils.SortedBookListByISBN(_currentList, true));
+                        SetSortingFlagsFlase();
+                        _isbnFlag = false;
+                    }
+                });
+
+            SearchCommand = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
+                });
+
+            ClearSearchCommand = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(_originalList);
+                    SearchWord = "";
                 });
         }
 
@@ -121,6 +193,14 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 BookList.Add(new BookViewModel(book, _navigationService, null, _user));
             }
+        }
+
+        private void SetSortingFlagsFlase()
+        {
+            _ratingFlag = false;
+            _isbnFlag = false;
+            _authorFlag = false;
+            _titleFlag = false;
         }
     }
 }

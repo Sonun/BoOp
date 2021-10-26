@@ -14,29 +14,27 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         private ILibrary _library;
         private PersonModel _user;
-        private string _barcode;
+        private BuchModel _book;
 
-        public string Barcode { get { return _barcode; } set { _barcode = value; OnPropertyChanged(); OnPropertyChanged(nameof(SaveCommand)); } }
-
-        public DelegateCommand SaveCommand { get; set; }
+        public BuchModel Book { get { return _book; } set { _book = value; OnPropertyChanged(); } }
+        public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
 
-        public RemoveBookViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public RemoveBookViewModel(INavigationService navigationService, ILibrary library, PersonModel user, BuchModel book)
         {
             _navigationService = navigationService;
             _library = library;
             _user = user;
-            _barcode = "";
+            Book = book;
 
-            SaveCommand = new DelegateCommand(
+            DeleteCommand = new DelegateCommand(
                 x =>
                 {
-                    var bookname = GetBookname(_barcode);
-                    if (bookname != null)
+                    if (_book != null)
                     {
-                        if (MessageBox.Show("Wollen Sie das Buch " + bookname + " wirklich Löschen?", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Wollen Sie das Buch " + _book.BasicInfos.Titel + " wirklich Löschen? \n Es werden dann auch Alle Exemplare aus der Datenbank gelöscht!", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            _library.RemoveBook(_barcode);
+                            _library.RemoveBook(_book);
                             _navigationService.ShowLibraryView(user);
                         }
                     }
@@ -49,20 +47,8 @@ namespace BoOp.UI.WPF.ViewModels
             CancelCommand = new DelegateCommand(
                 x =>
                 {
-                    _navigationService.ShowLibraryView(user);
+                    _navigationService.ShowAdminView(user);
                 });
-        }
-
-        private string GetBookname(string barcode)
-        {
-            try {
-                var bookId = _library.GetBookIdByBarcode(_barcode);
-                return _library.GetAllBooks().SingleOrDefault(x => { return x.Exemplare.ToList().SingleOrDefault(y => { return y.BasicInfos.Barcode == barcode; }).BasicInfos.BuchID == x.BasicInfos.Id; }).BasicInfos.Titel;
-            }
-            catch
-            {
-                return null;
-            }
         }
     }
 }

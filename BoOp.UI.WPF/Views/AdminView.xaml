@@ -19,16 +19,15 @@
             <RowDefinition Height=" 10*"/>
         </Grid.RowDefinitions>
 
-
-        <Button Grid.Row="0" Grid.Column="1" Content="Zurück" Command="{Binding BackCommand}" Margin="10"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Zurück" Command="{Binding BackCommand}" Foreground="Coral" Background="DimGray" Margin="10"/>
 
         <Grid Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Books" Foreground="HotPink" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Grid.Column="1" Content="User" Foreground="HotPink" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Grid.Column="0" Content="Buch hinzuügen" Command="{Binding AddBookCommand}" Margin="10" Background="LawnGreen"/>
+            <Button Grid.Column="1" Content="Person hinzufügen" Command="{Binding AddPersonCommand}" Margin="10" Background="LawnGreen"/>
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1">
@@ -39,22 +38,28 @@
             <!-- grid for book titles -->
             <Grid x:Name="booklistgrid" Margin="10, 2" IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="1.2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Command="{Binding SortTitleCommand}" >
+                <Button Grid.Column="0" Height="50" Margin="5" Command="{Binding SortTitleCommand}" >
                     <TextBlock Text="Titel">
                         <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
                     </TextBlock>
                 </Button>
-                <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" >
+                <Button Grid.Column="1" Height="50" Margin="5" Command="{Binding SortAuthorCommand}" >
                     <TextBlock Text="Author">
                         <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
                     </TextBlock>
                 </Button>
-                <Button Grid.Column="2" Content="Exemplare (verfügbar)"/>
+                <Button Grid.Column="2" Height="50" Margin="5" Command="{Binding SortISBNCommand}" >
+                    <TextBlock Text="ISBN">
+                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
+                    </TextBlock>
+                </Button>
+                <Button Grid.Column="3" Height="50"  Margin="5" Content="Exemplare (verfügbar)"/>
             </Grid>
             <!-- grid for user titles-->
             <Grid Margin="10, 2">
@@ -72,15 +77,23 @@
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:BookViewModel">
                             <StackPanel >
-                            <Grid Background="HotPink" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                            <Grid Style="{StaticResource BookviewBookStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
+                                        <MenuItem Header="Busch Löschen" Command="{Binding RemoveBookCommand}"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
                                 <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="1.2*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="1.2*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Margin="10" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
-                                <TextBlock Grid.Column="1" Margin="10" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
-                                <TextBlock Grid.Column="2" Margin="10" HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
+                                <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
+                                <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
+                                <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
+                                <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
                             </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -95,11 +108,8 @@
 
         <!-- Grün = funktionsfähig, Orange = vorhanden, aber geht nicht, Rot = nicht vorhanden -->
         <StackPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Button Content="Add Person" Command="{Binding AddPersonCommand}" Margin="10" Background="LawnGreen"/>
             <Button Content="Edit Person" Command="{Binding EditUserCommand}" Margin="10" Background="LawnGreen"/>
             <Button Content="Remove Person" Command="{Binding RemoveUserCommand}" Margin="10" Background="Red"/>
-            <Button Content="Add Book" Command="{Binding AddBookCommand}" Margin="10" Background="LawnGreen"/>
-            <Button Content="Remove Book" Command="{Binding RemoveBookCommand}" Margin="10" Background="Orange"/>
             <Button Content="Edit Book" Command="{Binding EditBookCommand}" Margin="10" Background="Red"/>
         </StackPanel>
     </Grid>

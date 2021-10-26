@@ -15,21 +15,36 @@ namespace BoOp.UI.WPF.Common
     public class BookViewModel : ViewModel
     {
         public BuchModel Model { get; set; }
-        public DelegateCommand ShowBookCommand { get; set; }
         private LibraryViewModel _libraryViewModel;
+        public DelegateCommand ShowBookCommand { get; set; }
+        public DelegateCommand EditBookCommand { get; set; }
+        public DelegateCommand RemoveBookCommand { get; set; }
 
-        public BookViewModel(BuchModel model, INavigationService navigationService, LibraryViewModel libraryViewModel, PersonModel personModel = null)
+        public BookViewModel(BuchModel model, INavigationService navigationService, LibraryViewModel libraryViewModel, PersonModel user)
         {
             Model = model;
             _libraryViewModel = libraryViewModel;
 
             ShowBookCommand = new DelegateCommand(
                 x => {
-                    _libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel(navigationService, personModel, model, libraryViewModel);
+                    _libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel(navigationService, user, model, libraryViewModel);
                 },
-                y => { return personModel != null; });
-        }
+                y => { return user != null; });
 
-        
+            EditBookCommand = new DelegateCommand(
+                x => {
+                    navigationService.ShowEditBookView(user, model);
+                },
+                y => { return user != null; });
+
+            RemoveBookCommand = new DelegateCommand(
+                x => {
+                    navigationService.ShowRemoveBookView(user, model);
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.ADMIN;
+                });
+        }
     }
 }
