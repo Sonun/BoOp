@@ -100,13 +100,13 @@
             
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Button Grid.Column="0" Command="{Binding SortStarsCommand}">
-                    <TextBlock Text="Sterne">
+                <Button Grid.Column="0" Command="{Binding SortRatingCommand}">
+                    <TextBlock Text="Bewertung">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                     </TextBlock>
                 </Button>
@@ -121,19 +121,19 @@
                 
             </Grid>
             
-            <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
-                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}">
+            <!--REVIEWS-->
+            <ScrollViewer  Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}" Background="Beige">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:ReviewViewModel">
                             <StackPanel>
                                 <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                                     <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1.5*"/>
                                         <ColumnDefinition Width="10*"/>
                                         <ColumnDefinition Width="2*"/>
-
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <Label Grid.Column="0" Margin="5, 5, 0, 0">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Sterne}"/>
@@ -141,7 +141,7 @@
                                             <Image Source="/Assets/Icons/Review/3077106.png" Width="25"/>
                                         </StackPanel>
                                     </Label>
-                                    
+
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
 
                                     <Label Grid.Column="2" Margin="0, 5, 0, 0">
@@ -157,8 +157,43 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-            
         </Grid>
 
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSeaGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*" x:Name="TextBoxColumn"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label>
+                    <TextBlock Margin="5" FontSize="16" Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Bewerte das Buch mit 1 - 5 Schmetterlingen!"/>
+                </Label>
+                
+                <ComboBox ItemsSource="{Binding Ratings}" SelectedItem="{Binding SelectedRating, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="70">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Rating}"/>
+                                <TextBlock Text="  "/>
+                                <Image Source="/Assets/Icons/Review/3077106.png" Width="20" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <Label HorizontalAlignment="Center" Margin="20">
+                    <TextBlock Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Schreibe Deine Bewertung in das Textfeld."/>
+                </Label>
+                <TextBox Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="150" Width="{Binding ElementName=TextBoxColumn, Path=ActualWidth}"/>
+            </StackPanel>
+
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
+
+        </Grid>
+        
     </Grid>
 </UserControl>
