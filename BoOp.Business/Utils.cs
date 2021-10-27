@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
@@ -277,6 +278,43 @@ namespace BoOp.Business
             MyBarCode.SaveAsPdf(book.BasicInfos.Titel + ".pdf");
 
             return barcodeAsString;
+        }
+
+        /// <summary>
+        /// BubbleSort algirithm for bookratings
+        /// </summary>
+        /// <param name="rezensionModels"></param>
+        /// <param name="reverse"></param>
+        /// <returns></returns>
+        public static List<RezensionModel> SortReviewsByRating(List<RezensionModel> rezensionModels, bool reverse = false)
+        {
+            RezensionModel tempReview;
+
+            for (int j = 0; j <= rezensionModels.Count - 2; j++)
+            {
+                for (int i = 0; i <= rezensionModels.Count - 2; i++)
+                {
+                    if (!reverse)
+                    {
+                        if (rezensionModels[i].BasicInfos.Sterne < rezensionModels[i + 1].BasicInfos.Sterne)
+                        {
+                            tempReview = rezensionModels[i + 1];
+                            rezensionModels[i + 1] = rezensionModels[i];
+                            rezensionModels[i] = tempReview;
+                        }
+                    }
+                    else
+                    {
+                        if (rezensionModels[i].BasicInfos.Sterne > rezensionModels[i + 1].BasicInfos.Sterne)
+                        {
+                            tempReview = rezensionModels[i + 1];
+                            rezensionModels[i + 1] = rezensionModels[i];
+                            rezensionModels[i] = tempReview;
+                        }
+                    }
+                }
+            }
+            return rezensionModels;
         }
     }
 }

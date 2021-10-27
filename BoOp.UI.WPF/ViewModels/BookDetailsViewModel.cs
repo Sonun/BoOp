@@ -1,4 +1,5 @@
-﻿using BoOp.DBAccessor.Models;
+﻿using BoOp.Business;
+using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
@@ -16,11 +17,13 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         private LibraryViewModel _libraryViewModel;
         private ObservableCollection<ReviewViewModel> _reviewViewModels;
+        private bool _ratingFlag;
 
         public BuchModel BuchModel { get; set; }
         public PersonModel PersonModel { get; set; }
         public DelegateCommand RateBookCommand { get; set; }
         public DelegateCommand CloseCommand { get; set; }
+        public DelegateCommand SortRatingCommand { get; set; }
         public ObservableCollection<ReviewViewModel> ReviewViewModels { get { return _reviewViewModels; } set { _reviewViewModels = value; OnPropertyChanged(); } }
 
         public int BookDetailsPropertyNameWidth { get; set; } = 130;
@@ -29,6 +32,9 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _showBookDetailsView;
         public bool ShowBookDetailsView { get { return _showBookDetailsView; } set { _showBookDetailsView = value; OnPropertyChanged(); } }
 
+        /// <summary>
+        /// Instance of empty constructor serves as a trigger for visibility in LibraryView
+        /// </summary>
         public BookDetailsViewModel()
         {
             ShowBookDetailsView = false;
@@ -55,6 +61,26 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel();
             });
+
+            SortRatingCommand = new DelegateCommand(x =>
+            {
+                UpdateReviewList(buchModel.Rezensionen);
+            });
+        }
+
+        private void UpdateReviewList(List<RezensionModel> reviews)
+        {
+            var sortedReviews = Utils.SortReviewsByRating(reviews, _ratingFlag);
+            ReviewViewModels.Clear();
+            sortedReviews.ForEach(x => ReviewViewModels.Add(new ReviewViewModel(x)));
+            if (_ratingFlag)
+            {
+                _ratingFlag = false;
+            }
+            else
+            {
+                _ratingFlag = true;
+            }
         }
 
         private void SetBookCoverPath(BuchModel book)
