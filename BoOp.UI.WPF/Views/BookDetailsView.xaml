@@ -26,7 +26,6 @@
         <Grid Grid.ColumnSpan="2" Background="Bisque">
             <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="DarkBlue"/>
             <Button Style="{StaticResource RoundedButtonStyle}" Content="Schließen" Command="{Binding CloseCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
-
         </Grid>
         
         <!--BOOK DETAILS-->
@@ -37,7 +36,7 @@
             </Grid.ColumnDefinitions>
 
             <Image Source="{Binding BookCoverPath}" Margin="10" VerticalAlignment="Center"></Image>
-            
+
             <StackPanel Grid.Column="2" Margin="20, 0, 0, 0" VerticalAlignment="Center">
                 <Label Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
@@ -91,6 +90,74 @@
                     </StackPanel>
                 </Label>
             </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="0" Command="{Binding SortStarsCommand}">
+                    <TextBlock Text="Sterne">
+                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                    </TextBlock>
+                </Button>
+                
+                <Button Grid.Column="1">
+                    <TextBlock Text="Rezension"/>
+                </Button>
+                
+                <Button Grid.Column="2">
+                    <TextBlock Text="Author"/>
+                </Button>
+                
+            </Grid>
+            
+            <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="common:ReviewViewModel">
+                            <StackPanel>
+                                <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="2*"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Grid.Column="0" Margin="5, 5, 0, 0">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Sterne}"/>
+                                            <TextBlock Text="  "/>
+                                            <Image Source="/Assets/Icons/Review/3077106.png" Width="25"/>
+                                        </StackPanel>
+                                    </Label>
+                                    
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
+
+                                    <Label Grid.Column="2" Margin="0, 5, 0, 0">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="{Binding RezensionModel.Author.Vorname}" />
+                                            <TextBlock Text=" "/>
+                                            <TextBlock Text="{Binding RezensionModel.Author.Nachname}" />
+                                        </StackPanel>
+                                    </Label>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            
         </Grid>
 
     </Grid>
