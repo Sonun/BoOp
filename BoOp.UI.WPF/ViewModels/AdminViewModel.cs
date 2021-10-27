@@ -24,6 +24,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _searchWord;
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
 
+        public BuchModel SelectedBook { get; set; }
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }

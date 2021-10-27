@@ -15,7 +15,7 @@ namespace BoOp.UI.WPF.ViewModels
     public class LibraryViewModel : ViewModel
     {
         private INavigationService _navigationService;
-        private ILibrary _library;
+        public ILibrary Library { get; private set; }
         private readonly Dispatcher _dispatcher;
         public PersonModel LoggedInUser { get; set; }
         //bookviewmodel booklist (binded by the view)
@@ -109,9 +109,9 @@ namespace BoOp.UI.WPF.ViewModels
                 });
 
             //create booklist from library
-            _library = library;
+            Library = library;
             _dispatcher = dispatcher;
-            _originalList = _library.GetAllBooks();
+            _originalList = Library.GetAllBooks();
             _currentList = _originalList;
 
             //fill boolist first time
@@ -219,6 +219,19 @@ namespace BoOp.UI.WPF.ViewModels
                     _navigationService.ShowScanUserView();
                 });
         }
+
+        /// <summary>
+        /// Useless method
+        /// </summary>
+        public void UpdateView()
+        {
+            BookList = new ObservableCollection<BookViewModel>();
+            foreach (var book in _originalList)
+            {
+                BookList.Add(new BookViewModel(book, _navigationService, this, LoggedInUser));
+            }
+        }
+
 
         private void UpdateBooklist(ObservableCollection<BuchModel> _booklist)
         {

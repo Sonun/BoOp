@@ -17,19 +17,23 @@ namespace BoOp.UI.WPF.ViewModels
         private INavigationService _navigationService;
         private LibraryViewModel _libraryViewModel;
         private ObservableCollection<ReviewViewModel> _reviewViewModels;
+        private ObservableCollection<RatingViewModel> _ratings;
         private bool _ratingFlag;
+        private bool _showBookDetailsView;
+        private string _reviewText;
 
+        public RatingViewModel SelectedRating { get; set; }
         public BuchModel BuchModel { get; set; }
         public PersonModel PersonModel { get; set; }
         public DelegateCommand RateBookCommand { get; set; }
         public DelegateCommand CloseCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
         public ObservableCollection<ReviewViewModel> ReviewViewModels { get { return _reviewViewModels; } set { _reviewViewModels = value; OnPropertyChanged(); } }
+        public ObservableCollection<RatingViewModel> Ratings { get { return _ratings; } set { _ratings = value; OnPropertyChanged(); } }
 
         public int BookDetailsPropertyNameWidth { get; set; } = 130;
         public string BookCoverPath { get; set; } = "https://i.pinimg.com/474x/31/63/49/3163495d3176cdff641c3e1b269a7a96--story-books-kid-books.jpg";
-
-        private bool _showBookDetailsView;
+        public string ReviewText { get { return _reviewText; } set { _reviewText = value; OnPropertyChanged(); } }
         public bool ShowBookDetailsView { get { return _showBookDetailsView; } set { _showBookDetailsView = value; OnPropertyChanged(); } }
 
         /// <summary>
@@ -42,10 +46,17 @@ namespace BoOp.UI.WPF.ViewModels
         public BookDetailsViewModel(INavigationService navigationService, PersonModel user, BuchModel buchModel, LibraryViewModel libraryViewModel)
         {
             _reviewViewModels = new ObservableCollection<ReviewViewModel>();
+            _ratings = new ObservableCollection<RatingViewModel>();
             BuchModel = buchModel;
             PersonModel = user;
             _navigationService = navigationService;
             _libraryViewModel = libraryViewModel;
+
+            for (int i = 1; i < 6; i++)
+            {
+                Ratings.Add(new RatingViewModel(i));
+            }
+            SelectedRating = Ratings.Last();
 
             if (buchModel != null)
             {
@@ -59,28 +70,42 @@ namespace BoOp.UI.WPF.ViewModels
 
             CloseCommand = new DelegateCommand(x =>
             {
+                // ToDo: LibraryView needs to be updated properly.
+                // Update View is useless. Doesnt work.
+                libraryViewModel.UpdateView();
                 libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel();
             });
 
             SortRatingCommand = new DelegateCommand(x =>
             {
-                UpdateReviewList(buchModel.Rezensionen);
+                var sortedReviews = Utils.SortReviewsByRating(buchModel.Rezensionen, _ratingFlag);
+                ReviewViewModels.Clear();
+                sortedReviews.ForEach(x => ReviewViewModels.Add(new ReviewViewModel(x)));
+                _ratingFlag = !_ratingFlag;
             });
-        }
 
-        private void UpdateReviewList(List<RezensionModel> reviews)
-        {
-            var sortedReviews = Utils.SortReviewsByRating(reviews, _ratingFlag);
-            ReviewViewModels.Clear();
-            sortedReviews.ForEach(x => ReviewViewModels.Add(new ReviewViewModel(x)));
-            if (_ratingFlag)
+            RateBookCommand = new DelegateCommand(x =>
             {
-                _ratingFlag = false;
-            }
-            else
-            {
-                _ratingFlag = true;
-            }
+                var review = new RezensionModel()
+                {
+                    Author = user,
+                    BasicInfos = new BasicRezensionenModel()
+                    {
+                        BuchID = buchModel.BasicInfos.Id.GetValueOrDefault(),
+                        PersonID = user.Id.GetValueOrDefault(),
+                        Rezensionstext = ReviewText,
+                        Sterne = SelectedRating.Rating
+                    }
+                };
+                //buchModel.Rezensionen.Add(review);
+                //libraryViewModel.Library.EditBookDetails(buchModel);
+
+                libraryViewModel.Library.AddReview(review);
+                ReviewViewModels.Add(new ReviewViewModel(review));
+                ReviewText = "";
+                SelectedRating = Ratings.Last();
+                MessageBox.Show("Vielen Dank für die Bewertung.");
+            });
         }
 
         private void SetBookCoverPath(BuchModel book)
