@@ -2,7 +2,6 @@
 using System;
 using System.Windows;
 using System.Timers;
-using System.Timers;
 using System.Windows.Threading;
 using BoOp.Business;
 using System.Diagnostics;

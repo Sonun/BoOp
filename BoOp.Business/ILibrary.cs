@@ -34,6 +34,9 @@ namespace BoOp.Business
 
         // User related:
 
+        //return all users
+        public ObservableCollection<PersonModel> GetAllUsers();
+
         // get user by id
         public PersonModel GetUserByID(int id);
 

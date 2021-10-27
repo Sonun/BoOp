@@ -1,10 +1,7 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
-using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels

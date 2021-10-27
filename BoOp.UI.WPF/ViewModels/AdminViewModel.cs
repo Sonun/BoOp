@@ -20,9 +20,11 @@ namespace BoOp.UI.WPF.ViewModels
         private Dispatcher _dispatcher;
         private ObservableCollection<BookViewModel> _bookList;
         private ObservableCollection<BuchModel> _currentList, _originalList;
+        private ObservableCollection<PersonViewModel> _userList;
+        private ObservableCollection<PersonModel> _currentUserList, _originalUserList;
         private PersonModel _user;
         private string _searchWord;
-        private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
+        private bool _titleFlag, _authorFlag, _isbnFlag;
 
         public BuchModel SelectedBook { get; set; }
         public Rechtelevel UserRights { get; }
@@ -62,6 +64,19 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
+        public ObservableCollection<PersonViewModel> UserList
+        {
+            get
+            {
+                return _userList;
+            }
+            set
+            {
+                _userList = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<BookViewModel> BookList
         {
             get
@@ -81,9 +96,16 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _user = user;
             _dispatcher = dispatcher;
+
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
-            UpdateBooklist(_originalList);
+            UpdateBooklist(_currentList);
+
+            //ToDo: when library is up to date
+   //         _originalUserList = _library.GetAllUsers();
+   //         _currentUserList = _originalUserList;
+   //         UpdateUserlist(_currentUserList);
+
             UserRights = user.Rechte;
 
             BackCommand = new DelegateCommand( 
@@ -187,18 +209,26 @@ namespace BoOp.UI.WPF.ViewModels
                 });
         }
 
-        private void UpdateBooklist(ObservableCollection<BuchModel> _booklist)
+        private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
             BookList = new ObservableCollection<BookViewModel>();
-            foreach (var book in _booklist)
+            foreach (var book in booklist)
             {
                 BookList.Add(new BookViewModel(book, _navigationService, null, _user));
             }
         }
 
+        private void UpdateUserlist(ObservableCollection<PersonModel> userlist)
+        {
+            UserList = new ObservableCollection<PersonViewModel>();
+            foreach (var user in userlist)
+            {
+                UserList.Add(new PersonViewModel(user));
+            }
+        }
+
         private void SetSortingFlagsFlase()
         {
-            _ratingFlag = false;
             _isbnFlag = false;
             _authorFlag = false;
             _titleFlag = false;

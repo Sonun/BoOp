@@ -106,6 +106,7 @@ namespace BoOp.UI.WPF.ViewModels
                     catch (Exception e)
                     {
                         MessageBox.Show(e.Message);
+                        return;
                     }
 
                     bookModel.BasicInfos.Id = _library.GetIdByISBN(bookModel);
@@ -178,7 +179,7 @@ namespace BoOp.UI.WPF.ViewModels
             sortedInfos = json.Split("\n").ToList();
 
             Titel = new string(sortedInfos.Where(x => x.Contains("title")).FirstOrDefault().Trim().Skip(10).TakeWhile(x => x != '"').ToArray());
-            
+
             var indexAuthor = sortedInfos.FindIndex(x => x.Contains("authors"));
             Author = new string(sortedInfos[indexAuthor + 1].Trim().Skip(1).TakeWhile(x => x != '"').ToArray());
 

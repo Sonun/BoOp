@@ -8,15 +8,41 @@
              d:DesignHeight="450" d:DesignWidth="800"             
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:LendBookViewModel}">
-    
-    <Grid Background="{StaticResource Available}">
-        <StackPanel Margin="10">
-            <Label Margin="10" Content="Ausleihe" HorizontalAlignment="Center"/>
-            <Label Margin="10" Content="{Binding Username}" HorizontalAlignment="Center"/>
-            <Label Margin="10" Content="Bitte scanne den Barcode:" HorizontalAlignment="Center"/>
-            <TextBox Margin="10" Text="{Binding Barcode}"/>
-            <Button Margin="10" Content="ausleihen" Command="{Binding SaveCommand}"/>
-            <Button Margin="10" Content="abbrechen" Command="{Binding CancelCommand}"/>
-        </StackPanel>
+
+    <Grid Background="{StaticResource DropShadow}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="380"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Buch ausleihen" FontSize="24"/>
+
+        <Border  Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource DropShadow}" BorderBrush="{StaticResource Available}" Padding="2">
+            <Grid Background="{StaticResource Secondary}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                    <StackPanel Orientation="Vertical" Grid.Row="0">
+                        <Label Content="Benutzer:" FontSize="16" />
+                        <Label Content="{Binding Username}"/>
+                        <Label Content="Barcode Scannen:" FontSize="16" />
+                        <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Barcode}"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausleihen" Command="{Binding SaveCommand}"/>
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Abbrechen" Command="{Binding CancelCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

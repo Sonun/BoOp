@@ -1,11 +1,7 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -32,8 +28,16 @@ namespace BoOp.UI.WPF.ViewModels
             SaveCommand = new DelegateCommand(
                 x =>
                 {
-                    _library.ReturnBook(_barcode);
-                    _navigationService.ShowLibraryView(user);
+                    try
+                    {
+                        if (_library.GetBookIdByBarcode(_barcode) == null) throw new System.Exception();
+                        _library.ReturnBook(_barcode);
+                        _navigationService.ShowLibraryView(user);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Der Barcode konnte keinem Buch zugeordnet werden!");
+                    }
                 });
 
             CancelCommand = new DelegateCommand(

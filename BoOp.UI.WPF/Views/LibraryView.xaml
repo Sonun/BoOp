@@ -49,7 +49,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="2">
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausloggen" Command="{Binding LogoutCommand}" />
-                <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="{Binding LoggedInUser.Rechte}" Command="{Binding OpenLoginView}" />
             </StackPanel>
         </Grid>
         <!--Sort Bar-->
@@ -60,12 +60,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.7*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Command="{Binding SortTitleCommand}" Style="{StaticResource SortButton}">
+            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
                 <TextBlock Text="Titel">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" Style="{StaticResource SortButton}">
+            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
                 <TextBlock Text="Author">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
@@ -75,7 +75,7 @@
                     <Image Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" Style="{StaticResource SortButton}">
+            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" >
                 <TextBlock Text="Bewertung">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
@@ -88,7 +88,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
-                            <Grid Style="{StaticResource BookviewBookStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                                 <Grid.InputBindings>
                                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowBookCommand}"/>
                                 </Grid.InputBindings>
@@ -111,9 +111,7 @@
 
 
         <Grid Grid.Row="1" Grid.RowSpan="2">
-            <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}">
-                
-            </views:BookDetailsView>
+            <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
         </Grid>
         
     </Grid>
