@@ -49,7 +49,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="2">
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausloggen" Command="{Binding LogoutCommand}" />
-                <Button Style="{StaticResource RoundedButtonStyle}" Content="Admin" Command="{Binding OpenLoginView}" />
+                <Button Style="{StaticResource RoundedButtonStyle}" Content="{Binding LoggedInUser.Rechte}" Command="{Binding OpenLoginView}" />
             </StackPanel>
         </Grid>
         <!--Sort Bar-->
@@ -88,7 +88,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
-                            <Grid Style="{StaticResource BookviewBookStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                                 <Grid.InputBindings>
                                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowBookCommand}"/>
                                 </Grid.InputBindings>
@@ -110,9 +110,9 @@
         </Grid>
 
 
-        <!--<Grid Grid.Row="1" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Grid.RowSpan="2">
             <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
-        </Grid>-->
+        </Grid>
         
     </Grid>
 </UserControl>

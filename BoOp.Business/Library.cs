@@ -14,8 +14,6 @@ namespace BoOp.Business
 {
     public class Library : ILibrary
     {
-        private PersonModel _loggedInUnser;
-
         private readonly string _connectionString;
         private SQLDataAccessor _db;
 
@@ -158,12 +156,6 @@ namespace BoOp.Business
             var person = _db.LoadData<PersonModel, dynamic>(sql, new { id }, _connectionString);
 
             return person.FirstOrDefault();
-        }
-
-        public void RemoveBook(BuchModel book)
-        {
-            //ToDo remove all copys of this book
-            throw new NotImplementedException();
         }
 
         public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
@@ -415,7 +407,7 @@ namespace BoOp.Business
                 "AusleihDatum = @datum " +
                 "WHERE Barcode = @bookBarcode";
 
-            _db.SaveData(sqlString, new { userId=userId, datum = DateTime.Now, bookBarcode=bookBarcode }, _connectionString);
+            _db.SaveData(sqlString, new { userId, datum = DateTime.Now, bookBarcode }, _connectionString);
         }
 
         public PersonModel GetUserByBarcode(string ausweisID)
@@ -438,6 +430,18 @@ namespace BoOp.Business
         {
             string sql = "SELECT BuchID FROM Exemplare WHERE Barcode = @barcode;";
             return _db.LoadData<int?, dynamic>(sql, new { barcode }, _connectionString).FirstOrDefault();
+        }
+
+        public ObservableCollection<PersonModel> GetAllUsers()
+        {
+            //ToDo: return a list with all users
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBook(BuchModel book)
+        {
+            //ToDo: remove all copys of this book
+            throw new NotImplementedException();
         }
     }
 }
