@@ -434,8 +434,17 @@ namespace BoOp.Business
 
         public ObservableCollection<PersonModel> GetAllUsers()
         {
-            //ToDo: return a list with all users
-            throw new NotImplementedException();
+            string sqlBasicBooks = "SELECT * FROM Personen";
+            var output = _db.LoadData<PersonModel, dynamic>(sqlBasicBooks, new { }, _connectionString);
+
+            var personen = new ObservableCollection<PersonModel>();
+
+            foreach (var p in output)
+            {
+                personen.Add(p);
+            }
+
+            return personen;
         }
 
         public void RemoveBook(BuchModel book)

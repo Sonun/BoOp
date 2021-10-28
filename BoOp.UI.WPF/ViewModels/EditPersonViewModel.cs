@@ -30,7 +30,6 @@ namespace BoOp.UI.WPF.ViewModels
         private string _telefon;
         private string _email;
 
-        private string _barcode;
         private PersonModel _user;
         private PersonModel _userToChange;
 
@@ -83,6 +82,22 @@ namespace BoOp.UI.WPF.ViewModels
             set
             {
                 _rechte = value;
+
+                switch (_rechte.ToLower())
+                {
+                    case "leser":
+                        _rechteAsInt = 1;
+                        break;
+                    case "helfer":
+                        _rechteAsInt = 2;
+                        break;
+                    case "bibo team":
+                        _rechteAsInt = 4;
+                        break;
+                    case "admin":
+                        _rechteAsInt = 8;
+                        break;
+                }
                 OnPropertyChanged();
             }
         }
@@ -152,50 +167,16 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public string Barcode
-        {
-            get
-            {
-                return _barcode;
-            }
-            set
-            {
-                _barcode = value;
-
-                // TODO:
-                //if (_library.GetUserByBarcode(_barcode).Rechte >= _user.Rechte)
-                //{
-                //    BarcodeScanned();
-                //    OnPropertyChanged();
-                //}
-
-                if (_library.GetUserByID(2).Rechte <= _user.Rechte)
-                {
-                    BarcodeScanned();
-                    OnPropertyChanged();
-                }
-                else
-                {
-                    MessageBox.Show("Du darfst diesen Benutzer nicht editieren, oder er existiert nicht");
-                }
-            }
-        }
-
-        public EditPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
+        public EditPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel editor, PersonModel userToChange)
         {
             _library = library;
             _navigationService = navigationService;
-            _user = user;
+            _user = editor;
+            _userToChange = userToChange;
 
-            Vorname = "";
-            Nachname = "";
-            Passwort = "";
-            Rechte = "";
-            GebTag = "";
-            GebMonat = "";
-            GebJahr = "";
-            Telefon = "";
-            Email = "";
+            Rechte = userToChange.Rechte.ToString();
+
+            GetUserInfo(_userToChange);
 
             CancelCommand = new DelegateCommand(
                 x =>
@@ -206,27 +187,10 @@ namespace BoOp.UI.WPF.ViewModels
             SaveCommand = new DelegateCommand(
                 x =>
                 {
-                    //biboteam darf keinen admin hinzufügen
-                    if (_rechteAsInt == 8 && _user.Rechte <= Rechtelevel.BIBOTEAM)
+                    if ((Rechtelevel)_rechteAsInt > _user.Rechte)
                     {
-                        MessageBox.Show("du darfst keinen Admin erstellen");
+                        MessageBox.Show("du darfst keine höher gestellte Person erstellen");
                         return;
-                    }
-
-                    switch (_rechte.ToLower())
-                    {
-                        case "leser":
-                            _rechteAsInt = 1;
-                            break;
-                        case "helfer":
-                            _rechteAsInt = 2;
-                            break;
-                        case "biboteam":
-                            _rechteAsInt = 4;
-                            break;
-                        case "admin":
-                            _rechteAsInt = 8;
-                            break;
                     }
 
                     if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || _telefon.Equals(""))
@@ -253,6 +217,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Passwort = "";
                     }
 
+                    //if password box was empty, dont change
                     tempModel.PasswortHash = _passwort != "" ? Utils.HashSHA(_passwort) : _userToChange.PasswortHash;
 
                     _library.EditUserDetails(tempModel);
@@ -260,20 +225,33 @@ namespace BoOp.UI.WPF.ViewModels
                 });
         }
 
-        private void BarcodeScanned()
+        private void GetUserInfo(PersonModel userToChange)
         {
-            //TODO:
-            //_userToChange = _library.GetUserByBarcode(_barcode);
-            _userToChange = _library.GetUserByID(2);
+            Nachname = userToChange.Nachname;
+            Vorname = userToChange.Vorname;
+            Email = userToChange.EMail;
+            Passwort = "";
+            Telefon = userToChange.Telefonnummer;
+            GebJahr = userToChange.Geburtsdatum.Year.ToString();
+            GebMonat = userToChange.Geburtsdatum.Month.ToString();
+            GebTag = userToChange.Geburtsdatum.Day.ToString();
 
-            Nachname = _userToChange.Nachname;
-            Vorname = _userToChange.Vorname;
-            Email = _userToChange.EMail;
-            Telefon = _userToChange.Telefonnummer;
-            GebJahr = _userToChange.Geburtsdatum.Year.ToString();
-            GebMonat = _userToChange.Geburtsdatum.Month.ToString();
-            GebTag = _userToChange.Geburtsdatum.Day.ToString();
-            Rechte = _userToChange.Rechte.ToString();
+            //set rechte
+            switch (userToChange.Rechte.ToString().ToLower())
+            {
+                case "leser":
+                    Rechte = "Leser";
+                    break;
+                case "helfer":
+                    Rechte = "Helfer";
+                    break;
+                case "biboteam":
+                    Rechte = "Bibo Team";
+                    break;
+                case "admin":
+                    Rechte = "Admin";
+                    break;
+            }
         }
     
     }
