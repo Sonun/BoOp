@@ -83,7 +83,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public void ShowEditBookView(PersonModel user, BuchModel book)
         {
-            throw new NotImplementedException();
+            CurrentViewModel = new EditBookViewModel(book, user, this, _library);
         }
     }
 }

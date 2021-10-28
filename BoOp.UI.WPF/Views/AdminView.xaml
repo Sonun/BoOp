@@ -79,6 +79,9 @@
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
                             <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditBookCommand}"/>
+                                </Grid.InputBindings>
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
@@ -94,7 +97,7 @@
                                 <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
                                 <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
                                 <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
-                                <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>
+                                <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.NichtVergebeneExemplare}"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>
@@ -105,8 +108,9 @@
             <ListView Grid.Column="1" Margin="10" x:Name="BookListView" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
-                        <StackPanel >
+                        <StackPanel>
                             <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                               
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Buch Bearbeiten" Command="{Binding EditUserCommand}"/>
