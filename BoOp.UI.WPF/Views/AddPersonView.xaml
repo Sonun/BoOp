@@ -1,100 +1,80 @@
 ﻿<UserControl x:Class="BoOp.UI.WPF.Views.AddPersonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
-             mc:Ignorable="d"
-             d:DesignHeight="1080" d:DesignWidth="1920"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddPersonViewModel}">
-
-    <Grid Background="{StaticResource Primary}">
+    
+    <Grid Background="{StaticResource Available}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.8*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="10" Grid.Column="1" Grid.Row="1" Background="{StaticResource Secondary}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <Label Style="{StaticResource LabelStyle}" Content="Ausweis (scanbar)" FontSize="16" />
-                    <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding AusweisID}" />
-                </StackPanel>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Vorname" FontSize="16" />
-                        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding Vorname}" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Nachname" FontSize="16" />
-                        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding Nachname}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Passwort" FontSize="16" />
-                        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding Vorname}" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Rechte" FontSize="16" />
-                        <ComboBox Name="Rechte" Width="260">
-                            <ComboBoxItem Content="Schueler" IsSelected="True" />
-                            <ComboBoxItem Content="Helfer" />
-                            <ComboBoxItem Content="Bibo" />
-                            <ComboBoxItem Content="Admin" />
-                        </ComboBox>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="E-Mail" FontSize="16" />
-                        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding Vorname}" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Telefonnummer" FontSize="16" />
-                        <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource AddPersonTextBoxStyle}" Text="{Binding Nachname}" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="4">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Label Style="{StaticResource LabelStyle}" Content="Geburtstag" FontSize="16" />
-                        <DatePickerTextBox Width="140" FontSize="16" TextAlignment="Center" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="5">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button Style="{StaticResource RoundedButtonStyle}" Content="Abbrechen" Command="{Binding CancelCommand}" />
-                        <Separator Opacity="0" Width="200" />
-                        <Button Style="{StaticResource RoundedButtonStyle}" Content="Speichern" Command="{Binding SaveCommand}" />
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </Border>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(SCANNEN)"/>
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Ausweis Scannen:"/>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Vorname:"/>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Nachname:"/>
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Passwort:"/>
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Rechte:"/>
+        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Geburtstag:"/>
+
+        <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Nicht erforderlich)"/>
+        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Telefonnummer:"/>
+        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Nicht erforderlich):"/>
+        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Email:"/>
+
+        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding AusweisID}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" HorizontalAlignment="Left"/>
+
+        <ComboBox Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="left" Width="100" Text="{Binding Rechte}">
+            <ComboBoxItem Content="Leser"/>
+            <ComboBoxItem Content="Helfer"/>
+            <ComboBoxItem Content="Lehrer"/>
+            <ComboBoxItem Content="Admin"/>
+        </ComboBox>
+
+        <!-- geburtstag -->
+        <Grid Grid.Row="5" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Tag:"/>
+            <TextBox Grid.Column="1" Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45"/>
+            <Label Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Monat:"/>
+            <TextBox Grid.Column="3" Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45"/>
+            <Label Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Jahr:"/>
+            <TextBox Grid.Column="5" Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45"/>
+        </Grid>
+
+        <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="7" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" HorizontalAlignment="Left"/>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="8" Grid.Column="3">
+            <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen"/>
+            <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding SaveCommand}" Content="Speichern"/>
+        </StackPanel>
     </Grid>
 </UserControl>
