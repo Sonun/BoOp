@@ -79,6 +79,9 @@
                     <DataTemplate DataType="common:BookViewModel">
                         <StackPanel>
                             <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid.InputBindings>
+                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditBookCommand}"/>
+                                </Grid.InputBindings>
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
@@ -105,8 +108,9 @@
             <ListView Grid.Column="1" Margin="10" x:Name="BookListView" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="common:BookViewModel">
-                        <StackPanel >
+                        <StackPanel>
                             <Grid Style="{StaticResource ListViewitemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                               
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Buch Bearbeiten" Command="{Binding EditUserCommand}"/>

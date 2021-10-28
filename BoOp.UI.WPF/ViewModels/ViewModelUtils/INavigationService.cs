@@ -13,8 +13,8 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         void ShowAddPersonView(PersonModel user);
         void ShowAddBookView(PersonModel user);
         void ShowEditUserView(PersonModel user);
-        void ShowLendBookView(PersonModel user); 
-        void ShowReturnLendBookView(PersonModel user); 
+        void ShowLendBookView(PersonModel user);
+        void ShowReturnLendBookView(PersonModel user);
         void ShowRemoveBookView(PersonModel user, BuchModel book);
         void ShowEditBookView(PersonModel user, BuchModel book);
     }
