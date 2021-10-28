@@ -161,12 +161,12 @@
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSeaGreen">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="8*" x:Name="TextBoxColumn"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" x:Name="TextBoxColumn"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Label>
                     <TextBlock Margin="5" FontSize="16" Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Bewerte das Buch mit 1 - 5 Schmetterlingen!"/>
                 </Label>
@@ -191,7 +191,7 @@
                 <TextBox Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="150" Width="{Binding ElementName=TextBoxColumn, Path=ActualWidth}"/>
             </StackPanel>
 
-            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Left"/>
 
         </Grid>
         

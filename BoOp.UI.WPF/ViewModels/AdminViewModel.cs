@@ -102,10 +102,9 @@ namespace BoOp.UI.WPF.ViewModels
             _currentList = _originalList;
             UpdateBooklist(_currentList);
 
-            //ToDo: when library is up to date
-   //         _originalUserList = _library.GetAllUsers();
-   //         _currentUserList = _originalUserList;
-   //         UpdateUserlist(_currentUserList);
+            _originalUserList = _library.GetAllUsers();
+            _currentUserList = _originalUserList;
+            UpdateUserlist(_currentUserList);
 
             UserRights = user.Rechte;
 
@@ -129,16 +128,6 @@ namespace BoOp.UI.WPF.ViewModels
                 x =>
                 {
                     _navigationService.ShowAddBookView(user);
-                },
-                y =>
-                {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
-                });
-
-            EditUserCommand = new DelegateCommand(
-                x =>
-                {
-                    _navigationService.ShowEditUserView(user);
                 },
                 y =>
                 {
@@ -224,7 +213,7 @@ namespace BoOp.UI.WPF.ViewModels
             UserList = new ObservableCollection<PersonViewModel>();
             foreach (var user in userlist)
             {
-                UserList.Add(new PersonViewModel(user));
+                UserList.Add(new PersonViewModel(user, _navigationService, _user));
             }
         }
 

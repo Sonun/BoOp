@@ -29,6 +29,7 @@
 
         <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Vorname:"/>
         <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Nachname:"/>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(leer lassen = nicht ändern)"/>
         <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Passwort:"/>
         <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Rechte:"/>
         <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Geburtstag:"/>
@@ -47,7 +48,7 @@
         <ComboBox Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="left" Width="100" Text="{Binding Rechte}">
             <ComboBoxItem Content="Leser"/>
             <ComboBoxItem Content="Helfer"/>
-            <ComboBoxItem Content="Lehrer"/>
+            <ComboBoxItem Content="Bibo Team"/>
             <ComboBoxItem Content="Admin"/>
         </ComboBox>
 

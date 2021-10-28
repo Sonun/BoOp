@@ -201,7 +201,7 @@ namespace BoOp.UI.WPF.ViewModels
                         case "helfer":
                             _rechteAsInt = 2;
                             break;
-                        case "biboteam":
+                        case "bibo team":
                             _rechteAsInt = 4;
                             break;
                         case "admin":
