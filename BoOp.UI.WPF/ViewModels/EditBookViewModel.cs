@@ -55,7 +55,6 @@ namespace BoOp.UI.WPF.ViewModels
             Altersvorschlag = "";
             Regal = "";
 
-            // Hard data - can't be edited: Labels in view
             Titel = buch.BasicInfos.Titel;
             Author = buch.BasicInfos.Author;
             Verlag = buch.BasicInfos.Verlag;
@@ -86,59 +85,58 @@ namespace BoOp.UI.WPF.ViewModels
                     return;
                 }
 
-                var isbn = new string(ISBN.Trim(' ').ToArray());
 
 
-                var bookModel = new BuchModel
+                BuchModel.BasicInfos.Titel = Titel = Titel.Trim(' ');
+                BuchModel.BasicInfos.Author = Author.Trim(' ');
+                BuchModel.BasicInfos.Auflage = _auflage;
+                BuchModel.BasicInfos.Verlag = _verlag.Trim(' ');
+                BuchModel.BasicInfos.ISBN = new string(_isbn.Where(c => char.IsDigit(c)).ToArray());
+                BuchModel.BasicInfos.Altersvorschlag = _altersvorschlag;
+                BuchModel.BasicInfos.Regal = _regal;
+
+
+
+
+                var bookCount = BuchModel.ExemplarAnzahl;
+
+                if (_exemplare - BuchModel.ExemplarAnzahl > 0)
                 {
-                    BasicInfos = new BasicBuchModel
+                    for (int i = 1; i <= _exemplare - bookCount; i++)
                     {
-                        Titel = Titel.Trim(' '),
-                        Auflage = _auflage,
-                        Author = Author.Trim(' '),
-                        Verlag = _verlag.Trim(' '),
-                        ISBN = new string(_isbn.Where(c => char.IsDigit(c)).ToArray()),
-                        Altersvorschlag = _altersvorschlag,
-                        Regal = _regal
-                    },
-                    Exemplare = new List<ExemplarModel>(),
-                };
-
-                try
-                {
-                    _library.EditBookDetails(bookModel);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                    return;
-                }
-
-                bookModel.BasicInfos.Id = _library.GetIdByISBN(bookModel);
-
-
-                for (int i = 1; i <= _exemplare; i++)
-                {
-                    bookModel.Exemplare.Add(new ExemplarModel() { BasicInfos = new BasicExemplarModel() { Barcode = "" } });
-                }
-
-                try
-                {
-                    foreach (var exemplar in bookModel.Exemplare)
-                    {
-                        exemplar.BasicInfos.Barcode = Utils.GenerateUniqueBarcode(bookModel);
+                        BuchModel.Exemplare.Add(
+                            new ExemplarModel() 
+                            { 
+                                BasicInfos = new BasicExemplarModel() 
+                                { 
+                                    Barcode = ""
+                                } 
+                            });
+                        BuchModel.Exemplare.Last().BasicInfos.Barcode = Utils.GenerateUniqueBarcode(BuchModel);
                     }
+                }
+                if (_exemplare - BuchModel.ExemplarAnzahl < 0)
+                {
+                    for (int i = 1; i <= bookCount - _exemplare; i++)
+                    {
+                        BuchModel.Exemplare.RemoveAt(BuchModel.Exemplare.Count - 1);
+                    }
+                }
+                
+
+                try
+                {
                     if (schlagwoerter.Count > 0)
                     {
-                        bookModel.Schlagwoerter = schlagwoerter;
+                        BuchModel.Schlagwoerter = schlagwoerter;
                     }
                     if (genres.Count > 0)
                     {
-                        bookModel.Genres = schlagwoerter;
+                        BuchModel.Genres = genres;
                     }
 
-                    // ToDo: EditBookDetails by ID
-                    _library.EditBookDetails(bookModel);
+                    // EditBookDetails by ID
+                    _library.EditBookDetails(BuchModel, true);
                 }
                 catch (Exception e)
                 {

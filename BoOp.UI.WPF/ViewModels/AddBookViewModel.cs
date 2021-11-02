@@ -129,7 +129,7 @@ namespace BoOp.UI.WPF.ViewModels
                         }
                         if (genres.Count > 0)
                         {
-                            bookModel.Genres = schlagwoerter;
+                            bookModel.Genres = genres;
                         }
 
                         _library.EditBookDetails(bookModel);
