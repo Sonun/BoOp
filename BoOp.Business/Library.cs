@@ -222,13 +222,24 @@ namespace BoOp.Business
             _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, user.Rechte, user.EMail, ausweis = user.AusweisID}, _connectionString );
         }
 
-        public void EditBookDetails (BuchModel book)
+        public void EditBookDetails (BuchModel book, bool editMode = false)
         {
-            string sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
-            book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
-                 sql,
-                 new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
-                 _connectionString).FirstOrDefault().Id;
+            string sql = "";
+            if (editMode)
+            {
+                sql = "UPDATE dbo.Buecher SET Titel = @Titel, Author = @Author, Verlag = @Verlag, Auflage = @Auflage, ISBN = @ISBN, Altersvorschlag = @Altersvorschlag, Regal = @Regal WHERE Id = @Id;";
+                _db.SaveData(sql,
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Id },
+                        _connectionString);
+            }
+            else
+            {
+                sql = "SELECT * FROM dbo.Buecher WHERE Titel = @Titel AND Author = @Author AND ISBN = @ISBN;";
+                book.BasicInfos.Id = _db.LoadData<BasicBuchModel, dynamic>(
+                     sql,
+                     new { Titel = book.BasicInfos.Titel, Author = book.BasicInfos.Author, ISBN = book.BasicInfos.ISBN },
+                     _connectionString).FirstOrDefault().Id;
+            }
 
             // Add Barcodes to DB
             if (book.Exemplare != null)

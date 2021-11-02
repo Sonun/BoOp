@@ -264,7 +264,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i < book.Exemplare.Count; i++)
                 {
-                    if (book.Exemplare[i].BasicInfos.Barcode == "")
+                    if (book.Exemplare[i].BasicInfos.Barcode == "" || book.Exemplare[i].BasicInfos.Barcode == null)
                     {
                         exCount = i;
                         break;
