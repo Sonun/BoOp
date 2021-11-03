@@ -8,147 +8,175 @@
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
+
+
+
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3.5*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="1" Content="Zurück" Command="{Binding BackCommand}" Foreground="Coral" Background="DimGray" Margin="10"/>
-
-        <Grid x:Name="addgrid" Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Buch hinzuügen" Command="{Binding AddBookCommand}" Margin="10" Background="LawnGreen"/>
-            <Button Grid.Column="1" Content="Person hinzufügen" Command="{Binding AddPersonCommand}" Margin="10" Background="LawnGreen"/>
+        <Grid Grid.Row="0" Background="{StaticResource Primary}">
+            <!-- buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Buch hinzuügen" Width="180" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
+                <Button Content="Person hinzufügen" Width="180" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
+                <Button Content="Zurück" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
+            </StackPanel>
         </Grid>
 
-        <Grid x:Name="sortgrid" Grid.Column="0" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!-- grid for book titles -->
-            <Grid x:Name="booklistgrid" Margin="10, 2" IsSharedSizeScope="True">
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="1.5*"/>
-                    <ColumnDefinition Width="1.2*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Column="0" Height="50" Margin="5" Command="{Binding SortTitleCommand}" >
-                    <TextBlock Text="Titel">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="1" Height="50" Margin="5" Command="{Binding SortAuthorCommand}" >
-                    <TextBlock Text="Author">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="2" Height="50" Margin="5" Command="{Binding SortISBNCommand}" >
-                    <TextBlock Text="ISBN">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="3" Height="50"  Margin="5" Content="Exemplare (verfügbar)"/>
-            </Grid>
-            <!-- grid for user titles-->
-            <Grid Grid.Column="1" Margin="10, 2">
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Column="0" Height="50" Margin="5" Command="{Binding SortTitleCommand}" >
-                    <TextBlock Text="Vorname">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="1" Height="50" Margin="5" Command="{Binding SortAuthorCommand}" >
-                    <TextBlock Text="Nachname">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="2" Height="50" Margin="5" Command="{Binding SortISBNCommand}" >
-                    <TextBlock Text="Rechte">
-                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
-                    </TextBlock>
-                </Button>
-            </Grid>
-        </Grid>
-
-        <Grid x:Name="listgrid" Grid.Row="2" Background="#70C6E1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!-- booklist -->
-            <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}" SelectedItem="{Binding SelectedBook}">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="common:BookViewModel">
-                        <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
-                            <Grid.InputBindings>
-                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditBookCommand}"/>
-                            </Grid.InputBindings>
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
-                                    <MenuItem Header="Buch Löschen" Command="{Binding RemoveBookCommand}"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <Grid.ColumnDefinitions >
+        <ScrollViewer Grid.Row="1" Background="Black">
+            <StackPanel >
+                <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="900">
+                    <Expander.Header>
+                        <Border BorderThickness="0,1,0,1" >
+                            <TextBlock Text="Bücher" Style="{StaticResource HeaderStyle}"></TextBlock>
+                        </Border>
+                    </Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                    
+                        <!-- grid for book titles -->
+                        <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
-                            <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
-                            <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
-                            <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.NichtVergebeneExemplare}"/>
+                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                                <TextBlock Text="Titel">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                                <TextBlock Text="Author">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                                <TextBlock Text="ISBN">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" >
+                                <TextBlock Text="Bewertung">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
                         </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <!-- userlist -->
-            <ListView Grid.Column="1" Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="common:UserViewModel">
-                        <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Person Bearbeiten" Command="{Binding EditUserCommand}"/>
-                                    <MenuItem Header="Person Löschen" Command="{Binding RemoveUserCommand}"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
+
+                        <!-- booklist grid -->
+                        <Grid x:Name="listgrid" Grid.Row="1">
+                            <!-- booklist -->
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                                <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}" SelectedItem="{Binding SelectedBook}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="common:BookViewModel">
+                                        <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                            <Grid.InputBindings>
+                                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditBookCommand}"/>
+                                            </Grid.InputBindings>
+                                            <Grid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
+                                                    <MenuItem Header="Busch Löschen" Command="{Binding RemoveBookCommand}"/>
+                                                </ContextMenu>
+                                            </Grid.ContextMenu>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="1.2*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="1.5*"/>
+                                                <ColumnDefinition Width="1.2*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Titel}"/>
+                                            <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Author}"/>
+                                            <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.ISBN}"/>
+                                            <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Expander>
+
+                <Expander Background="{StaticResource Secondary}"  MaxHeight="900">
+                    <Expander.Header>
+                        <Border BorderThickness="0,1,0,1" >
+                            <TextBlock Text="Personen"  Style="{StaticResource HeaderStyle}"></TextBlock>
+                        </Border>
+                    </Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                    
+                        <!-- grid for user titles-->
+                        <Grid Margin="10, 2">
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Vorname}"/>
-                            <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Nachname}"/>
-                            <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Rechte}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
 
-        <!-- Grün = funktionsfähig, Orange = vorhanden, aber geht nicht, Rot = nicht vorhanden -->
-        <StackPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Button Content="Remove Person" Command="{Binding RemoveUserCommand}" Margin="10" Background="Red"/>
-            <Button Content="Edit Book" Command="{Binding EditBookCommand}" Margin="10" Background="Red"/>
-        </StackPanel>
+                            <Button Grid.Column="0" Command="{Binding SortAuthorCommand}" >
+                                <TextBlock Text="Vorname">
+                                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}" >
+                                <TextBlock Text="Nachname">
+                                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}" >
+                                <TextBlock Text="Rechte">
+                                        <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
+                                </TextBlock>
+                            </Button>
+                        </Grid>
+                        <!-- userlist -->
+                        <ListView Grid.Row="1" Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="common:UserViewModel">
+                                    <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                        <Grid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Person Bearbeiten" Command="{Binding EditUserCommand}"/>
+                                                <MenuItem Header="Person Löschen" Command="{Binding RemoveUserCommand}"/>
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Vorname}"/>
+                                        <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Nachname}"/>
+                                        <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Rechte}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Expander>
+
+                <Expander Background="{StaticResource Secondary}"  MaxHeight="900">
+                    <Expander.Header>
+                        <Border BorderThickness="0,1,0,1" >
+                            <TextBlock Text="Ausgeliehene Bücher"  Style="{StaticResource HeaderStyle}"></TextBlock>
+                        </Border>
+                    </Expander.Header>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

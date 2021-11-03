@@ -156,9 +156,9 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         SetBookDetailsJSONLink();
                     }
-                    catch (Exception e)
+                    catch
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show("ISBN wurde nicht gefunden, bitte geben sie das Buch händisch ein!");
                     }
                 });
         }
