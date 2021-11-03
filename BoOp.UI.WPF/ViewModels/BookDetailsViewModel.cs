@@ -97,14 +97,26 @@ namespace BoOp.UI.WPF.ViewModels
                         Sterne = SelectedRating.Rating
                     }
                 };
-                //buchModel.Rezensionen.Add(review);
-                //libraryViewModel.Library.EditBookDetails(buchModel);
-
+               
                 libraryViewModel.Library.AddReview(review);
                 ReviewViewModels.Add(new ReviewViewModel(review));
+                libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Add(review);
                 ReviewText = "";
                 SelectedRating = Ratings.Last();
-                MessageBox.Show("Vielen Dank für die Bewertung.");
+
+                // Check if user already rated the book before
+                var checkDoupleReview = ReviewViewModels.Where(x => x.RezensionModel.Author.Id == user.Id).FirstOrDefault();
+                if (checkDoupleReview != null)
+                {
+                    ReviewViewModels.Remove(checkDoupleReview);
+                    var deleteFromBookList = libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Where(x => x.BasicInfos.PersonID == user.Id).FirstOrDefault();
+                    libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Remove(deleteFromBookList);
+                    MessageBox.Show("Sie haben das Buch bereits bewertet. Die Bewertung wurde aktualisiert.");
+                }
+                else
+                {
+                    MessageBox.Show("Vielen Dank für die Bewertung.");
+                }
             });
         }
 

@@ -50,10 +50,6 @@
             <views:ReturnBookView />
         </DataTemplate>
 
-        <DataTemplate x:Key="RemoveBookViewTemplate">
-            <views:RemoveBookView />
-        </DataTemplate>
-
         <DataTemplate x:Key="EditBookViewTemplate">
             <views:EditBookView />
         </DataTemplate>
@@ -69,7 +65,6 @@
                                                  EditPersonViewModelTemplate="{StaticResource EditPersonViewTemplate}"
                                                  LendBookViewModelTemplate="{StaticResource LendBookViewTemplate}"
                                                  ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"
-                                                 RemoveBookViewModelTemplate="{StaticResource RemoveBookViewTemplate}"
                                                  EditBookViewModelTemplate="{StaticResource EditBookViewTemplate}"/>
 
         
