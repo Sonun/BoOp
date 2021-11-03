@@ -10,7 +10,7 @@
              d:DesignHeight="800" d:DesignWidth="1300">
     
     
-    <Grid Background="{StaticResource Available}">
+    <Grid Background="{StaticResource  Secondary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
@@ -30,28 +30,100 @@
             <RowDefinition Height="1.35*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
-        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
-        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
-        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
-        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
-        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
-        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
-        <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
-        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
+        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
+        <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
+        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
+        <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
+        <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
 
-        <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="4" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="7" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="8" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="9" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
 
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="3">
-            <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Abrechen"/>
+        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center">
+                <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="20" MinHeight="35" MaxHeight="35" Command="{Binding AddPrintListCommand}" Content="+ Druckliste"/>
+                <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="20" MinHeight="35" MaxHeight="35" Command="{Binding DeleteBooksCommand}" Content="Löschen"/>
+            </StackPanel>
+            
+            
+            <!--BARCODES-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0">
+                    <TextBlock Text="Auswahl"/>
+                </Button>
+
+                <Button Grid.Column="1">
+                    <TextBlock Text="Barcode"/>
+                </Button>
+
+                <Button Grid.Column="2">
+                    <TextBlock Text="Ausgeliehen von"/>
+                </Button>
+
+            </Grid>
+
+            <ScrollViewer  Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ExemplarViewModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Beige">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="common:ExemplarViewModel">
+                            <StackPanel>
+                                <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    
+                                    <CheckBox Margin="5, 5, 0, 0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                                    <Label Grid.Column="1">
+                                        <TextBlock  Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Barcode}"/>
+                                    </Label>
+
+                                    <Label Grid.Column="2">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock FontSize="20" Text="{Binding Model.LendBy.Vorname}" />
+                                            <TextBlock FontSize="20" Text=" "/>
+                                            <TextBlock FontSize="20" Text="{Binding Model.LendBy.Nachname}" />
+                                        </StackPanel>
+                                    </Label>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+        
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Zurück"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>
     </Grid>

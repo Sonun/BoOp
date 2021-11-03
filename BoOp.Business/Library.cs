@@ -463,5 +463,18 @@ namespace BoOp.Business
             //ToDo: remove all copys of this book
             throw new NotImplementedException();
         }
+
+        public void RemoveExemplar(ExemplarModel exemplar)
+        {
+            try
+            {
+                string sql = "DELETE FROM Exemplare WHERE Id = @Id";
+                _db.SaveData(sql, new { Id = exemplar.BasicInfos.Id }, _connectionString);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

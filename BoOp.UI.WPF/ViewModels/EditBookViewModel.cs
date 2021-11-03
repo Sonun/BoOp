@@ -1,8 +1,10 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +17,12 @@ namespace BoOp.UI.WPF.ViewModels
         private BuchModel _buchModel;
         public BuchModel BuchModel { get { return _buchModel; } set { _buchModel = value; OnPropertyChanged(); } }
         public PersonModel User { get; set; }
+        public ObservableCollection<ExemplarViewModel> ExemplarViewModels { get; set; }
 
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand AddPrintListCommand { get; set; }
+        public DelegateCommand DeleteBooksCommand { get; set; }
 
         private string _titel;
         private string _author;
@@ -45,10 +50,13 @@ namespace BoOp.UI.WPF.ViewModels
 
         public EditBookViewModel(BuchModel buch, PersonModel user, INavigationService navigationService, ILibrary library)
         {
+            ExemplarViewModels = new ObservableCollection<ExemplarViewModel>();
             BuchModel = buch;
             User = user;
             _navigationService = navigationService;
             _library = library;
+
+            BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(x)));
 
             Schlagwoerter = "";
             Genres = "";
@@ -67,6 +75,39 @@ namespace BoOp.UI.WPF.ViewModels
             buch.Genres.ForEach(x => Genres += x + " ");
             Exemplare = buch.Exemplare.Count();
 
+            // ToDo: Implement methods
+
+            AddPrintListCommand = new DelegateCommand(x =>
+            {
+
+            });
+
+            DeleteBooksCommand = new DelegateCommand(x =>
+            {
+                var selectedExemplare = ExemplarViewModels.Where(x => x.IsChecked == true).ToList();
+                if (selectedExemplare.Count == BuchModel.ExemplarAnzahl)
+                {
+                    MessageBox.Show("Es können nicht alle Exemplare eines Buches gelöscht werden.");
+                    return;
+                }
+                try
+                {
+                    selectedExemplare.ForEach(x => 
+                    { 
+                        library.RemoveExemplar(x.Model); 
+                        ExemplarViewModels.Remove(x);
+                        BuchModel.Exemplare.Remove(x.Model);
+                    });
+                    Exemplare = BuchModel.Exemplare.Count();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+                
+                OnPropertyChanged(nameof(Exemplare));
+            });
+
             CancelCommand = new DelegateCommand(x =>
             {
                 _navigationService.ShowAdminView(user);
@@ -84,9 +125,6 @@ namespace BoOp.UI.WPF.ViewModels
                     MessageBox.Show("Füllen Sie Alle Felder Aus");
                     return;
                 }
-
-
-
                 BuchModel.BasicInfos.Titel = Titel = Titel.Trim(' ');
                 BuchModel.BasicInfos.Author = Author.Trim(' ');
                 BuchModel.BasicInfos.Auflage = _auflage;
@@ -95,14 +133,11 @@ namespace BoOp.UI.WPF.ViewModels
                 BuchModel.BasicInfos.Altersvorschlag = _altersvorschlag;
                 BuchModel.BasicInfos.Regal = _regal;
 
-
-
-
                 var bookCount = BuchModel.ExemplarAnzahl;
 
                 if (_exemplare - BuchModel.ExemplarAnzahl > 0)
                 {
-                    for (int i = 1; i <= _exemplare - bookCount; i++)
+                    for (int i = 0; i <= _exemplare - bookCount; i++)
                     {
                         BuchModel.Exemplare.Add(
                             new ExemplarModel() 
@@ -122,8 +157,6 @@ namespace BoOp.UI.WPF.ViewModels
                         BuchModel.Exemplare.RemoveAt(BuchModel.Exemplare.Count - 1);
                     }
                 }
-                
-
                 try
                 {
                     if (schlagwoerter.Count > 0)
