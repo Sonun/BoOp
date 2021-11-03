@@ -14,6 +14,7 @@ namespace BoOp.UI.WPF.Common
         public PersonModel Model { get; set; }
 
         public DelegateCommand EditUserCommand { get; set; }
+        public DelegateCommand RemoveUserCommand { get; set; }
 
         public PersonViewModel(PersonModel personModel, INavigationService navigationService, PersonModel editor)
         {
@@ -29,6 +30,11 @@ namespace BoOp.UI.WPF.Common
                     {
                         return editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
+            // ToDo: Remove User
+            RemoveUserCommand = new DelegateCommand(x =>
+            {
+
+            });
         }
     }
 }

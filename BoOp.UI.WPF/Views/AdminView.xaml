@@ -27,7 +27,7 @@
             </StackPanel>
         </Grid>
 
-        <ScrollViewer Grid.Row="1" Background="Black">
+        <ScrollViewer Grid.Row="1">
             <StackPanel >
                 <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="900">
                     <Expander.Header>
@@ -75,7 +75,7 @@
                         <Grid x:Name="listgrid" Grid.Row="1">
                             <!-- booklist -->
                             <ScrollViewer Style="{StaticResource LeftScrollViewer}">
-                                <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}" SelectedItem="{Binding SelectedBook}">
+                                <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate DataType="common:BookViewModel">
                                         <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
@@ -144,10 +144,13 @@
                             </Button>
                         </Grid>
                         <!-- userlist -->
-                        <ListView Grid.Row="1" Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
+                        <ListView Grid.Row="1" Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate DataType="common:UserViewModel">
                                     <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                        <Grid.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditUserCommand}"/>
+                                        </Grid.InputBindings>
                                         <Grid.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="Person Bearbeiten" Command="{Binding EditUserCommand}"/>
