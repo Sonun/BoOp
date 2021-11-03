@@ -93,6 +93,11 @@
                                     <Grid.InputBindings>
                                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowBookCommand}"/>
                                     </Grid.InputBindings>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Buch Details" Command="{Binding ShowBookCommand}"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="1*"/>

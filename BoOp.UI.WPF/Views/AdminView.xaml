@@ -186,7 +186,7 @@
                             <TextBlock Text="Ausgeliehene Bücher"  Style="{StaticResource HeaderStyle}"></TextBlock>
                         </Border>
                     </Expander.Header>
-                    
+
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -267,9 +267,7 @@
                             </ScrollViewer>
                         </Grid>
                     </Grid>
-
                 </Expander>
-                
             </StackPanel>
         </ScrollViewer>
     </Grid>

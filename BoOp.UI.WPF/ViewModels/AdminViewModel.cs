@@ -99,6 +99,7 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _user = user;
             _dispatcher = dispatcher;
+            ScanUserViewModel.LogoutTimer.Enabled = false;
 
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
@@ -125,6 +126,8 @@ namespace BoOp.UI.WPF.ViewModels
             BackCommand = new DelegateCommand( 
                 x =>
                 {
+                    ScanUserViewModel.LogoutTimer.Enabled = true;
+                    ScanUserViewModel.LogoutTimer.Start();
                     _navigationService.ShowLibraryView(user);
                 });
 
@@ -244,13 +247,14 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                 });
 
-
+            //suche der bücher
             SearchCommand = new DelegateCommand(
                 x =>
                 {
                     UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
                 });
 
+            //suche rueckgaengig machen
             ClearSearchCommand = new DelegateCommand(
                 x =>
                 {
