@@ -26,6 +26,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _searchWord;
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag;
 
+        public ObservableCollection<ExemplarViewModel> LendedBookList { get; set; }
         public Rechtelevel UserRights { get; }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
@@ -108,6 +109,18 @@ namespace BoOp.UI.WPF.ViewModels
             UpdateUserlist(_currentUserList);
 
             UserRights = user.Rechte;
+            LendedBookList = new ObservableCollection<ExemplarViewModel>();
+            
+            foreach (var book in BookList)
+            {
+                foreach (var exemplar in book.Model.Exemplare)
+                {
+                    if (exemplar.LendBy != null)
+                    {
+                        LendedBookList.Add(new ExemplarViewModel(exemplar, book.Model));
+                    }
+                }
+            }
 
             BackCommand = new DelegateCommand( 
                 x =>

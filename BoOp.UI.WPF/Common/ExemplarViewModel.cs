@@ -10,13 +10,21 @@ namespace BoOp.UI.WPF.Common
 {
     public class ExemplarViewModel : ViewModel
     {
-        public ExemplarModel Model { get; set; }
         private bool _isChecked;
-        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; OnPropertyChanged(); } }
 
-        public ExemplarViewModel(ExemplarModel model)
+        public ExemplarModel Model { get; set; }
+        public BuchModel BuchModel { get; set; }
+        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; OnPropertyChanged(); } }
+        public DelegateCommand ShowUserCommand { get; set; }
+
+        public ExemplarViewModel(ExemplarModel model, BuchModel buch = null)
         {
             Model = model;
+            BuchModel = buch;
+            ShowUserCommand = new DelegateCommand(x =>
+            {
+
+            });
         }
     }
 }

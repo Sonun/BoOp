@@ -178,13 +178,98 @@
                     </Grid>
                 </Expander>
 
+                
+                <!--LENDED BOOKS-->
                 <Expander Background="{StaticResource Secondary}"  MaxHeight="900">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Ausgeliehene Bücher"  Style="{StaticResource HeaderStyle}"></TextBlock>
                         </Border>
                     </Expander.Header>
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- grid for book titles -->
+                        <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                                <TextBlock Text="Titel"/>
+                            </Button>
+                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                                <TextBlock Text="Author"/>
+                            </Button>
+                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                                <TextBlock Text="ISBN"/>
+                            </Button>
+                            <Button Grid.Column="3" >
+                                <TextBlock Text="Barcode"/>
+                            </Button>
+                            <Button Grid.Column="4">
+                                <TextBlock Text="Ausgeliehen von">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Column="5">
+                                <TextBlock Text="Ausgeliehen am">
+                                    <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
+                                </TextBlock>
+                            </Button>
+                        </Grid>
+
+                        <!-- lendedbooklist grid -->
+                        <Grid Grid.Row="1">
+                            <!-- lendedbooklist -->
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                                <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBookList}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="common:ExemplarViewModel">
+                                            <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                                <Grid.InputBindings>
+                                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowUserCommand}"/>
+                                                </Grid.InputBindings>
+                                                <Grid.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="Benutzer anzeigen" Command="{Binding ShowUserCommand}"/>
+                                                    </ContextMenu>
+                                                </Grid.ContextMenu>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="1.5*"/>
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.Titel}"/>
+                                                <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.Author}"/>
+                                                <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.ISBN}"/>
+                                                <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Barcode}"/>
+                                                <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                                    <TextBlock FontSize="12" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.Vorname}"/>
+                                                    <TextBlock FontSize="12" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.Nachname}"/>
+                                                </StackPanel>
+                                                <TextBlock FontSize="12" Grid.Column="5" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.AusleihDatum}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
                 </Expander>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>
