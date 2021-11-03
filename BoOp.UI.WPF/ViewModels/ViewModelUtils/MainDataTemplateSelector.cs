@@ -15,7 +15,6 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         public DataTemplate EditPersonViewModelTemplate { get; set; }
         public DataTemplate LendBookViewModelTemplate { get; set; }
         public DataTemplate ReturnBookViewModelTemplate { get; set; }
-        public DataTemplate RemoveBookViewModelTemplate { get; set; }
         public DataTemplate EditBookViewModelTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -31,7 +30,6 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
                 EditPersonViewModel _ => EditPersonViewModelTemplate,
                 LendBookViewModel _ => LendBookViewModelTemplate,
                 ReturnBookViewModel _ => ReturnBookViewModelTemplate,
-                RemoveBookViewModel _ => RemoveBookViewModelTemplate,
                 EditBookViewModel _ => EditBookViewModelTemplate,
                 _ => base.SelectTemplate(item, container),
             };

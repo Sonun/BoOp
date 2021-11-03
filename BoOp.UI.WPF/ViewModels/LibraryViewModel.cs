@@ -224,7 +224,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in _originalList)
             {
-                BookList.Add(new BookViewModel(book, _navigationService, this, LoggedInUser));
+                BookList.Add(new BookViewModel(book, _navigationService, Library, this, LoggedInUser));
             }
 
         }
@@ -235,7 +235,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in _booklist)
             {
-                BookList.Add(new BookViewModel(book, _navigationService, this , LoggedInUser));
+                BookList.Add(new BookViewModel(book, _navigationService, Library, this , LoggedInUser));
             }
         }
 
