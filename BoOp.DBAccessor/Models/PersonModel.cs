@@ -35,6 +35,7 @@ namespace BoOp.DBAccessor.Models
         public string Nachname { get; set; }
         public string PasswortHash { get; set; }
         public DateTime Geburtsdatum { get; set; }
+        public string GeburtstagAsString { get { return ( Geburtsdatum.Day < 10 ? "0" + Geburtsdatum.Day : Geburtsdatum.Day ) + "." + ( Geburtsdatum.Month < 10 ? "0" + Geburtsdatum.Month : Geburtsdatum.Month ) + "." + Geburtsdatum.Year; } }
         public string Telefonnummer { get; set; }
         public Rechtelevel Rechte { get; set; }
         public string EMail { get; set; }

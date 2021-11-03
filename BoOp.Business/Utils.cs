@@ -34,6 +34,123 @@ namespace BoOp.Business
         }
 
         /// <summary>
+        /// sorts the userlist by vorname, bubblesort
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="reverse"></param>
+        /// <returns></returns>
+        public static ObservableCollection<PersonModel> SortedUserlistByVorname(ObservableCollection<PersonModel> list, bool reverse = false)
+        {
+            PersonModel tempUser;
+
+            for (int j = 0; j <= list.Count - 2; j++)
+            {
+                for (int i = 0; i <= list.Count - 2; i++)
+                {
+                    int comparison = string.Compare(list[i].Vorname, list[i + 1].Vorname, comparisonType: StringComparison.InvariantCulture);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// sorts the userlist by nachname, bubblesort
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="reverse"></param>
+        /// <returns></returns>
+        public static ObservableCollection<PersonModel> SortedUserlistByNachname(ObservableCollection<PersonModel> list, bool reverse = false)
+        {
+            PersonModel tempUser;
+
+            for (int j = 0; j <= list.Count - 2; j++)
+            {
+                for (int i = 0; i <= list.Count - 2; i++)
+                {
+                    int comparison = string.Compare(list[i].Nachname, list[i + 1].Nachname, comparisonType: StringComparison.InvariantCulture);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// sorts the userlist by rechte, bubblesort
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="reverse"></param>
+        /// <returns></returns>
+        public static ObservableCollection<PersonModel> SortedUserlistByRechte(ObservableCollection<PersonModel> list, bool reverse = false)
+        {
+            PersonModel tempUser;
+
+            for (int j = 0; j <= list.Count - 2; j++)
+            {
+                for (int i = 0; i <= list.Count - 2; i++)
+                {
+                    int comparison = string.Compare(list[i].Rechte.ToString().ToLower(), list[i + 1].Rechte.ToString().ToLower(), comparisonType: StringComparison.InvariantCulture);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            tempUser = list[i + 1];
+                            list[i + 1] = list[i];
+                            list[i] = tempUser;
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
         /// search for all books containing a string
         /// </summary>
         /// <param name="bookList"></param>
