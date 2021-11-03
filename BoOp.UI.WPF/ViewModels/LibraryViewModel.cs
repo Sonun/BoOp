@@ -226,6 +226,7 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 BookList.Add(new BookViewModel(book, _navigationService, this, LoggedInUser));
             }
+
         }
 
 

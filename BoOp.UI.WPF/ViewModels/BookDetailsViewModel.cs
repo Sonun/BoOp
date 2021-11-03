@@ -72,8 +72,8 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 // ToDo: LibraryView needs to be updated properly.
                 // Update View is useless. Doesnt work.
-                libraryViewModel.UpdateView();
                 libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel();
+                libraryViewModel.UpdateView();
             });
 
             SortRatingCommand = new DelegateCommand(x =>
