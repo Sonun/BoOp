@@ -24,7 +24,7 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<PersonModel> _currentUserList, _originalUserList;
         private PersonModel _user;
         private string _searchWord;
-        private bool _titleFlag, _authorFlag, _isbnFlag;
+        private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag;
 
         public ObservableCollection<ExemplarViewModel> LendedBookList { get; set; }
         public Rechtelevel UserRights { get; }
@@ -40,6 +40,9 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortAuthorCommand { get; set; }
         public DelegateCommand SortISBNCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
+        public DelegateCommand SortVornameCommand { get; set; }
+        public DelegateCommand SortNachnameCommand { get; set; }
+        public DelegateCommand SortRechteCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand ClearSearchCommand { get; set; }
 
@@ -157,8 +160,7 @@ namespace BoOp.UI.WPF.ViewModels
                     else
                     {
                         UpdateBooklist(Utils.SortedBookListByTitel(_currentList, true));
-                        SetSortingFlagsFlase();
-                        _titleFlag = false;
+                        SetBookSortingFlagsFlase();
                     }
                 });
 
@@ -174,8 +176,7 @@ namespace BoOp.UI.WPF.ViewModels
                     else
                     {
                         UpdateBooklist(Utils.SortedBookListByAuthor(_currentList, true));
-                        SetSortingFlagsFlase();
-                        _authorFlag = false;
+                        SetBookSortingFlagsFlase();
                     }
                 });
 
@@ -191,10 +192,58 @@ namespace BoOp.UI.WPF.ViewModels
                     else
                     {
                         UpdateBooklist(Utils.SortedBookListByISBN(_currentList, true));
-                        SetSortingFlagsFlase();
-                        _isbnFlag = false;
+                        SetBookSortingFlagsFlase();
                     }
                 });
+
+            //Sort Vorname
+            SortVornameCommand = new DelegateCommand(
+                x =>
+                {
+                    if (!_vornameFlag)
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByVorname(_originalUserList));
+                        _vornameFlag = true;
+                    }
+                    else
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByVorname(_originalUserList, true));
+                        SetUserSortingFlagsFlase();
+                    }
+                });
+
+            //Sort Nachname
+            SortNachnameCommand = new DelegateCommand(
+                x =>
+                {
+                    if (!_nachnameFlag)
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByNachname(_originalUserList));
+                        _nachnameFlag = true;
+                    }
+                    else
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByNachname(_originalUserList, true));
+                        SetUserSortingFlagsFlase();
+                    }
+                });
+
+            //Sort Rechte
+            SortRechteCommand = new DelegateCommand(
+                x =>
+                {
+                    if (!_rechteFlag)
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByRechte(_originalUserList));
+                        _rechteFlag = true;
+                    }
+                    else
+                    {
+                        UpdateUserlist(Utils.SortedUserlistByRechte(_originalUserList, true));
+                        SetUserSortingFlagsFlase();
+                    }
+                });
+
 
             SearchCommand = new DelegateCommand(
                 x =>
@@ -228,11 +277,18 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        private void SetSortingFlagsFlase()
+        private void SetBookSortingFlagsFlase()
         {
             _isbnFlag = false;
             _authorFlag = false;
             _titleFlag = false;
+        }
+
+        private void SetUserSortingFlagsFlase()
+        {
+            _vornameFlag = false;
+            _nachnameFlag = false;
+            _rechteFlag = false;
         }
     }
 }
