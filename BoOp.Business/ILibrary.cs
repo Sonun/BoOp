@@ -22,6 +22,9 @@ namespace BoOp.Business
         // Remove book
         public void RemoveBook(BuchModel book);
 
+        // Remove exemplar
+        public void RemoveExemplar(ExemplarModel exemplar);
+
         // Edit book
         public void EditBookDetails(BuchModel bookModel, bool editMode = false);
 
