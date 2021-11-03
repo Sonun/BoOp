@@ -19,17 +19,32 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- platz für deine komische drucken liste button dings -->
+            
             <!-- buttons -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Buch hinzuügen" Width="180" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
-                <Button Content="Person hinzufügen" Width="180" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
-                <Button Content="Zurück" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Buch hinzuügen" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
+                <Button Content="Person hinzufügen" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
+                <Button Content="Zurück" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
             </StackPanel>
+
+            <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="Red" Background="Black">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Center" Text="Programm"/>
+                    <TextBlock HorizontalAlignment="Center" Text="beenden!"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel >
-                <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="900">
+                <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="700">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Bücher" Style="{StaticResource HeaderStyle}"></TextBlock>
@@ -105,7 +120,7 @@
                     </Grid>
                 </Expander>
 
-                <Expander Background="{StaticResource Secondary}" MaxHeight="900">
+                <Expander Background="{StaticResource Secondary}" MaxHeight="700">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Personen"  Style="{StaticResource HeaderStyle}"/>
@@ -178,15 +193,13 @@
                     </Grid>
                 </Expander>
 
-                
                 <!--LENDED BOOKS-->
-                <Expander Background="{StaticResource Secondary}"  MaxHeight="900">
+                <Expander Background="{StaticResource Secondary}" MaxHeight="700">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
-                            <TextBlock Text="Ausgeliehene Bücher"  Style="{StaticResource HeaderStyle}"></TextBlock>
+                            <TextBlock Text="Ausgeliehene Bücher" Style="{StaticResource HeaderStyle}"/>
                         </Border>
                     </Expander.Header>
-
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

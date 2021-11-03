@@ -13,7 +13,7 @@ namespace BoOp.UI.WPF.ViewModels
         public static Timer LogoutTimer;
 
         //time untill logout in minutes
-        private readonly int _logoutTimespan = 1;
+        private readonly int _logoutTimespan = 12;
         private bool _timeFlag;
         private INavigationService _navigationService;
         private ILibrary _library;

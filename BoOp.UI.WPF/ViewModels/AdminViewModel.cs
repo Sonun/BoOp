@@ -45,6 +45,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortRechteCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand ClearSearchCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
 
         public string SearchWord
         {
@@ -247,21 +248,15 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                 });
 
-            //suche der bücher
-            SearchCommand = new DelegateCommand(
+            CloseApplicationCommand = new DelegateCommand(
                 x =>
                 {
-                    UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
+                    if (MessageBox.Show("Wollen Sie die Anwendung Schließen?", "Schließen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        Environment.Exit(0);
+                    }
                 });
-
-            //suche rueckgaengig machen
-            ClearSearchCommand = new DelegateCommand(
-                x =>
-                {
-                    UpdateBooklist(_originalList);
-                    SearchWord = "";
-                });
-        }
+    }
 
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {

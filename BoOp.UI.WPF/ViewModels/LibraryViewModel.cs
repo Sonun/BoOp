@@ -36,10 +36,10 @@ namespace BoOp.UI.WPF.ViewModels
         }
 
         private string _searchWord;
+        private string _searchBy;
 
         //flags to enable reverse sorting
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
-        private BookViewModel _selectedBook;
         public DelegateCommand OpenLoginView { get; set; }
         public DelegateCommand SortTitleCommand { get; set; }
         public DelegateCommand SortAuthorCommand { get; set; }
@@ -51,18 +51,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ReturnBookCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
 
-        public BookViewModel SelectedBook
-        {
-            get
-            {
-                return _selectedBook;
-            }
-            set
-            {
-                _selectedBook = value;
-                OnPropertyChanged();
-            }
-        }
+        public string SearchBy { get { return _searchBy; } set { _searchBy = value; OnPropertyChanged(); } }
 
         public string SearchWord {
             get
@@ -109,12 +98,12 @@ namespace BoOp.UI.WPF.ViewModels
             _dispatcher = dispatcher;
             _originalList = Library.GetAllBooks();
             _currentList = _originalList;
+            SearchBy = "Titel";
 
             //fill boolist first time
             UpdateBooklist(_originalList);
 
             BookDetailsViewModel = new BookDetailsViewModel();
-
 
             //SortTitleCommand
             SortTitleCommand = new DelegateCommand(
@@ -187,7 +176,21 @@ namespace BoOp.UI.WPF.ViewModels
             SearchCommand = new DelegateCommand(
                 x =>
                 {
-                    UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
+                switch (_searchBy.Split(" ")[1].ToLower())
+                    {
+                        case ("titel"):
+                            UpdateBooklist(Utils.SearchForTitleInBooklist(_originalList, SearchWord));
+                            break;
+                        case ("author"):
+                            UpdateBooklist(Utils.SearchForAuthorInBooklist(_originalList, SearchWord));
+                            break;
+                        case ("schlagwort"):
+                            UpdateBooklist(Utils.SearchForSchlagwortInBooklist(_originalList, SearchWord));
+                            break;
+                        case ("genre"):
+                            UpdateBooklist(Utils.SearchForGenreInBooklist(_originalList, SearchWord));
+                            break;
+                    }
                 });
 
             ClearSearchCommand = new DelegateCommand(
@@ -230,10 +233,11 @@ namespace BoOp.UI.WPF.ViewModels
         }
 
 
-        private void UpdateBooklist(ObservableCollection<BuchModel> _booklist)
+        private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
+            _currentList = booklist;
             BookList = new ObservableCollection<BookViewModel>();
-            foreach (var book in _booklist)
+            foreach (var book in booklist)
             {
                 BookList.Add(new BookViewModel(book, _navigationService, this , LoggedInUser));
             }
