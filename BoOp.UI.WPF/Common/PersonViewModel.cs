@@ -32,7 +32,7 @@ namespace BoOp.UI.WPF.Common
                     },
                     y =>
                     {
-                        return editor.Rechte >= Rechtelevel.BIBOTEAM;
+                        return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
             RemoveUserCommand = new DelegateCommand(
                 x =>
@@ -46,7 +46,7 @@ namespace BoOp.UI.WPF.Common
                 },
                 y =>
                 {
-                    return editor.Rechte >= Rechtelevel.ADMIN;
+                    return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.ADMIN;
                 });
         }
     }
