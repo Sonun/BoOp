@@ -13,5 +13,6 @@ namespace BoOp.DBAccessor.Models
         public string Barcode { get; set; }
         public int? AusleiherID { get; set; }
         public DateTime AusleihDatum { get; set; }
+        public string AusleihDatumFormatedString { get { return AusleihDatum.ToString("d"); } }
     }
 }

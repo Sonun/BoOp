@@ -22,29 +22,42 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<BuchModel> _currentList, _originalList;
         private ObservableCollection<PersonViewModel> _userList;
         private ObservableCollection<PersonModel> _currentUserList, _originalUserList;
+        private ObservableCollection<ExemplarViewModel> _currentLendedList;
         private PersonModel _user;
-        private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag;
-
-        public ObservableCollection<ExemplarViewModel> LendedBookList { get; set; }
+        private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
         public Rechtelevel UserRights { get; }
+
+        //button commands
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
+        public DelegateCommand AddBookCommand { get; set; }
+
+        //context menu commands
         public DelegateCommand EditBookCommand { get; set; }
         public DelegateCommand AddUserCommand { get; set; }
         public DelegateCommand RemoveUserCommand { get; set; }
         public DelegateCommand EditUserCommand { get; set; }
-        public DelegateCommand AddBookCommand { get; set; }
+
+        public DelegateCommand ClearSearchCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
+
+        //book searche commands
         public DelegateCommand SortTitleCommand { get; set; }
         public DelegateCommand SortAuthorCommand { get; set; }
         public DelegateCommand SortISBNCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
+
+        //book searche commands
         public DelegateCommand SortVornameCommand { get; set; }
         public DelegateCommand SortNachnameCommand { get; set; }
         public DelegateCommand SortRechteCommand { get; set; }
-        public DelegateCommand ClearSearchCommand { get; set; }
-        public DelegateCommand CloseApplicationCommand { get; set; }
 
+        //lended book commands
+        public DelegateCommand SortLendedName { get; set; }
+        public DelegateCommand SortLendedDate { get; set; }
+
+        public ObservableCollection<ExemplarViewModel> LendedBookList { get { return _currentLendedList;  } set { _currentLendedList = value; } }
 
         public ObservableCollection<PersonViewModel> UserList
         {
@@ -226,6 +239,36 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                 });
 
+            SortLendedDate = new DelegateCommand(
+                x =>
+                {
+                    if (!_lendeddateflag)
+                    {
+                        SortLendedListByDate(true);
+                        _lendeddateflag = true;
+                    }
+                    else
+                    {
+                        SortLendedListByDate();
+                        SetLendedSortingFlagsFalse();
+                    }
+                });
+
+            SortLendedName = new DelegateCommand(
+                x =>
+                {
+                    if (!_lendednameflag)
+                    {
+                        SortLendedListByName(true);
+                        _lendednameflag = true;
+                    }
+                    else
+                    {
+                        SortLendedListByName();
+                        SetLendedSortingFlagsFalse();
+                    }
+                });
+
             CloseApplicationCommand = new DelegateCommand(
                 x =>
                 {
@@ -234,7 +277,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Environment.Exit(0);
                     }
                 });
-    }
+        }
 
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
@@ -258,7 +301,13 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _isbnFlag = false;
             _authorFlag = false;
-            _titleFlag = false;
+            _titleFlag = false; 
+        }
+
+        private void SetLendedSortingFlagsFalse()
+        {
+            _lendeddateflag = false; 
+            _lendednameflag = false;
         }
 
         private void SetUserSortingFlagsFlase()
@@ -266,6 +315,70 @@ namespace BoOp.UI.WPF.ViewModels
             _vornameFlag = false;
             _nachnameFlag = false;
             _rechteFlag = false;
+        }
+
+        private void SortLendedListByDate(bool reverse = false)
+        {
+            ExemplarViewModel temp = null;
+
+            for (int j = 0; j <= LendedBookList.Count - 2; j++)
+            {
+                for (int i = 0; i <= LendedBookList.Count - 2; i++)
+                {
+                    int comparison = DateTime.Compare(LendedBookList[i].Model.BasicInfos.AusleihDatum, LendedBookList[i + 1].Model.BasicInfos.AusleihDatum);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            temp = LendedBookList[i + 1];
+                            LendedBookList[i + 1] = LendedBookList[i];
+                            LendedBookList[i] = temp;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            temp = LendedBookList[i + 1];
+                            LendedBookList[i + 1] = LendedBookList[i];
+                            LendedBookList[i] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SortLendedListByName(bool reverse = false)
+        {
+            ExemplarViewModel temp = null;
+
+            for (int j = 0; j <= LendedBookList.Count - 2; j++)
+            {
+                for (int i = 0; i <= LendedBookList.Count - 2; i++)
+                {
+                    int comparison = string.Compare(LendedBookList[i].Model.LendBy.Vorname + " " + LendedBookList[i].Model.LendBy.Nachname, LendedBookList[i + 1].Model.LendBy.Vorname + " " + LendedBookList[i].Model.LendBy.Nachname, comparisonType: StringComparison.InvariantCulture);
+
+                    if (!reverse)
+                    {
+                        if (comparison > 0)
+                        {
+                            temp = LendedBookList[i + 1];
+                            LendedBookList[i + 1] = LendedBookList[i];
+                            LendedBookList[i] = temp;
+                        }
+                    }
+                    else
+                    {
+                        if (comparison < 0)
+                        {
+                            temp = LendedBookList[i + 1];
+                            LendedBookList[i + 1] = LendedBookList[i];
+                            LendedBookList[i] = temp;
+                        }
+                    }
+                }
+            }
         }
     }
 }
