@@ -9,9 +9,6 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
 
-
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -53,12 +50,28 @@
                     </Expander.Header>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource IconButton}" Command="{Binding SearchTitleInAllBooks}">
+                                <Image Source="{StaticResource SearchIcon}" Width="32" Height="32" />
+                            </Button>
+                            <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxControlTemplate}" Text="{Binding AllBookSearchWord}" />
+                            <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchInAllBooks}">
+                                <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
+                            </Button>
+                        </Grid>
                     
                         <!-- grid for book titles -->
-                        <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
+                        <Grid Grid.Row="1" Background="{StaticResource Primary}" Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="*"/>
@@ -86,7 +99,7 @@
                         </Grid>
 
                         <!-- booklist grid -->
-                        <Grid x:Name="listgrid" Grid.Row="1">
+                        <Grid x:Name="listgrid" Grid.Row="2">
                             <!-- booklist -->
                             <ScrollViewer Style="{StaticResource LeftScrollViewer}">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}">
@@ -130,12 +143,28 @@
                     </Expander.Header>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource IconButton}" Command="{Binding SearchVornameInUsers}">
+                                <Image Source="{StaticResource SearchIcon}" Width="32" Height="32" />
+                            </Button>
+                            <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxControlTemplate}" Text="{Binding UserSearchWord}" />
+                            <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchInUsers}">
+                                <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
+                            </Button>
+                        </Grid>
                     
                         <!-- grid for user titles-->
-                        <Grid Grid.Row="0" Margin="10, 2">
+                        <Grid Grid.Row="1" Margin="10, 2">
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="*"/>
@@ -163,7 +192,7 @@
                             </Button>
                         </Grid>
                         <!-- userlist -->
-                        <ScrollViewer Grid.Row="1" Style="{StaticResource LeftScrollViewer}">
+                        <ScrollViewer Grid.Row="2" Style="{StaticResource LeftScrollViewer}">
                             <ListView Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate DataType="common:UserViewModel">
@@ -204,9 +233,25 @@
                     </Expander.Header>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource IconButton}" Command="{Binding SearchTitleInLendedBooks}">
+                                <Image Source="{StaticResource SearchIcon}" Width="32" Height="32" />
+                            </Button>
+                            <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxControlTemplate}" Text="{Binding LendedBooksSearchWord}" />
+                            <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchInLendedBooks}">
+                                <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
+                            </Button>
+                        </Grid>
 
                         <!-- grid for book titles -->
                         <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
@@ -280,6 +325,7 @@
                         </Grid>
                     </Grid>
                 </Expander>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

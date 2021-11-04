@@ -11,6 +11,7 @@
         Title="Book Options"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
+        WindowStyle="None"
         >
     
     <Window.Resources>
@@ -55,7 +56,6 @@
             <views:EditBookView />
         </DataTemplate>
 
-
         <viewModelUtils:MainDataTemplateSelector x:Key="MainDataTemplateSelector"
                                                  ScanUserViewModelTemplate="{StaticResource ScanUserViewTemplate}"
                                                  LoginViewModelTemplate="{StaticResource LoginViewTemplate}"
@@ -68,7 +68,6 @@
                                                  ReturnBookViewModelTemplate="{StaticResource ReturnBookViewTemplate}"
                                                  EditBookViewModelTemplate="{StaticResource EditBookViewTemplate}"/>
 
-        
     </Window.Resources>
 
     <Grid>

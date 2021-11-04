@@ -34,6 +34,32 @@ namespace BoOp.Business
         }
 
         /// <summary>
+        /// searches vor a vorname in a userlist
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ObservableCollection<PersonModel> SearchVornameInUserlist(ObservableCollection<PersonModel> userlsit, string searchWord)
+        {
+            //get rid of the reference
+            var useList = new ObservableCollection<PersonModel>(userlsit);
+
+            var temp = useList
+                .Where(x => x.Vorname.ToLower()
+                .Contains(searchWord.ToLower()))
+                .ToList();
+
+            ObservableCollection<PersonModel> outList = new ObservableCollection<PersonModel>();
+            foreach (var each in temp)
+            {
+                outList.Add(each);
+                useList.Remove(each);
+            }
+
+            return SortedUserlistByVorname(outList);
+        }
+        
+
+        /// <summary>
         /// sorts the userlist by vorname, bubblesort
         /// </summary>
         /// <param name="list"></param>

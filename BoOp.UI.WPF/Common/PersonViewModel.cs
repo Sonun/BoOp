@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,12 +28,27 @@ namespace BoOp.UI.WPF.Common
                     },
                     y =>
                     {
+                        //standard admin cannot be changed
+                        if (Model.AusweisID.Equals("maskenpflicht"))
+                        {
+                            return false;
+                        }
+
                         return editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
             // ToDo: Remove User
             RemoveUserCommand = new DelegateCommand(x =>
             {
 
+            },
+            y =>
+            {
+                //standard admin cannot be changed
+                if (Model.AusweisID.Equals("maskenpflicht"))
+                {
+                    return false;
+                }
+                return true;
             });
         }
     }
