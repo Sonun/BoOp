@@ -212,7 +212,7 @@ namespace BoOp.Business
 
         public void RemoveUser(PersonModel user)
         {
-            string sqlstring = $"DELETE From Personen Where id=@Id";
+            string sqlstring = $"DELETE From Personen Where Id=@Id";
             _db.SaveData( sqlstring, new { user.Id }, _connectionString );
         }
 
@@ -460,25 +460,33 @@ namespace BoOp.Business
 
         public void RemoveBook(BuchModel book)
         {
-            // Remove Exemplare
-            string sql = "DELETE FROM Exemplare WHERE BuchID = @BuchID;";
-            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+            try
+            {
+                // Remove Exemplare
+                string sql = "DELETE FROM Exemplare WHERE BuchID = @BuchID;";
+                _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
 
-            // Remove BuchSchlagwoerter
-            sql = "DELETE FROM BuchSchlagwoerter WHERE BuchID = @BuchID;";
-            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+                // Remove BuchSchlagwoerter
+                sql = "DELETE FROM BuchSchlagwoerter WHERE BuchID = @BuchID;";
+                _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
 
-            // Remove BuchGenres
-            sql = "DELETE FROM BuchGenres WHERE BuchID = @BuchID;";
-            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+                // Remove BuchGenres
+                sql = "DELETE FROM BuchGenres WHERE BuchID = @BuchID;";
+                _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
 
-            // Remove Rezensionen
-            sql = "DELETE FROM Rezensionen WHERE BuchID = @BuchID;";
-            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+                // Remove Rezensionen
+                sql = "DELETE FROM Rezensionen WHERE BuchID = @BuchID;";
+                _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
 
-            // Remove BasicBook
-            sql = "DELETE FROM Buecher WHERE Id = @Id;";
-            _db.SaveData(sql, new { Id = book.BasicInfos.Id }, _connectionString);
+                // Remove BasicBook
+                sql = "DELETE FROM Buecher WHERE Id = @Id;";
+                _db.SaveData(sql, new { Id = book.BasicInfos.Id }, _connectionString);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
         }
 
         public void RemoveExemplar(ExemplarModel exemplar)

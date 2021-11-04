@@ -137,7 +137,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                 if (_exemplare - BuchModel.ExemplarAnzahl > 0)
                 {
-                    for (int i = 0; i <= _exemplare - bookCount; i++)
+                    for (int i = 0; i < _exemplare - bookCount; i++)
                     {
                         BuchModel.Exemplare.Add(
                             new ExemplarModel() 
