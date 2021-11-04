@@ -5,6 +5,7 @@ using System.Timers;
 using System.Windows.Threading;
 using BoOp.Business;
 using System.Diagnostics;
+using BoOp.DBAccessor.Models;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -22,7 +23,7 @@ namespace BoOp.UI.WPF.ViewModels
         public string PersonBarcoded { get { return _personBarcode; } set { _personBarcode = value; OnPropertyChanged(); } }
         public string LogoutWarning { get { return "Sie werden nach \"Weiter\"\nnach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
 
-        public DelegateCommand TestButtonCommand { get; set; }
+        public DelegateCommand LoginButtonCommand { get; set; }
 
         public ScanUserViewModel(INavigationService navigationService, ILibrary library, Dispatcher dispatcher)
         {
@@ -32,7 +33,13 @@ namespace BoOp.UI.WPF.ViewModels
             if  (LogoutTimer != null) LogoutTimer.Stop();
             LogoutTimer = null;
 
-            TestButtonCommand = new DelegateCommand
+            if(_library.GetAllUsers().Count <= 0)
+            {
+                //standard benutzer
+                _library.AddUser(new PersonModel{AusweisID = "maskenpflicht", Vorname = "Rick", Nachname = "Snachez", Geburtsdatum = new DateTime(2011, 11, 11), Telefonnummer="00", Rechte = Rechtelevel.ADMIN, EMail="00", PasswortHash= "C71FC1B21A6824082BB07D3BF6695D4737D8691B57CEB34E592A8BDE11CB4EA3" });
+            }
+
+            LoginButtonCommand = new DelegateCommand
                 (
                      x =>
                      {
