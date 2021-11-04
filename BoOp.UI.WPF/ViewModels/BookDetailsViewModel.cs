@@ -99,7 +99,6 @@ namespace BoOp.UI.WPF.ViewModels
                 };
                
                 libraryViewModel.Library.AddReview(review);
-                ReviewViewModels.Add(new ReviewViewModel(review));
                 libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Add(review);
                 ReviewText = "";
                 SelectedRating = Ratings.Last();
@@ -115,6 +114,7 @@ namespace BoOp.UI.WPF.ViewModels
                 }
                 else
                 {
+                    ReviewViewModels.Add(new ReviewViewModel(review));
                     MessageBox.Show("Vielen Dank für die Bewertung.");
                 }
             });
