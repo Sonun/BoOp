@@ -250,7 +250,7 @@ namespace BoOp.UI.WPF.ViewModels
             UserList = new ObservableCollection<PersonViewModel>();
             foreach (var user in userlist)
             {
-                UserList.Add(new PersonViewModel(user, _navigationService, _user));
+                UserList.Add(new PersonViewModel(user, _navigationService, _library, _user, this));
             }
         }
 
