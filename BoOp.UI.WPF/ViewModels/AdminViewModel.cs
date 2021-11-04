@@ -23,7 +23,6 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<PersonViewModel> _userList;
         private ObservableCollection<PersonModel> _currentUserList, _originalUserList;
         private PersonModel _user;
-        private string _searchWord;
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag;
 
         public ObservableCollection<ExemplarViewModel> LendedBookList { get; set; }
@@ -43,22 +42,8 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortVornameCommand { get; set; }
         public DelegateCommand SortNachnameCommand { get; set; }
         public DelegateCommand SortRechteCommand { get; set; }
-        public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand ClearSearchCommand { get; set; }
         public DelegateCommand CloseApplicationCommand { get; set; }
-
-        public string SearchWord
-        {
-            get
-            {
-                return _searchWord;
-            }
-            set
-            {
-                _searchWord = value;
-                OnPropertyChanged();
-            }
-        }
 
         public ObservableCollection<BuchModel> AllBooks
         {

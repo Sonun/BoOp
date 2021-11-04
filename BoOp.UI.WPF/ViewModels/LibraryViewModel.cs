@@ -35,9 +35,6 @@ namespace BoOp.UI.WPF.ViewModels
             } 
         }
 
-        private string _searchWord;
-        private ComboBoxItemViewModel _searchBy;
-
         //flags to enable reverse sorting
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
         public DelegateCommand OpenLoginView { get; set; }
@@ -51,6 +48,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ReturnBookCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
 
+        private string _searchWord;
         public ComboBoxItemViewModel SelectedSearchBy { get; set; }
         public ObservableCollection<ComboBoxItemViewModel> SearchByList { get; set; }
 
