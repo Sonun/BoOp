@@ -31,6 +31,7 @@ namespace BoOp.UI.WPF.ViewModels
             _timeFlag = false;
             if  (LogoutTimer != null) LogoutTimer.Stop();
             LogoutTimer = null;
+            AdminViewModel.StaticBookPrintList = new System.Collections.ObjectModel.ObservableCollection<Common.ExemplarViewModel>();
 
             TestButtonCommand = new DelegateCommand
                 (

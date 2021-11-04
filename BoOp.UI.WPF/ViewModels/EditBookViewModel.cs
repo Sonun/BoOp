@@ -79,7 +79,18 @@ namespace BoOp.UI.WPF.ViewModels
 
             AddPrintListCommand = new DelegateCommand(x =>
             {
+                var selectedExemplare = ExemplarViewModels.Where(x => x.IsChecked == true).ToList();
 
+                selectedExemplare.ForEach(x => 
+                {
+                    var checkExemplar = AdminViewModel.StaticBookPrintList.SingleOrDefault(y => y.Model.BasicInfos.Barcode == x.Model.BasicInfos.Barcode);
+                    if (checkExemplar == null)
+                    {
+                        x.BuchModel = BuchModel;
+                        AdminViewModel.StaticBookPrintList.Add(x);
+                    }
+                    
+                });
             });
 
             DeleteBooksCommand = new DelegateCommand(x =>

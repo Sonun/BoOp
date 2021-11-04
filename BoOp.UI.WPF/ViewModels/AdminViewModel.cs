@@ -27,11 +27,28 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
         public Rechtelevel UserRights { get; }
 
+        public static ObservableCollection<ExemplarViewModel> StaticBookPrintList;
+
+        public ObservableCollection<ExemplarViewModel> BookPrintList { get {  return StaticBookPrintList;  } }
+
+        public int BarcodeAmount 
+            { 
+                get 
+                    {
+                    if (StaticBookPrintList != null)
+                    {
+                        return BookPrintList.Count;
+                    }
+                    return 0;
+                }
+            }
+
         //button commands
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand PrintBookBarcodesCommand { get; set; }
 
         //context menu commands
         public DelegateCommand EditBookCommand { get; set; }
@@ -141,6 +158,16 @@ namespace BoOp.UI.WPF.ViewModels
                 y =>
                 {
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
+                });
+
+            PrintBookBarcodesCommand = new DelegateCommand(
+                x =>
+                {
+
+                },
+                y => 
+                {
+                    return StaticBookPrintList.Count != 0;
                 });
 
             //SortTitleCommand
