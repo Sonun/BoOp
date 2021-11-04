@@ -98,7 +98,7 @@
                                                 <Grid.ContextMenu>
                                                     <ContextMenu>
                                                         <MenuItem Header="Buch Bearbeiten" Command="{Binding EditBookCommand}"/>
-                                                        <MenuItem Header="Busch Löschen" Command="{Binding RemoveBookCommand}"/>
+                                                        <MenuItem Header="Buch Löschen" Command="{Binding RemoveBookCommand}"/>
                                                     </ContextMenu>
                                                 </Grid.ContextMenu>
                                                 <Grid.ColumnDefinitions >

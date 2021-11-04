@@ -263,7 +263,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in booklist)
             {
-                BookList.Add(new BookViewModel(book, _navigationService, null, _user));
+                BookList.Add(new BookViewModel(book, _navigationService, _library,  null, _user));
             }
         }
 

@@ -9,20 +9,24 @@ using BoOp.UI.WPF.Views;
 using System.Windows.Threading;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System.Windows;
+using BoOp.Business;
 
 namespace BoOp.UI.WPF.Common
 {
     public class BookViewModel : ViewModel
     {
         public BuchModel Model { get; set; }
+
+        private readonly ILibrary _library;
         private LibraryViewModel _libraryViewModel;
         public DelegateCommand ShowBookCommand { get; set; }
         public DelegateCommand EditBookCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
 
-        public BookViewModel(BuchModel model, INavigationService navigationService, LibraryViewModel libraryViewModel, PersonModel user)
+        public BookViewModel(BuchModel model, INavigationService navigationService, ILibrary library, LibraryViewModel libraryViewModel, PersonModel user)
         {
             Model = model;
+            _library = library;
             _libraryViewModel = libraryViewModel;
 
             ShowBookCommand = new DelegateCommand(
@@ -38,8 +42,10 @@ namespace BoOp.UI.WPF.Common
                 y => { return user != null; });
 
             RemoveBookCommand = new DelegateCommand(
-                x => {
-                    navigationService.ShowRemoveBookView(user, model);
+                x => 
+                {
+                    //ToDo: Update View
+                    _library.RemoveBook(model);
                 },
                 y =>
                 {

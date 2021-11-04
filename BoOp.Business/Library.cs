@@ -460,8 +460,25 @@ namespace BoOp.Business
 
         public void RemoveBook(BuchModel book)
         {
-            //ToDo: remove all copys of this book
-            throw new NotImplementedException();
+            // Remove Exemplare
+            string sql = "DELETE FROM Exemplare WHERE BuchID = @BuchID;";
+            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+
+            // Remove BuchSchlagwoerter
+            sql = "DELETE FROM BuchSchlagwoerter WHERE BuchID = @BuchID;";
+            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+
+            // Remove BuchGenres
+            sql = "DELETE FROM BuchGenres WHERE BuchID = @BuchID;";
+            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+
+            // Remove Rezensionen
+            sql = "DELETE FROM Rezensionen WHERE BuchID = @BuchID;";
+            _db.SaveData(sql, new { BuchID = book.BasicInfos.Id }, _connectionString);
+
+            // Remove BasicBook
+            sql = "DELETE FROM Buecher WHERE Id = @Id;";
+            _db.SaveData(sql, new { Id = book.BasicInfos.Id }, _connectionString);
         }
 
         public void RemoveExemplar(ExemplarModel exemplar)
