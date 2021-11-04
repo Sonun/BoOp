@@ -9,12 +9,12 @@
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddBookViewModel}">
 
-    <Grid Background="{StaticResource Available}">
+    <Grid Background="{StaticResource Secondary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*" x:Name="TextBoxColumn"/>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.5*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

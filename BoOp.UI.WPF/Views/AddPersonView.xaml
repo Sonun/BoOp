@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddPersonViewModel}">
     
-    <Grid Background="{StaticResource Available}">
+    <Grid Background="{StaticResource Secondary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
@@ -62,11 +62,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Tag:"/>
-            <TextBox Grid.Column="1" Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45"/>
+            <TextBox Grid.Column="1" Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45" Height="20"/>
             <Label Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Monat:"/>
-            <TextBox Grid.Column="3" Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45"/>
+            <TextBox Grid.Column="3" Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45" Height="20"/>
             <Label Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Jahr:"/>
-            <TextBox Grid.Column="5" Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45"/>
+            <TextBox Grid.Column="5" Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45" Height="20"/>
         </Grid>
 
         <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" HorizontalAlignment="Left"/>

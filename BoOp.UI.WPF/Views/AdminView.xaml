@@ -44,7 +44,8 @@
 
         <ScrollViewer Grid.Row="1">
             <StackPanel >
-                <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="700">
+                <!-- alle bücher -->
+                <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Bücher" Style="{StaticResource HeaderStyle}"></TextBlock>
@@ -120,7 +121,8 @@
                     </Grid>
                 </Expander>
 
-                <Expander Background="{StaticResource Secondary}" MaxHeight="700">
+                <!-- Personen -->
+                <Expander Background="{StaticResource Secondary}" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Personen"  Style="{StaticResource HeaderStyle}"/>
@@ -194,7 +196,7 @@
                 </Expander>
 
                 <!--LENDED BOOKS-->
-                <Expander Background="{StaticResource Secondary}" MaxHeight="700">
+                <Expander Background="{StaticResource Secondary}" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                     <Expander.Header>
                         <Border BorderThickness="0,1,0,1" >
                             <TextBlock Text="Ausgeliehene Bücher" Style="{StaticResource HeaderStyle}"/>
