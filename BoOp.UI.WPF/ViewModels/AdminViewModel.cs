@@ -67,9 +67,9 @@ namespace BoOp.UI.WPF.ViewModels
         public Rechtelevel UserRights { get; }
 
         //searchword propertys
-        public string AllBookSearchWord { get { return _allBookSearchWord; } set { _allBookSearchWord = value; } }
-        public string UserSearchWord { get { return _userSearchWord; } set { _userSearchWord = value; } }
-        public string LendedBooksSearchWord { get { return _lendedBooksSearchWord; } set { _lendedBooksSearchWord = value; } }
+        public string AllBookSearchWord { get { return _allBookSearchWord; } set { _allBookSearchWord = value; OnPropertyChanged(); } }
+        public string UserSearchWord { get { return _userSearchWord; } set { _userSearchWord = value; OnPropertyChanged(); } }
+        public string LendedBooksSearchWord { get { return _lendedBooksSearchWord; } set { _lendedBooksSearchWord = value; OnPropertyChanged(); } }
 
         public ObservableCollection<PersonViewModel> UserList
         {

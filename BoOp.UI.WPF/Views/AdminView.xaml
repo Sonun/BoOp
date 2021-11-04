@@ -28,7 +28,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content=" Buch hinzuügen " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
                 <Button Content=" Person hinzufügen " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
-                <Button Content=" Zurück " Width="Auto Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
+                <Button Content=" Zurück " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
             </StackPanel>
 
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="Red" Background="Black">
