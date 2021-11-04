@@ -18,34 +18,48 @@ namespace BoOp.UI.WPF.Common
         public BuchModel Model { get; set; }
 
         private readonly ILibrary _library;
-        private LibraryViewModel _libraryViewModel;
+        private readonly LibraryViewModel _libraryViewModel;
+        private readonly AdminViewModel _adminViewModel;
+
         public DelegateCommand ShowBookCommand { get; set; }
         public DelegateCommand EditBookCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
 
-        public BookViewModel(BuchModel model, INavigationService navigationService, ILibrary library, LibraryViewModel libraryViewModel, PersonModel user)
+        public BookViewModel(BuchModel model, INavigationService navigationService, ILibrary library, PersonModel user, LibraryViewModel libraryViewModel = null, AdminViewModel adminViewModel = null)
         {
             Model = model;
             _library = library;
             _libraryViewModel = libraryViewModel;
-
+            _adminViewModel = adminViewModel;
             ShowBookCommand = new DelegateCommand(
-                x => {
+                x => 
+                {
                     _libraryViewModel.BookDetailsViewModel = new BookDetailsViewModel(navigationService, user, model, libraryViewModel);
                 },
-                y => { return user != null; });
+                y => 
+                { 
+                    return user != null; 
+                });
 
             EditBookCommand = new DelegateCommand(
-                x => {
+                x => 
+                {
                     navigationService.ShowEditBookView(user, model);
                 },
-                y => { return user != null; });
+                y => 
+                { 
+                    return user != null; 
+                });
 
             RemoveBookCommand = new DelegateCommand(
                 x => 
                 {
-                    //ToDo: Update View
+                    // Delete in DB
                     _library.RemoveBook(model);
+
+                    // Delete in View
+                    var deleteBook = _adminViewModel.BookList.Where(x => x.Model.BasicInfos.Id == model.BasicInfos.Id).FirstOrDefault();
+                    _adminViewModel.BookList.Remove(deleteBook);
                 },
                 y =>
                 {

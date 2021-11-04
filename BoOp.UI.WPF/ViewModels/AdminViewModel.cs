@@ -45,13 +45,6 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ClearSearchCommand { get; set; }
         public DelegateCommand CloseApplicationCommand { get; set; }
 
-        public ObservableCollection<BuchModel> AllBooks
-        {
-            get
-            {
-                return _library.GetAllBooks();
-            }
-        }
 
         public ObservableCollection<PersonViewModel> UserList
         {
@@ -248,7 +241,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in booklist)
             {
-                BookList.Add(new BookViewModel(book, _navigationService, _library,  null, _user));
+                BookList.Add(new BookViewModel(book, _navigationService, _library, _user, null, this));
             }
         }
 
