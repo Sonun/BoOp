@@ -32,6 +32,7 @@ namespace BoOp.UI.WPF.ViewModels
             _timeFlag = false;
             if  (LogoutTimer != null) LogoutTimer.Stop();
             LogoutTimer = null;
+            AdminViewModel.StaticBookPrintList = new System.Collections.ObjectModel.ObservableCollection<Common.ExemplarViewModel>();
 
             if(_library.GetAllUsers().Count <= 0)
             {
