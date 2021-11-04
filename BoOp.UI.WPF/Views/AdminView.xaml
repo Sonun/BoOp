@@ -230,12 +230,12 @@
                             <Button Grid.Column="3" >
                                 <TextBlock Text="Barcode"/>
                             </Button>
-                            <Button Grid.Column="4">
+                            <Button Grid.Column="4" Command="{Binding SortLendedName}">
                                 <TextBlock Text="Ausgeliehen von">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="5">
+                            <Button Grid.Column="5" Command="{Binding SortLendedDate}">
                                 <TextBlock Text="Ausgeliehen am">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
@@ -270,11 +270,8 @@
                                                 <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.Author}"/>
                                                 <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.ISBN}"/>
                                                 <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Barcode}"/>
-                                                <StackPanel Grid.Column="4" Orientation="Horizontal">
-                                                    <TextBlock FontSize="12" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.Vorname}"/>
-                                                    <TextBlock FontSize="12" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.Nachname}"/>
-                                                </StackPanel>
-                                                <TextBlock FontSize="12" Grid.Column="5" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.AusleihDatum}"/>
+                                                <TextBlock FontSize="12" Grid.Column="4" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.VorUndNachname}"/>
+                                                <TextBlock FontSize="12" Grid.Column="5" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.AusleihDatumFormatedString}"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
