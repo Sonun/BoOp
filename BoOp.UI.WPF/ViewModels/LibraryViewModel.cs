@@ -36,7 +36,7 @@ namespace BoOp.UI.WPF.ViewModels
         }
 
         private string _searchWord;
-        private string _searchBy;
+        private ComboBoxItemViewModel _searchBy;
 
         //flags to enable reverse sorting
         private bool _titleFlag, _authorFlag, _isbnFlag, _ratingFlag;
@@ -51,7 +51,8 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand ReturnBookCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
 
-        public string SearchBy { get { return _searchBy; } set { _searchBy = value; OnPropertyChanged(); } }
+        public ComboBoxItemViewModel SelectedSearchBy { get; set; }
+        public ObservableCollection<ComboBoxItemViewModel> SearchByList { get; set; }
 
         public string SearchWord {
             get
@@ -98,7 +99,12 @@ namespace BoOp.UI.WPF.ViewModels
             _dispatcher = dispatcher;
             _originalList = Library.GetAllBooks();
             _currentList = _originalList;
-            SearchBy = "Titel";
+            SearchByList = new ObservableCollection<ComboBoxItemViewModel>();
+            SearchByList.Add(new ComboBoxItemViewModel("Titel"));
+            SearchByList.Add(new ComboBoxItemViewModel("Author"));
+            SearchByList.Add(new ComboBoxItemViewModel("Genre"));
+            SearchByList.Add(new ComboBoxItemViewModel("Schlagwort"));
+            SelectedSearchBy = SearchByList[0];
 
             //fill boolist first time
             UpdateBooklist(_originalList);
@@ -176,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
             SearchCommand = new DelegateCommand(
                 x =>
                 {
-                switch (_searchBy.Split(" ")[1].ToLower())
+                switch (SelectedSearchBy.Content.ToLower())
                     {
                         case ("titel"):
                             UpdateBooklist(Utils.SearchForTitleInBooklist(_originalList, SearchWord));

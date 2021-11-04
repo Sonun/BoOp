@@ -44,11 +44,12 @@
 
             <StackPanel Grid.Column="1" Orientation="Vertical">
                 <Label FontSize="14" Content="Suche nach:"/>
-                <ComboBox SelectedItem="{Binding SearchBy}" SelectedIndex="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ComboBoxItem Content="Titel"/>
-                    <ComboBoxItem Content="Author"/>
-                    <ComboBoxItem Content="Schlagwort"/>
-                    <ComboBoxItem Content="Genre"/>
+                <ComboBox SelectedItem="{Binding SelectedSearchBy}" ItemsSource="{Binding SearchByList}" SelectedIndex="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Content}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
 
