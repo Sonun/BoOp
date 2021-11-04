@@ -34,19 +34,20 @@ namespace BoOp.UI.WPF.Common
                     {
                         return editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
-            RemoveUserCommand = new DelegateCommand(x =>
-            {
-                // Delete in DB
-                _library.RemoveUser(Model);
+            RemoveUserCommand = new DelegateCommand(
+                x =>
+                {
+                    // Delete in DB
+                    _library.RemoveUser(Model);
 
-                // Delete in View
-                var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
-                _adminViewModel.UserList.Remove(deletePerson);
-            },
-            y =>
-            {
-                return editor.Rechte >= Rechtelevel.ADMIN;
-            });
+                    // Delete in View
+                    var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
+                    _adminViewModel.UserList.Remove(deletePerson);
+                },
+                y =>
+                {
+                    return editor.Rechte >= Rechtelevel.ADMIN;
+                });
         }
     }
 }
