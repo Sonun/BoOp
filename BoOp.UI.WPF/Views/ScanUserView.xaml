@@ -34,7 +34,7 @@
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="{Binding LogoutWarning}" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding TestButtonCommand}"/>
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding LoginButtonCommand}"/>
                 </StackPanel>
             </Grid>
         </Border>

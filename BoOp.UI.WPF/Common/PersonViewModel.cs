@@ -32,21 +32,22 @@ namespace BoOp.UI.WPF.Common
                     },
                     y =>
                     {
-                        return editor.Rechte >= Rechtelevel.BIBOTEAM;
+                        return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
-            RemoveUserCommand = new DelegateCommand(x =>
-            {
-                // Delete in DB
-                _library.RemoveUser(Model);
+            RemoveUserCommand = new DelegateCommand(
+                x =>
+                {
+                    // Delete in DB
+                    _library.RemoveUser(Model);
 
-                // Delete in View
-                var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
-                _adminViewModel.UserList.Remove(deletePerson);
-            },
-            y =>
-            {
-                return editor.Rechte >= Rechtelevel.ADMIN;
-            });
+                    // Delete in View
+                    var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
+                    _adminViewModel.UserList.Remove(deletePerson);
+                },
+                y =>
+                {
+                    return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.ADMIN;
+                });
         }
     }
 }

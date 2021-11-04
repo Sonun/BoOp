@@ -131,7 +131,7 @@ namespace BoOp.UI.WPF.ViewModels
                 var genres = _genres.Split(' ', ',', '.', ';').ToList();
                 genres.RemoveAll(x => x == "");
 
-                if (_titel.Equals("") || _author.Equals("") || _verlag.Equals("") || _isbn.Equals(""))
+                if (_titel.Equals("") || _author.Equals("") || _verlag.Equals(""))
                 {
                     MessageBox.Show("Füllen Sie Alle Felder Aus");
                     return;
@@ -140,7 +140,6 @@ namespace BoOp.UI.WPF.ViewModels
                 BuchModel.BasicInfos.Author = Author.Trim(' ');
                 BuchModel.BasicInfos.Auflage = _auflage;
                 BuchModel.BasicInfos.Verlag = _verlag.Trim(' ');
-                BuchModel.BasicInfos.ISBN = new string(_isbn.Where(c => char.IsDigit(c)).ToArray());
                 BuchModel.BasicInfos.Altersvorschlag = _altersvorschlag;
                 BuchModel.BasicInfos.Regal = _regal;
 

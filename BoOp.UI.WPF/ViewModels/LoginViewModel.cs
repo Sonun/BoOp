@@ -70,8 +70,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Password = "";
                     }
                     
-                }
-            );
+                });
 
             CancelCommand = new DelegateCommand(
                 x =>

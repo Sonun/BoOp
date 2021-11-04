@@ -25,7 +25,7 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<ExemplarViewModel> _currentLendedList;
         private PersonModel _user;
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
-        public Rechtelevel UserRights { get; }
+        private string _allBookSearchWord, _userSearchWord, _lendedBooksSearchWord;
 
         public static ObservableCollection<ExemplarViewModel> StaticBookPrintList;
 
@@ -49,6 +49,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
         public DelegateCommand PrintBookBarcodesCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
 
         //context menu commands
         public DelegateCommand EditBookCommand { get; set; }
@@ -56,8 +57,13 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveUserCommand { get; set; }
         public DelegateCommand EditUserCommand { get; set; }
 
-        public DelegateCommand ClearSearchCommand { get; set; }
-        public DelegateCommand CloseApplicationCommand { get; set; }
+        //SearchCommands
+        public DelegateCommand SearchTitleInAllBooks { get; set; }
+        public DelegateCommand ClearSearchInAllBooks { get; set; }
+        public DelegateCommand SearchVornameInUsers { get; set; }
+        public DelegateCommand ClearSearchInUsers { get; set; }
+        public DelegateCommand SearchTitleInLendedBooks { get; set; }
+        public DelegateCommand ClearSearchInLendedBooks { get; set; }
 
         //book searche commands
         public DelegateCommand SortTitleCommand { get; set; }
@@ -75,6 +81,12 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortLendedDate { get; set; }
 
         public ObservableCollection<ExemplarViewModel> LendedBookList { get { return _currentLendedList;  } set { _currentLendedList = value; } }
+        public Rechtelevel UserRights { get; }
+
+        //searchword propertys
+        public string AllBookSearchWord { get { return _allBookSearchWord; } set { _allBookSearchWord = value; OnPropertyChanged(); } }
+        public string UserSearchWord { get { return _userSearchWord; } set { _userSearchWord = value; OnPropertyChanged(); } }
+        public string LendedBooksSearchWord { get { return _lendedBooksSearchWord; } set { _lendedBooksSearchWord = value; OnPropertyChanged(); } }
 
         public ObservableCollection<PersonViewModel> UserList
         {
@@ -113,6 +125,7 @@ namespace BoOp.UI.WPF.ViewModels
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
             UpdateBooklist(_currentList);
+            UpdateLendedBooklist(_originalList);
 
             _originalUserList = _library.GetAllUsers();
             _currentUserList = _originalUserList;
@@ -120,17 +133,6 @@ namespace BoOp.UI.WPF.ViewModels
 
             UserRights = user.Rechte;
             LendedBookList = new ObservableCollection<ExemplarViewModel>();
-            
-            foreach (var book in BookList)
-            {
-                foreach (var exemplar in book.Model.Exemplare)
-                {
-                    if (exemplar.LendBy != null)
-                    {
-                        LendedBookList.Add(new ExemplarViewModel(exemplar, book.Model));
-                    }
-                }
-            }
 
             BackCommand = new DelegateCommand( 
                 x =>
@@ -224,12 +226,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_vornameFlag)
                     {
-                        UpdateUserlist(Utils.SortedUserlistByVorname(_originalUserList));
+                        UpdateUserlist(Utils.SortedUserlistByVorname(_currentUserList));
                         _vornameFlag = true;
                     }
                     else
                     {
-                        UpdateUserlist(Utils.SortedUserlistByVorname(_originalUserList, true));
+                        UpdateUserlist(Utils.SortedUserlistByVorname(_currentUserList, true));
                         SetUserSortingFlagsFlase();
                     }
                 });
@@ -240,12 +242,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_nachnameFlag)
                     {
-                        UpdateUserlist(Utils.SortedUserlistByNachname(_originalUserList));
+                        UpdateUserlist(Utils.SortedUserlistByNachname(_currentUserList));
                         _nachnameFlag = true;
                     }
                     else
                     {
-                        UpdateUserlist(Utils.SortedUserlistByNachname(_originalUserList, true));
+                        UpdateUserlist(Utils.SortedUserlistByNachname(_currentUserList, true));
                         SetUserSortingFlagsFlase();
                     }
                 });
@@ -256,12 +258,12 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (!_rechteFlag)
                     {
-                        UpdateUserlist(Utils.SortedUserlistByRechte(_originalUserList));
+                        UpdateUserlist(Utils.SortedUserlistByRechte(_currentUserList));
                         _rechteFlag = true;
                     }
                     else
                     {
-                        UpdateUserlist(Utils.SortedUserlistByRechte(_originalUserList, true));
+                        UpdateUserlist(Utils.SortedUserlistByRechte(_currentUserList, true));
                         SetUserSortingFlagsFlase();
                     }
                 });
@@ -296,6 +298,45 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                 });
 
+            SearchTitleInAllBooks = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(Utils.SearchForTitleInBooklist(_originalList, _allBookSearchWord));
+                });
+
+            ClearSearchInAllBooks = new DelegateCommand(
+                x =>
+                {
+                    UpdateBooklist(_originalList);
+                    AllBookSearchWord = "";
+                });
+
+            SearchVornameInUsers = new DelegateCommand(
+                x =>
+                {
+                    UpdateUserlist(Utils.SearchVornameInUserlist(_originalUserList, _userSearchWord));
+                });
+
+            ClearSearchInUsers = new DelegateCommand(
+                x =>
+                {
+                    UpdateUserlist(_originalUserList);
+                    UserSearchWord = "";
+                });
+
+            SearchTitleInLendedBooks = new DelegateCommand(
+                x =>
+                {
+                    UpdateLendedBooklist(Utils.SearchForTitleInBooklist(_originalList, _lendedBooksSearchWord));
+                });
+
+            ClearSearchInLendedBooks = new DelegateCommand(
+                x =>
+                {
+                    UpdateLendedBooklist(_originalList);
+                    LendedBooksSearchWord = "";
+                });
+
             CloseApplicationCommand = new DelegateCommand(
                 x =>
                 {
@@ -308,6 +349,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
+            _currentList = booklist;
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in booklist)
             {
@@ -317,10 +359,25 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void UpdateUserlist(ObservableCollection<PersonModel> userlist)
         {
+            _currentUserList = userlist;
             UserList = new ObservableCollection<PersonViewModel>();
             foreach (var user in userlist)
             {
                 UserList.Add(new PersonViewModel(user, _navigationService, _library, _user, this));
+            }
+        }
+
+        private void UpdateLendedBooklist(ObservableCollection<BuchModel> booklist)
+        {
+            foreach (var book in booklist)
+            {
+                foreach (var exemplar in book.Exemplare)
+                {
+                    if (exemplar.LendBy != null)
+                    {
+                        LendedBookList.Add(new ExemplarViewModel(exemplar, book));
+                    }
+                }
             }
         }
 
