@@ -162,7 +162,7 @@
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSeaGreen">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*" x:Name="TextBoxColumn"/>
+                <ColumnDefinition Width="3*" x:Name="TextBoxColumn"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -188,7 +188,7 @@
                 <Label HorizontalAlignment="Center" Margin="20">
                     <TextBlock Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Schreibe Deine Bewertung in das Textfeld."/>
                 </Label>
-                <TextBox Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="150" Width="{Binding ElementName=TextBoxColumn, Path=ActualWidth}"/>
+                <TextBox Style="{StaticResource AddBookTextBoxStyle}" FontSize="18" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="150"/>
             </StackPanel>
 
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Left"/>

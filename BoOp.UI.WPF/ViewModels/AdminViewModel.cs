@@ -45,6 +45,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortRechteCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand ClearSearchCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
 
         public string SearchWord
         {
@@ -99,6 +100,7 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _user = user;
             _dispatcher = dispatcher;
+            ScanUserViewModel.LogoutTimer.Enabled = false;
 
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
@@ -125,6 +127,8 @@ namespace BoOp.UI.WPF.ViewModels
             BackCommand = new DelegateCommand( 
                 x =>
                 {
+                    ScanUserViewModel.LogoutTimer.Enabled = true;
+                    ScanUserViewModel.LogoutTimer.Start();
                     _navigationService.ShowLibraryView(user);
                 });
 
@@ -244,20 +248,15 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                 });
 
-
-            SearchCommand = new DelegateCommand(
+            CloseApplicationCommand = new DelegateCommand(
                 x =>
                 {
-                    UpdateBooklist(Utils.SearchForWordInBooklist(_originalList, _searchWord));
+                    if (MessageBox.Show("Wollen Sie die Anwendung Schließen?", "Schließen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        Environment.Exit(0);
+                    }
                 });
-
-            ClearSearchCommand = new DelegateCommand(
-                x =>
-                {
-                    UpdateBooklist(_originalList);
-                    SearchWord = "";
-                });
-        }
+    }
 
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {

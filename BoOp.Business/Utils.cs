@@ -151,12 +151,12 @@ namespace BoOp.Business
         }
 
         /// <summary>
-        /// search for all books containing a string
+        /// search for all book titles containing a string
         /// </summary>
         /// <param name="bookList"></param>
         /// <param name="searchWord"></param>
         /// <returns></returns>
-        public static ObservableCollection<BuchModel> SearchForWordInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
+        public static ObservableCollection<BuchModel> SearchForTitleInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
         {
             //get rid of the reference
             var useList = new ObservableCollection<BuchModel>(bookList);
@@ -173,14 +173,84 @@ namespace BoOp.Business
                 useList.Remove(each);
             }
 
-            temp = useList
+            return SortedBookListByTitel(outList);
+        }
+
+        /// <summary>
+        /// search for all books containing a string
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        public static ObservableCollection<BuchModel> SearchForAuthorInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
+        {
+            //get rid of the reference
+            var useList = new ObservableCollection<BuchModel>(bookList);
+
+            var temp = useList
                 .Where(x => x.BasicInfos.Author.ToLower()
                 .Contains(searchWord.ToLower()))
                 .ToList();
 
+            ObservableCollection<BuchModel> outList = new ObservableCollection<BuchModel>();
             foreach (var each in temp)
             {
                 outList.Add(each);
+                useList.Remove(each);
+            }
+
+            return SortedBookListByTitel(outList);
+        }
+
+        /// <summary>
+        /// search for all books containing a string
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        public static ObservableCollection<BuchModel> SearchForGenreInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
+        {
+            //get rid of the reference
+            var useList = new ObservableCollection<BuchModel>(bookList);
+            ObservableCollection<BuchModel> outList = new ObservableCollection<BuchModel>();
+
+            foreach (var book in useList)
+            {
+                foreach (var genre in book.Genres)
+                {
+                    if (genre.ToLower().Equals(searchWord))
+                    {
+                        outList.Add(book);
+                        break;
+                    }
+                }
+            }
+
+            return SortedBookListByTitel(outList);
+        }
+
+        /// <summary>
+        /// search for all books containing a string
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        public static ObservableCollection<BuchModel> SearchForSchlagwortInBooklist(ObservableCollection<BuchModel> bookList, string searchWord)
+        {
+            //get rid of the reference
+            var useList = new ObservableCollection<BuchModel>(bookList);
+            ObservableCollection<BuchModel> outList = new ObservableCollection<BuchModel>();
+
+            foreach (var book in useList)
+            {
+                foreach (var schlagwort in book.Schlagwoerter)
+                {
+                    if (schlagwort.ToLower().Equals(searchWord))
+                    {
+                        outList.Add(book);
+                        break;
+                    }
+                }
             }
 
             return SortedBookListByTitel(outList);

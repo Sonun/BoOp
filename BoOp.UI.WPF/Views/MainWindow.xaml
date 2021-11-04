@@ -8,9 +8,10 @@
         xmlns:viewModelUtils="clr-namespace:BoOp.UI.WPF.ViewModels.ViewModelUtils"
         xmlns:local="clr-namespace:BoOp.UI.WPF"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Book Options oder BoOp"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        >
     
     <Window.Resources>
 
@@ -71,6 +72,6 @@
     </Window.Resources>
 
     <Grid>
-        <ContentPresenter Content="{Binding CurrentViewModel}" ContentTemplateSelector="{StaticResource MainDataTemplateSelector}" />
+        <ContentPresenter Content="{Binding CurrentViewModel}" ContentTemplateSelector="{StaticResource MainDataTemplateSelector}"/>
     </Grid>
 </Window>
