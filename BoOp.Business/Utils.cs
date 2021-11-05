@@ -537,7 +537,7 @@ namespace BoOp.Business
             // Beispiel für einen Barcode:
             // Usr0000010
 
-            if (user != null)
+            if (user == null)
             {
                 return null;
             }

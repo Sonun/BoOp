@@ -36,7 +36,7 @@ namespace BoOp.UI.WPF.Common
                         // bearbeiten von benutzer "maskenpflicht" nicht möglich, ansonsten nur untergestellte
                         return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
-
+            // Remove user from db --> used in AdminViewModel
             RemoveUserCommand = new DelegateCommand(
                 x =>
                 {

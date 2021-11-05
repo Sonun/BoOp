@@ -27,10 +27,22 @@ namespace BoOp.UI.WPF.ViewModels
         private int _rechteAsInt;
         private string _telefon;
         private string _email;
-        private string _ausweisID;
         private DateTime _geburtstag;
+        private bool _addToPrintList;
 
         //user Info Propertys
+        public bool AddToPrintList
+        {
+            get
+            {
+                return _addToPrintList;
+            }
+            set
+            {
+                _addToPrintList = value;
+                OnPropertyChanged();
+            }
+        }
         public string Vorname {
             get 
             {
@@ -126,6 +138,7 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _navigationService = navigationService;
 
+            AddToPrintList = true;
             Vorname = "";
             Nachname = "";
             Passwort = "";
@@ -180,7 +193,10 @@ namespace BoOp.UI.WPF.ViewModels
                     newUser.AusweisID = Utils.GenerateUniqueUserBarcodeString(newUser);
 
                     _library.AddUser(newUser);
-
+                    if (AddToPrintList)
+                    {
+                        AdminViewModel.StaticUserIDPrintList.Add(new Common.PersonViewModel(newUser, navigationService, library, user, null));
+                    }
                     _navigationService.ShowAdminView(user);
                 });
         }
