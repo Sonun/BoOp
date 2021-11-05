@@ -27,11 +27,28 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
         private string _allBookSearchWord, _userSearchWord, _lendedBooksSearchWord;
 
+        public static ObservableCollection<ExemplarViewModel> StaticBookPrintList;
+
+        public ObservableCollection<ExemplarViewModel> BookPrintList { get {  return StaticBookPrintList;  } }
+
+        public int BarcodeAmount 
+            { 
+                get 
+                    {
+                    if (StaticBookPrintList != null)
+                    {
+                        return BookPrintList.Count;
+                    }
+                    return 0;
+                }
+            }
+
         //button commands
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand PrintBookBarcodesCommand { get; set; }
         public DelegateCommand CloseApplicationCommand { get; set; }
 
         //context menu commands
@@ -67,9 +84,9 @@ namespace BoOp.UI.WPF.ViewModels
         public Rechtelevel UserRights { get; }
 
         //searchword propertys
-        public string AllBookSearchWord { get { return _allBookSearchWord; } set { _allBookSearchWord = value; } }
-        public string UserSearchWord { get { return _userSearchWord; } set { _userSearchWord = value; } }
-        public string LendedBooksSearchWord { get { return _lendedBooksSearchWord; } set { _lendedBooksSearchWord = value; } }
+        public string AllBookSearchWord { get { return _allBookSearchWord; } set { _allBookSearchWord = value; OnPropertyChanged(); } }
+        public string UserSearchWord { get { return _userSearchWord; } set { _userSearchWord = value; OnPropertyChanged(); } }
+        public string LendedBooksSearchWord { get { return _lendedBooksSearchWord; } set { _lendedBooksSearchWord = value; OnPropertyChanged(); } }
 
         public ObservableCollection<PersonViewModel> UserList
         {
@@ -143,6 +160,16 @@ namespace BoOp.UI.WPF.ViewModels
                 y =>
                 {
                     return user.Rechte >= Rechtelevel.BIBOTEAM;
+                });
+
+            PrintBookBarcodesCommand = new DelegateCommand(
+                x =>
+                {
+
+                },
+                y => 
+                {
+                    return StaticBookPrintList.Count != 0;
                 });
 
             //SortTitleCommand
