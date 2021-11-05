@@ -55,7 +55,8 @@ namespace BoOp.Business
         // Edit User Details
         public void EditUserDetails(PersonModel user);
 
-
+        // Get User DB ID
+        public int GetUserID(PersonModel user);
 
     }
 }
