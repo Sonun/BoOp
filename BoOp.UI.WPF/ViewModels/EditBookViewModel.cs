@@ -157,7 +157,7 @@ namespace BoOp.UI.WPF.ViewModels
                                     Barcode = ""
                                 } 
                             });
-                        BuchModel.Exemplare.Last().BasicInfos.Barcode = Utils.GenerateUniqueBarcode(BuchModel);
+                        BuchModel.Exemplare.Last().BasicInfos.Barcode = Utils.GenerateUniqueBookBarcodeString(BuchModel);
                     }
                 }
                 if (_exemplare - BuchModel.ExemplarAnzahl < 0)

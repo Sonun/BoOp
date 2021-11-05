@@ -17,6 +17,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand CreateBarcodeCommand { get; set; }
 
         //user info attributes
         private string _vorname;
@@ -29,7 +30,6 @@ namespace BoOp.UI.WPF.ViewModels
         private string _gebJahr;
         private string _telefon;
         private string _email;
-        private string _ausweisID;
 
         //user Info Propertys
         public string Vorname {
@@ -148,25 +148,11 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public string AusweisID
-        {
-            get
-            {
-                return _ausweisID;
-            }
-            set
-            {
-                _ausweisID = value;
-                OnPropertyChanged();
-            }
-        }
-
         public AddPersonViewModel(INavigationService navigationService, ILibrary library, PersonModel user)
         {
             _library = library;
             _navigationService = navigationService;
 
-            AusweisID = "";
             Vorname = "";
             Nachname = "";
             Passwort = "";
@@ -186,13 +172,6 @@ namespace BoOp.UI.WPF.ViewModels
             SaveCommand = new DelegateCommand(
                 x =>
                 {
-                    //biboteam darf keinen admin hinzufügen
-                    if(_rechteAsInt == 8 && user.Rechte <= Rechtelevel.BIBOTEAM)
-                    {
-                        MessageBox.Show("du darfst keinen Admin hinzufügen");
-                        return;
-                    }
-
                     switch (_rechte.ToLower())
                     {
                         case "leser":
@@ -209,15 +188,22 @@ namespace BoOp.UI.WPF.ViewModels
                             break;
                     }
 
+                    //biboteam darf keinen admin hinzufügen
+                    if (_rechteAsInt == 8 && user.Rechte <= Rechtelevel.BIBOTEAM)
+                    {
+                        MessageBox.Show("du darfst keinen Admin hinzufügen");
+                        return;
+                    }
+
                     if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
                     {
+                        MessageBox.Show("Bitte fülle alle Nötigen felder aus!");
                         return;
                     }
 
                     var newUser = new PersonModel
                     {
                         Vorname = _vorname,
-                        AusweisID = _ausweisID,
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
@@ -226,7 +212,8 @@ namespace BoOp.UI.WPF.ViewModels
                         EMail = _email
                     };
 
-                    //_gebTag + "-" + _gebMonat + "-" + _gebJahr
+                    //add barcode to user
+                    newUser.AusweisID = Utils.GenerateUniqueUserBarcodeString(newUser);
 
                     _library.AddUser(newUser);
 
