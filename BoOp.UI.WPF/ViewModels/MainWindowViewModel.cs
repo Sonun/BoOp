@@ -77,9 +77,9 @@ namespace BoOp.UI.WPF.ViewModels
         }
 
 
-        public void ShowEditBookView(PersonModel user, BuchModel book)
+        public void ShowEditBookView(PersonModel user, BuchModel book, AdminViewModel adminViewModel)
         {
-            CurrentViewModel = new EditBookViewModel(book, user, this, _library);
+            CurrentViewModel = new EditBookViewModel(book, user, this, _library, adminViewModel);
         }
     }
 }

@@ -36,6 +36,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _genres;
         private readonly INavigationService _navigationService;
         private readonly ILibrary _library;
+        private readonly AdminViewModel _adminViewModel;
 
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
@@ -48,16 +49,17 @@ namespace BoOp.UI.WPF.ViewModels
         public string Schlagwoerter { get { return _schlagwoerter; } set { _schlagwoerter = value; OnPropertyChanged(); } }
         public string Genres { get { return _genres; } set { _genres = value; OnPropertyChanged(); } }
 
-        public EditBookViewModel(BuchModel buch, PersonModel user, INavigationService navigationService, ILibrary library)
+        public EditBookViewModel(BuchModel buch, PersonModel user, INavigationService navigationService, ILibrary library, AdminViewModel adminViewModel)
         {
             ExemplarViewModels = new ObservableCollection<ExemplarViewModel>();
             BuchModel = buch;
             User = user;
             _navigationService = navigationService;
             _library = library;
-
-            BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(x)));
-
+            _adminViewModel = adminViewModel;
+          
+            BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(x, BuchModel, adminViewModel)));
+            
             Schlagwoerter = "";
             Genres = "";
             Altersvorschlag = "";
@@ -86,7 +88,6 @@ namespace BoOp.UI.WPF.ViewModels
                     var checkExemplar = AdminViewModel.StaticBookPrintList.SingleOrDefault(y => y.Model.BasicInfos.Barcode == x.Model.BasicInfos.Barcode);
                     if (checkExemplar == null)
                     {
-                        x.BuchModel = BuchModel;
                         AdminViewModel.StaticBookPrintList.Add(x);
                     }
                     

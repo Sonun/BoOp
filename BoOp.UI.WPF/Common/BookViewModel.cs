@@ -25,7 +25,7 @@ namespace BoOp.UI.WPF.Common
         public DelegateCommand EditBookCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
 
-        public BookViewModel(BuchModel model, INavigationService navigationService, ILibrary library, PersonModel user, LibraryViewModel libraryViewModel = null, AdminViewModel adminViewModel = null)
+        public BookViewModel(BuchModel model, INavigationService navigationService, ILibrary library, PersonModel user, AdminViewModel adminViewModel = null, LibraryViewModel libraryViewModel = null)
         {
             Model = model;
             _library = library;
@@ -44,7 +44,7 @@ namespace BoOp.UI.WPF.Common
             EditBookCommand = new DelegateCommand(
                 x => 
                 {
-                    navigationService.ShowEditBookView(user, model);
+                    navigationService.ShowEditBookView(user, model, adminViewModel);
                 },
                 y => 
                 { 
@@ -63,7 +63,7 @@ namespace BoOp.UI.WPF.Common
                 },
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.ADMIN;
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
         }
     }

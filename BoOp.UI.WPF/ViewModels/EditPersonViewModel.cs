@@ -24,16 +24,27 @@ namespace BoOp.UI.WPF.ViewModels
         private string _passwort;
         private string _rechte;
         private int _rechteAsInt;
-        private string _gebTag;
-        private string _gebMonat;
-        private string _gebJahr;
         private string _telefon;
         private string _email;
+        private DateTime _birthdate;
 
         private PersonModel _user;
         private PersonModel _userToChange;
 
         //user Info Propertys
+        public DateTime Birthdate
+        {
+            get
+            {
+                return _birthdate;
+            }
+            set
+            {
+                _birthdate = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Vorname
         {
             get
@@ -102,45 +113,6 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public string GebTag
-        {
-            get
-            {
-                return _gebTag;
-            }
-            set
-            {
-                _gebTag = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebMonat
-        {
-            get
-            {
-                return _gebMonat;
-            }
-            set
-            {
-                _gebMonat = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebJahr
-        {
-            get
-            {
-                return _gebJahr;
-            }
-            set
-            {
-                _gebJahr = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string Telefon
         {
             get
@@ -193,7 +165,7 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || _telefon.Equals(""))
+                    if (_vorname.Equals("") || _nachname.Equals("") || _telefon.Equals(""))
                     {
                         MessageBox.Show("Sie müssen alles (bis auf das Passwort) eingeben");
                         return;
@@ -206,7 +178,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Vorname = _vorname,
                         Nachname = _nachname,
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = new DateTime(int.Parse(_gebJahr), int.Parse(_gebMonat), int.Parse(_gebTag)),
+                        Geburtsdatum = Birthdate,
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
@@ -232,9 +204,8 @@ namespace BoOp.UI.WPF.ViewModels
             Email = userToChange.EMail;
             Passwort = "";
             Telefon = userToChange.Telefonnummer;
-            GebJahr = userToChange.Geburtsdatum.Year.ToString();
-            GebMonat = userToChange.Geburtsdatum.Month.ToString();
-            GebTag = userToChange.Geburtsdatum.Day.ToString();
+            Birthdate = userToChange.Geburtsdatum;
+
 
             //set rechte
             switch (userToChange.Rechte.ToString().ToLower())

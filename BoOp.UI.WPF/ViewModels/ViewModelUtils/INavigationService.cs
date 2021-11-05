@@ -15,6 +15,6 @@ namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
         void ShowEditUserView(PersonModel editor, PersonModel userToChange);
         void ShowLendBookView(PersonModel user);
         void ShowReturnLendBookView(PersonModel user);
-        void ShowEditBookView(PersonModel user, BuchModel book);
+        void ShowEditBookView(PersonModel user, BuchModel book, AdminViewModel adminViewModel);
     }
 }

@@ -24,12 +24,10 @@ namespace BoOp.UI.WPF.ViewModels
         private string _passwort;
         private string _rechte;
         private int _rechteAsInt;
-        private string _gebTag;
-        private string _gebMonat;
-        private string _gebJahr;
         private string _telefon;
         private string _email;
         private string _ausweisID;
+        private DateTime _geburtstag;
 
         //user Info Propertys
         public string Vorname {
@@ -83,41 +81,15 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public string GebTag
+        public DateTime Geburtstag
         {
             get
             {
-                return _gebTag;
+                return _geburtstag;
             }
             set
             {
-                _gebTag = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebMonat
-        {
-            get
-            {
-                return _gebMonat;
-            }
-            set
-            {
-                _gebMonat = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebJahr
-        {
-            get
-            {
-                return _gebJahr;
-            }
-            set
-            {
-                _gebJahr = value;
+                _geburtstag = value;
                 OnPropertyChanged();
             }
         }
@@ -171,11 +143,9 @@ namespace BoOp.UI.WPF.ViewModels
             Nachname = "";
             Passwort = "";
             Rechte = "Leser";
-            GebTag = "";
-            GebMonat = "";
-            GebJahr = "";
             Telefon = "";
             Email = "";
+            Geburtstag = new DateTime(2000, 1, 1);
 
             CancelCommand = new DelegateCommand(
                 x => 
@@ -209,7 +179,7 @@ namespace BoOp.UI.WPF.ViewModels
                             break;
                     }
 
-                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
+                    if (_vorname.Equals("") || _nachname.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
                     {
                         return;
                     }
@@ -221,12 +191,10 @@ namespace BoOp.UI.WPF.ViewModels
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = new DateTime(int.Parse(_gebJahr), int.Parse(_gebMonat), int.Parse(_gebTag)),
+                        Geburtsdatum = Geburtstag,
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
-
-                    //_gebTag + "-" + _gebMonat + "-" + _gebJahr
 
                     _library.AddUser(newUser);
 

@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
@@ -51,23 +51,7 @@
             <ComboBoxItem Content="Admin"/>
         </ComboBox>
 
-        <!-- geburtstag -->
-        <Grid Grid.Row="5" Grid.Column="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Tag:"/>
-            <TextBox Grid.Column="1" Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45" Height="20"/>
-            <Label Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Monat:"/>
-            <TextBox Grid.Column="3" Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45" Height="20"/>
-            <Label Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Jahr:"/>
-            <TextBox Grid.Column="5" Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45" Height="20"/>
-        </Grid>
+        <Calendar Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" SelectedDate="{Binding Geburtstag}" DisplayDate="{Binding Geburtstag}"/>
 
         <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="7" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" HorizontalAlignment="Left"/>

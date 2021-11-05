@@ -11,6 +11,7 @@ namespace BoOp.UI.WPF.Common
     public class ExemplarViewModel : ViewModel
     {
         private bool _isChecked;
+        public  AdminViewModel AdminViewModel { get; private set; }
 
         public ExemplarModel Model { get; set; }
         public BuchModel BuchModel { get; set; }
@@ -19,13 +20,14 @@ namespace BoOp.UI.WPF.Common
         public DelegateCommand DeleteFromListCommand { get; set; }
 
 
-        public ExemplarViewModel(ExemplarModel model, BuchModel buch = null)
+        public ExemplarViewModel(ExemplarModel model, BuchModel buch, AdminViewModel adminViewModel = null)
         {
             Model = model;
             BuchModel = buch;
+            AdminViewModel = adminViewModel;
             ShowUserCommand = new DelegateCommand(x =>
             {
-
+                
             });
 
             DeleteFromListCommand = new DelegateCommand(x =>
