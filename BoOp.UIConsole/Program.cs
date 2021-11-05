@@ -15,20 +15,34 @@ namespace BoOp.UIConsole
 
         static void Main(string[] args)
         {
-            //make library
-            _library = new Library();
+            List<(string barcode, string name)> tupelList = new List<(string barcode, string name)>();
 
-            var rez = new RezensionModel { BasicInfos = new BasicRezensionenModel() { PersonID = 1, BuchID = 1, Sterne = 5, Rezensionstext = "good book" } };
+            tupelList.Add(("Boop000051","Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007")); 
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007")); 
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007")); 
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007")); 
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007"));
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007"));
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007"));
+            tupelList.Add(("Boop000051", "Herr der Ringe"));
+            tupelList.Add(("usr1561d6", "name vom user"));
+            tupelList.Add(("Boop000051", "Kinderbuch 007"));
 
-            _library.AddReview(rez);
-
-            foreach (var book in _library.GetAllBooks())
-            {
-                foreach (var eachRez in book.Rezensionen)
-                {
-                    Console.WriteLine("Buch: " + book.BasicInfos.Titel + ", person: " + eachRez.BasicInfos.PersonID + ", sterne: " + eachRez.BasicInfos.Sterne + ", Rezension: " + eachRez.BasicInfos.Rezensionstext);
-                }
-            }
+            Utils.GenerateMultipleBarcodePDF(tupelList);
         }
 
         static void testaddUser()
@@ -54,7 +68,7 @@ namespace BoOp.UIConsole
 
         static void testbarcode()
         {
-            var temp = Utils.GenerateUniqueBarcode(new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN = "213231-3123", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A" } });
+            var temp = Utils.GenerateUniqueBookBarcodeString(new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN = "213231-3123", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A" } });
             Console.WriteLine(temp);
         }
 

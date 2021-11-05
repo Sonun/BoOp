@@ -167,7 +167,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                     if (_vorname.Equals("") || _nachname.Equals("") || _telefon.Equals(""))
                     {
-                        MessageBox.Show("Sie müssen alles (bis auf das Passwort) eingeben");
+                        MessageBox.Show("Sie müssen alle nötigen felder eingeben,\nwenn ein Leser mehr rechte bekommt, muss ein passwort vergeben werden.");
                         return;
                     }
 

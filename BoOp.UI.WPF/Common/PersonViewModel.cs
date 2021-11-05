@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +25,7 @@ namespace BoOp.UI.WPF.Common
             Model = personModel;
             _library = library;
             _adminViewModel = adminViewModel;
+
             EditUserCommand = new DelegateCommand(
                     x =>
                     {
@@ -32,22 +33,36 @@ namespace BoOp.UI.WPF.Common
                     },
                     y =>
                     {
+                        // bearbeiten von benutzer "maskenpflicht" nicht möglich, ansonsten nur untergestellte
                         return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
+
             RemoveUserCommand = new DelegateCommand(
                 x =>
                 {
-                    // Delete in DB
-                    _library.RemoveUser(Model);
+                    if (MessageBox.Show("Wollen Sie den Benutzer " + Model.Vorname + " " + Model.Nachname + " wirklich Löschen?", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            // Delete in DB
+                            _library.RemoveUser(Model);
 
-                    // Delete in View
-                    var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
-                    _adminViewModel.UserList.Remove(deletePerson);
-                },
+                            // Delete in View
+                            var deletePerson = _adminViewModel.UserList.Where(x => x.Model.Id == Model.Id).FirstOrDefault();
+                            _adminViewModel.UserList.Remove(deletePerson);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Fehler beim Benutzer löschen, Benutzer wurde nicht gelöscht");
+                        }
+                    }
+                    },
                 y =>
                 {
-                    return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.ADMIN;
+                    // löschen von benutzer "maskenpflicht" nicht möglich, ansonsten nur untergestellte
+                    return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                 });
+            
         }
     }
 }
