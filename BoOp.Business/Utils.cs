@@ -5,6 +5,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using BoOp.DBAccessor.Models;
+using BarcodeLib;
+using System.Drawing;
+using System.IO;
 
 namespace BoOp.Business
 {
@@ -56,7 +59,7 @@ namespace BoOp.Business
 
             return SortedUserlistByVorname(outList);
         }
-        
+
 
         /// <summary>
         /// sorts the userlist by vorname, bubblesort
@@ -446,7 +449,7 @@ namespace BoOp.Business
                             bookList[i] = tempBook;
                         }
                     }
-                        
+
                 }
             }
             return bookList;
@@ -558,9 +561,29 @@ namespace BoOp.Business
         /// creates a pdf with multiple barcodes
         /// </summary>
         /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
-        public static void GenerateMultipleBarcodePDF((string barcode, string name)[] tupel)
+        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList)
         {
-            
+            var fullBarcodeHeight = 100;
+
+            Bitmap bitmap = new Bitmap(400, fullBarcodeHeight * tupelList.Count);
+            Graphics gr = Graphics.FromImage(bitmap);
+
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            gr.Clear(Color.Transparent);
+
+            for (int i = 0; i < tupelList.Count; i++)
+            {
+                var yOffset = fullBarcodeHeight * i;
+
+                gr.DrawString(tupelList[i].name, new Font("Times New Roman", 12.0f), Brushes.Black, 100, yOffset);
+                gr.DrawImage(new Barcode().Encode(TYPE.CODE39Extended, tupelList[i].barcode, Color.Black, Color.White, 300, 45), 0, yOffset + 20);
+                gr.DrawString(tupelList[i].barcode, new Font("Times New Roman", 12.0f), Brushes.Black, 100, yOffset + 65);
+            }
+
+            bitmap.Save("image.png");
+
+            gr.Dispose();
         }
     }
 }

@@ -121,7 +121,7 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         foreach(var exemplar in bookModel.Exemplare)
                         {
-                            exemplar.BasicInfos.Barcode = Utils.GenerateUniqueBarcode(bookModel);
+                            exemplar.BasicInfos.Barcode = Utils.GenerateUniqueBookBarcodeString(bookModel);
                         }
                         if (schlagwoerter.Count > 0)
                         {
