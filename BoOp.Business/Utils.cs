@@ -553,5 +553,14 @@ namespace BoOp.Business
 
             return barcodeAsString;
         }
+
+        /// <summary>
+        /// creates a pdf with multiple barcodes
+        /// </summary>
+        /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
+        public static void GenerateMultipleBarcodePDF((string barcode, string name) tupel)
+        {
+
+        }
     }
 }
