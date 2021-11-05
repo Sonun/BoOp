@@ -31,6 +31,7 @@ namespace BoOp.UI.WPF.Common
             _library = library;
             _libraryViewModel = libraryViewModel;
             _adminViewModel = adminViewModel;
+
             ShowBookCommand = new DelegateCommand(
                 x => 
                 {
@@ -38,7 +39,7 @@ namespace BoOp.UI.WPF.Common
                 },
                 y => 
                 { 
-                    return user != null; 
+                    return user != null;
                 });
 
             EditBookCommand = new DelegateCommand(
@@ -47,23 +48,33 @@ namespace BoOp.UI.WPF.Common
                     navigationService.ShowEditBookView(user, model);
                 },
                 y => 
-                { 
-                    return user != null; 
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
 
             RemoveBookCommand = new DelegateCommand(
                 x => 
                 {
-                    // Delete in DB
-                    _library.RemoveBook(model);
+                    if (MessageBox.Show("Wollen Sie das Buch " + Model.BasicInfos.Titel + " wirklich Löschen?", "Löschen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            // Delete in DB
+                            _library.RemoveBook(model);
 
-                    // Delete in View
-                    var deleteBook = _adminViewModel.BookList.Where(x => x.Model.BasicInfos.Id == model.BasicInfos.Id).FirstOrDefault();
-                    _adminViewModel.BookList.Remove(deleteBook);
+                            // Delete in View
+                            var deleteBook = _adminViewModel.BookList.Where(x => x.Model.BasicInfos.Id == model.BasicInfos.Id).FirstOrDefault();
+                            _adminViewModel.BookList.Remove(deleteBook);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Fehler beim buch löschen, Buch wurde nicht gelöscht");
+                        }
+                    }
                 },
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.ADMIN;
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
         }
     }

@@ -54,7 +54,7 @@ namespace BoOp.UIConsole
 
         static void testbarcode()
         {
-            var temp = Utils.GenerateUniqueBarcode(new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN = "213231-3123", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A" } });
+            var temp = Utils.GenerateUniqueBookBarcodeString(new BuchModel() { BasicInfos = new BasicBuchModel() { Altersvorschlag = "ab 12", Auflage = 2, Author = "Domi", ISBN = "213231-3123", Titel = "Das Leben.", Verlag = "Selfmade", Regal = "5A" } });
             Console.WriteLine(temp);
         }
 

@@ -17,6 +17,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand CreateBarcodeCommand { get; set; }
 
         //user info attributes
         private string _vorname;

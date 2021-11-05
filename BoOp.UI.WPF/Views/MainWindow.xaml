@@ -11,9 +11,8 @@
         Title="Book Options"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        WindowStyle="None"
-        >
-    
+        WindowStyle="None">
+
     <Window.Resources>
 
         <DataTemplate x:Key="LoginViewTemplate">
