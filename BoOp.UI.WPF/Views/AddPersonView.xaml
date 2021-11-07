@@ -21,13 +21,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(SCANNEN)"/>
-        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Ausweis Scannen:"/>
         <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Vorname:"/>
         <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Nachname:"/>
         <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Passwort:"/>
@@ -39,7 +37,6 @@
         <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Nicht erforderlich):"/>
         <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Email:"/>
 
-        <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding AusweisID}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="1" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="3" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" HorizontalAlignment="Left"/>
@@ -51,32 +48,14 @@
             <ComboBoxItem Content="Admin"/>
         </ComboBox>
 
-        <!-- geburtstag -->
-        <Grid Grid.Row="5" Grid.Column="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <Label VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Tag:"/>
-            <TextBox Text="{Binding GebTag}" HorizontalAlignment="Left" Width="45" Height="20"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-            <Label VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Monat:"/>
-            <TextBox Text="{Binding GebMonat}" HorizontalAlignment="Center" Width="45" Height="20"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Orientation="Horizontal">
-            <Label VerticalAlignment="Center" HorizontalContentAlignment="Right" Content="Jahr:"/>
-            <TextBox Text="{Binding GebJahr}" HorizontalAlignment="Center" Width="45" Height="20"/>
-            </StackPanel>
-        </Grid>
+        <Calendar Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" SelectedDate="{Binding Geburtstag}" DisplayDate="{Binding Geburtstag}"/>
 
         <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="7" Grid.Column="3" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" HorizontalAlignment="Left"/>
 
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="8" Grid.Column="3">
+        <CheckBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"  IsChecked="{Binding AddToPrintList}"  Content="Benutzerausweis zu Druckliste hinzufügen" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0"/>
+        
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
             <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen"/>
             <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>

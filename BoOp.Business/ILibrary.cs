@@ -55,7 +55,8 @@ namespace BoOp.Business
         // Edit User Details
         public void EditUserDetails(PersonModel user);
 
-
+        // Check if UserID already exists
+        public bool CheckAvailabilityUserID(string userID);
 
     }
 }

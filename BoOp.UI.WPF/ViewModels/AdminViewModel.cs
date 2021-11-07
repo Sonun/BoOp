@@ -22,26 +22,17 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<BuchModel> _currentList, _originalList;
         private ObservableCollection<PersonViewModel> _userList;
         private ObservableCollection<PersonModel> _currentUserList, _originalUserList;
-        private ObservableCollection<ExemplarViewModel> _currentLendedList;
+        private ObservableCollection<ExemplarViewModel> _lendedBookList;
         private PersonModel _user;
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
         private string _allBookSearchWord, _userSearchWord, _lendedBooksSearchWord;
 
         public static ObservableCollection<ExemplarViewModel> StaticBookPrintList;
+        public static ObservableCollection<PersonViewModel> StaticUserIDPrintList;
 
-        public ObservableCollection<ExemplarViewModel> BookPrintList { get {  return StaticBookPrintList;  } }
+        public ObservableCollection<ExemplarViewModel> BookPrintList { get {  return StaticBookPrintList;  }set { OnPropertyChanged(); } }
+        public ObservableCollection<PersonViewModel> UserIDPrintList { get { return StaticUserIDPrintList; } set { OnPropertyChanged(); } }
 
-        public int BarcodeAmount 
-            { 
-                get 
-                    {
-                    if (StaticBookPrintList != null)
-                    {
-                        return BookPrintList.Count;
-                    }
-                    return 0;
-                }
-            }
 
         //button commands
         public DelegateCommand BackCommand { get; set; }
@@ -49,6 +40,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
         public DelegateCommand PrintBookBarcodesCommand { get; set; }
+        public DelegateCommand PrintUserCardsCommand { get; set; }
         public DelegateCommand CloseApplicationCommand { get; set; }
 
         //context menu commands
@@ -80,7 +72,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortLendedName { get; set; }
         public DelegateCommand SortLendedDate { get; set; }
 
-        public ObservableCollection<ExemplarViewModel> LendedBookList { get { return _currentLendedList;  } set { _currentLendedList = value; } }
+
         public Rechtelevel UserRights { get; }
 
         //searchword propertys
@@ -113,6 +105,19 @@ namespace BoOp.UI.WPF.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<ExemplarViewModel> LendedBookList 
+        { 
+            get 
+                { 
+                return _lendedBookList; 
+                } 
+            set 
+                {
+                _lendedBookList = value; 
+                OnPropertyChanged(); 
+                } 
+        }
+
 
         public AdminViewModel(INavigationService navigationService, ILibrary library, PersonModel user, Dispatcher dispatcher)
         {
@@ -125,6 +130,7 @@ namespace BoOp.UI.WPF.ViewModels
             _originalList = _library.GetAllBooks();
             _currentList = _originalList;
             UpdateBooklist(_currentList);
+            LendedBookList = new ObservableCollection<ExemplarViewModel>();
             UpdateLendedBooklist(_originalList);
 
             _originalUserList = _library.GetAllUsers();
@@ -132,7 +138,6 @@ namespace BoOp.UI.WPF.ViewModels
             UpdateUserlist(_currentUserList);
 
             UserRights = user.Rechte;
-            LendedBookList = new ObservableCollection<ExemplarViewModel>();
 
             BackCommand = new DelegateCommand( 
                 x =>
@@ -170,6 +175,16 @@ namespace BoOp.UI.WPF.ViewModels
                 y => 
                 {
                     return StaticBookPrintList.Count != 0;
+                });
+
+            PrintUserCardsCommand = new DelegateCommand(
+                x =>
+                {
+
+                },
+                y =>
+                {
+                    return true;
                 });
 
             //SortTitleCommand
@@ -353,7 +368,7 @@ namespace BoOp.UI.WPF.ViewModels
             BookList = new ObservableCollection<BookViewModel>();
             foreach (var book in booklist)
             {
-                BookList.Add(new BookViewModel(book, _navigationService, _library, _user, null, this));
+                BookList.Add(new BookViewModel(book, _navigationService, _library, _user, this));
             }
         }
 
@@ -375,7 +390,7 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (exemplar.LendBy != null)
                     {
-                        LendedBookList.Add(new ExemplarViewModel(exemplar, book));
+                        LendedBookList.Add(new ExemplarViewModel(exemplar, book, this));
                     }
                 }
             }

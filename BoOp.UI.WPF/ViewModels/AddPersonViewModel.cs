@@ -25,13 +25,24 @@ namespace BoOp.UI.WPF.ViewModels
         private string _passwort;
         private string _rechte;
         private int _rechteAsInt;
-        private string _gebTag;
-        private string _gebMonat;
-        private string _gebJahr;
         private string _telefon;
         private string _email;
+        private DateTime _geburtstag;
+        private bool _addToPrintList;
 
         //user Info Propertys
+        public bool AddToPrintList
+        {
+            get
+            {
+                return _addToPrintList;
+            }
+            set
+            {
+                _addToPrintList = value;
+                OnPropertyChanged();
+            }
+        }
         public string Vorname {
             get 
             {
@@ -83,41 +94,15 @@ namespace BoOp.UI.WPF.ViewModels
             }
         }
 
-        public string GebTag
+        public DateTime Geburtstag
         {
             get
             {
-                return _gebTag;
+                return _geburtstag;
             }
             set
             {
-                _gebTag = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebMonat
-        {
-            get
-            {
-                return _gebMonat;
-            }
-            set
-            {
-                _gebMonat = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GebJahr
-        {
-            get
-            {
-                return _gebJahr;
-            }
-            set
-            {
-                _gebJahr = value;
+                _geburtstag = value;
                 OnPropertyChanged();
             }
         }
@@ -153,15 +138,14 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _navigationService = navigationService;
 
+            AddToPrintList = true;
             Vorname = "";
             Nachname = "";
             Passwort = "";
             Rechte = "Leser";
-            GebTag = "";
-            GebMonat = "";
-            GebJahr = "";
             Telefon = "";
             Email = "";
+            Geburtstag = new DateTime(2000, 1, 1);
 
             CancelCommand = new DelegateCommand(
                 x => 
@@ -188,14 +172,7 @@ namespace BoOp.UI.WPF.ViewModels
                             break;
                     }
 
-                    //biboteam darf keinen admin hinzufügen
-                    if (_rechteAsInt == 8 && user.Rechte <= Rechtelevel.BIBOTEAM)
-                    {
-                        MessageBox.Show("du darfst keinen Admin hinzufügen");
-                        return;
-                    }
-
-                    if (_vorname.Equals("") || _nachname.Equals("") || _gebTag.Equals("") || _gebMonat.Equals("") || _gebJahr.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
+                    if (_vorname.Equals("") || _nachname.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
                     {
                         MessageBox.Show("Bitte fülle alle Nötigen felder aus!");
                         return;
@@ -207,16 +184,23 @@ namespace BoOp.UI.WPF.ViewModels
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = new DateTime(int.Parse(_gebJahr), int.Parse(_gebMonat), int.Parse(_gebTag)),
+                        Geburtsdatum = Geburtstag,
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
 
                     //add barcode to user
-                    newUser.AusweisID = Utils.GenerateUniqueUserBarcodeString(newUser);
-
+                    do
+                    {
+                        newUser.AusweisID = Utils.GenerateUniqueUserIDString();
+                    } while (!_library.CheckAvailabilityUserID(newUser.AusweisID));
+                    
                     _library.AddUser(newUser);
 
+                    if (AddToPrintList)
+                    {
+                        AdminViewModel.StaticUserIDPrintList.Add(new Common.PersonViewModel(newUser, navigationService, library, user, null));
+                    }
                     _navigationService.ShowAdminView(user);
                 });
         }

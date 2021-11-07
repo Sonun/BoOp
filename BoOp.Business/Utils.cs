@@ -532,29 +532,21 @@ namespace BoOp.Business
             return barcodeAsString;
         }
 
-        public static string GenerateUniqueUserBarcodeString(PersonModel user)
+        public static string GenerateUniqueUserIDString()
         {
-            // Beispiel für einen Barcode:
-            // Usr0000010
 
-            if (user != null)
-            {
-                return null;
-            }
+            StringBuilder builder = new StringBuilder();
+            Enumerable
+               .Range(65, 26)
+                .Select(e => ((char)e).ToString())
+                .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+                .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
+                .OrderBy(e => Guid.NewGuid())
+                .Take(8)
+                .ToList().ForEach(e => builder.Append(e));
+            string id = builder.ToString();
 
-            //add leading 0's untill the lenght is 6
-            var barcodeId = user.Id.ToString();
-            while (barcodeId.Length <= 6)
-            {
-                barcodeId = "0" + barcodeId;
-            }
-
-            var barcodeAsString = "Usr" + barcodeId;
-
-            //GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
-            //MyBarCode.SaveAsPdf(user.Vorname + " " + user.Nachname + ".pdf");
-
-            return barcodeAsString;
+            return id;
         }
 
         /// <summary>

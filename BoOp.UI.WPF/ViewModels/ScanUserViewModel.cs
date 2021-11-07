@@ -33,11 +33,12 @@ namespace BoOp.UI.WPF.ViewModels
             if  (LogoutTimer != null) LogoutTimer.Stop();
             LogoutTimer = null;
             AdminViewModel.StaticBookPrintList = new System.Collections.ObjectModel.ObservableCollection<Common.ExemplarViewModel>();
+            AdminViewModel.StaticUserIDPrintList = new System.Collections.ObjectModel.ObservableCollection<Common.PersonViewModel>();
 
             if(_library.GetAllUsers().Count <= 0)
             {
                 //standard benutzer
-                _library.AddUser(new PersonModel{AusweisID = "maskenpflicht", Vorname = "Rick", Nachname = "Snachez", Geburtsdatum = new DateTime(2011, 11, 11), Telefonnummer="00", Rechte = Rechtelevel.ADMIN, EMail="00", PasswortHash= "C71FC1B21A6824082BB07D3BF6695D4737D8691B57CEB34E592A8BDE11CB4EA3" });
+                _library.AddUser(new PersonModel{AusweisID = "RickSanchez", Vorname = "Rick", Nachname = "Sanchez", Geburtsdatum = new DateTime(2011, 11, 11), Telefonnummer="00", Rechte = Rechtelevel.ADMIN, EMail="00", PasswortHash= "C71FC1B21A6824082BB07D3BF6695D4737D8691B57CEB34E592A8BDE11CB4EA3" });
             }
 
             LoginButtonCommand = new DelegateCommand

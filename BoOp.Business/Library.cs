@@ -205,9 +205,9 @@ namespace BoOp.Business
         public void AddUser(PersonModel user)
         {
             string sqlString = "INSERT INTO Personen(Vorname, Nachname, Geburtsdatum, Telefonnummer, Rechte, Email, PasswortHASH, AusweisID) " +
-                "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail, @pass, @bar);";
+                "VALUES(@Vorname, @Nachname, @Geburtsdatum, @Telefonnummer, @Rechte, @EMail, @pass, @AusweisID);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, bar=user.AusweisID, Rechte = user.Rechte, user.EMail }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, Rechte = user.Rechte, user.EMail, user.AusweisID }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)
@@ -428,6 +428,7 @@ namespace BoOp.Business
             {
                 string sql = "SELECT * FROM Personen";
                 person = _db.LoadData<PersonModel, dynamic>(sql, new { }, _connectionString)
+                    .Where(x => x.AusweisID != null)
                     .Single(x => { return x.AusweisID.Equals(ausweisID); });
             }
             catch (Exception)
@@ -500,6 +501,19 @@ namespace BoOp.Business
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Check if UserID is available
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public bool CheckAvailabilityUserID(string userID)
+        {
+            string sql = "SELECT * FROM Personen WHERE AusweisID = @AusweisID";
+            var userExists = _db.LoadData<PersonModel, dynamic>(sql, new { AusweisID = userID }, _connectionString).SingleOrDefault();
+
+            return userExists == null;
         }
     }
 }

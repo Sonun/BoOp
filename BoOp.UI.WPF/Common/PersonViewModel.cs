@@ -19,6 +19,7 @@ namespace BoOp.UI.WPF.Common
 
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand RemoveUserCommand { get; set; }
+        public DelegateCommand DeleteFromListCommand { get; set; }
 
         public PersonViewModel(PersonModel personModel, INavigationService navigationService, ILibrary library, PersonModel editor, AdminViewModel adminViewModel)
         {
@@ -36,7 +37,7 @@ namespace BoOp.UI.WPF.Common
                         // bearbeiten von benutzer "maskenpflicht" nicht möglich, ansonsten nur untergestellte
                         return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                     });
-
+            // Remove user from db --> used in AdminViewModel
             RemoveUserCommand = new DelegateCommand(
                 x =>
                 {
@@ -62,7 +63,15 @@ namespace BoOp.UI.WPF.Common
                     // löschen von benutzer "maskenpflicht" nicht möglich, ansonsten nur untergestellte
                     return Model.AusweisID.Equals("maskenpflicht") ? false : editor.Rechte >= Rechtelevel.BIBOTEAM;
                 });
-            
+
+            DeleteFromListCommand = new DelegateCommand(
+                x =>
+                {
+                    var deleteModel = AdminViewModel.StaticUserIDPrintList.SingleOrDefault(x => x.Model.Id == Model.Id);
+                    AdminViewModel.StaticUserIDPrintList.Remove(deleteModel);
+                });
+
+
         }
     }
 }

@@ -27,9 +27,14 @@
                 <Button Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintBookBarcodesCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text=" " FontSize="12" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding BarcodeAmount}" FontSize="12" HorizontalAlignment="Center"/>
-                            <TextBlock Text="  Barcodes drucken " FontSize="12"/>
+                            <TextBlock Text="  Barcodes PDF speichern " FontSize="12"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintUserCardsCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="  Ausweise PDF speichern " FontSize="12"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -265,7 +270,7 @@
                         </Grid>
 
                         <!-- grid for book titles -->
-                        <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
+                        <Grid Grid.Row="1" Background="#70C6E1" Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="*"/>
@@ -299,7 +304,7 @@
                         </Grid>
 
                         <!-- lendedbooklist grid -->
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="2">
                             <!-- lendedbooklist -->
                             <ScrollViewer Style="{StaticResource LeftScrollViewer}">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBookList}">
@@ -403,7 +408,74 @@
                         </Grid>
                     </Grid>
                 </Expander>
-                
+
+                <!--PRINT USER ID LIST-->
+                <Expander Background="{StaticResource Secondary}" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                    <Expander.Header>
+                        <Border BorderThickness="0,1,0,1" >
+                            <TextBlock Text="Benutzerausweise in Druckliste" Style="{StaticResource HeaderStyle}"/>
+                        </Border>
+                    </Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- grid for book titles -->
+                        <Grid Grid.Row="0" Background="#70C6E1" Margin="10, 2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                                <TextBlock Text="Vorname"/>
+                            </Button>
+                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                                <TextBlock Text="Nachname"/>
+                            </Button>
+                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                                <TextBlock Text="Geburtstag"/>
+                            </Button>
+                            <Button Grid.Column="3" >
+                                <TextBlock Text="Ausweisnummer"/>
+                            </Button>
+                        </Grid>
+
+                        <!-- printbooklist grid -->
+                        <Grid Grid.Row="1">
+                            <!-- printbooklist -->
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                                <ListView Grid.Column="0" Margin="10"  x:Name="PrintUserIDListView" ItemsSource="{Binding UserIDPrintList}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="common:PersonViewModel">
+                                            <Grid Style="{StaticResource ListViewItemStyle}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                                <Grid.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="Löschen" Command="{Binding DeleteFromListCommand}"/>
+                                                    </ContextMenu>
+                                                </Grid.ContextMenu>
+                                                <Grid.ColumnDefinitions >
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="1.5*"/>
+                                                    <ColumnDefinition Width="1.2*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock FontSize="12" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Vorname}"/>
+                                                <TextBlock FontSize="12" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.Nachname}"/>
+                                                <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.GeburtstagAsString}"/>
+                                                <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.AusweisID}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Expander>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
