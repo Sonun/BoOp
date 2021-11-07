@@ -190,11 +190,12 @@ namespace BoOp.UI.WPF.ViewModels
                     };
 
                     //add barcode to user
-                    // ToDo: Henne-EI Problem: GenerateUniqueUserBarcodeString method needs DB User ID to generate valuable AusweisID. User can't be added to DB without an AusweisID
-
+                    do
+                    {
+                        newUser.AusweisID = Utils.GenerateUniqueUserIDString();
+                    } while (!_library.CheckAvailabilityUserID(newUser.AusweisID));
+                    
                     _library.AddUser(newUser);
-                    newUser.Id = library.GetUserID(newUser);
-                    newUser.AusweisID = Utils.GenerateUniqueUserBarcodeString(newUser);
 
                     if (AddToPrintList)
                     {

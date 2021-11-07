@@ -210,12 +210,6 @@ namespace BoOp.Business
             _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.Geburtsdatum, user.Telefonnummer, pass=user.PasswortHash, Rechte = user.Rechte, user.EMail, user.AusweisID }, _connectionString);
         }
 
-        public int GetUserID(PersonModel user)
-        {
-            string sql = "SELECT Id FROM Personen WHERE Vorname = @Vorname AND Nachname = @Nachname;";
-            return _db.LoadData<int, dynamic>(sql, new { user.Vorname, user.Nachname }, _connectionString).FirstOrDefault();
-        }
-
         public void RemoveUser(PersonModel user)
         {
             string sqlstring = $"DELETE From Personen Where Id=@Id";
@@ -507,6 +501,19 @@ namespace BoOp.Business
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Check if UserID is available
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public bool CheckAvailabilityUserID(string userID)
+        {
+            string sql = "SELECT * FROM Personen WHERE AusweisID = @AusweisID";
+            var userExists = _db.LoadData<PersonModel, dynamic>(sql, new { AusweisID = userID }, _connectionString).SingleOrDefault();
+
+            return userExists == null;
         }
     }
 }
