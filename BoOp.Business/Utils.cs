@@ -574,7 +574,6 @@ namespace BoOp.Business
             }
 
             bitmap.Save("image.png");
-
             gr.Dispose();
         }
     }
