@@ -67,7 +67,7 @@ namespace BoOp.UI.WPF.Common
             DeleteFromListCommand = new DelegateCommand(
                 x =>
                 {
-                    var deleteModel = AdminViewModel.StaticUserIDPrintList.SingleOrDefault(x => x.Model.Id == Model.Id);
+                    var deleteModel = AdminViewModel.StaticUserIDPrintList.Single(x => x.Model.AusweisID == Model.AusweisID);
                     AdminViewModel.StaticUserIDPrintList.Remove(deleteModel);
                 });
 
