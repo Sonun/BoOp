@@ -534,7 +534,6 @@ namespace BoOp.Business
 
         public static string GenerateUniqueUserIDString()
         {
-
             StringBuilder builder = new StringBuilder();
             Enumerable
                .Range(65, 26)
@@ -550,10 +549,10 @@ namespace BoOp.Business
         }
 
         /// <summary>
-        /// creates a pdf with multiple barcodes
+        /// creates a png with multiple barcodes
         /// </summary>
         /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
-        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList)
+        public static void GenerateMultipleBarcodePNG(List<(string barcode, string name)> tupelList)
         {
             var fullBarcodeHeight = 100;
 
@@ -575,6 +574,16 @@ namespace BoOp.Business
 
             bitmap.Save("image.png");
             gr.Dispose();
+        }
+
+        /// <summary>
+        /// creates a pdf with multiple barcodes
+        /// </summary>
+        /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
+        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList)
+        {
+            //ToDo: ...
+            throw new NotImplementedException();
         }
     }
 }
