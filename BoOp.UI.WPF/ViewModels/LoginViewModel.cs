@@ -18,7 +18,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public string Password
         {
-            get
+            private get
             {
                 return _password;
             }

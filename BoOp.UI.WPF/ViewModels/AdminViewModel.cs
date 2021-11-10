@@ -39,9 +39,11 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
+
+        //print commands 
         public DelegateCommand PrintBookBarcodesCommand { get; set; }
         public DelegateCommand PrintUserCardsCommand { get; set; }
-        public DelegateCommand CloseApplicationCommand { get; set; }
 
         //context menu commands
         public DelegateCommand EditBookCommand { get; set; }
@@ -63,7 +65,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortISBNCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
 
-        //book searche commands
+        //book search commands
         public DelegateCommand SortVornameCommand { get; set; }
         public DelegateCommand SortNachnameCommand { get; set; }
         public DelegateCommand SortRechteCommand { get; set; }
@@ -180,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                 },
                 y =>
                 {
-                    return true;
+                    return StaticUserIDPrintList.Count != 0;
                 });
 
             //SortTitleCommand
