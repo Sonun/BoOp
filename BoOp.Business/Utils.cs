@@ -583,8 +583,8 @@ namespace BoOp.Business
         /// <param name="tupelList">list of infos to be printed</param>
         /// <param name="path">path to put the directory</param>
         /// <param name="benutzerOderBuch"></param>
-        /// <param name="username"></param>
-        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList, bool benutzerOderBuch, string username, string path)
+        /// <param name="nameDesErstellers"></param>
+        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList, bool benutzerOderBuch, string nameDesErstellers, string path)
         {
             //register different encoding provider
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -607,7 +607,7 @@ namespace BoOp.Business
             {
                 //create pdf header
                 document.Info.Title = "BoOp generierter Barcode";
-                document.Info.Author = username;
+                document.Info.Author = nameDesErstellers;
                 document.Info.Subject = (benutzerOderBuch ? "ausweis" : "bücher")+ " Barcode";
                 document.Info.CreationDate = now;
 
@@ -661,7 +661,7 @@ namespace BoOp.Business
                 }
 
                 //crete dir for the pdf files
-                string dir = path + "\\BoOp_PDF_dateien\\" + username + "\\" + (benutzerOderBuch ? "ausweis" : "bücher");
+                string dir = path + "\\BoOp_PDF_dateien\\" + nameDesErstellers + "\\" + (benutzerOderBuch ? "ausweis" : "bücher");
                 
                 //check if path exists and create if it doesnt
                 if (!Directory.Exists(dir))

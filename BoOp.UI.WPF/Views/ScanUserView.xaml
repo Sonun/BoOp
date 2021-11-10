@@ -19,20 +19,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border  Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Unavailable}" BorderBrush="{StaticResource Secondary}" Padding="2">
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Unavailable}" BorderBrush="{StaticResource Secondary}" Padding="2">
             <Grid Background="{StaticResource Secondary}">
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                <!-- willkommensnachricht in die BoOp -->
+                <Label xml:space="preserve" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontStyle="Italic" FontWeight="Bold" FontFamily="Comic Sans MS">Willkommen zu Book Options
+             BoOp
+                </Label>
+                <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
                     <StackPanel Orientation="Vertical" Grid.Row="0">
                         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Content="Bitte Scann deine Karte mit dem Kartenleser!"/>
                         <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding PersonBarcoded}"/>
                     </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="{Binding LogoutWarning}" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding LoginButtonCommand}"/>
                 </StackPanel>
