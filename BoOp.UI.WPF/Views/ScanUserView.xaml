@@ -19,9 +19,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border  Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Unavailable}" BorderBrush="{StaticResource Secondary}" Padding="2">
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Unavailable}" BorderBrush="{StaticResource Secondary}" Padding="2">
             <Grid Background="{StaticResource Secondary}">
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />

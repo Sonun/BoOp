@@ -52,12 +52,6 @@ namespace BoOp.UI.WPF.ViewModels
         {
             _navigationService = navigationservice;
             _webClient = new WebClient();
-            
-            if (user.Rechte < Rechtelevel.BIBOTEAM)
-            {
-                _navigationService.ShowLibraryView(user);
-                return;
-            }
 
             _library = library;
             AddPrintList = true;

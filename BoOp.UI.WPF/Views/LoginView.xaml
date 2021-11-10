@@ -34,7 +34,7 @@
                         <Label Content="Benutzer:" FontSize="16" />
                         <Label Content="{Binding Username}"/>
                         <Label Content="Passwort:" FontSize="16" />
-                        <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Password}"/>
+                        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" PasswordChar="#" Style="{StaticResource PasswordBoxStyle}"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">

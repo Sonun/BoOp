@@ -39,9 +39,11 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
         public DelegateCommand AddBookCommand { get; set; }
+        public DelegateCommand CloseApplicationCommand { get; set; }
+
+        //print commands 
         public DelegateCommand PrintBookBarcodesCommand { get; set; }
         public DelegateCommand PrintUserCardsCommand { get; set; }
-        public DelegateCommand CloseApplicationCommand { get; set; }
 
         //context menu commands
         public DelegateCommand EditBookCommand { get; set; }
@@ -63,7 +65,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SortISBNCommand { get; set; }
         public DelegateCommand SortRatingCommand { get; set; }
 
-        //book searche commands
+        //book search commands
         public DelegateCommand SortVornameCommand { get; set; }
         public DelegateCommand SortNachnameCommand { get; set; }
         public DelegateCommand SortRechteCommand { get; set; }
@@ -99,11 +101,7 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 return _bookList;
             }
-            set
-            {
-                _bookList = value;
-                OnPropertyChanged();
-            }
+            set { SetValue(ref _bookList, value); }
         }
         public ObservableCollection<ExemplarViewModel> LendedBookList 
         { 
@@ -154,7 +152,7 @@ namespace BoOp.UI.WPF.ViewModels
                 }, 
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                    return user.Rechte >= Rechtelevel.HELFER;
                 });
             
             AddBookCommand = new DelegateCommand(
@@ -164,7 +162,7 @@ namespace BoOp.UI.WPF.ViewModels
                 },
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                    return user.Rechte >= Rechtelevel.HELFER;
                 });
 
             PrintBookBarcodesCommand = new DelegateCommand(
@@ -184,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                 },
                 y =>
                 {
-                    return true;
+                    return StaticUserIDPrintList.Count != 0;
                 });
 
             //SortTitleCommand
@@ -359,6 +357,10 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         Environment.Exit(0);
                     }
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
         }
 
@@ -384,8 +386,8 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void UpdateLendedBooklist(ObservableCollection<BuchModel> booklist)
         {
-            
-            LendedBookList.Clear();
+            LendedBookList = new ObservableCollection<ExemplarViewModel>();
+
             foreach (var book in booklist)
             {
                 foreach (var exemplar in book.Exemplare)
