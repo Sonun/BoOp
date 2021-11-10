@@ -29,9 +29,11 @@ namespace BoOp.UI.WPF.Common
             Model = model;
             BuchModel = buch;
             AdminViewModel = adminViewModel;
+            
             ShowUserCommand = new DelegateCommand(x =>
             {
-                //_navigationService.ShowUserView(Model.LendBy, )
+                var userBooks = adminViewModel.GetLendedBooksFromUser(model.LendBy);
+                _navigationService.ShowUserView(userBooks, model.LendBy, adminViewModel.LoggedinUser);
             });
 
             DeleteFromListCommand = new DelegateCommand(x =>

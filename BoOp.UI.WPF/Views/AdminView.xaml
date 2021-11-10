@@ -218,8 +218,10 @@
                                             </Grid.InputBindings>
                                             <Grid.ContextMenu>
                                                 <ContextMenu>
-                                                    <MenuItem Header="Person Bearbeiten" Command="{Binding EditUserCommand}"/>
-                                                    <MenuItem Header="Person Löschen" Command="{Binding RemoveUserCommand}"/>
+                                                    <MenuItem Header="Benutzer bearbeiten" Command="{Binding EditUserCommand}"/>
+                                                    <MenuItem Header="Benutzer löschen" Command="{Binding RemoveUserCommand}"/>
+                                                    <MenuItem Header="Benutzer anzeigen" Command="{Binding ShowUserCommand}"/>
+                                                    <MenuItem Header="Benutzerausweis zur Druckliste hinzufügen" Command="{Binding AddPrintListCommand}"/>
                                                 </ContextMenu>
                                             </Grid.ContextMenu>
                                             <Grid.ColumnDefinitions >

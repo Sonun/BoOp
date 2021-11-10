@@ -661,14 +661,14 @@ namespace BoOp.Business
                 }
 
                 //crete dir for the pdf files
-                string dir = path + "\\BoOp_PDF_dateien\\" + nameDesErstellers + "\\" + (benutzerOderBuch ? "ausweis" : "bücher");
+                string dir = path + "\\BoOp_PDF_Dateien\\" + nameDesErstellers + "\\" + (benutzerOderBuch ? "Ausweise" : "Bücher");
                 
                 //check if path exists and create if it doesnt
                 if (!Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
 
                 //save the pdf in dir
-                document.Save((dir + "\\" + (benutzerOderBuch ? "ausweis" : "bücher") + "_" + (now.ToString("g")).Replace(":", "-")) + ".pdf");
+                document.Save((dir + "\\" + (benutzerOderBuch ? "Ausweise" : "Bücher") + "_" + (now.ToString("g")).Replace(":", "-")) + ".pdf");
             }
         }
 
