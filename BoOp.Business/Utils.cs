@@ -636,7 +636,7 @@ namespace BoOp.Business
                         XPen pen = new XPen(XColor.FromCmyk(0, 0, 0, 255), 1);
 
                         //image und point von der jeweiligen karte
-                        XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite/2) -1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite/2)) * (singleBarcodeHeight + offset)) + offset);
+                        XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite / 2) - 1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite / 2)) * (singleBarcodeHeight + offset)) + offset);
                         Stream imagestram = (ImageToStream(GenerateBarcode(tupelList[i]), ImageFormat.Png));
 
                         //draw rectanlge
@@ -656,7 +656,7 @@ namespace BoOp.Business
                         gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 50, point.Y + 110));
 
                         //text fuer name
-                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + tupelList[i].name, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + tupelList[i].name.Substring(0, (tupelList[i].name.Length > 32 ? 32 : tupelList[i].name.Length)), font, textBrush, new XPoint(point.X + 10, point.Y + 140));
                     }
                 }
 

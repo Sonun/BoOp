@@ -16,19 +16,10 @@ namespace BoOp.UIConsole
         {
             List<(string barcode, string name)> tupelList = new List<(string barcode, string name)>();
 
-            tupelList.Add(("Boop000051","Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("z2AB5a78", "name vom user")); 
-            tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user")); tupelList.Add(("Boop000051", "Herr der Ringe"));
-            tupelList.Add(("z2AB5a78", "name vom user"));
+            tupelList.Add(("Boop000051", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride"));
+            tupelList.Add(("z2AB5a78", "nameununununununun vom user"));
 
-            Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            Utils.GenerateMultipleBarcodePDF(tupelList, false, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
         }
 
         static void testaddUser()

@@ -8,10 +8,10 @@
         xmlns:viewModelUtils="clr-namespace:BoOp.UI.WPF.ViewModels.ViewModelUtils"
         xmlns:local="clr-namespace:BoOp.UI.WPF"
         mc:Ignorable="d"
-        Title="Book Options"
+        Title="BoOp - Book Options - BoOp"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
         >
     
     <Window.Resources>
