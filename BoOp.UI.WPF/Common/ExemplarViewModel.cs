@@ -1,5 +1,6 @@
 ﻿using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels;
+using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace BoOp.UI.WPF.Common
     public class ExemplarViewModel : ViewModel
     {
         private bool _isChecked;
+        private readonly INavigationService _navigationService;
+
         public  AdminViewModel AdminViewModel { get; private set; }
 
         public ExemplarModel Model { get; set; }
@@ -20,14 +23,17 @@ namespace BoOp.UI.WPF.Common
         public DelegateCommand DeleteFromListCommand { get; set; }
 
 
-        public ExemplarViewModel(ExemplarModel model, BuchModel buch, AdminViewModel adminViewModel = null)
+        public ExemplarViewModel(INavigationService navigationService, ExemplarModel model, BuchModel buch, AdminViewModel adminViewModel = null)
         {
+            _navigationService = navigationService;
             Model = model;
             BuchModel = buch;
             AdminViewModel = adminViewModel;
+            
             ShowUserCommand = new DelegateCommand(x =>
             {
-                
+                var userBooks = adminViewModel.GetLendedBooksFromUser(model.LendBy);
+                _navigationService.ShowUserView(userBooks, model.LendBy, adminViewModel.LoggedinUser);
             });
 
             DeleteFromListCommand = new DelegateCommand(x =>

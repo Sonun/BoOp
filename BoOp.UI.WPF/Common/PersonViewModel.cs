@@ -19,7 +19,9 @@ namespace BoOp.UI.WPF.Common
 
         public DelegateCommand EditUserCommand { get; set; }
         public DelegateCommand RemoveUserCommand { get; set; }
+        public DelegateCommand ShowUserCommand { get; set; }
         public DelegateCommand DeleteFromListCommand { get; set; }
+        public DelegateCommand AddPrintListCommand { get; set; }
 
         public PersonViewModel(PersonModel personModel, INavigationService navigationService, ILibrary library, PersonModel editor, AdminViewModel adminViewModel)
         {
@@ -70,8 +72,15 @@ namespace BoOp.UI.WPF.Common
                     var deleteModel = AdminViewModel.StaticUserIDPrintList.Single(x => x.Model.AusweisID == Model.AusweisID);
                     AdminViewModel.StaticUserIDPrintList.Remove(deleteModel);
                 });
-
-
+            ShowUserCommand = new DelegateCommand(x =>
+            {
+                var lendedBooks = adminViewModel.GetLendedBooksFromUser(personModel);
+                navigationService.ShowUserView(lendedBooks, personModel, editor);
+            });
+            AddPrintListCommand = new DelegateCommand(x =>
+            {
+                AdminViewModel.StaticUserIDPrintList.Add(this);
+            });
         }
     }
 }

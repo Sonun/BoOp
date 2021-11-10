@@ -27,6 +27,8 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _titleFlag, _authorFlag, _isbnFlag, _vornameFlag, _rechteFlag, _nachnameFlag, _lendeddateflag, _lendednameflag;
         private string _allBookSearchWord, _userSearchWord, _lendedBooksSearchWord;
 
+        public PersonModel LoggedinUser { get { return _user; } }
+
         public static ObservableCollection<ExemplarViewModel> StaticBookPrintList;
         public static ObservableCollection<PersonViewModel> StaticUserIDPrintList;
 
@@ -168,21 +170,39 @@ namespace BoOp.UI.WPF.ViewModels
             PrintBookBarcodesCommand = new DelegateCommand(
                 x =>
                 {
+                    var tupelList = new List<(string barcode, string name)>();
 
+                    foreach (var book in BookPrintList)
+                    {
+                        tupelList.Add((book.Model.BasicInfos.Barcode, book.BuchModel.BasicInfos.Titel + " - " + book.BuchModel.BasicInfos.Author));
+                    }
+                    Utils.GenerateMultipleBarcodePDF(tupelList, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
+                    MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
+                    StaticBookPrintList.Clear();
                 },
                 y => 
                 {
-                    return StaticBookPrintList.Count != 0;
+                    return BookPrintList.Count != 0;
                 });
 
             PrintUserCardsCommand = new DelegateCommand(
                 x =>
                 {
+                    var tupelList = new List<(string barcode, string name)>();
 
+                    foreach (var user in UserIDPrintList)
+                    {
+                        tupelList.Add((user.Model.AusweisID, user.Model.VorUndNachname));
+                    }
+                    Utils.GenerateMultipleBarcodePDF(tupelList, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
+                    MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
+                    StaticUserIDPrintList.Clear();
                 },
                 y =>
                 {
-                    return StaticUserIDPrintList.Count != 0;
+                    return UserIDPrintList.Count != 0;
                 });
 
             //SortTitleCommand
@@ -364,6 +384,22 @@ namespace BoOp.UI.WPF.ViewModels
                 });
         }
 
+        public List<ExemplarViewModel> GetLendedBooksFromUser(PersonModel user)
+        {
+            var list = new List<ExemplarViewModel>();
+            foreach (var book in BookList)
+            {
+                foreach (var exemplar in book.Model.Exemplare)
+                {
+                    if (user.AusweisID == exemplar.LendBy.AusweisID)
+                    {
+                        list.Add(new ExemplarViewModel(_navigationService, exemplar, book.Model));
+                    }
+                }
+            }
+            return list;
+        }
+
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
             _currentList = booklist;
@@ -394,7 +430,7 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (exemplar.LendBy != null)
                     {
-                        LendedBookList.Add(new ExemplarViewModel(exemplar, book, this));
+                        LendedBookList.Add(new ExemplarViewModel(_navigationService, exemplar, book, this));
                     }
                 }
             }

@@ -30,6 +30,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _schlagwoerter;
         private string _genres;
         private string _bookDetailsJSONLink = "";
+        private bool _addPrintList;
 
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
@@ -41,6 +42,7 @@ namespace BoOp.UI.WPF.ViewModels
         public int Exemplare { get { return _exemplare; } set { _exemplare = value; OnPropertyChanged(); } }
         public string Schlagwoerter { get { return _schlagwoerter; } set { _schlagwoerter = value; OnPropertyChanged(); } }
         public string Genres { get { return _genres; } set { _genres = value; OnPropertyChanged(); } }
+        public bool AddPrintList { get { return _addPrintList; } set { _addPrintList = value; OnPropertyChanged(); } }
 
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
@@ -52,6 +54,7 @@ namespace BoOp.UI.WPF.ViewModels
             _webClient = new WebClient();
 
             _library = library;
+            AddPrintList = true;
 
             Titel = "";
             Author = "";
@@ -132,6 +135,10 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         MessageBox.Show(e.Message);
                         return;
+                    }
+                    if (AddPrintList)
+                    {
+                        bookModel.Exemplare.ForEach(x => AdminViewModel.StaticBookPrintList.Add(new ExemplarViewModel(navigationservice, x, bookModel)));
                     }
 
                     _navigationService.ShowAdminView(user);

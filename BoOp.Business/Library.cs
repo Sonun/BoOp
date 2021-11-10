@@ -87,7 +87,8 @@ namespace BoOp.Business
                                                Nachname = personen.Nachname,
                                                Rechte = personen.Rechte,
                                                Telefonnummer = personen.Telefonnummer,
-                                               Vorname = personen.Vorname
+                                               Vorname = personen.Vorname,
+                                               AusweisID = personen.AusweisID
                                            }).FirstOrDefault()
                              }).ToList(),
 

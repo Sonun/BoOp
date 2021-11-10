@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="1080" d:DesignWidth="1920"
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddBookViewModel}">
 
@@ -14,10 +14,12 @@
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*" x:Name="TextBoxColumn"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -31,35 +33,35 @@
             <RowDefinition Height="1.35*"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
         <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
         <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
-        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
-        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
-        <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld, Scannbar):"/>
-        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN:"/>
-        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
-        <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
-        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
+        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
+        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
+        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld, Scannbar):"/>
+        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN:"/>
+        <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
+        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
+        <Label Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
 
-        <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Left" />
-        <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="6" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ISBN}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="8" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="9" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Left" />
+        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ISBN}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="8" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="9" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="10" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
 
-        <Button Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" Margin="10" Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SearchInfosCommand}" Content="Suche Infos"/>
-
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="2">
+        <Button Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left" Margin="10" Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SearchInfosCommand}" Content="Suche Infos"/>
+        <CheckBox Margin="10,0,0,0" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" Content="Exemplar Barcodes zur Druckliste hinzufügen" IsChecked="{Binding AddPrintList}"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="11" Grid.Column="2">
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Abrechen"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>
