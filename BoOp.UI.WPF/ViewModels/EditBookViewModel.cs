@@ -83,15 +83,24 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 var selectedExemplare = ExemplarViewModels.Where(x => x.IsChecked == true).ToList();
 
-                selectedExemplare.ForEach(x => 
+                if (selectedExemplare.Count > 0)
                 {
-                    var checkExemplar = AdminViewModel.StaticBookPrintList.SingleOrDefault(y => y.Model.BasicInfos.Barcode == x.Model.BasicInfos.Barcode);
-                    if (checkExemplar == null)
+                    selectedExemplare.ForEach(x =>
                     {
-                        AdminViewModel.StaticBookPrintList.Add(x);
-                    }
-                    
-                });
+                        var checkExemplar = AdminViewModel.StaticBookPrintList.SingleOrDefault(y => y.Model.BasicInfos.Barcode == x.Model.BasicInfos.Barcode);
+                        if (checkExemplar == null)
+                        {
+                            AdminViewModel.StaticBookPrintList.Add(x);
+                        }
+
+                    });
+                    MessageBox.Show(selectedExemplare.Count.ToString() + " Exemplar Barcode(s) wurden in die Druckliste aufgenommen.");
+                }
+                else
+                {
+                    MessageBox.Show("Es sind keine Exemplare ausgewählt. Bitte wählen Sie die Exemplare mit Hilfe der Checkbox aus, die Sie zur Druckliste hinzufügen möchten.");
+                }
+                
             });
 
             DeleteBooksCommand = new DelegateCommand(x =>

@@ -170,7 +170,7 @@ namespace BoOp.UI.WPF.ViewModels
             PrintBookBarcodesCommand = new DelegateCommand(
                 x =>
                 {
-
+                    
                 },
                 y => 
                 {
@@ -384,6 +384,8 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void UpdateLendedBooklist(ObservableCollection<BuchModel> booklist)
         {
+            
+            LendedBookList.Clear();
             foreach (var book in booklist)
             {
                 foreach (var exemplar in book.Exemplare)

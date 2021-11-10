@@ -1,7 +1,9 @@
 ﻿using BoOp.Business;
 using BoOp.DBAccessor.Models;
+using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
+using System.Collections.Generic;
 using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
@@ -80,6 +82,11 @@ namespace BoOp.UI.WPF.ViewModels
         public void ShowEditBookView(PersonModel user, BuchModel book, AdminViewModel adminViewModel)
         {
             CurrentViewModel = new EditBookViewModel(book, user, this, _library, adminViewModel);
+        }
+
+        public void ShowUserView(PersonModel personModel, List<ExemplarViewModel> exemplare)
+        {
+            CurrentViewModel = new ShowUserViewModel(personModel, exemplare);
         }
     }
 }
