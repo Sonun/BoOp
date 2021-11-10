@@ -150,7 +150,7 @@ namespace BoOp.UI.WPF.ViewModels
                 }, 
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                    return user.Rechte >= Rechtelevel.HELFER;
                 });
             
             AddBookCommand = new DelegateCommand(
@@ -160,7 +160,7 @@ namespace BoOp.UI.WPF.ViewModels
                 },
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                    return user.Rechte >= Rechtelevel.HELFER;
                 });
 
             PrintBookBarcodesCommand = new DelegateCommand(
@@ -355,6 +355,10 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         Environment.Exit(0);
                     }
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
         }
 
@@ -380,6 +384,8 @@ namespace BoOp.UI.WPF.ViewModels
 
         private void UpdateLendedBooklist(ObservableCollection<BuchModel> booklist)
         {
+            LendedBookList = new ObservableCollection<ExemplarViewModel>();
+
             foreach (var book in booklist)
             {
                 foreach (var exemplar in book.Exemplare)

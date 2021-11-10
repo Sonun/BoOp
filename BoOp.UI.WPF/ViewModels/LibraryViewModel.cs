@@ -89,7 +89,7 @@ namespace BoOp.UI.WPF.ViewModels
                 },
                 y =>
                 {
-                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                    return user.Rechte >= Rechtelevel.HELFER;
                 });
 
             //create booklist from library
