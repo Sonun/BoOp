@@ -364,6 +364,11 @@ namespace BoOp.UI.WPF.ViewModels
                 });
         }
 
+        public List<ExemplarViewModel> GetLendedBooksFromUser(PersonModel user)
+        {
+
+        }
+
         private void UpdateBooklist(ObservableCollection<BuchModel> booklist)
         {
             _currentList = booklist;
@@ -394,7 +399,7 @@ namespace BoOp.UI.WPF.ViewModels
                 {
                     if (exemplar.LendBy != null)
                     {
-                        LendedBookList.Add(new ExemplarViewModel(exemplar, book, this));
+                        LendedBookList.Add(new ExemplarViewModel(_navigationService, exemplar, book, this));
                     }
                 }
             }

@@ -138,7 +138,7 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                     if (AddPrintList)
                     {
-                        bookModel.Exemplare.ForEach(x => AdminViewModel.StaticBookPrintList.Add(new ExemplarViewModel(x, bookModel)));
+                        bookModel.Exemplare.ForEach(x => AdminViewModel.StaticBookPrintList.Add(new ExemplarViewModel(navigationservice, x, bookModel)));
                     }
 
                     _navigationService.ShowAdminView(user);

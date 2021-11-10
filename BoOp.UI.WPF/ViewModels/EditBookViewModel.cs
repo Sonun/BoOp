@@ -58,7 +58,7 @@ namespace BoOp.UI.WPF.ViewModels
             _library = library;
             _adminViewModel = adminViewModel;
           
-            BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(x, BuchModel, adminViewModel)));
+            BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(_navigationService,x, BuchModel, adminViewModel)));
             
             Schlagwoerter = "";
             Genres = "";
