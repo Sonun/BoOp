@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="3077106.png" />
     <None Remove="SQLiteDB\SQLiteBoOpDB.db" />
   </ItemGroup>
 
@@ -19,11 +20,18 @@
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BoOp.DBAccessor\BoOp.DBAccessor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="3077106.png" />
+    <Resource Include="Bilder\3077106.png" />
   </ItemGroup>
 
   <ItemGroup>

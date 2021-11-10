@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using BoOp.UI.WPF.ViewModels;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
 {

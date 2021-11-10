@@ -5,9 +5,16 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using BoOp.DBAccessor.Models;
-using BarcodeLib;
 using System.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Diagnostics;
+using BarcodeLib;
+using PdfSharp.Drawing.BarCodes;
+using PdfSharp.Drawing.Layout;
 using System.IO;
+using System.Drawing.Imaging;
+using System.Resources;
 
 namespace BoOp.Business
 {
@@ -552,38 +559,125 @@ namespace BoOp.Business
         /// creates a png with multiple barcodes
         /// </summary>
         /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
-        public static void GenerateMultipleBarcodePNG(List<(string barcode, string name)> tupelList)
+        private static Bitmap GenerateBarcode((string barcode, string name) tupel)
         {
-            var fullBarcodeHeight = 100;
+            var BarcodeHeight = 60;
+            var BarcodeWidth = 250;
 
-            Bitmap bitmap = new Bitmap(400, fullBarcodeHeight * tupelList.Count);
+            Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
 
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            gr.Clear(Color.Transparent);
 
-            for (int i = 0; i < tupelList.Count; i++)
-            {
-                var yOffset = fullBarcodeHeight * i;
-
-                gr.DrawString(tupelList[i].name, new Font("Times New Roman", 12.0f), Brushes.Black, 100, yOffset);
-                gr.DrawImage(new Barcode().Encode(TYPE.CODE39Extended, tupelList[i].barcode, Color.Black, Color.White, 300, 45), 0, yOffset + 20);
-                gr.DrawString(tupelList[i].barcode, new Font("Times New Roman", 12.0f), Brushes.Black, 100, yOffset + 65);
-            }
-
-            bitmap.Save("image.png");
+            gr.Clear(Color.White);
+            gr.DrawImage(new Barcode().Encode(TYPE.CODE128, tupel.barcode, Color.Black, Color.White, BarcodeWidth, BarcodeHeight), 0, 0);
+            
             gr.Dispose();
+            return bitmap;
         }
 
         /// <summary>
-        /// creates a pdf with multiple barcodes
+        /// creates a pdf with multiple barcodes or benutzerausweisen
         /// </summary>
-        /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
-        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList)
+        /// <param name="tupelList">list of infos to be printed</param>
+        /// <param name="path">path to put the directory</param>
+        /// <param name="benutzerOderBuch"></param>
+        /// <param name="username"></param>
+        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList, bool benutzerOderBuch, string username, string path)
         {
-            //ToDo: ...
-            throw new NotImplementedException();
+            //register different encoding provider
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            // DIN A4 210 x 297 mm
+            // ausweis 105 mm × 74 mm
+
+            //some vars
+            var now = DateTime.Now;
+            var kartenProSeite = 8;
+            var offset = 20;
+            var singleBarcodeWidth = 250;
+            var singleBarcodeHeight = 150;
+            var pdfPageheight = 297;
+            var pdfPageWidth = 210;
+            var pages = ((double)tupelList.Count / 6) > (int)tupelList.Count / kartenProSeite ? ((int)tupelList.Count / kartenProSeite) + 1 : (int)tupelList.Count / kartenProSeite;
+            var pageAmount = pages < 1 ? 1 : pages ;
+
+            using (PdfDocument document = new PdfDocument())
+            {
+                //create pdf header
+                document.Info.Title = "BoOp generierter Barcode";
+                document.Info.Author = username;
+                document.Info.Subject = (benutzerOderBuch ? "ausweis" : "bücher")+ " Barcode";
+                document.Info.CreationDate = now;
+
+                //make sure the font is embedded
+                var options = new XPdfFontOptions(PdfFontEmbedding.Always);
+
+                for(int j = 0; j < pageAmount; j++)
+                { 
+                    //create new pdf page
+                    PdfPage page = document.AddPage();
+                    page.Width = XUnit.FromMillimeter(pdfPageWidth);
+                    page.Height = XUnit.FromMillimeter(pdfPageheight);
+                }
+
+                for (int i = 0; i < tupelList.Count; i++)
+                {
+                    int currentPageIndex = i / kartenProSeite;
+                    Debug.WriteLine("current page : " + currentPageIndex);
+
+                    using (XGraphics gfx = XGraphics.FromPdfPage(document.Pages[currentPageIndex]))
+                    {
+                        //declare a font for drawing in the PDF
+                        XFont font = new XFont("Code EAN13", 12, XFontStyle.Regular, options);
+                        XBrush rectBrush = XBrushes.White;
+                        XBrush textBrush = XBrushes.Black;
+                        XPen pen = new XPen(XColor.FromCmyk(0, 0, 0, 255), 1);
+
+                        //image und point von der jeweiligen karte
+                        XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite/2) -1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite/2)) * (singleBarcodeHeight + offset)) + offset);
+                        Stream imagestram = (ImageToStream(GenerateBarcode(tupelList[i]), ImageFormat.Png));
+
+                        //draw rectanlge
+                        gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);
+
+                        //text fuer verein
+                        gfx.DrawString("Name der Ultra Coolen Schule", font, textBrush, new XPoint(point.X + 10, point.Y + 15));
+
+                        //image der schule
+                        var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/3077106.png";
+                        gfx.DrawImage(XImage.FromFile(picpath), point.X + 200, point.Y + 15, 40, 40);
+
+                        //barcode image
+                        gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
+
+                        //text fuer barcode
+                        gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 50, point.Y + 110));
+
+                        //text fuer name
+                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + tupelList[i].name, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+                    }
+                }
+
+                //crete dir for the pdf files
+                string dir = path + "\\BoOp_PDF_dateien\\" + username + "\\" + (benutzerOderBuch ? "ausweis" : "bücher");
+                
+                //check if path exists and create if it doesnt
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
+                //save the pdf in dir
+                document.Save((dir + "\\" + (benutzerOderBuch ? "ausweis" : "bücher") + "_" + (now.ToString("g")).Replace(":", "-")) + ".pdf");
+            }
+        }
+
+        private static Stream ImageToStream(Image image, ImageFormat format)
+        {
+            var stream = new MemoryStream();
+            image.Save(stream, format);
+            stream.Position = 0;
+            return stream;
         }
     }
 }
