@@ -22,7 +22,6 @@ namespace BoOp.UI.WPF.ViewModels
 
             backingField = newValue;
 
-            // ReSharper disable once ExplicitCallerInfoArgument
             OnPropertyChanged(propertyName);
             return true;
         }

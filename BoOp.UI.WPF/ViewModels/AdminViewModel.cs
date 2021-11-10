@@ -99,11 +99,7 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 return _bookList;
             }
-            set
-            {
-                _bookList = value;
-                OnPropertyChanged();
-            }
+            set { SetValue(ref _bookList, value); }
         }
         public ObservableCollection<ExemplarViewModel> LendedBookList 
         { 
