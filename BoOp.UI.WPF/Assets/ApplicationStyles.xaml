@@ -3,12 +3,12 @@
                     xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
                     xmlns:views="clr-namespace:BoOp.UI.WPF.Views">
 
-    <SolidColorBrush x:Key="Primary" Color="#82D5EF"/>
-    <SolidColorBrush x:Key="Secondary" Color="#70C6E1"/>
-    <SolidColorBrush x:Key="DropShadow" Color="#ccc"/>
-    <SolidColorBrush x:Key="Available" Color="#4ADB72"/>
-    <SolidColorBrush x:Key="Unavailable" Color="#EA3E3E"/>
-    <SolidColorBrush x:Key="MouseOverColor" Color="#eee"/>
+    <SolidColorBrush x:Key="Primary" Color="#ffb777"/>
+    <SolidColorBrush x:Key="Secondary" Color="#E2E8CE"/>
+    <SolidColorBrush x:Key="DropShadow" Color="#ACBFA4"/>
+    <SolidColorBrush x:Key="Available" Color="#262626"/>
+    <SolidColorBrush x:Key="Unavailable" Color="#FF1B1C"/>
+    <SolidColorBrush x:Key="MouseOverColor" Color="#ACBFA4"/>
 
     <Style x:Key="LeftScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -57,13 +57,13 @@
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type Grid}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource Primary}"/>
+                <Setter Property="Background" Value="{StaticResource Secondary}"/>
                 <Setter Property="Opacity" Value="0.8"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Primary}"/>
+                <Setter Property="Background" Value="{StaticResource DropShadow}"/>
                 <Setter Property="Opacity" Value="1"/>
-                <Setter Property="TextBlock.Foreground" Value="Chocolate"/>
+                <Setter Property="TextBlock.Foreground" Value="{StaticResource Available}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -94,7 +94,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="#eee" />
+                <Setter Property="Background" Value="#ACBFA4" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -140,7 +140,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="LoginTextBoxControlTemplate" TargetType="{x:Type TextBoxBase}">
-        <Border Background="{StaticResource Primary}"
+        <Border Background="{StaticResource DropShadow}"
                 x:Name="Bd" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
             <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
@@ -160,7 +160,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="PasswordBoxControlTemplate" TargetType="{x:Type PasswordBox}">
-        <Border Background="{StaticResource Primary}"
+        <Border Background="{StaticResource DropShadow}"
                 x:Name="Bd" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
             <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
@@ -237,7 +237,7 @@
         </Button>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#70C6E1" />
+                <Setter Property="Background" Value="#ACBFA4" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

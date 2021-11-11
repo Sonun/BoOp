@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Background="DarkGray">
+    <Grid Background="{StaticResource Available}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="380"/>
@@ -32,7 +32,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="{Binding LogoutWarning}" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Content="{Binding LogoutWarning}" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding LoginButtonCommand}" Focusable="False"/>
                 </StackPanel>
             </Grid>

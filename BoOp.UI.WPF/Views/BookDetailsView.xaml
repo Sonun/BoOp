@@ -23,13 +23,13 @@
 
         <!--HEADER-->
 
-        <Grid Grid.ColumnSpan="2" Background="Bisque">
-            <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="DarkBlue"/>
+        <Grid Grid.ColumnSpan="2" Background="{StaticResource Primary}">
+            <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="{StaticResource Available}"/>
             <Button Style="{StaticResource RoundedButtonStyle}" Content="Schließen" Command="{Binding CloseCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
         </Grid>
         
         <!--BOOK DETAILS-->
-        <Grid Grid.Column="0" Grid.Row="1" Background="Beige">
+        <Grid Grid.Column="0" Grid.Row="1" Background="{StaticResource Secondary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -123,11 +123,11 @@
             
             <!--REVIEWS-->
             <ScrollViewer  Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
-                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}" Background="Beige">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}" Background="{StaticResource Secondary}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:ReviewViewModel">
                             <StackPanel>
-                                <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid Background="{StaticResource DropShadow}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="1.5*"/>
                                         <ColumnDefinition Width="10*"/>
@@ -159,7 +159,7 @@
             </ScrollViewer>
         </Grid>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSeaGreen">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="{StaticResource Secondary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*" x:Name="TextBoxColumn"/>

@@ -10,7 +10,7 @@
       d:DesignHeight="920" d:DesignWidth="1080"
       Background="{StaticResource Primary}">
 
-    <Grid Background="{StaticResource Primary}">
+    <Grid Background="{StaticResource Available}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="380"/>
@@ -38,8 +38,8 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Sie werden danach" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Label Content="nicht mehr Automatisch ausgeloggt!" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Content="Sie werden danach" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Content="nicht mehr Automatisch ausgeloggt!" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding LoginCommand}"/>
                     <Button Style="{StaticResource RoundedButtonStyle}" Content="Abbrechen" Command="{Binding CancelCommand}"/>
                 </StackPanel>
