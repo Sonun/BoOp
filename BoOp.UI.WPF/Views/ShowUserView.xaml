@@ -25,7 +25,7 @@
             
             <Grid Grid.Row="1" Grid.Column="1" Background="{StaticResource Secondary}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
@@ -87,7 +87,7 @@
                 <Label Grid.Column="1" Content="Ausgeliehene Bücher" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <!-- grid for book titles -->
-                <Grid Grid.Row="1" Grid.Column="1" Background="#70C6E1" Margin="10, 2">
+                <Grid Grid.Row="1" Grid.Column="1" Background="#70C6E1" Margin="40,0,20,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.2*"/>
                         <ColumnDefinition Width="*"/>
@@ -113,7 +113,7 @@
                 </Grid>
 
                 <!-- lendedbooklist grid -->
-                <Grid Grid.Row="2" Grid.Column="1">
+                <Grid Grid.Row="2" Grid.Column="1" Margin="10">
                     <!-- lendedbooklist -->
                     <ScrollViewer Style="{StaticResource LeftScrollViewer}">
                         <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBooks}">

@@ -3,6 +3,7 @@ using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
@@ -22,6 +23,7 @@ namespace BoOp.UI.WPF.ViewModels
         private ObservableCollection<BuchModel> _originalList;
 
         private BookDetailsViewModel _bookDetailsViewModel;
+        private ShowUserViewModel _showUserViewModel;
         public BookDetailsViewModel BookDetailsViewModel 
         { 
             get 
@@ -33,6 +35,19 @@ namespace BoOp.UI.WPF.ViewModels
                 _bookDetailsViewModel = value;
                 OnPropertyChanged();
             } 
+        }
+
+        public ShowUserViewModel ShowUserViewModel
+        {
+            get
+            {
+                return _showUserViewModel;
+            }
+            set
+            {
+                _showUserViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
         //flags to enable reverse sorting
@@ -47,6 +62,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand LendBookCommand { get; set; }
         public DelegateCommand ReturnBookCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
+        public DelegateCommand YourAccountCommand { get; set; }
 
         private string _searchWord;
         public ComboBoxItemViewModel SelectedSearchBy { get; set; }
@@ -108,6 +124,13 @@ namespace BoOp.UI.WPF.ViewModels
             UpdateBooklist(_originalList);
 
             BookDetailsViewModel = new BookDetailsViewModel();
+            ShowUserViewModel = new ShowUserViewModel();
+
+            YourAccountCommand = new DelegateCommand(x =>
+            {
+                var lendedBooks = GetLendedBooksFromUser(LoggedInUser);
+                ShowUserViewModel = new ShowUserViewModel(navigationService, LoggedInUser, LoggedInUser, lendedBooks, this, true);
+            });
 
             //SortTitleCommand
             SortTitleCommand = new DelegateCommand(
@@ -253,6 +276,26 @@ namespace BoOp.UI.WPF.ViewModels
             _isbnFlag = false;
             _authorFlag = false;
             _titleFlag = false;
+        }
+
+        public List<ExemplarViewModel> GetLendedBooksFromUser(PersonModel user)
+        {
+            var list = new List<ExemplarViewModel>();
+            foreach (var book in BookList)
+            {
+                foreach (var exemplar in book.Model.Exemplare)
+                {
+                    if (exemplar.LendBy != null)
+                    {
+                        if (user.AusweisID == exemplar.LendBy.AusweisID)
+                        {
+                            list.Add(new ExemplarViewModel(_navigationService, exemplar, book.Model));
+                        }
+                    }
+
+                }
+            }
+            return list;
         }
     }
 }

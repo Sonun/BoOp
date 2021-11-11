@@ -8,7 +8,7 @@
              xmlns:common="clr-namespace:BoOp.UI.WPF.Common"
              d:DataContext="{d:DesignInstance Type=viewmodels:LibraryViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="920" d:DesignWidth="1080"
+             d:DesignHeight="1080" d:DesignWidth="1920"
              Background="White">
 
     <Grid x:Name="MainGrid">
@@ -20,16 +20,16 @@
         
         <Grid Grid.Row="0" Background="#82D5EF">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <!--TODO: icon should disappear when user clicks on the bar
                 alternatively: dont show searchbar and make icon a button, user clicks on button, searchbar fades in from left to right PS: animation-->
@@ -40,9 +40,8 @@
                 <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchCommand}">
                     <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
                 </Button>
-            </Grid>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Column="3" Orientation="Vertical">
                 <Label FontSize="14" Content="Suche nach:"/>
                 <ComboBox SelectedItem="{Binding SelectedSearchBy}" ItemsSource="{Binding SearchByList}" SelectedIndex="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <ComboBox.ItemTemplate>
@@ -53,11 +52,15 @@
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">
+            </Grid>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding YourAccountCommand}" Content="Dein Konto" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding ReturnBookCommand}" Content="Zurückgeben" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LendBookCommand}" Content="Ausleihen" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="3">
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="Ausloggen" Command="{Binding LogoutCommand}" />
                 <Button Style="{StaticResource RoundedButtonStyle}" Content="{Binding LoggedInUser.Rechte}" Command="{Binding OpenLoginView}" />
             </StackPanel>
@@ -129,6 +132,9 @@
 
         <Grid Grid.Row="1" Grid.RowSpan="2">
             <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}"/>
         </Grid>
         
     </Grid>
