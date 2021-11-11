@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="1080" d:DesignWidth="1920"
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:BookDetailsViewModel}">
 
@@ -23,13 +23,13 @@
 
         <!--HEADER-->
 
-        <Grid Grid.ColumnSpan="2" Background="Bisque">
-            <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="DarkBlue"/>
+        <Grid Grid.ColumnSpan="2" Background="{StaticResource Primary}">
+            <Label Content="Buchdetails Ansicht" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="{StaticResource Available}"/>
             <Button Style="{StaticResource RoundedButtonStyle}" Content="Schließen" Command="{Binding CloseCommand}" Width="100" Height="35" HorizontalAlignment="Right"/>
         </Grid>
         
         <!--BOOK DETAILS-->
-        <Grid Grid.Column="0" Grid.Row="1" Background="Beige">
+        <Grid Grid.Column="0" Grid.Row="1" Background="{StaticResource Secondary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -37,50 +37,50 @@
 
             <Image Source="{Binding BookCoverPath}" Margin="10" VerticalAlignment="Center"></Image>
 
-            <StackPanel Grid.Column="2" Margin="20, 0, 0, 0" VerticalAlignment="Center">
-                <Label Grid.ColumnSpan="2">
+            <StackPanel Grid.Column="2" Margin="20, 0, 0, 0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Titel: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Titel}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Author: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Author}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Verlag: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Verlag}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="ISBN: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.ISBN}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Auflage: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Auflage}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Altersvorschlag: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Altersvorschlag}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Regal: " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Regal}" />
                     </StackPanel>
                 </Label>
-                <Label Grid.ColumnSpan="2">
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Exemplare (verfügbar): " Width="{Binding BookDetailsPropertyNameWidth}"/>
                         <TextBlock Text="{Binding BuchModel.ExemplarAnzahl}" />
@@ -123,11 +123,11 @@
             
             <!--REVIEWS-->
             <ScrollViewer  Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
-                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}" Background="Beige">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ReviewViewModels}" Background="{StaticResource Secondary}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:ReviewViewModel">
                             <StackPanel>
-                                <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid Background="{StaticResource DropShadow}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="1.5*"/>
                                         <ColumnDefinition Width="10*"/>
@@ -144,7 +144,7 @@
 
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
 
-                                    <Label Grid.Column="2" Margin="0, 5, 0, 0">
+                                    <Label  Grid.Column="2" Margin="0, 5, 0, 0">
                                         <StackPanel Orientation="Horizontal" >
                                             <TextBlock Text="{Binding RezensionModel.Author.Vorname}" />
                                             <TextBlock Text=" "/>
@@ -159,7 +159,7 @@
             </ScrollViewer>
         </Grid>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSeaGreen">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="{StaticResource Secondary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*" x:Name="TextBoxColumn"/>
@@ -184,11 +184,11 @@
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" Name="ReviewStackPanel">
                 <Label HorizontalAlignment="Center" Margin="20">
                     <TextBlock Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Schreibe Deine Bewertung in das Textfeld."/>
                 </Label>
-                <TextBox Style="{StaticResource AddBookTextBoxStyle}" FontSize="18" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="150"/>
+                <TextBox Style="{StaticResource AddBookTextBoxStyle}" FontSize="18" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="200" Width="{Binding ElementName=ReviewStackPanel, Path=ActualWidth}"/>
             </StackPanel>
 
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Left"/>

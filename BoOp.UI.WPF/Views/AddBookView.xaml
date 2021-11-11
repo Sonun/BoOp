@@ -33,20 +33,20 @@
             <RowDefinition Height="1.35*"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
-        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
-        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
-        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
-        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
-        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld, Scannbar):"/>
-        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN:"/>
-        <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
-        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
-        <Label Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld)"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="(Pflichtfeld, Scannbar):"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
+        <Label Style="{StaticResource LabelBookStyle}" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
 
         <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Left" />
         <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Left"/>
@@ -60,7 +60,11 @@
         <TextBox Grid.Row="10" Grid.Column="2" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
 
         <Button Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left" Margin="10" Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SearchInfosCommand}" Content="Suche Infos"/>
-        <CheckBox Margin="10,0,0,0" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" Content="Exemplar Barcodes zur Druckliste hinzufügen" IsChecked="{Binding AddPrintList}"/>
+        <CheckBox Margin="10,0,0,0" Grid.Row="10" Grid.Column="3" VerticalAlignment="Center"  IsChecked="{Binding AddPrintList}">
+            <Label Style="{StaticResource LabelBookStyle}" Content="Exemplar Barcodes zur Druckliste hinzufügen"/>
+        </CheckBox>
+        
+        
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="11" Grid.Column="2">
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Abrechen"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>

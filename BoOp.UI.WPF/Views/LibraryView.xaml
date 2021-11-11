@@ -18,7 +18,7 @@
             <RowDefinition Height="18*" />
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" Background="#82D5EF">
+        <Grid Grid.Row="0" Background="{StaticResource Primary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -38,7 +38,7 @@
                 </Button>
                 <TextBox Grid.Column="1" Style="{StaticResource SearchIconTextBoxTemplate}" Template="{StaticResource TextBoxControlTemplate}" Text="{Binding SearchWord}" />
                 <Button Grid.Column="2" Style="{StaticResource IconButton}" Command="{Binding ClearSearchCommand}">
-                    <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="Red" Text="X"/>
+                    <TextBlock FontSize="32" FontWeight="Bold" Background="Transparent" Foreground="{StaticResource Unavailable}" Text="X"/>
                 </Button>
 
             <StackPanel Grid.Column="3" Orientation="Vertical">
@@ -66,36 +66,36 @@
             </StackPanel>
         </Grid>
         <!--Sort Bar-->
-        <Grid Grid.Row="1" Background="#70C6E1">
+        <Grid Grid.Row="1" Background="{StaticResource Secondary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.7*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                 <TextBlock Text="Titel">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                 <TextBlock Text="Author">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="2" Style="{StaticResource SortButton}">
+            <Button Style="{StaticResource SortButton}" Grid.Column="2" >
                 <TextBlock Text="Exemplare (verfügbar)">
                     <Image Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Grid.Column="3" Command="{Binding SortRatingCommand}" >
+            <Button Style="{StaticResource SortButton}" Grid.Column="3" Command="{Binding SortRatingCommand}" >
                 <TextBlock Text="Bewertung">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
         </Grid>
         <!--Books info-->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" >
             <!--Examples for books-->
             <ScrollViewer>
                 <ListView x:Name="BookListView" ItemsSource="{Binding BookList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

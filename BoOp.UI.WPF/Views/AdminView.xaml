@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1080" d:DesignWidth="1920">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -47,7 +47,7 @@
                 <Button Content=" Zurück " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
             </StackPanel>
 
-            <Button HorizontalAlignment="Right" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="Red" Background="Black">
+            <Button HorizontalAlignment="Right" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="{StaticResource Unavailable}" Background="{StaticResource Available}">
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="Center" Text="Programm"/>
                     <TextBlock HorizontalAlignment="Center" Text="beenden!"/>
@@ -71,7 +71,7 @@
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                        <Grid Grid.Row="0" Background="{StaticResource DropShadow}" Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="Auto" />
@@ -87,29 +87,30 @@
                         </Grid>
                     
                         <!-- grid for book titles -->
-                        <Grid Grid.Row="1" Background="{StaticResource Primary}" Margin="10, 2">
+                        <Grid Grid.Row="1"  Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                                 <TextBlock Text="Titel">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                                 <TextBlock Text="Author">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="2" Command="{Binding SortISBNCommand}">
                                 <TextBlock Text="ISBN">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
+                                
                             </Button>
-                            <Button Grid.Column="3">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="3">
                                 <TextBlock Text="Bewertung"/>
                             </Button>
                         </Grid>
@@ -164,7 +165,7 @@
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                        <Grid Grid.Row="0" Background="{StaticResource DropShadow}" Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="Auto" />
@@ -188,20 +189,20 @@
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Command="{Binding SortVornameCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortVornameCommand}">
                                 <TextBlock Text="Vorname">
                                         <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding SortNachnameCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortNachnameCommand}">
                                 <TextBlock Text="Nachname">
                                         <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="2">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="2">
                                 <TextBlock Text="Geburtstag"/>
                             </Button>
-                            <Button Grid.Column="3" Command="{Binding SortRechteCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="3" Command="{Binding SortRechteCommand}">
                                 <TextBlock Text="Rechte">
                                         <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="5, 0, 0, 0"/>
                                 </TextBlock>
@@ -256,7 +257,7 @@
                             <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Background="{StaticResource Primary}" Margin="10, 2">
+                        <Grid Grid.Row="0" Background="{StaticResource DropShadow}" Margin="10, 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="Auto" />
@@ -281,24 +282,24 @@
                                 <ColumnDefinition Width="1.2*"/>
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                                 <TextBlock Text="Titel"/>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                                 <TextBlock Text="Author"/>
                             </Button>
-                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="2" Command="{Binding SortISBNCommand}">
                                 <TextBlock Text="ISBN"/>
                             </Button>
-                            <Button Grid.Column="3" >
+                            <Button Style="{StaticResource SortButton}" Grid.Column="3" >
                                 <TextBlock Text="Barcode"/>
                             </Button>
-                            <Button Grid.Column="4" Command="{Binding SortLendedName}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="4" Command="{Binding SortLendedName}">
                                 <TextBlock Text="Ausgeliehen von">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
                             </Button>
-                            <Button Grid.Column="5" Command="{Binding SortLendedDate}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="5" Command="{Binding SortLendedDate}">
                                 <TextBlock Text="Ausgeliehen am">
                                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                                 </TextBlock>
@@ -365,16 +366,16 @@
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                                 <TextBlock Text="Titel"/>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                                 <TextBlock Text="Author"/>
                             </Button>
-                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="2" Command="{Binding SortISBNCommand}">
                                 <TextBlock Text="ISBN"/>
                             </Button>
-                            <Button Grid.Column="3" >
+                            <Button Style="{StaticResource SortButton}" Grid.Column="3" >
                                 <TextBlock Text="Barcode"/>
                             </Button>
                         </Grid>
@@ -432,16 +433,16 @@
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Command="{Binding SortTitleCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                                 <TextBlock Text="Vorname"/>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding SortAuthorCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                                 <TextBlock Text="Nachname"/>
                             </Button>
-                            <Button Grid.Column="2" Command="{Binding SortISBNCommand}">
+                            <Button Style="{StaticResource SortButton}" Grid.Column="2" Command="{Binding SortISBNCommand}">
                                 <TextBlock Text="Geburtstag"/>
                             </Button>
-                            <Button Grid.Column="3" >
+                            <Button Style="{StaticResource SortButton}" Grid.Column="3" >
                                 <TextBlock Text="Ausweisnummer"/>
                             </Button>
                         </Grid>

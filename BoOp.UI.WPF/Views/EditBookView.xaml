@@ -89,11 +89,11 @@
             </Grid>
 
             <ScrollViewer  Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
-                <ListView x:Name="ReviewListView" ItemsSource="{Binding ExemplarViewModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Beige">
+                <ListView x:Name="ReviewListView" ItemsSource="{Binding ExemplarViewModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource MouseOverColor}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:ExemplarViewModel">
                             <StackPanel>
-                                <Grid Background="LightSeaGreen" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
+                                <Grid Background="{StaticResource Secondary}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                                     <Grid.ColumnDefinitions >
                                         <ColumnDefinition Width="1.5*"/>
                                         <ColumnDefinition Width="5*"/>

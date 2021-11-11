@@ -31,7 +31,7 @@ namespace BoOp.UI.WPF.ViewModels
         public ObservableCollection<ReviewViewModel> ReviewViewModels { get { return _reviewViewModels; } set { _reviewViewModels = value; OnPropertyChanged(); } }
         public ObservableCollection<RatingViewModel> Ratings { get { return _ratings; } set { _ratings = value; OnPropertyChanged(); } }
 
-        public int BookDetailsPropertyNameWidth { get; set; } = 130;
+        public int BookDetailsPropertyNameWidth { get; set; } = 180;
         public string BookCoverPath { get; set; } = "https://i.pinimg.com/474x/31/63/49/3163495d3176cdff641c3e1b269a7a96--story-books-kid-books.jpg";
         public string ReviewText { get { return _reviewText; } set { _reviewText = value; OnPropertyChanged(); } }
         public bool ShowBookDetailsView { get { return _showBookDetailsView; } set { _showBookDetailsView = value; OnPropertyChanged(); } }
