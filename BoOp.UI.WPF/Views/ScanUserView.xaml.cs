@@ -23,6 +23,14 @@ namespace BoOp.UI.WPF.Views
         public ScanUserView()
         {
             InitializeComponent();
+            Task.Factory.StartNew(() => SetFocusScanBox());
+
         }
+        public void SetFocusScanBox()
+        {
+            Dispatcher.Invoke(() => ScanBox.Focus());
+        }
+        
+        
     }
 }

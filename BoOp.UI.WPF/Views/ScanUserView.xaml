@@ -26,14 +26,14 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
-                    <StackPanel Orientation="Vertical" Grid.Row="0">
+                    <StackPanel Orientation="Vertical" Grid.Row="0" FocusManager.FocusedElement="{Binding ElementName=ScanBox}">
                         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Content="Bitte Scann deine Karte mit dem Kartenleser!"/>
-                        <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding PersonBarcoded}"/>
+                        <TextBox x:Name="ScanBox" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding PersonBarcoded, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Focusable="True"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="{Binding LogoutWarning}" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding LoginButtonCommand}"/>
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Weiter" Command="{Binding LoginButtonCommand}" Focusable="False"/>
                 </StackPanel>
             </Grid>
         </Border>

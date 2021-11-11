@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using BoOp.Business;
 using System.Diagnostics;
 using BoOp.DBAccessor.Models;
+using System.Windows.Controls;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -22,11 +23,14 @@ namespace BoOp.UI.WPF.ViewModels
 
         public string PersonBarcoded { get { return _personBarcode; } set { _personBarcode = value; OnPropertyChanged(); } }
         public string LogoutWarning { get { return "Sie werden nach \"Weiter\"\nnach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
+        public TextBox ScanBox { get; set; }
 
         public DelegateCommand LoginButtonCommand { get; set; }
 
         public ScanUserViewModel(INavigationService navigationService, ILibrary library, Dispatcher dispatcher)
         {
+            ScanBox = new TextBox();
+            ScanBox.Focus();
             _navigationService = navigationService;
             _library = library;
             _timeFlag = false;
