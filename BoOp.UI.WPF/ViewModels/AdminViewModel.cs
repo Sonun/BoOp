@@ -391,10 +391,14 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 foreach (var exemplar in book.Model.Exemplare)
                 {
-                    if (user.AusweisID == exemplar.LendBy.AusweisID)
+                    if (exemplar.LendBy != null)
                     {
-                        list.Add(new ExemplarViewModel(_navigationService, exemplar, book.Model));
+                        if (user.AusweisID == exemplar.LendBy.AusweisID)
+                        {
+                            list.Add(new ExemplarViewModel(_navigationService, exemplar, book.Model));
+                        }
                     }
+                    
                 }
             }
             return list;
