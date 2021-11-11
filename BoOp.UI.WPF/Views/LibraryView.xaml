@@ -73,22 +73,22 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.7*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource IconButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
+            <Button Style="{StaticResource SortButton}" Grid.Column="0" Command="{Binding SortTitleCommand}">
                 <TextBlock Text="Titel">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Style="{StaticResource IconButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
+            <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
                 <TextBlock Text="Author">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Style="{StaticResource IconButton}" Grid.Column="2" >
+            <Button Style="{StaticResource SortButton}" Grid.Column="2" >
                 <TextBlock Text="Exemplare (verfügbar)">
                     <Image Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
-            <Button Style="{StaticResource IconButton}" Grid.Column="3" Command="{Binding SortRatingCommand}" >
+            <Button Style="{StaticResource SortButton}" Grid.Column="3" Command="{Binding SortRatingCommand}" >
                 <TextBlock Text="Bewertung">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
