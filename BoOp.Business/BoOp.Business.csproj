@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <Resource Include="3077106.png" />
-    <Resource Include="Bilder\3077106.png" />
   </ItemGroup>
 
   <ItemGroup>

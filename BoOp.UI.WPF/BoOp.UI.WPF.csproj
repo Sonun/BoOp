@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Assets\Icons\Review\3077106.png" />
+    <None Remove="Assets\Icons\Review\schoolbutterfly.png" />
     <None Remove="Assets\Icons\Search\Search_glyph71GrayNoHalo_16x.png" />
     <None Remove="Assets\Icons\Sort\Sort_noHalo_16x.png" />
   </ItemGroup>
@@ -19,6 +20,9 @@
 
   <ItemGroup>
     <Resource Include="Assets\Icons\Review\3077106.png" />
+    <Resource Include="Assets\Icons\Review\schoolbutterfly.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\Search\Search_glyph71GrayNoHalo_16x.png" />
     <Resource Include="Assets\Icons\Sort\Sort_noHalo_16x.png" />
   </ItemGroup>
