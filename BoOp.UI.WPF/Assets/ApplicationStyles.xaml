@@ -3,12 +3,12 @@
                     xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
                     xmlns:views="clr-namespace:BoOp.UI.WPF.Views">
 
-    <SolidColorBrush x:Key="Primary" Color="#ffb777"/>
-    <SolidColorBrush x:Key="Secondary" Color="#E2E8CE"/>
-    <SolidColorBrush x:Key="DropShadow" Color="#ACBFA4"/>
-    <SolidColorBrush x:Key="Available" Color="#262626"/>
-    <SolidColorBrush x:Key="Unavailable" Color="#FF1B1C"/>
-    <SolidColorBrush x:Key="MouseOverColor" Color="#ACBFA4"/>
+    <SolidColorBrush x:Key="Primary" Color="#ffb777" />
+    <SolidColorBrush x:Key="Secondary" Color="#E2E8CE" />
+    <SolidColorBrush x:Key="DropShadow" Color="#ACBFA4" />
+    <SolidColorBrush x:Key="Available" Color="#262626" />
+    <SolidColorBrush x:Key="Unavailable" Color="#FF1B1C" />
+    <SolidColorBrush x:Key="MouseOverColor" Color="#ACBFA4" />
 
     <Style x:Key="LeftScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -34,7 +34,7 @@
                                    Value="{TemplateBinding VerticalOffset}"
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Orientation="Horizontal"
                                    Grid.Row="1"
@@ -42,7 +42,7 @@
                                    Value="{TemplateBinding HorizontalOffset}"
                                    Maximum="{TemplateBinding ScrollableWidth}"
                                    ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -57,13 +57,13 @@
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type Grid}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource Secondary}"/>
-                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="Background" Value="{StaticResource Secondary}" />
+                <Setter Property="Opacity" Value="0.8" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource DropShadow}"/>
-                <Setter Property="Opacity" Value="1"/>
-                <Setter Property="TextBlock.Foreground" Value="{StaticResource Available}"/>
+                <Setter Property="Background" Value="{StaticResource DropShadow}" />
+                <Setter Property="Opacity" Value="1" />
+                <Setter Property="TextBlock.Foreground" Value="{StaticResource Available}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -140,7 +140,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="LoginTextBoxControlTemplate" TargetType="{x:Type TextBoxBase}">
-        <Border Background="{StaticResource DropShadow}"
+        <Border
                 x:Name="Bd" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
             <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
@@ -216,7 +216,7 @@
     <Style x:Key="AddBookTextBoxStyle" TargetType="TextBoxBase">
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Width" Value="600" />
+        <Setter Property="Width" Value="250" />
         <Setter Property="MinWidth" Value="180" />
         <Setter Property="Height" Value="45" />
         <Setter Property="MinHeight" Value="45" />
@@ -241,7 +241,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <Style x:Key="SortButton" TargetType="Button">
         <Setter Property="Height" Value="26" />
         <Setter Property="FontSize" Value="18" />
@@ -261,27 +261,26 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
-
     <Style x:Key="BookDetailsStyle" TargetType="views:BookDetailsView">
-        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Visibility" Value="Visible" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding ShowBookDetailsView, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                <Setter Property="Visibility" Value="Visible"/>
+                <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding ShowBookDetailsView, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed"/>
+                <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="ShowUserDetailsStyle" TargetType="views:ShowUserView">
-        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Visibility" Value="Visible" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding ShowUserDetailsView, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                <Setter Property="Visibility" Value="Visible"/>
+                <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding ShowUserDetailsView, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                <Setter Property="Visibility" Value="Collapsed"/>
+                <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

@@ -23,6 +23,33 @@ namespace BoOp.UI.WPF.Views
         public AddPersonView()
         {
             InitializeComponent();
+
+            SolidColorBrush required = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF1B1C"));
+
+            if (String.IsNullOrEmpty(VornameTextbox.Text))
+            {
+                VornameLabel.Foreground = required;
+            }
+            else
+            {
+                VornameLabel.Foreground = Brushes.Black;
+            }
+            if (String.IsNullOrEmpty(NachnameTextbox.Text))
+            {
+                NachnameLabel.Foreground = required;
+            }
+            else
+            {
+                NachnameLabel.Foreground = Brushes.Black;
+            }
+            if (String.IsNullOrEmpty(PasswortTextbox.Text))
+            {
+                PasswortLabel.Foreground = required;
+            }
+            else
+            {
+                PasswortLabel.Foreground = Brushes.Black;
+            }
         }
     }
 }

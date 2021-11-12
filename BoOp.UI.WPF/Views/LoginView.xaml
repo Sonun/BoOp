@@ -4,46 +4,45 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
-      xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels" 
+      xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
       d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
       mc:Ignorable="d"
-      d:DesignHeight="920" d:DesignWidth="1080"
-      Background="{StaticResource Primary}">
+      d:DesignHeight="920" d:DesignWidth="1080">
 
-    <Grid Background="{StaticResource Available}">
+    <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="380"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border  Grid.Row="1" Grid.Column="1" BorderThickness="3" CornerRadius="10" Background="{StaticResource Secondary}" BorderBrush="{StaticResource Secondary}" Padding="2">
             <Grid Background="{StaticResource Secondary}">
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" Grid.Row="0">
                         <Label Content="Benutzer:" FontSize="16" />
-                        <Label Content="{Binding Username}"/>
+                        <Label Content="{Binding Username}" />
                         <Label Content="Passwort:" FontSize="16" />
-                        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" PasswordChar="#" Style="{StaticResource PasswordBoxStyle}"/>
+                        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" PasswordChar="#" Style="{StaticResource PasswordBoxStyle}" />
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Sie werden danach" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Label Content="nicht mehr Automatisch ausgeloggt!" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding LoginCommand}"/>
-                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Abbrechen" Command="{Binding CancelCommand}"/>
+                    <Label Content="Sie werden danach" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Label Content="nicht mehr Automatisch ausgeloggt!" FontSize="14" Foreground="{StaticResource Unavailable}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Login" Command="{Binding LoginCommand}" />
+                    <Button Style="{StaticResource RoundedButtonStyle}" Content="Abbrechen" Command="{Binding CancelCommand}" />
                 </StackPanel>
             </Grid>
-        </Border>     
+        </Border>
     </Grid>
 </UserControl>
