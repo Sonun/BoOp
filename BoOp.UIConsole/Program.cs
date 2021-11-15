@@ -19,7 +19,7 @@ namespace BoOp.UIConsole
             tupelList.Add(("Boop000051", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride"));
             tupelList.Add(("z2AB5a78", "nameununununununun vom user"));
 
-            Utils.GenerateMultipleBarcodePDF(tupelList, false, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
         }
 
         static void testaddUser()

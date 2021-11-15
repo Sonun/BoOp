@@ -562,7 +562,7 @@ namespace BoOp.Business
         private static Bitmap GenerateBarcode((string barcode, string name) tupel)
         {
             var BarcodeHeight = 60;
-            var BarcodeWidth = 250;
+            var BarcodeWidth = 300;
 
             Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
@@ -642,12 +642,9 @@ namespace BoOp.Business
                         //draw rectanlge
                         gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);
 
-                        //text fuer verein
-                        gfx.DrawString("Name der Ultra Coolen Schule", font, textBrush, new XPoint(point.X + 10, point.Y + 15));
-
                         //image der schule
-                        var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/3077106.png";
-                        gfx.DrawImage(XImage.FromFile(picpath), point.X + 200, point.Y + 15, 40, 40);
+                        var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/cropped-logo-mcd-2-1.png";
+                        gfx.DrawImage(XImage.FromFile(picpath), point.X + 50, point.Y + 8, 130, 30);
 
                         //barcode image
                         gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
