@@ -532,10 +532,6 @@ namespace BoOp.Business
             }
 
             var barcodeAsString = "BoOp" + barcodeId + exCount;
-
-            //GeneratedBarcode MyBarCode = BarcodeWriter.CreateBarcode(barcodeAsString, BarcodeWriterEncoding.Code128);
-            //MyBarCode.SaveAsPdf(book.BasicInfos.Titel + ".pdf");
-
             return barcodeAsString;
         }
 

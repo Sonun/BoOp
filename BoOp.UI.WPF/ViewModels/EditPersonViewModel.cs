@@ -165,9 +165,9 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    if (_vorname.Equals("") || _nachname.Equals("") || _telefon.Equals(""))
+                    if (_vorname.Equals("") || _nachname.Equals("") || _telefon.Equals("") || (userToChange.Rechte == Rechtelevel.LESER && _rechteAsInt >= 2 && _passwort.Equals("")))
                     {
-                        MessageBox.Show("Sie müssen alle nötigen felder eingeben,\nwenn ein Leser mehr rechte bekommt, muss ein passwort vergeben werden.");
+                        MessageBox.Show("Sie müssen alle nötigen Felder eingeben,\nwenn ein Leser höhere rechte bekommt, muss ein passwort vergeben werden.");
                         return;
                     }
 
