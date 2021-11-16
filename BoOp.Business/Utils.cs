@@ -608,7 +608,7 @@ namespace BoOp.Business
                 //create pdf header
                 document.Info.Title = "BoOp generierter Barcode";
                 document.Info.Author = nameDesErstellers;
-                document.Info.Subject = (benutzerOderBuch ? "ausweis" : "bücher") + " Barcode";
+                document.Info.Subject = (benutzerOderBuch ? "Ausweis" : "Buch") + " Barcode";
                 document.Info.CreationDate = now;
 
                 //make sure the font is embedded
