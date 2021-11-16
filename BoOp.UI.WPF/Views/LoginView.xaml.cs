@@ -27,8 +27,8 @@ namespace BoOp.UI.WPF.Views
 
             private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
             {
-                if (this.DataContext != null)
-                { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+                if (DataContext != null)
+                { ((dynamic)DataContext).Password = ((PasswordBox)sender).Password; }
             }
 
         }
