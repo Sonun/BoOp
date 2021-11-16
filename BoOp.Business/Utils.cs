@@ -562,7 +562,7 @@ namespace BoOp.Business
         private static Bitmap GenerateBarcode((string barcode, string name) tupel)
         {
             var BarcodeHeight = 60;
-            var BarcodeWidth = 300;
+            var BarcodeWidth = 450;
 
             Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
@@ -571,7 +571,7 @@ namespace BoOp.Business
             gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             gr.Clear(Color.White);
-            gr.DrawImage(new Barcode().Encode(TYPE.CODE128, tupel.barcode, Color.Black, Color.White, BarcodeWidth, BarcodeHeight), 0, 0);
+            gr.DrawImage(new Barcode().Encode(TYPE.CODE39, tupel.barcode, Color.Black, Color.HotPink, BarcodeWidth, BarcodeHeight), 0, 0);
             
             gr.Dispose();
             return bitmap;
@@ -653,7 +653,13 @@ namespace BoOp.Business
                         gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 50, point.Y + 110));
 
                         //text fuer name
-                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + tupelList[i].name.Substring(0, (tupelList[i].name.Length > 32 ? 32 : tupelList[i].name.Length)), font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+                        var substring = tupelList[i].name;
+                        if (tupelList[i].name.Length > 30)
+                        {
+                            substring = tupelList[i].name.Substring(0, 30) + "...";
+                        }
+
+                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + substring, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
                     }
                 }
 
