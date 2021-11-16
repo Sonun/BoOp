@@ -53,13 +53,13 @@ namespace BoOp.UI.WPF.Views
                 VerlagLabel.Foreground = Brushes.Black;
             }
 
-            if (String.IsNullOrEmpty(SchlagwoerterTextbox.Text))
+            if (String.IsNullOrEmpty(ISBNTextBox.Text))
             {
-                SchlagwoerterLabel.Foreground = required;
+                ISBNLabel.Foreground = required;
             }
             else
             {
-                SchlagwoerterLabel.Foreground = Brushes.Black;
+                ISBNLabel.Foreground = Brushes.Black;
             }
         }
     }

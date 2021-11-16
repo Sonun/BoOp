@@ -37,32 +37,32 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label x:Name="VornameLabel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Vorname*" />
-                <Label x:Name="NachnameLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Nachname*" />
-                <Label x:Name="PasswortLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Passwort*" />
-                <Label x:Name="RechteLabel" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Rechte*" />
-                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Geburtstag" />
-                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Telefonnummer" />
-                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="Email" />
+                <Label x:Name="VornameLabel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Vorname*" />
+                <Label x:Name="NachnameLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Nachname*" />
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Passwort:" />
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Rechte:" />
+                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Geburtstag:" />
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Telefonnummer:" />
+                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Email:" />
 
-                <TextBox x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="450" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
-                <TextBox x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="450" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
-                <TextBox x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="450" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
+                <TextBox x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
+                <TextBox x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
+                <TextBox x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
 
-                <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Text="{Binding Rechte}">
+                <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Text="{Binding Rechte}">
                     <ComboBoxItem Content="Leser" />
                     <ComboBoxItem Content="Helfer" />
                     <ComboBoxItem Content="Bibo Team" />
                     <ComboBoxItem Content="Admin" />
                 </ComboBox>
 
-                <Calendar Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Geburtstag}" DisplayDate="{Binding Geburtstag}" />
+                <Calendar Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding Geburtstag}" DisplayDate="{Binding Geburtstag}" />
 
-                <TextBox Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" Width="450" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
-                <TextBox Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" Width="450" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
-                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBox Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
+                <TextBox Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
+                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <CheckBox IsChecked="{Binding AddToPrintList}" VerticalAlignment="Center" />
-                    <Label FontSize="24" Content="Benutzerausweis zu Druckliste hinzufügen" />
+                    <Label FontSize="14" Content="Benutzerausweis zu Druckliste hinzufügen" />
                 </StackPanel>
                 <Button Grid.Row="8" Grid.Column="0" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen" />
                 <Button Grid.Row="8" Grid.Column="1" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding SaveCommand}" Content="Speichern" />

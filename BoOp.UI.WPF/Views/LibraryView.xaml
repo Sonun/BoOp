@@ -95,9 +95,9 @@
             </Button>
         </Grid>
         <!--Books info-->
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <!--Examples for books-->
-            <ScrollViewer>
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden">
                 <ListView x:Name="BookListView" ItemsSource="{Binding BookList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="common:BookViewModel">

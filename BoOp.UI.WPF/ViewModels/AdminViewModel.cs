@@ -170,6 +170,13 @@ namespace BoOp.UI.WPF.ViewModels
             PrintBookBarcodesCommand = new DelegateCommand(
                 x =>
                 {
+                    //check if there is something to print
+                    if (BookPrintList == null || BookPrintList.Count == 0)
+                    {
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu");
+                        return;
+                    }
+
                     var tupelList = new List<(string barcode, string name)>();
 
                     foreach (var book in BookPrintList)
@@ -180,15 +187,18 @@ namespace BoOp.UI.WPF.ViewModels
 
                     MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
                     StaticBookPrintList.Clear();
-                },
-                y => 
-                {
-                    return BookPrintList.Count != 0;
                 });
 
             PrintUserCardsCommand = new DelegateCommand(
                 x =>
                 {
+                    //check if there is something to print
+                    if(UserIDPrintList == null || UserIDPrintList.Count == 0)
+                    {
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu");
+                        return;
+                    }
+
                     var tupelList = new List<(string barcode, string name)>();
 
                     foreach (var user in UserIDPrintList)
@@ -199,10 +209,6 @@ namespace BoOp.UI.WPF.ViewModels
 
                     MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
                     StaticUserIDPrintList.Clear();
-                },
-                y =>
-                {
-                    return UserIDPrintList.Count != 0;
                 });
 
             //SortTitleCommand

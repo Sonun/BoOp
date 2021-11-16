@@ -1,6 +1,6 @@
 ﻿using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using BoOp.Business;
-using System;
+using System.Windows;
 using BoOp.DBAccessor.Models;
 
 namespace BoOp.UI.WPF.ViewModels
@@ -67,9 +67,9 @@ namespace BoOp.UI.WPF.ViewModels
                     else
                     {
                         //falsches passwort
+                        MessageBox.Show("Passwort war falsch");
                         Password = "";
                     }
-                    
                 });
 
             CancelCommand = new DelegateCommand(

@@ -121,13 +121,13 @@
 
     <ControlTemplate x:Key="TextBoxControlTemplate" TargetType="{x:Type TextBoxBase}">
         <Border Background="{StaticResource Secondary}"
-                x:Name="Bd" BorderBrush="Black"
+                x:Name="Bod" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
             <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd" />
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bod" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </Trigger>
             <Trigger Property="Width" Value="Auto">
@@ -143,7 +143,7 @@
         <Border
                 x:Name="Bd" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
-            <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
+            <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible"/>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -151,10 +151,10 @@
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </Trigger>
             <Trigger Property="Width" Value="Auto">
-                <Setter Property="MinWidth" Value="100" />
+                <Setter Property="MinWidth" Value="100"/>
             </Trigger>
             <Trigger Property="Height" Value="Auto">
-                <Setter Property="MinHeight" Value="20" />
+                <Setter Property="MinHeight" Value="20"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -163,7 +163,7 @@
         <Border Background="{StaticResource DropShadow}"
                 x:Name="Bd" BorderBrush="Black"
                 BorderThickness="0" CornerRadius="10">
-            <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible" />
+            <ScrollViewer x:Name="PART_ContentHost" Visibility="Visible"/>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -198,7 +198,7 @@
         <Setter Property="Height" Value="45" />
         <Setter Property="MinHeight" Value="45" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Template" Value="{StaticResource LoginTextBoxControlTemplate}" />
+        <Setter Property="Background" Value="{StaticResource Primary}"/>
     </Style>
 
     <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
@@ -221,7 +221,6 @@
         <Setter Property="Height" Value="45" />
         <Setter Property="MinHeight" Value="45" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Template" Value="{StaticResource LoginTextBoxControlTemplate}" />
     </Style>
 
     <ControlTemplate x:Key="SortButtonTemplate" TargetType="Button">

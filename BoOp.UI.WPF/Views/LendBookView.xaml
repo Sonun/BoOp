@@ -9,7 +9,7 @@
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:LendBookViewModel}">
 
-    <Grid Background="{StaticResource Secondary}">
+    <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="5*" />
@@ -21,15 +21,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="1" Grid.Column="1" CornerRadius="10" Background="{StaticResource Primary}">
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="10" Background="{StaticResource Secondary}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Buch ausleihen" FontSize="24" />
-                <StackPanel Orientation="Vertical" Grid.Row="1">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
                     <Label Content="Benutzer:" FontSize="16" />
                     <Label Content="{Binding Username}" />
                     <Label Content="Barcode Scannen:" FontSize="16" />

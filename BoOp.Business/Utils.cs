@@ -601,21 +601,21 @@ namespace BoOp.Business
             var pdfPageheight = 297;
             var pdfPageWidth = 210;
             var pages = ((double)tupelList.Count / 6) > (int)tupelList.Count / kartenProSeite ? ((int)tupelList.Count / kartenProSeite) + 1 : (int)tupelList.Count / kartenProSeite;
-            var pageAmount = pages < 1 ? 1 : pages ;
+            var pageAmount = pages < 1 ? 1 : pages;
 
             using (PdfDocument document = new PdfDocument())
             {
                 //create pdf header
                 document.Info.Title = "BoOp generierter Barcode";
                 document.Info.Author = nameDesErstellers;
-                document.Info.Subject = (benutzerOderBuch ? "ausweis" : "bücher")+ " Barcode";
+                document.Info.Subject = (benutzerOderBuch ? "ausweis" : "bücher") + " Barcode";
                 document.Info.CreationDate = now;
 
                 //make sure the font is embedded
                 var options = new XPdfFontOptions(PdfFontEmbedding.Always);
 
-                for(int j = 0; j < pageAmount; j++)
-                { 
+                for (int j = 0; j < pageAmount; j++)
+                {
                     //create new pdf page
                     PdfPage page = document.AddPage();
                     page.Width = XUnit.FromMillimeter(pdfPageWidth);
@@ -659,7 +659,7 @@ namespace BoOp.Business
 
                 //crete dir for the pdf files
                 string dir = path + "\\BoOp_PDF_Dateien\\" + nameDesErstellers + "\\" + (benutzerOderBuch ? "Ausweise" : "Bücher");
-                
+
                 //check if path exists and create if it doesnt
                 if (!Directory.Exists(dir))
                     Directory.CreateDirectory(dir);

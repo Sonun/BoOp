@@ -42,14 +42,7 @@ namespace BoOp.UI.WPF.Views
             {
                 NachnameLabel.Foreground = Brushes.Black;
             }
-            if (String.IsNullOrEmpty(PasswortTextbox.Text))
-            {
-                PasswortLabel.Foreground = required;
-            }
-            else
-            {
-                PasswortLabel.Foreground = Brushes.Black;
-            }
+            
         }
     }
 }

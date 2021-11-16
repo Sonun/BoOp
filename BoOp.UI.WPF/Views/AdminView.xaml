@@ -24,14 +24,14 @@
             
             <!-- platz für deine komische drucken liste button dings -->
             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintBookBarcodesCommand}">
+                <Button Width="Auto" Height="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintBookBarcodesCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="  Barcodes PDF speichern " FontSize="12"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintUserCardsCommand}">
+                <Button Width="Auto" Height="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintUserCardsCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="  Ausweise PDF speichern " FontSize="12"/>
@@ -41,10 +41,10 @@
             </StackPanel>
             
             <!-- buttons -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content=" Buch hinzufügen " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
-                <Button Content=" Person hinzufügen " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
-                <Button Content=" Zurück " Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Height="Auto" HorizontalAlignment="Center">
+                <Button Content=" Buch hinzufügen " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
+                <Button Content=" Person hinzufügen " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
+                <Button Content=" Zurück " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
             </StackPanel>
 
             <Button HorizontalAlignment="Right" Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="{StaticResource Unavailable}" Background="{StaticResource Available}">
@@ -55,7 +55,7 @@
             </Button>
         </Grid>
 
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" Background="{StaticResource Primary}">
             <StackPanel >
                 <!-- alle bücher -->
                 <Expander Background="{StaticResource Secondary}" IsExpanded="True" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
@@ -118,7 +118,7 @@
                         <!-- booklist grid -->
                         <Grid x:Name="listgrid" Grid.Row="2">
                             <!-- booklist -->
-                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="BookListView" ItemsSource="{Binding BookList}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="common:BookViewModel">
@@ -209,7 +209,7 @@
                             </Button>
                         </Grid>
                         <!-- userlist -->
-                        <ScrollViewer Grid.Row="2" Style="{StaticResource LeftScrollViewer}">
+                        <ScrollViewer Grid.Row="2" Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
                             <ListView Margin="10" x:Name="UserListView" ItemsSource="{Binding UserList}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate DataType="common:UserViewModel">
@@ -309,7 +309,7 @@
                         <!-- lendedbooklist grid -->
                         <Grid Grid.Row="2">
                             <!-- lendedbooklist -->
-                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBookList}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="common:ExemplarViewModel">
@@ -383,7 +383,7 @@
                         <!-- printbooklist grid -->
                         <Grid Grid.Row="1">
                             <!-- printbooklist -->
-                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="PrintBookListView" ItemsSource="{Binding BookPrintList}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="common:ExemplarViewModel">

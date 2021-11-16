@@ -72,14 +72,26 @@ namespace BoOp.UI.WPF.Common
                     var deleteModel = AdminViewModel.StaticUserIDPrintList.Single(x => x.Model.AusweisID == Model.AusweisID);
                     AdminViewModel.StaticUserIDPrintList.Remove(deleteModel);
                 });
+
             ShowUserCommand = new DelegateCommand(x =>
             {
                 var lendedBooks = adminViewModel.GetLendedBooksFromUser(personModel);
                 navigationService.ShowUserView(lendedBooks, personModel, editor);
+            },
+            y =>
+            {
+                // details von benutzer "maskenpflicht" nicht möglich
+                return !Model.AusweisID.ToLower().Equals("ricksanchez");
             });
+
             AddPrintListCommand = new DelegateCommand(x =>
             {
                 AdminViewModel.StaticUserIDPrintList.Add(this);
+            },
+            y =>
+            {
+                // drucken von benutzer "maskenpflicht" nicht möglich
+                return !Model.AusweisID.ToLower().Equals("ricksanchez");
             });
         }
     }
