@@ -21,8 +21,10 @@ namespace BoOp.DBAccessor.Models
         public string Nachname { get; set; }
         public string VorUndNachname { get { return Vorname + " " + Nachname; } }
         public string PasswortHash { get; set; }
-        public DateTime Geburtsdatum { get; set; }
-        public string GeburtstagAsString { get { return Geburtsdatum.ToString("d");  } }
+        //public DateTime Geburtsdatum { get; set; }
+        //public string GeburtstagAsString { get { return Geburtsdatum.ToString("d");  } }
+        public string GeburtsdatumString { get; set; }
+        public DateTime GeburtsdatumDateTime { get { return DateTime.Parse(GeburtsdatumString); } set { GeburtsdatumDateTime = value; } }
         public string Telefonnummer { get; set; }
         public Rechtelevel Rechte { get; set; }
         public string EMail { get; set; }

@@ -191,7 +191,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Nachname = _nachname,
                         PasswortHash = Utils.HashSHA(_passwort),
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = Geburtstag,
+                        GeburtsdatumString = Geburtstag.ToString("d"),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };

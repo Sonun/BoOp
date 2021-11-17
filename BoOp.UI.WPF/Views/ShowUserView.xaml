@@ -52,7 +52,7 @@
                     <Label>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Geburtsdatum: "/>
-                            <TextBlock Text="{Binding PersonModel.GeburtstagAsString}"/>
+                            <TextBlock Text="{Binding PersonModel.GeburtsdatumString}"/>
                         </StackPanel>
                     </Label>
 

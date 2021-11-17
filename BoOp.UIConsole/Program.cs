@@ -34,7 +34,7 @@ namespace BoOp.UIConsole
         {
             var geb = new DateTime(1996, 07, 20);
 
-            var model = new PersonModel { Vorname="Dominik", Nachname="v.M.", EMail="sad@sad.sad", Geburtsdatum=geb, PasswortHash=Utils.HashSHA("qwe"), Rechte=Rechtelevel.ADMIN, Telefonnummer="123" };
+            var model = new PersonModel { Vorname="Dominik", Nachname="v.M.", EMail="sad@sad.sad", GeburtsdatumDateTime=geb, GeburtsdatumString = geb.ToString("d"), PasswortHash=Utils.HashSHA("qwe"), Rechte=Rechtelevel.ADMIN, Telefonnummer="123" };
 
             _library.AddUser(model);
         }
