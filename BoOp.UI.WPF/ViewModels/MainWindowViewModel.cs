@@ -2,7 +2,6 @@
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
-using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
 

@@ -49,9 +49,9 @@
                 <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Telefonnummer:" />
                 <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="Email:" />
 
-                <TextBox x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
-                <TextBox x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
-                <TextBox x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
+                <TextBox x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
+                <TextBox x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
+                <TextBox x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
 
                 <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Text="{Binding Rechte}">
                     <ComboBoxItem Content="Leser" />
@@ -62,8 +62,8 @@
 
                 <Calendar Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding Geburtstag}" DisplayDate="{Binding Geburtstag}" />
 
-                <TextBox Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
-                <TextBox Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
+                <TextBox Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
+                <TextBox Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
                 <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <CheckBox IsChecked="{Binding AddToPrintList}" VerticalAlignment="Center" />
                     <Label FontSize="14" Content="Benutzerausweis zu Druckliste hinzufügen" />
