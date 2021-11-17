@@ -1,8 +1,5 @@
 ﻿using System.Windows;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoOp.Business;
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels;
