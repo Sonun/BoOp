@@ -5,6 +5,13 @@ using System.Collections.ObjectModel;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: INavigationService.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 1/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : interface zur implementierung der navigations schnittstelle
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public interface INavigationService
     {
         void ShowLoginView(PersonModel user);

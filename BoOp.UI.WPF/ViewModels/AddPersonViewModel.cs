@@ -10,6 +10,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: AddPersonViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 4/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die Personen hinzufügen View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class AddPersonViewModel : ViewModel
     {
         private INavigationService _navigationService;

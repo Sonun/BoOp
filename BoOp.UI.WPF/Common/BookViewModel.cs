@@ -13,6 +13,13 @@ using BoOp.Business;
 
 namespace BoOp.UI.WPF.Common
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: BookViewModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 16/9/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Buch View Model und dazu gehörige methoden
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class BookViewModel : ViewModel
     {
         public BuchModel Model { get; set; }

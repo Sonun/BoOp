@@ -13,6 +13,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: AddBookViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 4/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die Buch hinzufügen View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class AddBookViewModel : ViewModel
     {
         private INavigationService _navigationService;

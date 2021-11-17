@@ -9,6 +9,13 @@ using System.Data.SQLite;
 
 namespace BoOp.DBAccessor
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: SQLiteDataAccessor.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 30/9/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : Klasse zur bereitstellung zum laden und speichern in einer SQLite Datenbank
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class SQLiteDataAccessor
     {
         public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionString)

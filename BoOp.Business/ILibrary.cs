@@ -3,6 +3,13 @@ using System.Collections.ObjectModel;
 
 namespace BoOp.Business
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ILibrary.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 1/9/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Interface klasse zur beschreibung einer Klasse zur datenbank connection
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public interface ILibrary
     {
         // Book related:
@@ -19,7 +26,7 @@ namespace BoOp.Business
         // Dependent on User Rights
         public void AddBook(BuchModel book);
 
-        // Remove book
+        // removes a book from the datbase
         public void RemoveBook(BuchModel book);
 
         // Remove exemplar

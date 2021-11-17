@@ -12,6 +12,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: EditBookViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 28/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die buch edit View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class EditBookViewModel : ViewModel
     {
         private BuchModel _buchModel;

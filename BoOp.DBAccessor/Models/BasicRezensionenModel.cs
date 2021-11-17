@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: BasicRezensionenModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 14/09/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : dinge die das BasicRezensionenModel enthalten muss
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class BasicRezensionenModel
     {
         public int? Id { get; set; }

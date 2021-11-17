@@ -11,6 +11,13 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: SQLDataAccessor.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 3/9/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : Klasse zur bereitstellung zum laden und speichern in einer Datenbank
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class SQLDataAccessor
     {
         public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionString)

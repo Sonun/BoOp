@@ -13,6 +13,13 @@ using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: AdminViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 30/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die Admin View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class AdminViewModel : ViewModel
     {
         private INavigationService _navigationService;

@@ -10,6 +10,13 @@ using System.Windows.Controls;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ScanUserViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 2/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : View model für den buch abgeben view
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ScanUserViewModel : ViewModel
     {
         public static Timer LogoutTimer;

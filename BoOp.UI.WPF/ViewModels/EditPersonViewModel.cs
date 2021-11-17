@@ -10,6 +10,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: EditPersonViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 6/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die personen edit View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class EditPersonViewModel : ViewModel
     {
         private INavigationService _navigationService;

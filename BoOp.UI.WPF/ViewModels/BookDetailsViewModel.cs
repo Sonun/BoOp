@@ -12,6 +12,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: BookDetailsViewModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 12/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die book details view
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class BookDetailsViewModel : ViewModel
     {
         private INavigationService _navigationService;

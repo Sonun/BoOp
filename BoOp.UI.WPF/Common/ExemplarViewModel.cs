@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace BoOp.UI.WPF.Common
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ExemplarViewModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 3/11/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : View Model für exemplare
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ExemplarViewModel : ViewModel
     {
         private bool _isChecked;

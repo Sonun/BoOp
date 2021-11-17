@@ -5,6 +5,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ReturnBookViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 7/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : View model für den buch abgeben view
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ReturnBookViewModel : ViewModel
     {
         private INavigationService _navigationService;

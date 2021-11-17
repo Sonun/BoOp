@@ -5,7 +5,14 @@ using BoOp.DBAccessor.Models;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-  public class LoginViewModel : ViewModel
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: LoginViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 2/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für den login view
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public class LoginViewModel : ViewModel
     {
         private INavigationService _navigationService;
         private string _password;

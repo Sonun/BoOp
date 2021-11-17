@@ -3,6 +3,13 @@ using System.Windows.Controls;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: MainDataTemplateSelector.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 2/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : klasse die zur auswahl von viewmodels für die jeweiligen views benötigt wird
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class MainDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate ScanUserViewModelTemplate { get; set; }

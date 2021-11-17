@@ -11,7 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BoOp.Business
-{
+
+{   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: Library.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 1/9/2021
+    //Bearbeitet von : Aynur Sabri, Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Implementierung des Interfaces ILibrary, und somit die Schnittstelle zur Datenbank
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class Library : ILibrary
     {
         private readonly string _connectionString;

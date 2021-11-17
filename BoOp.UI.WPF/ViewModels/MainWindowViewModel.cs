@@ -8,6 +8,13 @@ using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: MainWindowViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 1/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : View model klasse für das Main Window, diese klasse Implementiert außerdem den INavigationService, und dient als navigator zwischen den views
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     class MainWindowViewModel : ViewModel, INavigationService
     {
         private readonly Dispatcher _dispatcher;

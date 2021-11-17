@@ -6,6 +6,36 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: PersonModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 16/09/2021
+    //Bearbeitet von : Manuel Janzen, Dominik von Michalkowsky
+    //Beschreibung : dinge die das PersonModel enthalten muss
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PersonModel
+    {
+        public int? Id { get; set; }
+        public string Vorname { get; set; }
+        public string Nachname { get; set; }
+        public string VorUndNachname { get { return Vorname + " " + Nachname; } }
+        public string PasswortHash { get; set; }
+        public DateTime Geburtsdatum { get; set; }
+        public string GeburtstagAsString { get { return Geburtsdatum.ToString("d");  } }
+        public string Telefonnummer { get; set; }
+        public Rechtelevel Rechte { get; set; }
+        public string EMail { get; set; }
+        public string AusweisID { get; set; }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: PersonModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 19/09/2021
+    //Bearbeitet von : Manuel Janzen, Dominik von Michalkowsky
+    //Beschreibung : alle Mögliche Rechtelevel Der benutzer
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     [Flags]
     public enum Rechtelevel
     {
@@ -26,20 +56,5 @@ namespace BoOp.DBAccessor.Models
         /// Gibt de, Benutzer die Rechte von Staff und darf Rechte verwalten, sowie neue Mitarbeiter anlegen
         /// </summary>
         ADMIN = 8 // Alles (BiboTeam anlegen und löschen)
-    }
-
-    public class PersonModel
-    {
-        public int? Id { get; set; }
-        public string Vorname { get; set; }
-        public string Nachname { get; set; }
-        public string VorUndNachname { get { return Vorname + " " + Nachname; } }
-        public string PasswortHash { get; set; }
-        public DateTime Geburtsdatum { get; set; }
-        public string GeburtstagAsString { get { return Geburtsdatum.ToString("d");  } }
-        public string Telefonnummer { get; set; }
-        public Rechtelevel Rechte { get; set; }
-        public string EMail { get; set; }
-        public string AusweisID { get; set; }
     }
 }

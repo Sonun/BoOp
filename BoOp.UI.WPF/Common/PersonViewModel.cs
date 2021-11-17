@@ -10,6 +10,13 @@ using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 
 namespace BoOp.UI.WPF.Common
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: PersonViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 26/10/2021
+    //Bearbeitet von : Manuel Janzen, Dominik von Michalkowsky
+    //Beschreibung : View Model für personen
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class PersonViewModel : ViewModel
     {
         private readonly ILibrary _library;

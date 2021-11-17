@@ -9,6 +9,13 @@ using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 1/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky
+    //Beschreibung : ViewModel klasse die in alle Viewmodels vererbt werden muss
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace BoOp.DBAccessor.Models
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: BuchModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 3/09/2021
+    //Bearbeitet von : Manuel Janzen, Dominik von Michalkowsky
+    //Beschreibung : dinge die das BuchModel enthalten muss
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class BuchModel
     {
         public BasicBuchModel BasicInfos { get; set; }

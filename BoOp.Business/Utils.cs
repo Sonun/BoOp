@@ -18,6 +18,13 @@ using System.Resources;
 
 namespace BoOp.Business
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: Utils.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 3/9/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Klasse die alle nötigen Mehoden enthält, die in mehreren klassen verendet werden müssen
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static class Utils
     {
         /// <summary>

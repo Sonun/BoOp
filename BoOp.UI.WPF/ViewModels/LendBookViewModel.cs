@@ -5,6 +5,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: LendBookViewModel.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 7/10/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
+    //Beschreibung : Viewmodel für die buch leih View
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class LendBookViewModel : ViewModel
     {
         private INavigationService _navigationService;

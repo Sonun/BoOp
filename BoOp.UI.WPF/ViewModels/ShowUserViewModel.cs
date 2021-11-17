@@ -10,6 +10,13 @@ using System.Threading.Tasks;
 
 namespace BoOp.UI.WPF.ViewModels
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ShowUserViewModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 10/11/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : View model für die benutzer infos view
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ShowUserViewModel : ViewModel
     {
         private readonly INavigationService _navigationService;

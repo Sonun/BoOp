@@ -12,6 +12,13 @@ using System.Windows;
 
 namespace BoOp.UI.WPF.Common
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: ReviewViewModel.cs
+    //Author : Manuel Janzen
+    //Erstellt am : 26/10/2021
+    //Bearbeitet von : Manuel Janzen
+    //Beschreibung : View Model für reviews
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class ReviewViewModel : ViewModel
     {
         public RezensionModel RezensionModel {get; set;}

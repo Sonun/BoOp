@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[Personen]
+﻿-- Erstellt von Manuel Janzen
+-- Bearbeitet von Manuel Janzen, Dominik von Michalkowsky
+CREATE TABLE [dbo].[Personen]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Vorname] NVARCHAR(50) NOT NULL, 

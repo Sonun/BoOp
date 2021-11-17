@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[Buecher]
+﻿-- Erstellt von Manuel Janzen
+-- Bearbeitet von Manuel Janzen, Dominik von Michalkowsky
+CREATE TABLE [dbo].[Buecher]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [Titel] NVARCHAR(50) NOT NULL, 

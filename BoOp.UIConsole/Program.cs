@@ -8,6 +8,14 @@ using System.Text;
 
 namespace BoOp.UIConsole
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Dateiname: Program.cs
+    //Author : Dominik von Michalkowsky
+    //Erstellt am : 1/09/2021
+    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen, Aynur Sabri, Florian Heinebrodt
+    //Beschreibung : Klasse zum Testen von Methoden aus der   Utils.cs   und der   Library.cs   klasse
+    //              ( die meisten tests wurden gelöscht um einen überblick zu haben)
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     class Program
     {
         static private ILibrary _library;
@@ -16,7 +24,7 @@ namespace BoOp.UIConsole
         {
             List<(string barcode, string name)> tupelList = new List<(string barcode, string name)>();
 
-            tupelList.Add(("Boop000051", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride"));
+            tupelList.Add(("Boop000051", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride, ich kenne keine langen buch namen :("));
             tupelList.Add(("z2AB5ada78", "nameununununununun vom user"));
 
             Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
@@ -41,7 +49,6 @@ namespace BoOp.UIConsole
             Console.ReadLine();
 
         }
-
 
         static void testbarcode()
         {
