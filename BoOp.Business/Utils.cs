@@ -574,7 +574,7 @@ namespace BoOp.Business
             gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             //clears the rect for the barcode
-        //    gr.Clear(Color.White);
+            gr.Clear(Color.White);
             gr.DrawImage(new Barcode().Encode(TYPE.CODE39Extended, tupel.barcode, Color.Black, Color.Transparent, BarcodeWidth, BarcodeHeight), 0, 0);
             
             gr.Dispose();
