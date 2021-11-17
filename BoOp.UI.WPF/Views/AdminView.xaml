@@ -313,7 +313,7 @@
                         <!-- lendedbooklist grid -->
                         <Grid Grid.Row="2">
                             <!-- lendedbooklist -->
-                            <ScrollViewer Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBookList}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="common:ExemplarViewModel">
