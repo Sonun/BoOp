@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>gutes_Icon.ico</ApplicationIcon>
+    <Win32Resource></Win32Resource>
   </PropertyGroup>
 
   <ItemGroup>
