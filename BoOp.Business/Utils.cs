@@ -559,13 +559,13 @@ namespace BoOp.Business
         }
 
         /// <summary>
-        /// creates a png with multiple barcodes
+        /// creates a png with 1 barcode
         /// </summary>
-        /// <param name="tupel">first index = barcode, second = name of book (or) user (vor und nachname)</param>
+        /// <param name="tupel">first index = barcode, second = name of book (or) username </param>
         private static Bitmap GenerateBarcode((string barcode, string name) tupel)
         {
-            var BarcodeHeight = 60;
-            var BarcodeWidth = 450;
+            var BarcodeHeight = 70;
+            var BarcodeWidth = 330;
 
             Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
@@ -573,8 +573,9 @@ namespace BoOp.Business
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            gr.Clear(Color.White);
-            gr.DrawImage(new Barcode().Encode(TYPE.CODE39, tupel.barcode, Color.Black, Color.HotPink, BarcodeWidth, BarcodeHeight), 0, 0);
+            //clears the rect for the barcode
+        //    gr.Clear(Color.White);
+            gr.DrawImage(new Barcode().Encode(TYPE.CODE39Extended, tupel.barcode, Color.Black, Color.Transparent, BarcodeWidth, BarcodeHeight), 0, 0);
             
             gr.Dispose();
             return bitmap;
@@ -632,7 +633,7 @@ namespace BoOp.Business
 
                     using (XGraphics gfx = XGraphics.FromPdfPage(document.Pages[currentPageIndex]))
                     {
-                        //declare a font for drawing in the PDF
+                        //declare a font and coors for drawing in the PDF
                         XFont font = new XFont("Code EAN13", 12, XFontStyle.Regular, options);
                         XBrush rectBrush = XBrushes.White;
                         XBrush textBrush = XBrushes.Black;
