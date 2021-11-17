@@ -5,18 +5,14 @@ using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace BoOp.UI.WPF.ViewModels
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Dateiname: AdminViewModel.cs
-    //Author : Dominik von Michalkowsky
-    //Erstellt am : 30/09/2021
-    //Bearbeitet von : Dominik von Michalkowsky, Manuel Janzen
-    //Beschreibung : Viewmodel für die Admin View
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class AdminViewModel : ViewModel
     {
         private INavigationService _navigationService;
@@ -65,7 +61,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SearchTitleInLendedBooks { get; set; }
         public DelegateCommand ClearSearchInLendedBooks { get; set; }
 
-        //book searche commands
+        //book sort commands
         public DelegateCommand SortTitleCommand { get; set; }
         public DelegateCommand SortAuthorCommand { get; set; }
         public DelegateCommand SortISBNCommand { get; set; }
