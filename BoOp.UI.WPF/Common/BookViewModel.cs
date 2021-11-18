@@ -17,7 +17,36 @@ namespace BoOp.UI.WPF.Common
     public class BookViewModel : ViewModel
     {
         public BuchModel Model { get; set; }
-
+        public string Genres
+        {
+            get
+            {
+                var genreString = "";
+                if (Model != null)
+                {
+                    foreach (var genre in Model.Genres)
+                    {
+                        genreString += genre + " ";
+                    }
+                }
+                return genreString;
+            }
+        }
+        public string Schlagwoerter
+        {
+            get
+            {
+                var schlagwoerter = "";
+                if (Model != null)
+                {
+                    foreach (var wort in Model.Schlagwoerter)
+                    {
+                        schlagwoerter += wort + " ";
+                    }
+                }
+                return schlagwoerter;
+            }
+        }
         private readonly ILibrary _library;
         private readonly LibraryViewModel _libraryViewModel;
         private readonly AdminViewModel _adminViewModel;

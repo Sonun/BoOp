@@ -34,6 +34,37 @@ namespace BoOp.UI.WPF.ViewModels
         public ObservableCollection<ReviewViewModel> ReviewViewModels { get { return _reviewViewModels; } set { _reviewViewModels = value; OnPropertyChanged(); } }
         public ObservableCollection<RatingViewModel> Ratings { get { return _ratings; } set { _ratings = value; OnPropertyChanged(); } }
 
+        public string Genres
+        {
+            get
+            {
+                var genreString = "";
+                if (BuchModel != null)
+                {
+                    foreach (var genre in BuchModel.Genres)
+                    {
+                        genreString += genre + " ";
+                    }
+                }
+                return genreString;
+            }
+        }
+        public string Schlagwoerter
+        {
+            get
+            {
+                var schlagwoerter = "";
+                if (BuchModel != null)
+                {
+                    foreach (var wort in BuchModel.Schlagwoerter)
+                    {
+                        schlagwoerter += wort + " ";
+                    }
+                }
+                return schlagwoerter;
+            }
+        }
+
         public int BookDetailsPropertyNameWidth { get; set; } = 180;
         public string BookCoverPath { get; set; } = "https://i.pinimg.com/474x/31/63/49/3163495d3176cdff641c3e1b269a7a96--story-books-kid-books.jpg";
         public string ReviewText { get { return _reviewText; } set { _reviewText = value; OnPropertyChanged(); } }

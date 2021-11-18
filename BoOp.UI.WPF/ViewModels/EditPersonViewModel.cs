@@ -182,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Vorname = _vorname,
                         Nachname = _nachname,
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        GeburtsdatumDateTime = Birthdate,
+                        GeburtsdatumString = Birthdate.ToString("d"),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
