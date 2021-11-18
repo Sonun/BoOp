@@ -516,10 +516,6 @@ namespace BoOp.Business
 
             //add leading 0's untill the lenght is 6
             var barcodeId = book.BasicInfos.Id.ToString();
-            while (barcodeId.Length <= 6)
-            {
-                barcodeId = "0" + barcodeId;
-            }
 
             int exCount = 0;
 
@@ -535,8 +531,13 @@ namespace BoOp.Business
                 }
             }
 
-            var barcodeAsString = "BoOp" + barcodeId + exCount;
-            return barcodeAsString;
+            var barcodeAsString = exCount.ToString();
+            while (barcodeAsString.Length < 3)
+            {
+                barcodeAsString = "0" + barcodeAsString;
+            }
+
+            return "BoOp" + barcodeId + barcodeAsString;
         }
 
         public static string GenerateUniqueUserIDString()

@@ -115,7 +115,7 @@
                                 
                             </Button>
                             <Button Style="{StaticResource SortButton}" Grid.Column="3">
-                                <TextBlock Text="Bewertung"/>
+                                <TextBlock Text="Exemplare (verfügbar)"/>
                             </Button>
                         </Grid>
 
