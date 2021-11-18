@@ -474,7 +474,7 @@ namespace BoOp.UI.WPF.ViewModels
             {
                 for (int i = 0; i <= LendedBookList.Count - 2; i++)
                 {
-                    int comparison = DateTime.Compare(LendedBookList[i].Model.BasicInfos.AusleihDatum, LendedBookList[i + 1].Model.BasicInfos.AusleihDatum);
+                    int comparison = DateTime.Compare(LendedBookList[i].Model.BasicInfos.AusleihDatumDateTime, LendedBookList[i + 1].Model.BasicInfos.AusleihDatumDateTime);
 
                     if (!reverse)
                     {

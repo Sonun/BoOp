@@ -49,7 +49,7 @@ namespace BoOp.UI.WPF.ViewModels
             if(_library.GetAllUsers().Count <= 0)
             {
                 //standard benutzer
-                _library.AddUser(new PersonModel{AusweisID = "RickSanchez", Vorname = "Admin", Nachname = "Admin", Geburtsdatum = new DateTime(2011, 11, 11), Telefonnummer="11", Rechte = Rechtelevel.ADMIN, EMail="11", PasswortHash= "C71FC1B21A6824082BB07D3BF6695D4737D8691B57CEB34E592A8BDE11CB4EA3" });
+                _library.AddUser(new PersonModel{AusweisID = "RickSanchez", Vorname = "Admin", Nachname = "Admin", GeburtsdatumString = new DateTime(1111, 11, 11).ToString("d"), Telefonnummer="00", Rechte = Rechtelevel.ADMIN, EMail="00", PasswortHash= "C71FC1B21A6824082BB07D3BF6695D4737D8691B57CEB34E592A8BDE11CB4EA3" });
             }
 
             LoginButtonCommand = new DelegateCommand

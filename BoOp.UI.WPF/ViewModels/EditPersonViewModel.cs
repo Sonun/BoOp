@@ -182,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Vorname = _vorname,
                         Nachname = _nachname,
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        Geburtsdatum = Birthdate,
+                        GeburtsdatumString = Birthdate.ToString("d"),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };
@@ -208,7 +208,7 @@ namespace BoOp.UI.WPF.ViewModels
             Email = userToChange.EMail;
             Passwort = "";
             Telefon = userToChange.Telefonnummer;
-            Birthdate = userToChange.Geburtsdatum;
+            Birthdate = userToChange.GeburtsdatumDateTime;
 
 
             //set rechte
