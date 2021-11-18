@@ -313,7 +313,7 @@
                         <!-- lendedbooklist grid -->
                         <Grid Grid.Row="2">
                             <!-- lendedbooklist -->
-                            <ScrollViewer Style="{StaticResource LeftScrollViewer}" HorizontalScrollBarVisibility="Hidden">
+                            <ScrollViewer Style="{StaticResource LeftScrollViewer}">
                                 <ListView Grid.Column="0" Margin="10"  x:Name="LendedBookListView" ItemsSource="{Binding LendedBookList}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="common:ExemplarViewModel">
@@ -339,7 +339,7 @@
                                                 <TextBlock FontSize="12" Grid.Column="2" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding BuchModel.BasicInfos.ISBN}"/>
                                                 <TextBlock FontSize="12" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.Barcode}"/>
                                                 <TextBlock FontSize="12" Grid.Column="4" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.LendBy.VorUndNachname}"/>
-                                                <TextBlock FontSize="12" Grid.Column="5" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.AusleihDatumFormatedString}"/>
+                                                <TextBlock FontSize="12" Grid.Column="5" Margin="10" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.BasicInfos.AusleihDatumString}"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>

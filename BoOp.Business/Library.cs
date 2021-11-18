@@ -1,14 +1,9 @@
 ﻿using BoOp.DBAccessor;
 using BoOp.DBAccessor.Models;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoOp.Business
 
@@ -152,7 +147,7 @@ namespace BoOp.Business
         {
             string sqlString = "UPDATE Exemplare " +
                  "SET AusleiherID = NULL, " +
-                 "AusleihDatum = NULL " +
+                 "AusleihDatumString = NULL " +
                  "WHERE Barcode = @bookBarcode";
 
             _db.SaveData(sqlString, new { bookBarcode = bookBarcode }, _connectionString);
@@ -423,7 +418,7 @@ namespace BoOp.Business
         {
             string sqlString = "UPDATE Exemplare " +
                 "SET AusleiherID = @userId, " +
-                "AusleihDatum = @datum " +
+                "AusleihDatumString = @datum " +
                 "WHERE Barcode = @bookBarcode";
 
             _db.SaveData(sqlString, new { userId, datum = DateTime.Now.ToString("d"), bookBarcode }, _connectionString);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoOp.Business;
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
@@ -24,6 +20,7 @@ namespace BoOp.UI.WPF.ViewModels
 
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand AddToPrintList { get; set; }
 
         //user info attributes
         private string _vorname;
@@ -172,7 +169,7 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    if (_vorname.Equals("") || _nachname.Equals("") || _telefon.Equals("") || (userToChange.Rechte == Rechtelevel.LESER && _rechteAsInt >= 2 && _passwort.Equals("")))
+                    if (_vorname.Equals("") || _nachname.Equals("") || (userToChange.Rechte == Rechtelevel.LESER && _rechteAsInt >= 2 && _passwort.Equals("")))
                     {
                         MessageBox.Show("Sie müssen alle nötigen Felder eingeben,\nwenn ein Leser höhere rechte bekommt, muss ein passwort vergeben werden.");
                         return;
@@ -185,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                         Vorname = _vorname,
                         Nachname = _nachname,
                         Rechte = (Rechtelevel)_rechteAsInt,
-                        GeburtsdatumDateTime = Birthdate,
+                        GeburtsdatumString = Birthdate.ToString("d"),
                         Telefonnummer = _telefon,
                         EMail = _email
                     };

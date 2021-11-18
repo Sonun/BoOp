@@ -60,6 +60,20 @@
                         <TextBlock Text="{Binding BuchModel.BasicInfos.Verlag}" />
                     </StackPanel>
                 </Label>
+
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Genre: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding Genres}" />
+                    </StackPanel>
+                </Label>
+                <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Schlagwörter: " Width="{Binding BookDetailsPropertyNameWidth}"/>
+                        <TextBlock Text="{Binding Schlagwoerter}" />
+                    </StackPanel>
+                </Label>
+
                 <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="ISBN: " Width="{Binding BookDetailsPropertyNameWidth}"/>

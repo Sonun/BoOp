@@ -10,11 +10,8 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System.Diagnostics;
 using BarcodeLib;
-using PdfSharp.Drawing.BarCodes;
-using PdfSharp.Drawing.Layout;
 using System.IO;
 using System.Drawing.Imaging;
-using System.Resources;
 
 namespace BoOp.Business
 {

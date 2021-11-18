@@ -1,7 +1,6 @@
 ﻿using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace BoOp.UI.WPF.ViewModels.ViewModelUtils
 {
