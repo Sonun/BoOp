@@ -22,11 +22,13 @@ namespace BoOp.UIConsole
         static void Main(string[] args)
         {
             List<(string barcode, string name)> tupelList = new List<(string barcode, string name)>();
+            BuchModel n = new BuchModel();
+            n.BasicInfos = new BasicBuchModel();
+            n.BasicInfos.Id = 193;
+            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n) + "3", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride, ich kenne keine langen buch namen :("));
+            tupelList.Add(("asc34zoy", "nameununununununun vom user"));
 
-            tupelList.Add(("Boop000051", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride, ich kenne keine langen buch namen :("));
-            tupelList.Add(("z2AB5ada78", "nameununununununun vom user"));
-
-            Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            Utils.GenerateMultipleBarcodePDF(tupelList, false, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
         }
 
         static void testaddUser()

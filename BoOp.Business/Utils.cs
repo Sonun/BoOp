@@ -504,21 +504,15 @@ namespace BoOp.Business
         }
 
         /// <summary>
-        /// create a unique abrcode and save pdf file in projet directory
-        /// Example for a Barcode: BoOp0000010
+        /// create a unique Barcode
         /// </summary>
         /// <param BuchModel="book">das buch für das ein neuer barcode erstellt werden soll</param>
         /// <returns>returns the new barcode for the book</returns>
         public static string GenerateUniqueBookBarcodeString(BuchModel book)
         {
-            // Beispiel für einen Barcode:
-            // BoOp0000010
-
-            //add leading 0's untill the lenght is 6
             var barcodeId = book.BasicInfos.Id.ToString();
 
             int exCount = 0;
-
             if (book.Exemplare != null)
             {
                 for (int i = 0; i < book.Exemplare.Count; i++)
@@ -530,14 +524,14 @@ namespace BoOp.Business
                     }
                 }
             }
+            var barcodeAsASring = barcodeId + (exCount < 10 ? "0" + exCount : exCount);
 
-            var barcodeAsString = exCount.ToString();
-            while (barcodeAsString.Length < 3)
+            while (barcodeAsASring.Length < 8)
             {
-                barcodeAsString = "0" + barcodeAsString;
+                barcodeAsASring = "0" + barcodeAsASring;
             }
 
-            return "BoOp" + barcodeId + barcodeAsString;
+            return barcodeAsASring;
         }
 
         public static string GenerateUniqueUserIDString()
@@ -563,7 +557,7 @@ namespace BoOp.Business
         private static Bitmap GenerateBarcode((string barcode, string name) tupel)
         {
             var BarcodeHeight = 70;
-            var BarcodeWidth = 330;
+            var BarcodeWidth = 300;
 
             Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
@@ -573,7 +567,7 @@ namespace BoOp.Business
 
             //clears the rect for the barcode
             gr.Clear(Color.White);
-            gr.DrawImage(new Barcode().Encode(TYPE.CODE39Extended, tupel.barcode, Color.Black, Color.Transparent, BarcodeWidth, BarcodeHeight), 0, 0);
+            gr.DrawImage(new Barcode().Encode(TYPE.CODE128, tupel.barcode, Color.Black, Color.Transparent, BarcodeWidth, BarcodeHeight), 0, 0);
             
             gr.Dispose();
             return bitmap;
