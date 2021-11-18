@@ -147,7 +147,7 @@ namespace BoOp.Business
         {
             string sqlString = "UPDATE Exemplare " +
                  "SET AusleiherID = NULL, " +
-                 "AusleihDatum = NULL " +
+                 "AusleihDatumString = NULL " +
                  "WHERE Barcode = @bookBarcode";
 
             _db.SaveData(sqlString, new { bookBarcode = bookBarcode }, _connectionString);
@@ -418,7 +418,7 @@ namespace BoOp.Business
         {
             string sqlString = "UPDATE Exemplare " +
                 "SET AusleiherID = @userId, " +
-                "AusleihDatum = @datum " +
+                "AusleihDatumString = @datum " +
                 "WHERE Barcode = @bookBarcode";
 
             _db.SaveData(sqlString, new { userId, datum = DateTime.Now.ToString("d"), bookBarcode }, _connectionString);
