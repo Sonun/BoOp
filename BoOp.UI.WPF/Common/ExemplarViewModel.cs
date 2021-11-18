@@ -25,7 +25,6 @@ namespace BoOp.UI.WPF.Common
         public DelegateCommand ShowUserCommand { get; set; }
         public DelegateCommand DeleteFromListCommand { get; set; }
 
-
         public ExemplarViewModel(INavigationService navigationService, ExemplarModel model, BuchModel buch, AdminViewModel adminViewModel = null)
         {
             _navigationService = navigationService;
