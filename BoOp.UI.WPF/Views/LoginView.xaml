@@ -11,12 +11,12 @@
       xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
       d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
       mc:Ignorable="d"
-      d:DesignHeight="920" d:DesignWidth="1080">
+      d:DesignHeight="1080" d:DesignWidth="1920">
 
     <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
