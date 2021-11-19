@@ -11,5 +11,5 @@ namespace BoOp.UI.WPF.Views
     {
       InitializeComponent();
     }
-  }
+    }
 }

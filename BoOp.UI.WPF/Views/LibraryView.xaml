@@ -83,7 +83,7 @@
                 </TextBlock>
             </Button>
             <Button Style="{StaticResource SortButton}" Grid.Column="1" Command="{Binding SortAuthorCommand}">
-                <TextBlock Text="Author">
+                <TextBlock Text="Autor">
                     <Image Source="{StaticResource SortIcon}" Width="16" Height="16" Margin="0, 0, 5, 0"/>
                 </TextBlock>
             </Button>
@@ -134,12 +134,12 @@
         </Grid>
 
 
-        <Grid Grid.Row="1" Grid.RowSpan="2">
+        <!--<Grid Grid.Row="1" Grid.RowSpan="2">
             <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
-        </Grid>
-        <Grid Grid.Row="1" Grid.RowSpan="2">
-            <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}"/>
-        </Grid>
+        </Grid>-->
+        <!--<Grid Grid.Row="1" Grid.RowSpan="2">
+            <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}" Loaded="ShowUserView_Loaded"/>
+        </Grid>-->
         
     </Grid>
 </UserControl>
