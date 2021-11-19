@@ -215,7 +215,7 @@ namespace BoOp.UI.WPF.ViewModels
                         case ("titel"):
                             UpdateBooklist(Utils.SearchForTitleInBooklist(_originalList, SearchWord));
                             break;
-                        case ("author"):
+                        case ("autor"):
                             UpdateBooklist(Utils.SearchForAuthorInBooklist(_originalList, SearchWord));
                             break;
                         case ("schlagwort"):
