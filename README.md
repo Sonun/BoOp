@@ -6,5 +6,7 @@ Systemvoraussetzungen:
 - mind. Windows 7 SP1
 
 Die Standard Admin Login Daten sind:
+
 Benutzername: RickSanchez
+
 Passwort: #11BE102021~
