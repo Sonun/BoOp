@@ -138,7 +138,7 @@
             <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
         </Grid>
         <Grid Grid.Row="1" Grid.RowSpan="2">
-            <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}" Loaded="ShowUserView_Loaded"/>
+            <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}"/>
         </Grid>
         
     </Grid>
