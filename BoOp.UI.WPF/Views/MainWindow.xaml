@@ -15,7 +15,7 @@
         Title="BoOp - Book Options - BoOp"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         >
     
     <Window.Resources>

@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource Secondary}" CornerRadius="10">
@@ -35,37 +35,37 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="0.5*" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label x:Name="VornameLabel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Vorname:" />
-                <Label x:Name="NachnameLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Nachname:" />
-                <Label x:Name="PasswortLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Passwort:" />
-                <Label x:Name="RechteLabel" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Rechte:" />
-                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Geburtstag:" />
-                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Telefonnummer:" />
-                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Email:" />
+                <Label Margin="10" x:Name="VornameLabel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Vorname:" />
+                <Label Margin="10" x:Name="NachnameLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Nachname:" />
+                <Label Margin="10" x:Name="PasswortLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Passwort:" />
+                <Label Margin="10" x:Name="RechteLabel" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Rechte:" />
+                <Label Margin="10" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Geburtstag:" />
+                <Label Margin="10" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Telefonnummer:" />
+                <Label Margin="10" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Content="Email:" />
 
-                <TextBox x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
-                <TextBox x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
-                <TextBox x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
+                <TextBox Margin="10" x:Name="VornameTextbox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Vorname}" />
+                <TextBox Margin="10" x:Name="NachnameTextbox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Nachname}" />
+                <TextBox Margin="10" x:Name="PasswortTextbox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Passwort}" />
 
-                <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Text="{Binding Rechte}">
+                <ComboBox Margin="10" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Text="{Binding Rechte}">
                     <ComboBoxItem Content="Leser" />
                     <ComboBoxItem Content="Helfer" />
                     <ComboBoxItem Content="Bibo Team" />
                     <ComboBoxItem Content="Admin" />
                 </ComboBox>
 
-                <Calendar Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Birthdate}" DisplayDate="{Binding Birthdate}" />
+                <Calendar Margin="10" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Birthdate}" DisplayDate="{Binding Birthdate}" />
 
-                <TextBox Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
-                <TextBox Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
-                <Button Grid.Row="8" Grid.Column="0" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen" />
-                <Button Grid.Row="8" Grid.Column="1" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding SaveCommand}" Content="Speichern" />
+                <TextBox Margin="10" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Telefon}" />
+                <TextBox Margin="10" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" Width="300" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Email}" />
+                <Button Margin="10" Grid.Row="8" Grid.Column="0" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding CancelCommand}" Content="Abrechen" />
+                <Button Margin="10" Grid.Row="8" Grid.Column="1" Width="250" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Command="{Binding SaveCommand}" Content="Speichern" />
             </Grid>
         </Border>
     </Grid>

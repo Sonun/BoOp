@@ -101,7 +101,7 @@
                         <TextBlock Text="Titel"/>
                     </Button>
                     <Button Grid.Column="1">
-                        <TextBlock Text="Author"/>
+                        <TextBlock Text="Autor"/>
                     </Button>
                     <Button Grid.Column="2">
                         <TextBlock Text="ISBN"/>
