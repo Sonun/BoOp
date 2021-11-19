@@ -134,12 +134,12 @@
         </Grid>
 
 
-        <!--<Grid Grid.Row="1" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Grid.RowSpan="2">
             <views:BookDetailsView Style="{StaticResource BookDetailsStyle}" DataContext="{Binding BookDetailsViewModel}"/>
-        </Grid>-->
-        <!--<Grid Grid.Row="1" Grid.RowSpan="2">
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2">
             <views:ShowUserView Style="{StaticResource ShowUserDetailsStyle}" DataContext="{Binding ShowUserViewModel}" Loaded="ShowUserView_Loaded"/>
-        </Grid>-->
+        </Grid>
         
     </Grid>
 </UserControl>
