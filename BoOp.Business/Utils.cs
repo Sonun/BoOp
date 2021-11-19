@@ -559,15 +559,13 @@ namespace BoOp.Business
             var BarcodeHeight = 70;
             var BarcodeWidth = 300;
 
-            Bitmap bitmap = new Bitmap(BarcodeWidth, BarcodeHeight);
+            Bitmap bitmap = new Bitmap(BarcodeWidth + 50, BarcodeHeight);
             Graphics gr = Graphics.FromImage(bitmap);
-
-            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             //clears the rect for the barcode
             gr.Clear(Color.White);
-            gr.DrawImage(new Barcode().Encode(TYPE.CODE128, tupel.barcode, Color.Black, Color.Transparent, BarcodeWidth, BarcodeHeight), 0, 0);
+            var barcode = new Barcode().Encode(TYPE.CODE128B, "" + tupel.barcode + "", Color.Black, Color.White, BarcodeWidth, BarcodeHeight);
+            gr.DrawImage(barcode, 0, 0);
             
             gr.Dispose();
             return bitmap;
@@ -629,7 +627,7 @@ namespace BoOp.Business
                         XFont font = new XFont("Code EAN13", 12, XFontStyle.Regular, options);
                         XBrush rectBrush = XBrushes.White;
                         XBrush textBrush = XBrushes.Black;
-                        XPen pen = new XPen(XColor.FromCmyk(0, 0, 0, 255), 1);
+                        XPen pen = new XPen(XColor.FromCmyk(0,125, 255, 0), 1);
 
                         //image und point von der jeweiligen karte
                         XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite / 2) - 1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite / 2)) * (singleBarcodeHeight + offset)) + offset);
@@ -642,9 +640,6 @@ namespace BoOp.Business
                         var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/cropped-logo-mcd-2-1.png";
                         gfx.DrawImage(XImage.FromFile(picpath), point.X + 50, point.Y + 8, 130, 30);
 
-                        //barcode image
-                        gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
-
                         //text fuer barcode
                         gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 50, point.Y + 110));
 
@@ -655,7 +650,11 @@ namespace BoOp.Business
                             substring = tupelList[i].name.Substring(0, 30) + "...";
                         }
 
+                        //draw name
                         gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + substring, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+                        
+                        //barcode image
+                        gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
                     }
                 }
 
