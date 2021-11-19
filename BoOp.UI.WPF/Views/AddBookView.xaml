@@ -16,12 +16,12 @@
     <Grid Background="{StaticResource Primary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.Row="1" CornerRadius="10" Background="{StaticResource Secondary}">
@@ -45,37 +45,37 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="1.2*" />
                 </Grid.RowDefinitions>
-                <Label x:Name="TitelLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel*" />
-                <Label x:Name="AuthorLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author*" />
-                <Label x:Name="VerlagLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag*" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:" />
-                <Label x:Name="ISBNLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN (scannbar)*" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:" />
-                <Label Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:" />
+                <Label Margin="10" x:Name="TitelLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel*" />
+                <Label Margin="10" x:Name="AuthorLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author*" />
+                <Label Margin="10" x:Name="VerlagLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag*" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:" />
+                <Label Margin="10" x:Name="ISBNLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ISBN (scannbar)*" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:" />
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:" />
 
-                <TextBox x:Name="TitelTextbox" Grid.Row="0" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Center" />
-                <TextBox x:Name="AuthorTextbox" Grid.Row="1" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Center" />
-                <TextBox x:Name="VerlagTextbox" Grid.Row="2" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Verlag}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="3" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Auflage}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="4" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Genres}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="5" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Center" />
-                <TextBox x:Name="ISBNTextBox" Grid.Row="6" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ISBN}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="7" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="8" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Regal}" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="9" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Center" />
-                <Button Grid.Row="6" Grid.Column="2" FontSize="24" Height="Auto" HorizontalAlignment="Center" Style="{StaticResource RoundedButtonStyle}" Command="{Binding SearchInfosCommand}" Content="Suche Infos" />
-                <StackPanel Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBox Margin="10" x:Name="TitelTextbox" Grid.Row="0" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Titel}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" x:Name="AuthorTextbox" Grid.Row="1" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Author}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" x:Name="VerlagTextbox" Grid.Row="2" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Verlag}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="3" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Auflage}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="4" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Genres}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="5" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" x:Name="ISBNTextBox" Grid.Row="6" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding ISBN}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="7" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="8" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Regal}" HorizontalAlignment="Center" />
+                <TextBox Margin="10" Grid.Row="9" Grid.Column="1" Width="300" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Exemplare}" HorizontalAlignment="Center" />
+                <Button Margin="10" Grid.Row="6" Grid.Column="2" FontSize="24" Height="Auto" HorizontalAlignment="Center" Style="{StaticResource RoundedButtonStyle}" Command="{Binding SearchInfosCommand}" Content="Suche Infos" />
+                <StackPanel Margin="10" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                     <CheckBox HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" IsChecked="{Binding AddPrintList}" />
                     <StackPanel>
                         <Label Style="{StaticResource LabelBookStyle}" FontSize="14" Content="Exemplar- Barcodes" />
                         <Label Style="{StaticResource LabelBookStyle}" FontSize="14" Content="zur Druckliste hinzufügen?" />
                     </StackPanel>
                 </StackPanel>
-                <Button Grid.Row="11" Grid.Column="0" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding CancelCommand}" Content="Abrechen" />
-                <Button Grid.Row="11" Grid.Column="1" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding SaveCommand}" Content="Speichern" />
+                <Button Margin="10" Grid.Row="11" Grid.Column="0" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding CancelCommand}" Content="Abrechen" />
+                <Button Margin="10" Grid.Row="11" Grid.Column="1" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding SaveCommand}" Content="Speichern" />
             </Grid>
         </Border>
     </Grid>
