@@ -122,7 +122,7 @@ namespace BoOp.UI.WPF.ViewModels
             _currentList = _originalList;
             SearchByList = new ObservableCollection<ComboBoxItemViewModel>();
             SearchByList.Add(new ComboBoxItemViewModel("Titel"));
-            SearchByList.Add(new ComboBoxItemViewModel("Author"));
+            SearchByList.Add(new ComboBoxItemViewModel("Autor"));
             SearchByList.Add(new ComboBoxItemViewModel("Genre"));
             SearchByList.Add(new ComboBoxItemViewModel("Schlagwort"));
             SelectedSearchBy = SearchByList[0];

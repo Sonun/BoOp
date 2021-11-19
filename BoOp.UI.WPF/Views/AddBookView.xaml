@@ -46,7 +46,7 @@
                     <RowDefinition Height="1.2*" />
                 </Grid.RowDefinitions>
                 <Label Margin="10" x:Name="TitelLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel*" />
-                <Label Margin="10" x:Name="AuthorLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author*" />
+                <Label Margin="10" x:Name="AuthorLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Autor*" />
                 <Label Margin="10" x:Name="VerlagLabel" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag*" />
                 <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:" />
                 <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:" />
