@@ -625,7 +625,7 @@ namespace BoOp.Business
                     {
                         //declare a font and coors for drawing in the PDF
                         XFont font = new XFont("Code EAN13", 12, XFontStyle.Regular, options);
-                        XBrush rectBrush = XBrushes.White;
+                        XBrush rectBrush = XBrushes.Transparent;
                         XBrush textBrush = XBrushes.Black;
                         XPen pen = new XPen(XColor.FromCmyk(0,125, 255, 0), 1);
 
@@ -633,28 +633,31 @@ namespace BoOp.Business
                         XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite / 2) - 1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite / 2)) * (singleBarcodeHeight + offset)) + offset);
                         Stream imagestram = (ImageToStream(GenerateBarcode(tupelList[i]), ImageFormat.Png));
 
-                        //draw rectanlge
-                        gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);
-
                         //image der schule
                         var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/cropped-logo-mcd-2-1.png";
                         gfx.DrawImage(XImage.FromFile(picpath), point.X + 50, point.Y + 8, 130, 30);
 
-                        //text fuer barcode
-                        gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 50, point.Y + 110));
-
                         //text fuer name
                         var substring = tupelList[i].name;
-                        if (tupelList[i].name.Length > 30)
+                        if (tupelList[i].name.Length > 38)
                         {
-                            substring = tupelList[i].name.Substring(0, 30) + "...";
+                            substring = tupelList[i].name.Substring(0, 38) + "...";
                         }
+                        //draw name 
+                        gfx.DrawString(substring, font, textBrush, new XPoint(point.X + 95 - (substring.Length * 2), point.Y + 110));
 
-                        //draw name
-                        gfx.DrawString((benutzerOderBuch ? "Mitglied: " : "Buch: ") + substring, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
-                        
+                        //draw (benutzerOderBuch ? "Mitglied: " : "Buch: "
+                        string art = benutzerOderBuch ? "(Mitglied)" : "(Buch)";
+                        gfx.DrawString(art, font, textBrush, new XPoint(point.X + 100 - (art.Length * 2), point.Y + 120));
+
                         //barcode image
                         gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
+
+                        //draw name 
+                        gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+
+                        //draw rectanlge
+                        gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);
                     }
                 }
 

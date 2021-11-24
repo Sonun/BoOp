@@ -25,10 +25,14 @@ namespace BoOp.UIConsole
             BuchModel n = new BuchModel();
             n.BasicInfos = new BasicBuchModel();
             n.BasicInfos.Id = 193;
-            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n) + "3", "Rapunpunzel und der Stein der WeMsen roflmao kappa pride, ich kenne keine langen buch namen :("));
-            tupelList.Add(("asc34zoy", "nameununununununun vom user"));
 
+            tupelList.Add((Utils.GenerateUniqueUserIDString(), "Max Low"));
+            Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            
+            tupelList.Clear();
+            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n), "Rapunzel und der Stein der Weisen"));
             Utils.GenerateMultipleBarcodePDF(tupelList, false, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
         }
 
         static void testaddUser()
