@@ -211,11 +211,11 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    var tupelList = new List<(string barcode, string name)>();
+                    var triplelist = new List<(string barcode, string name, string klase)>();
 
                     foreach (var book in BookPrintList)
                     {
-                        tupelList.Add((book.Model.BasicInfos.Barcode, book.BuchModel.BasicInfos.Titel + " - " + book.BuchModel.BasicInfos.Author));
+                        triplelist.Add((book.Model.BasicInfos.Barcode, book.BuchModel.BasicInfos.Titel + " - " + book.BuchModel.BasicInfos.Author, ""));
                     }
 
                     try
@@ -242,11 +242,11 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
-                    var tupelList = new List<(string barcode, string name)>();
+                    var triplelist = new List<(string barcode, string name, string klasse)>();
 
                     foreach (var user in UserIDPrintList)
                     {
-                        tupelList.Add((user.Model.AusweisID, user.Model.VorUndNachname));
+                        triplelist.Add((user.Model.AusweisID, user.Model.VorUndNachname, user.Model.Klassenname));
                     }
 
                     try

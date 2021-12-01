@@ -574,11 +574,11 @@ namespace BoOp.Business
         /// <summary>
         /// creates a pdf with multiple barcodes or benutzerausweisen
         /// </summary>
-        /// <param name="tupelList">list of infos to be printed</param>
+        /// <param name="trippleList">list of infos to be printed</param>
         /// <param name="path">path to put the directory</param>
         /// <param name="benutzerOderBuch"></param>
         /// <param name="nameDesErstellers"></param>
-        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name)> tupelList, bool benutzerOderBuch, string nameDesErstellers, string path)
+        public static void GenerateMultipleBarcodePDF(List<(string barcode, string name, string klasse)> trippleList, bool benutzerOderBuch, string nameDesErstellers, string path)
         {
             //register different encoding provider
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -594,7 +594,7 @@ namespace BoOp.Business
             var singleBarcodeHeight = 150;
             var pdfPageheight = 297;
             var pdfPageWidth = 210;
-            var pages = ((double)tupelList.Count / 6) > (int)tupelList.Count / kartenProSeite ? ((int)tupelList.Count / kartenProSeite) + 1 : (int)tupelList.Count / kartenProSeite;
+            var pages = ((double)trippleList.Count / 6) > (int)trippleList.Count / kartenProSeite ? ((int)trippleList.Count / kartenProSeite) + 1 : (int)trippleList.Count / kartenProSeite;
             var pageAmount = pages < 1 ? 1 : pages;
 
             using (PdfDocument document = new PdfDocument())
@@ -616,7 +616,7 @@ namespace BoOp.Business
                     page.Height = XUnit.FromMillimeter(pdfPageheight);
                 }
 
-                for (int i = 0; i < tupelList.Count; i++)
+                for (int i = 0; i < trippleList.Count; i++)
                 {
                     int currentPageIndex = i / kartenProSeite;
                     Debug.WriteLine("current page : " + currentPageIndex);
@@ -631,30 +631,29 @@ namespace BoOp.Business
 
                         //image und point von der jeweiligen karte
                         XPoint point = new XPoint((i % kartenProSeite > ((kartenProSeite / 2) - 1) ? 1 : 0) * (singleBarcodeWidth + offset) + offset, ((i % (kartenProSeite / 2)) * (singleBarcodeHeight + offset)) + offset);
-                        Stream imagestram = (ImageToStream(GenerateBarcode(tupelList[i]), ImageFormat.Png));
+                        Stream imagestram = (ImageToStream(GenerateBarcode((trippleList[i].barcode, trippleList[i].name)), ImageFormat.Png));
 
                         //image der schule
                         var picpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")) + "BoOp.Business/Bilder/cropped-logo-mcd-2-1.png";
                         gfx.DrawImage(XImage.FromFile(picpath), point.X + 50, point.Y + 8, 130, 30);
 
                         //text fuer name
-                        var substring = tupelList[i].name;
-                        if (tupelList[i].name.Length > 38)
+                        var substring = trippleList[i].name;
+                        if (trippleList[i].name.Length > 38)
                         {
-                            substring = tupelList[i].name.Substring(0, 38) + "...";
+                            substring = trippleList[i].name.Substring(0, 38) + "...";
                         }
                         //draw name 
                         gfx.DrawString(substring, font, textBrush, new XPoint(point.X + 100 - (substring.Length * 2), point.Y + 110));
                         
                         //draw barcode as string
-                        gfx.DrawString("(" + tupelList[i].barcode + ")", font, textBrush, new XPoint(point.X + 105 - (tupelList[i].barcode.Length * 2), point.Y + 125));
+                        gfx.DrawString("(" + trippleList[i].barcode + ")", font, textBrush, new XPoint(point.X + 105 - (trippleList[i].barcode.Length * 2), point.Y + 125));
      
                         //barcode image
                         gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
 
-                        //draw (benutzerOderBuch ? "Mitglied: " : "Buch: "
-                        string art = benutzerOderBuch ? "Mitglied" : "Buch";
-                        gfx.DrawString(art, font, textBrush, new XPoint(point.X + 110 - (art.Length * 2), point.Y + 140));
+                        //draw klassenname, falls vorhanden
+                        gfx.DrawString(trippleList[i].klasse, font, textBrush, new XPoint(point.X + 110 - (trippleList[i].klasse.Length * 2), point.Y + 140));
 
                         //draw rectanlge
                         gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);

@@ -26,17 +26,17 @@ namespace BoOp.UIConsole
 
         static void testBarcodePDF()
         {
-            List<(string barcode, string name)> tupelList = new List<(string barcode, string name)>();
+            List<(string barcode, string name, string klasse)> tupelList = new List<(string barcode, string name, string klasse)>();
             BuchModel n = new BuchModel();
             n.BasicInfos = new BasicBuchModel();
             n.BasicInfos.Id = 193;
 
-            tupelList.Add((Utils.GenerateUniqueUserIDString(), "Thorsten Sommerfeld"));
+            tupelList.Add((Utils.GenerateUniqueUserIDString(), "Thorsten Sommerfeld", "11BE10"));
             Utils.GenerateMultipleBarcodePDF(tupelList, true, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
             tupelList.Clear();
-            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n), "Rapunzel und der Stein der Weisen"));
-            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n), "Rapunzel und der Stein der Weisen, Teil 1: der Turm der Schande"));
+            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n), "Rapunzel und der Stein der Weisen", ""));
+            tupelList.Add((Utils.GenerateUniqueBookBarcodeString(n), "Rapunzel und der Stein der Weisen, Teil 1: der Turm der Schande", ""));
 
             Utils.GenerateMultipleBarcodePDF(tupelList, false, "dominik", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 

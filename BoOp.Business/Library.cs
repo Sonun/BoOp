@@ -207,10 +207,10 @@ namespace BoOp.Business
 
         public void AddUser(PersonModel user)
         {
-            string sqlString = "INSERT INTO Personen(Vorname, Nachname, GeburtsdatumString, Telefonnummer, Rechte, Email, PasswortHASH, AusweisID) " +
-                "VALUES(@Vorname, @Nachname, @GeburtsdatumString, @Telefonnummer, @Rechte, @EMail, @pass, @AusweisID);";
+            string sqlString = "INSERT INTO Personen(Vorname, Nachname, GeburtsdatumString, Telefonnummer, Rechte, Email, PasswortHASH, AusweisID, Klassenname) " +
+                "VALUES(@Vorname, @Nachname, @GeburtsdatumString, @Telefonnummer, @Rechte, @EMail, @pass, @AusweisID, @Klassenname);";
 
-            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.GeburtsdatumString, user.Telefonnummer, pass=user.PasswortHash, Rechte = user.Rechte, user.EMail, user.AusweisID }, _connectionString);
+            _db.SaveData(sqlString, new { user.Vorname, user.Nachname, user.GeburtsdatumString, user.Telefonnummer, pass=user.PasswortHash, Rechte = user.Rechte, user.EMail, user.AusweisID, user.Klassenname }, _connectionString);
         }
 
         public void RemoveUser(PersonModel user)
@@ -221,8 +221,8 @@ namespace BoOp.Business
 
         public void EditUserDetails(PersonModel user)
         {
-            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, PasswortHASH=@pass, GeburtsdatumString=@GeburtsdatumString, Telefonnummer=@Telefonnummer, Rechte=@Rechte, AusweisID=@ausweis, EMail=@EMail WHERE Id = @Id; ";
-            _db.SaveData( sqlstring, new {user.Id, user.Vorname, user.Nachname, user.GeburtsdatumString, user.Telefonnummer, pass=user.PasswortHash, user.Rechte, user.EMail, ausweis = user.AusweisID}, _connectionString );
+            string sqlstring = $"UPDATE Personen SET Vorname = @Vorname, Nachname =@Nachname, PasswortHASH=@pass, GeburtsdatumString=@GeburtsdatumString, Telefonnummer=@Telefonnummer, Rechte=@Rechte, AusweisID=@ausweis, EMail=@EMail, Klassenname=@klassenname WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new { user.Id, user.Vorname, user.Nachname, user.GeburtsdatumString, user.Telefonnummer, pass = user.PasswortHash, user.Rechte, user.EMail, ausweis = user.AusweisID, klassenname = user.Klassenname }, _connectionString );
         }
 
         public void EditBookDetails (BuchModel book, bool editMode = false)

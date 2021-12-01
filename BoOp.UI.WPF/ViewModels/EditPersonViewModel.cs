@@ -31,6 +31,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _telefon;
         private string _email;
         private DateTime _birthdate;
+        private string _klassenname;
 
         private PersonModel _user;
         private PersonModel _userToChange;
@@ -45,6 +46,18 @@ namespace BoOp.UI.WPF.ViewModels
             set
             {
                 _birthdate = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Klassenname
+        {
+            get
+            {
+                return _klassenname;
+            }
+            set
+            {
+                _klassenname = value;
                 OnPropertyChanged();
             }
         }
@@ -175,6 +188,9 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
+                    if (_klassenname.Equals(""))
+                        _klassenname = "Unbekannt";
+
                     var tempModel = new PersonModel
                     {
                         Id = _userToChange.Id,
@@ -184,7 +200,8 @@ namespace BoOp.UI.WPF.ViewModels
                         Rechte = (Rechtelevel)_rechteAsInt,
                         GeburtsdatumString = Birthdate.ToString("d"),
                         Telefonnummer = _telefon,
-                        EMail = _email
+                        EMail = _email,
+                        Klassenname = _klassenname
                     };
 
                     if (_user.Rechte != Rechtelevel.ADMIN && !_passwort.Equals(""))
@@ -209,7 +226,7 @@ namespace BoOp.UI.WPF.ViewModels
             Passwort = "";
             Telefon = userToChange.Telefonnummer;
             Birthdate = userToChange.GeburtsdatumDateTime;
-
+            Klassenname = userToChange.Klassenname;
 
             //set rechte
             switch (userToChange.Rechte.ToString().ToLower())

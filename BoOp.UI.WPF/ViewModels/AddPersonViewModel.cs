@@ -21,7 +21,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CreateBarcodeCommand { get; set; }
-
+        
         //user info attributes
         private string _vorname;
         private string _nachname;
@@ -32,6 +32,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _email;
         private DateTime _geburtstag;
         private bool _addToPrintList;
+        private string _klassenname;
 
         //user Info Propertys
         public bool AddToPrintList
@@ -54,6 +55,18 @@ namespace BoOp.UI.WPF.ViewModels
             set
             {
                 _vorname = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Klassenname
+        {
+            get
+            {
+                return _klassenname;
+            }
+            set
+            {
+                _klassenname = value;
                 OnPropertyChanged();
             }
         }
@@ -148,6 +161,7 @@ namespace BoOp.UI.WPF.ViewModels
             Rechte = "Leser";
             Telefon = "";
             Email = "";
+            Klassenname = "";
             Geburtstag = new DateTime(2000, 1, 1);
 
             CancelCommand = new DelegateCommand(
@@ -181,6 +195,9 @@ namespace BoOp.UI.WPF.ViewModels
                         return;
                     }
 
+                    if (_klassenname.Equals(""))
+                        _klassenname = "Unbekannt";
+
                     var newUser = new PersonModel
                     {
                         Vorname = _vorname,
@@ -189,7 +206,8 @@ namespace BoOp.UI.WPF.ViewModels
                         Rechte = (Rechtelevel)_rechteAsInt,
                         GeburtsdatumString = Geburtstag.ToString("d"),
                         Telefonnummer = _telefon,
-                        EMail = _email
+                        EMail = _email,
+                        Klassenname = _klassenname
                     };
 
                     //add barcode to user
