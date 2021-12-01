@@ -36,8 +36,6 @@ namespace BoOp.UI.WPF.ViewModels
 
         public ScanUserViewModel(INavigationService navigationService, ILibrary library, Dispatcher dispatcher)
         {
-            ScanBox = new TextBox();
-            ScanBox.Focus();
             _navigationService = navigationService;
             _library = library;
             _timeFlag = false;
