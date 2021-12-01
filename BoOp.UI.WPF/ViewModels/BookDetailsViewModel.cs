@@ -148,6 +148,7 @@ namespace BoOp.UI.WPF.ViewModels
                     ReviewViewModels.Remove(checkDoupleReview);
                     var deleteFromBookList = libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Where(x => x.BasicInfos.PersonID == user.Id).FirstOrDefault();
                     libraryViewModel.BookList.Where(x => x.Model.BasicInfos.Id == BuchModel.BasicInfos.Id).First().Model.Rezensionen.Remove(deleteFromBookList);
+                    ReviewViewModels.Add(new ReviewViewModel(review));
                     MessageBox.Show("Sie haben das Buch bereits bewertet. Die Bewertung wurde aktualisiert.");
                 }
                 else

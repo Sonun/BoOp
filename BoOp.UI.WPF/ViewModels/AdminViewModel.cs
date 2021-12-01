@@ -2,14 +2,18 @@
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.WindowsAPICodePack.Dialogs;
+
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -37,6 +41,8 @@ namespace BoOp.UI.WPF.ViewModels
 
 
         //button commands
+
+        public DelegateCommand BackUpDatabase { get; set; }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
@@ -138,6 +144,34 @@ namespace BoOp.UI.WPF.ViewModels
             UpdateUserlist(_currentUserList);
 
             UserRights = user.Rechte;
+
+            BackUpDatabase = new DelegateCommand(
+                x =>
+                {
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.InitialDirectory = Directory.GetCurrentDirectory()+ @"\SQLiteBoOpDB.db";
+                    dialog.IsFolderPicker = true;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    {
+                        MessageBox.Show("You selected: " + dialog.FileName);
+                      
+                        string sourceFile = Directory.GetCurrentDirectory() + @"\SQLiteDB\SQLiteBoOpDB.db";
+                        string destinationFile = dialog.FileName;
+                        if (File.Exists(sourceFile))
+                        {
+                            try
+                            {
+                                FileInfo i = new FileInfo(sourceFile);
+                                //i.CopyTo(Path.Combine(destinationFile,@"\Backup.db"),true);
+                                File.Copy(sourceFile, destinationFile+@"\SQLite_Backup_Database.db", true);
+                            }
+                            catch (IOException iox)
+                            {
+                                Console.WriteLine(iox.Message);
+                            }
+                        }
+                    }
+                });
 
             BackCommand = new DelegateCommand( 
                 x =>

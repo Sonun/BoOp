@@ -46,6 +46,7 @@
             
             <!-- buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Height="Auto" HorizontalAlignment="Center">
+                <Button Content="Datenbank Backup" Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackUpDatabase}"/>
                 <Button Content=" Buch hinzufügen " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
                 <Button Content=" Person hinzufügen " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
                 <Button Content=" Zurück " Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
