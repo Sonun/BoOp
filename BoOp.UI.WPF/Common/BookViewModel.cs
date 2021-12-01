@@ -47,6 +47,40 @@ namespace BoOp.UI.WPF.Common
                 return schlagwoerter;
             }
         }
+
+        //private string _ratingPic;
+
+        public string RatingPic
+        {
+            get
+            {
+                switch (Model.RezensionenDurschschnitt)
+                {
+                    case (1):
+                        return "/Assets/Butterflies/1butterflies.png";
+                    case (<2):
+                        return "/Assets/Butterflies/1.5butterflies.png";
+                    case (< 2.5):
+                        return "/Assets/Butterflies/2butterflies.png";
+                    case (< 3):
+                        return "/Assets/Butterflies/2.5butterflies.png";
+                    case (< 3.5):
+                        return "/Assets/Butterflies/3butterflies.png";
+                    case (< 4):
+                        return "/Assets/Butterflies/3.5butterflies.png";
+                    case (< 4.5):
+                        return "/Assets/Butterflies/4butterflies.png";
+                    case (< 5):
+                        return "/Assets/Butterflies/4.5butterflies.png";
+                    case (< 5.5):
+                        return "/Assets/Butterflies/5butterflies.png";
+                    default:
+                        return "/Assets/Butterflies/0butterflies.png";
+                }
+            }
+        }
+
+
         private readonly ILibrary _library;
         private readonly LibraryViewModel _libraryViewModel;
         private readonly AdminViewModel _adminViewModel;
