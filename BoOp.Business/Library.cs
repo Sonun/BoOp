@@ -131,9 +131,9 @@ namespace BoOp.Business
             if (bookCheck == null)
             {
                 // Save the basic book
-                sql = "insert into Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal );";
+                sql = "insert into Buecher (Titel, Author, Verlag, Auflage, ISBN, Altersvorschlag, Regal, BildPfad, Beschreibung) values (@Titel, @Author, @Verlag, @Auflage, @ISBN, @Altersvorschlag, @Regal, @BildPfad, @Beschreibung);";
                 _db.SaveData(sql,
-                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal },
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.BildPfad, book.BasicInfos.Beschreibung },
                         _connectionString);
             }
             else
@@ -163,8 +163,8 @@ namespace BoOp.Business
 
         public void EditBasicBookDetails(BasicBuchModel basicBuchModel)
         {
-            string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag WHERE Id = @Id; ";
-            _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag }, _connectionString );
+            string sqlstring = $"UPDATE Buecher SET Id = @Id, ISBN =@ISBN, Regal=@Regal, Titel=@Titel, Auflage=@Auflage, Verlag=@Verlag, Altersvorschlag=@Altersvorschlag, BildPfad=@BildPfad, Beschreibung=@Beschreibung WHERE Id = @Id; ";
+            _db.SaveData( sqlstring, new { basicBuchModel.Id, basicBuchModel.ISBN, basicBuchModel.Regal, basicBuchModel.Titel, basicBuchModel.Auflage, basicBuchModel.Verlag, basicBuchModel.Altersvorschlag, basicBuchModel.BildPfad, basicBuchModel.Beschreibung }, _connectionString );
         }
 
         public void AddReview(RezensionModel review)
@@ -230,9 +230,9 @@ namespace BoOp.Business
             string sql = "";
             if (editMode)
             {
-                sql = "UPDATE Buecher SET Titel = @Titel, Author = @Author, Verlag = @Verlag, Auflage = @Auflage, ISBN = @ISBN, Altersvorschlag = @Altersvorschlag, Regal = @Regal WHERE Id = @Id;";
+                sql = "UPDATE Buecher SET Titel = @Titel, Author = @Author, Verlag = @Verlag, Auflage = @Auflage, ISBN = @ISBN, Altersvorschlag = @Altersvorschlag, Regal = @Regal, BildPfad=@BildPfad, Beschreibung=@Beschreibung WHERE Id = @Id;";
                 _db.SaveData(sql,
-                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Id },
+                        new { book.BasicInfos.Titel, book.BasicInfos.Author, book.BasicInfos.Verlag, book.BasicInfos.Auflage, book.BasicInfos.ISBN, book.BasicInfos.Altersvorschlag, book.BasicInfos.Regal, book.BasicInfos.Id, book.BasicInfos.BildPfad, book.BasicInfos.Beschreibung },
                         _connectionString);
             }
             else

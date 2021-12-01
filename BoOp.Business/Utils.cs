@@ -384,7 +384,7 @@ namespace BoOp.Business
             {
                 for (int i = 0; i <= bookList.Count - 2; i++)
                 {
-                    int throughCut1 = 0;
+                    double throughCut1 = 0;
 
                     foreach (var eachRez in bookList[i].Rezensionen)
                     {
@@ -394,7 +394,7 @@ namespace BoOp.Business
                     if (bookList[i].Rezensionen.Count != 0)
                         throughCut1 /= bookList[i].Rezensionen.Count;
 
-                    int throughCut2 = 0;
+                    double throughCut2 = 0;
 
                     foreach (var eachRez in bookList[i + 1].Rezensionen)
                     {
@@ -644,17 +644,17 @@ namespace BoOp.Business
                             substring = tupelList[i].name.Substring(0, 38) + "...";
                         }
                         //draw name 
-                        gfx.DrawString(substring, font, textBrush, new XPoint(point.X + 95 - (substring.Length * 2), point.Y + 110));
-
-                        //draw (benutzerOderBuch ? "Mitglied: " : "Buch: "
-                        string art = benutzerOderBuch ? "(Mitglied)" : "(Buch)";
-                        gfx.DrawString(art, font, textBrush, new XPoint(point.X + 100 - (art.Length * 2), point.Y + 120));
-
+                        gfx.DrawString(substring, font, textBrush, new XPoint(point.X + 100 - (substring.Length * 2), point.Y + 110));
+                        
+                        //draw barcode as string
+                        gfx.DrawString("(" + tupelList[i].barcode + ")", font, textBrush, new XPoint(point.X + 105 - (tupelList[i].barcode.Length * 2), point.Y + 125));
+     
                         //barcode image
                         gfx.DrawImage(XImage.FromStream(imagestram), new XPoint(point.X + 10, point.Y + 45));
 
-                        //draw name 
-                        gfx.DrawString(tupelList[i].barcode, font, textBrush, new XPoint(point.X + 10, point.Y + 140));
+                        //draw (benutzerOderBuch ? "Mitglied: " : "Buch: "
+                        string art = benutzerOderBuch ? "Mitglied" : "Buch";
+                        gfx.DrawString(art, font, textBrush, new XPoint(point.X + 110 - (art.Length * 2), point.Y + 140));
 
                         //draw rectanlge
                         gfx.DrawRectangle(pen, rectBrush, point.X, point.Y, singleBarcodeWidth, singleBarcodeHeight);

@@ -35,6 +35,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _genres;
         private string _bookDetailsJSONLink = "";
         private bool _addPrintList;
+        private string _beschreibung;
 
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
@@ -46,8 +47,9 @@ namespace BoOp.UI.WPF.ViewModels
         public int Exemplare { get { return _exemplare; } set { _exemplare = value; OnPropertyChanged(); } }
         public string Schlagwoerter { get { return _schlagwoerter; } set { _schlagwoerter = value; OnPropertyChanged(); } }
         public string Genres { get { return _genres; } set { _genres = value; OnPropertyChanged(); } }
+        public string Beschreibung { get { return _beschreibung; } set { _beschreibung = value; OnPropertyChanged(); } }
         public bool AddPrintList { get { return _addPrintList; } set { _addPrintList = value; OnPropertyChanged(); } }
-
+        
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SearchInfosCommand { get; set; }
@@ -66,6 +68,7 @@ namespace BoOp.UI.WPF.ViewModels
             ISBN = "";
             Schlagwoerter = "";
             Genres = "";
+            Beschreibung = "";
             Exemplare = 1;
 
             SaveCommand = new DelegateCommand( 
@@ -85,8 +88,8 @@ namespace BoOp.UI.WPF.ViewModels
                     var isbn = new string(ISBN.Trim(' ').ToArray());
 
 
-                    var bookModel = new BuchModel 
-                    { 
+                    var bookModel = new BuchModel
+                    {
                         BasicInfos = new BasicBuchModel
                         {
                             Titel = Titel.Trim(' '),
@@ -95,7 +98,8 @@ namespace BoOp.UI.WPF.ViewModels
                             Verlag = _verlag.Trim(' '),
                             ISBN = new string(_isbn.Where(c => char.IsDigit(c)).ToArray()),
                             Altersvorschlag = _altersvorschlag,
-                            Regal = _regal
+                            Regal = _regal,
+                            Beschreibung = _beschreibung
                         }, 
                         Exemplare = new List<ExemplarModel>(),
                     };

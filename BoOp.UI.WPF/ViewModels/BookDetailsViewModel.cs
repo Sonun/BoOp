@@ -24,8 +24,11 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _ratingFlag;
         private bool _showBookDetailsView;
         private string _reviewText;
+        private double _selectedRating;
 
+        public double Rating { get { return _selectedRating; } set { _selectedRating = value; OnPropertyChanged(); SelectedRating = new RatingViewModel(_selectedRating); } }
         public RatingViewModel SelectedRating { get; set; }
+
         public BuchModel BuchModel { get; set; }
         public PersonModel PersonModel { get; set; }
         public DelegateCommand RateBookCommand { get; set; }
@@ -91,6 +94,7 @@ namespace BoOp.UI.WPF.ViewModels
                 Ratings.Add(new RatingViewModel(i));
             }
             SelectedRating = Ratings.Last();
+            Rating = 3;
 
             if (buchModel != null)
             {

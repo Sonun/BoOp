@@ -38,6 +38,8 @@ namespace BoOp.UI.WPF.ViewModels
         private int _exemplare;
         private string _schlagwoerter;
         private string _genres;
+        private string _beschreibung;
+
         private readonly INavigationService _navigationService;
         private readonly ILibrary _library;
         private readonly AdminViewModel _adminViewModel;
@@ -52,6 +54,7 @@ namespace BoOp.UI.WPF.ViewModels
         public int Exemplare { get { return _exemplare; } set { _exemplare = value; OnPropertyChanged(); } }
         public string Schlagwoerter { get { return _schlagwoerter; } set { _schlagwoerter = value; OnPropertyChanged(); } }
         public string Genres { get { return _genres; } set { _genres = value; OnPropertyChanged(); } }
+        public string Beschreibung { get { return _beschreibung; } set { _beschreibung = value; OnPropertyChanged(); } }
 
         public EditBookViewModel(BuchModel buch, PersonModel user, INavigationService navigationService, ILibrary library, AdminViewModel adminViewModel)
         {
@@ -63,25 +66,19 @@ namespace BoOp.UI.WPF.ViewModels
             _adminViewModel = adminViewModel;
           
             BuchModel.Exemplare.ForEach(x => ExemplarViewModels.Add(new ExemplarViewModel(_navigationService,x, BuchModel, adminViewModel)));
-            
-            Schlagwoerter = "";
-            Genres = "";
-            Altersvorschlag = "";
-            Regal = "";
 
             Titel = buch.BasicInfos.Titel;
             Author = buch.BasicInfos.Author;
             Verlag = buch.BasicInfos.Verlag;
             ISBN = buch.BasicInfos.ISBN;
+            Beschreibung = buch.BasicInfos.Beschreibung;
 
             Auflage = buch.BasicInfos.Auflage.GetValueOrDefault();
             Altersvorschlag = buch.BasicInfos.Altersvorschlag;
-            Regal = buch.BasicInfos.Regal;            
+            Regal = buch.BasicInfos.Regal;
             buch.Schlagwoerter.ForEach(x => Schlagwoerter += x + " ");
             buch.Genres.ForEach(x => Genres += x + " ");
             Exemplare = buch.Exemplare.Count();
-
-            // ToDo: Implement methods
 
             AddPrintListCommand = new DelegateCommand(x =>
             {
@@ -156,6 +153,7 @@ namespace BoOp.UI.WPF.ViewModels
                 BuchModel.BasicInfos.Verlag = _verlag.Trim(' ');
                 BuchModel.BasicInfos.Altersvorschlag = _altersvorschlag;
                 BuchModel.BasicInfos.Regal = _regal;
+                BuchModel.BasicInfos.Beschreibung = _beschreibung;
 
                 var bookCount = BuchModel.ExemplarAnzahl;
 
