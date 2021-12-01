@@ -30,9 +30,18 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" VerticalAlignment="Center">
+                    <StackPanel Margin="10">
+                        <Label Style="{StaticResource LabelBookStyle}" Content="Cover Vorschau:"/>
+                        <Image Width="250" Source="{Binding CoverPath}"/>
+                    </StackPanel>
+                    
+                </Grid>
+
+                <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -85,11 +94,19 @@
                     <Button Margin="10" Grid.Row="12" Grid.Column="0" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding CancelCommand}" Content="Abrechen" />
                     <Button Margin="10" Grid.Row="12" Grid.Column="1" FontSize="24" Style="{StaticResource RoundedButtonStyle}" Width="250" Command="{Binding SaveCommand}" Content="Speichern" />
                 </Grid>
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="2">
                     <StackPanel>
-                        <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" Grid.Row="10"  HorizontalAlignment="Center" VerticalAlignment="Center" Content="Beschreibung:" />
+                        <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18"  VerticalAlignment="Center" Content="Beschreibung:" />
 
                         <TextBox TextWrapping="Wrap" MaxLength="275" Margin="10" Width="300" Height="450" FontSize="24" Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding Beschreibung}" HorizontalAlignment="Center" />
+                        <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" VerticalAlignment="Center" Content="Cover Link:" />
+                        <TextBox Style="{StaticResource AddBookTextBoxStyle}" Text="{Binding CoverPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LoadPicCommand}">
+                            <StackPanel>
+                                <TextBlock Text="Cover Lokal" HorizontalAlignment="Center" FontSize="14"/>
+                                <TextBlock Text="auswählen" HorizontalAlignment="Center" FontSize="14"/>
+                            </StackPanel>
+                        </Button>
 
                     </StackPanel>
                     

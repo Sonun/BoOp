@@ -20,9 +20,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="6*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <!--HEADER-->
@@ -163,7 +163,7 @@
                                         <Image Height="30" Width="140" Source="{Binding RatingPic}"/>
                                     </Label>
 
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
+                                    <TextBlock Grid.Column="1" FontSize="14" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
 
                                     <Label  Grid.Column="2" Margin="0, 5, 0, 0">
                                         <StackPanel Orientation="Horizontal" >
@@ -199,10 +199,10 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" Name="ReviewStackPanel">
-                <Label HorizontalAlignment="Center" Margin="20">
-                    <TextBlock Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Schreibe Deine Bewertung in das Textfeld."/>
+                <Label HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource BooklistBookStyle}" FontStyle="Italic" FontSize="16" TextWrapping="Wrap" Text="Schreibe Deine Bewertung in das Textfeld."/>
                 </Label>
-                <TextBox Style="{StaticResource AddBookTextBoxStyle}" FontSize="18" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="200" Width="{Binding ElementName=ReviewStackPanel, Path=ActualWidth}"/>
+                <TextBox Style="{StaticResource AddBookTextBoxStyle}" MaxLength="300" FontSize="14" Text="{Binding ReviewText}" TextWrapping="Wrap" Height="120" Width="{Binding ElementName=ReviewStackPanel, Path=ActualWidth}"/>
             </StackPanel>
 
             <Button Grid.Column="2" Style="{StaticResource RoundedButtonStyle}" Content="bewerten" Command="{Binding RateBookCommand}" Width="100" Height="35" HorizontalAlignment="Left"/>

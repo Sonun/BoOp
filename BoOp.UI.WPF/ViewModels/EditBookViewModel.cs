@@ -27,6 +27,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand AddPrintListCommand { get; set; }
         public DelegateCommand DeleteBooksCommand { get; set; }
+        public DelegateCommand LoadPicCommand { get; set; }
 
         private string _titel;
         private string _author;
@@ -43,6 +44,14 @@ namespace BoOp.UI.WPF.ViewModels
         private readonly INavigationService _navigationService;
         private readonly ILibrary _library;
         private readonly AdminViewModel _adminViewModel;
+        private string _coverPath;
+
+        public string CoverPath
+        {
+            get { return _coverPath; }
+            set { SetValue(ref _coverPath, value); }
+        }
+
 
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
@@ -203,6 +212,19 @@ namespace BoOp.UI.WPF.ViewModels
 
                 _navigationService.ShowAdminView(user);
             });
+
+            LoadPicCommand = new DelegateCommand(
+                x =>
+                {
+                    try
+                    {
+
+                    }
+                    catch
+                    {
+
+                    }
+                });
         }
     }
 }
