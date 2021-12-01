@@ -180,25 +180,35 @@ namespace BoOp.UI.WPF.ViewModels
             LoadBackupCommand = new DelegateCommand(
                 x =>
                 {
-                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                    dialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\SQLiteBoOpDB.db";
-                    dialog.IsFolderPicker = false;
-                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    if (MessageBox.Show("Der jetzige Stand, wird beim Laden überschrieben. \n\nsind sie sicher, dass Sie die Datenbank überschreiben möchten?", "Laden?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        string destinationFile = Directory.GetCurrentDirectory() + @"\SQLiteDB\SQLiteBoOpDB.db";
-                        string sourceFile = dialog.FileName;
-                        if (File.Exists(sourceFile))
+                        CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                        dialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\SQLiteBoOpDB.db";
+                        dialog.IsFolderPicker = false;
+                        if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                         {
-                            try
+                            string destinationFile = Directory.GetCurrentDirectory() + @"\SQLiteDB\SQLiteBoOpDB.db";
+                            string sourceFile = dialog.FileName;
+                            if (File.Exists(sourceFile))
                             {
-                                FileInfo i = new FileInfo(sourceFile);
-                                File.Copy(sourceFile, destinationFile, true);
-                                MessageBox.Show("Das Backup wurde erfolgreich geladen! \n\n Ansicht wird Aktualisiert!", "Erfolg!");
-                                _navigationService.ShowAdminView(user);
-                            }
-                            catch (IOException iox)
-                            {
-                                MessageBox.Show("Fehler beim Laden des Backups :( \n\n" + iox.Message, "Fehler!");
+                                try
+                                {
+                                    var fileExtension = sourceFile.Substring(sourceFile.Length - 3, 3).ToLower();
+                                    if (!fileExtension.Equals(".db"))
+                                    {
+                                        MessageBox.Show("Sie haben keine Datenbankdatei ausgewählt!","Fehler!");
+                                        return;
+                                    }
+
+                                    FileInfo i = new FileInfo(sourceFile);
+                                    File.Copy(sourceFile, destinationFile, true);
+                                    MessageBox.Show("Das Backup wurde erfolgreich geladen! \n\n Ansicht wird Aktualisiert!", "Erfolg!");
+                                    _navigationService.ShowAdminView(user);
+                                }
+                                catch (IOException iox)
+                                {
+                                    MessageBox.Show("Fehler beim Laden des Backups :( \n\n" + iox.Message, "Fehler!");
+                                }
                             }
                         }
                     }
@@ -242,7 +252,7 @@ namespace BoOp.UI.WPF.ViewModels
                     //check if there is something to print
                     if (BookPrintList == null || BookPrintList.Count == 0)
                     {
-                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu");
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu", "Fehler!");
                         return;
                     }
 
@@ -257,12 +267,12 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         Utils.GenerateMultipleBarcodePDF(triplelist, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
-                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
+                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.", "Erfolg!");
                         StaticBookPrintList.Clear();
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message);
+                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message, "Fehler!");
                     }
                     
                 });
@@ -273,7 +283,7 @@ namespace BoOp.UI.WPF.ViewModels
                     //check if there is something to print
                     if(UserIDPrintList == null || UserIDPrintList.Count == 0)
                     {
-                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu");
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu", "Fehler!");
                         return;
                     }
 
@@ -288,12 +298,12 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         Utils.GenerateMultipleBarcodePDF(triplelist, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
-                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
+                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.", "Erfolg!");
                         StaticUserIDPrintList.Clear();
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message);
+                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message, "Fehler!");
                     }
 
                 });
