@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Butterflies\0butterflies.png" />
+    <None Remove="Assets\Butterflies\1.5butterflies.png" />
+    <None Remove="Assets\Butterflies\1butterflies.png" />
+    <None Remove="Assets\Butterflies\2.5butterflies.png" />
+    <None Remove="Assets\Butterflies\2butterflies.png" />
+    <None Remove="Assets\Butterflies\3.5butterflies.png" />
+    <None Remove="Assets\Butterflies\3butterflies.png" />
+    <None Remove="Assets\Butterflies\4.5butterflies.png" />
+    <None Remove="Assets\Butterflies\4butterflies.png" />
+    <None Remove="Assets\Butterflies\5butterflies.png" />
     <None Remove="Assets\Icons\Review\3077106.png" />
     <None Remove="Assets\Icons\Review\schoolbutterfly.png" />
     <None Remove="Assets\Icons\Search\Search_glyph71GrayNoHalo_16x.png" />
@@ -24,6 +34,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Butterflies\0butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\1.5butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\1butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\2.5butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\2butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\3.5butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\3butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\4.5butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\4butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Butterflies\5butterflies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\Review\3077106.png" />
     <Resource Include="Assets\Icons\Review\schoolbutterfly.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
