@@ -217,10 +217,19 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         triplelist.Add((book.Model.BasicInfos.Barcode, book.BuchModel.BasicInfos.Titel + " - " + book.BuchModel.BasicInfos.Author, ""));
                     }
-                    Utils.GenerateMultipleBarcodePDF(triplelist, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
-                    MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
-                    StaticBookPrintList.Clear();
+                    try
+                    {
+                        Utils.GenerateMultipleBarcodePDF(triplelist, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
+                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
+                        StaticBookPrintList.Clear();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message);
+                    }
+                    
                 });
 
             PrintUserCardsCommand = new DelegateCommand(
@@ -239,10 +248,19 @@ namespace BoOp.UI.WPF.ViewModels
                     {
                         triplelist.Add((user.Model.AusweisID, user.Model.VorUndNachname, user.Model.Klassenname));
                     }
-                    Utils.GenerateMultipleBarcodePDF(triplelist, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
-                    MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
-                    StaticUserIDPrintList.Clear();
+                    try
+                    {
+                        Utils.GenerateMultipleBarcodePDF(triplelist, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
+                        MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
+                        StaticUserIDPrintList.Clear();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("PDF konnte nicht erstellt werden." + e.Message);
+                    }
+
                 });
 
             //SortTitleCommand
