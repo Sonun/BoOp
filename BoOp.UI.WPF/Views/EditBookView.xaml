@@ -18,7 +18,8 @@
     <Grid Background="{StaticResource  Secondary}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -35,27 +36,45 @@
             <RowDefinition Height="1.35*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
-        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
-        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
-        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
-        <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
-        <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
-        <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
-        <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
+        <Grid Grid.Row="1" Grid.RowSpan="9">
+            <StackPanel Margin="10">
+                <Label Style="{StaticResource LabelBookStyle}" Content="Cover Vorschau:"/>
+                <Image Width="200" MaxHeight="300" Source="{Binding CoverPath}"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+                <Label Margin="10" Style="{StaticResource LabelBookStyle}" FontSize="18" VerticalAlignment="Center" Content="Cover Link:" />
+                <TextBox Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding CoverPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LoadPicCommand}">
+                    <StackPanel>
+                        <TextBlock Text="Cover Lokal" HorizontalAlignment="Center" FontSize="14"/>
+                        <TextBlock Text="auswählen" HorizontalAlignment="Center" FontSize="14"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
 
-        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
+        </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="9">
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titel:"/>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Author:"/>
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Verlag:"/>
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Auflage:"/>
+        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genres:"/>
+        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Schlagwörter:"/>
+        <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
+        <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
+        <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
+
+        <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Verlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Auflage}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Genres}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Schlagwoerter}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="8" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="9" Grid.Column="2" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
+
+        <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="2*"/>
@@ -135,7 +154,7 @@
             </StackPanel>
         </Grid>
         
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4">
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Zurück"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>

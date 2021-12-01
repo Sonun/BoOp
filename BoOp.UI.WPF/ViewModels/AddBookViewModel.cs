@@ -37,6 +37,15 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _addPrintList;
         private string _beschreibung;
 
+        private string _coverPath;
+
+        public string CoverPath
+        {
+            get { return _coverPath; }
+            set { SetValue(ref _coverPath, value); }
+        }
+
+
         public string Titel { get { return _titel; } set { _titel = value; OnPropertyChanged(); } }
         public string Author { get { return _author; } set { _author = value; OnPropertyChanged(); } }
         public string Verlag { get { return _verlag; } set { _verlag = value; OnPropertyChanged(); } }
@@ -53,6 +62,7 @@ namespace BoOp.UI.WPF.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SearchInfosCommand { get; set; }
+        public DelegateCommand LoadPicCommand { get; set; }
 
         public AddBookViewModel(INavigationService navigationservice, ILibrary library, PersonModel user)
         {
@@ -168,6 +178,18 @@ namespace BoOp.UI.WPF.ViewModels
                     catch
                     {
                         MessageBox.Show("ISBN wurde nicht gefunden, bitte geben sie das Buch händisch ein!");
+                    }
+                });
+            LoadPicCommand = new DelegateCommand(
+                x =>
+                {
+                    try
+                    {
+
+                    }
+                    catch
+                    {
+
                     }
                 });
         }
