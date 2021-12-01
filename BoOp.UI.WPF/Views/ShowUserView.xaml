@@ -83,6 +83,13 @@
                             <TextBlock Text="{Binding PersonModel.Rechte}"/>
                         </StackPanel>
                     </Label>
+
+                    <Label>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Klassenname: "/>
+                            <TextBlock Text="{Binding PersonModel.Klassenname}"/>
+                        </StackPanel>
+                    </Label>
                 </StackPanel>
 
                 <!--LENDED BOOKS-->
