@@ -39,7 +39,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="{Binding BookCoverPath}" Margin="10" VerticalAlignment="Center"></Image>
+            <Image Source="{Binding CoverPath}" Margin="10" VerticalAlignment="Center"></Image>
 
             <StackPanel x:Name="gridname" Grid.Column="2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Style="{StaticResource LabelBookStyle}" HorizontalAlignment="Left" Grid.ColumnSpan="2">

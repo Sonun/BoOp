@@ -4,9 +4,12 @@ using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -79,6 +82,7 @@ namespace BoOp.UI.WPF.ViewModels
             Schlagwoerter = "";
             Genres = "";
             Beschreibung = "";
+            CoverPath = "";
             Exemplare = 1;
 
             SaveCommand = new DelegateCommand( 
@@ -109,7 +113,8 @@ namespace BoOp.UI.WPF.ViewModels
                             ISBN = new string(_isbn.Where(c => char.IsDigit(c)).ToArray()),
                             Altersvorschlag = _altersvorschlag,
                             Regal = _regal,
-                            Beschreibung = _beschreibung
+                            Beschreibung = _beschreibung,
+                            BildPfad = _coverPath
                         }, 
                         Exemplare = new List<ExemplarModel>(),
                     };
@@ -183,13 +188,22 @@ namespace BoOp.UI.WPF.ViewModels
             LoadPicCommand = new DelegateCommand(
                 x =>
                 {
-                    try
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.IsFolderPicker = false;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
-
-                    }
-                    catch
-                    {
-
+                        string sourceFile = dialog.FileName;
+                        if (File.Exists(sourceFile))
+                        {
+                            try
+                            {
+                                CoverPath = sourceFile;
+                            }
+                            catch (IOException iox)
+                            {
+                                MessageBox.Show("Fehler beim Laden des Bildes :( \n\n" + iox.Message, "Fehler!");
+                            }
+                        }
                     }
                 });
         }
@@ -213,8 +227,33 @@ namespace BoOp.UI.WPF.ViewModels
 
             var indexAuthor = sortedInfos.FindIndex(x => x.Contains("authors"));
             Author = new string(sortedInfos[indexAuthor + 1].Trim().Skip(1).TakeWhile(x => x != '"').ToArray());
-
             Verlag = new string(sortedInfos.Where(x => x.Contains("publisher")).FirstOrDefault().Trim().Skip(14).TakeWhile(x => x != '"').ToArray());
+
+            var uri = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
+
+            // geht aber kein bild 9783845843605
+            // geht aber bild 9780141036144
+
+            var image = new BitmapImage(new Uri(uri));
+
+            if (image.IsDownloading)
+            {
+                image.DownloadCompleted += (s, e) =>
+                {
+                    if (image.PixelHeight > 10)
+                    {
+                        CoverPath = uri;
+                    }
+                    else
+                    {
+                        CoverPath = "";
+                    }
+                };
+            }
+            else
+            {
+                CoverPath = "";
+            }
         }
     }
 }

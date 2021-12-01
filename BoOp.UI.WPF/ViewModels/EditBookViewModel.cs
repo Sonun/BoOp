@@ -2,8 +2,10 @@
 using BoOp.DBAccessor.Models;
 using BoOp.UI.WPF.Common;
 using BoOp.UI.WPF.ViewModels.ViewModelUtils;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -40,11 +42,11 @@ namespace BoOp.UI.WPF.ViewModels
         private string _schlagwoerter;
         private string _genres;
         private string _beschreibung;
+        private string _coverPath;
 
         private readonly INavigationService _navigationService;
         private readonly ILibrary _library;
         private readonly AdminViewModel _adminViewModel;
-        private string _coverPath;
 
         public string CoverPath
         {
@@ -83,6 +85,7 @@ namespace BoOp.UI.WPF.ViewModels
             Beschreibung = buch.BasicInfos.Beschreibung;
             Schlagwoerter = "";
             Genres = "";
+            CoverPath = "";
 
             Auflage = buch.BasicInfos.Auflage.GetValueOrDefault();
             Altersvorschlag = buch.BasicInfos.Altersvorschlag;
@@ -90,6 +93,7 @@ namespace BoOp.UI.WPF.ViewModels
             buch.Schlagwoerter.ForEach(x => Schlagwoerter += x + " ");
             buch.Genres.ForEach(x => Genres += x + " ");
             Exemplare = buch.Exemplare.Count();
+            if (buch.BasicInfos.BildPfad != null) CoverPath = buch.BasicInfos.BildPfad;
 
             AddPrintListCommand = new DelegateCommand(x =>
             {
@@ -165,6 +169,7 @@ namespace BoOp.UI.WPF.ViewModels
                 BuchModel.BasicInfos.Altersvorschlag = _altersvorschlag;
                 BuchModel.BasicInfos.Regal = _regal;
                 BuchModel.BasicInfos.Beschreibung = _beschreibung;
+                BuchModel.BasicInfos.BildPfad = _coverPath;
 
                 var bookCount = BuchModel.ExemplarAnzahl;
 
@@ -216,13 +221,22 @@ namespace BoOp.UI.WPF.ViewModels
             LoadPicCommand = new DelegateCommand(
                 x =>
                 {
-                    try
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.IsFolderPicker = false;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
-
-                    }
-                    catch
-                    {
-
+                        string sourceFile = dialog.FileName;
+                        if (File.Exists(sourceFile))
+                        {
+                            try
+                            {
+                                CoverPath = sourceFile;
+                            }
+                            catch (IOException iox)
+                            {
+                                MessageBox.Show("Fehler beim Laden des Bildes :( \n\n" + iox.Message, "Fehler!");
+                            }
+                        }
                     }
                 });
         }

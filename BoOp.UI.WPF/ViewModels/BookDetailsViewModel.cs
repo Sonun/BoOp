@@ -5,6 +5,7 @@ using BoOp.UI.WPF.ViewModels.ViewModelUtils;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation;
 
 namespace BoOp.UI.WPF.ViewModels
 {
@@ -25,6 +26,7 @@ namespace BoOp.UI.WPF.ViewModels
         private bool _showBookDetailsView;
         private string _reviewText;
         private double _selectedRating;
+        private string _coverPath;
 
         public double Rating
         {
@@ -113,7 +115,11 @@ namespace BoOp.UI.WPF.ViewModels
         }
 
         public int BookDetailsPropertyNameWidth { get; set; } = 180;
-        public string BookCoverPath { get; set; } = "https://i.pinimg.com/474x/31/63/49/3163495d3176cdff641c3e1b269a7a96--story-books-kid-books.jpg";
+        public string CoverPath
+        {
+            get { return _coverPath; }
+            set { SetValue(ref _coverPath, value); }
+        }
         public string ReviewText { get { return _reviewText; } set { _reviewText = value; OnPropertyChanged(); } }
         public bool ShowBookDetailsView { get { return _showBookDetailsView; } set { _showBookDetailsView = value; OnPropertyChanged(); } }
 
@@ -207,7 +213,17 @@ namespace BoOp.UI.WPF.ViewModels
         {
             var rawISBNSplit = book.BasicInfos.ISBN.Split(' ', '-', '.', ',');
             var rawISBN = string.Join("", rawISBNSplit);
-            BookCoverPath = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
+
+            try
+            {
+                if (book.BasicInfos.BildPfad.Equals(""))
+                    throw new ElementNotAvailableException();
+                CoverPath = book.BasicInfos.BildPfad;
+            }
+            catch
+            {
+                CoverPath = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
+            }
         }
     }
 }
