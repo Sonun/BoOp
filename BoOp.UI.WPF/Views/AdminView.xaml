@@ -31,55 +31,45 @@
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintBookBarcodesCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text=" Barcodes PDF " FontSize="14" HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
-                            <TextBlock Text=" speichern " FontSize="14" HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
+                            <TextBlock Text=" Barcodes PDF " HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
+                            <TextBlock Text=" speichern " HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
                 <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding PrintUserCardsCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text=" Ausweise PDF " FontSize="14" HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
-                            <TextBlock Text=" speichern " FontSize="14" HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
+                            <TextBlock Text=" Ausweise PDF " HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
+                            <TextBlock Text=" speichern " HorizontalAlignment="Center" Margin="10 ,0, 10, 0"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
             </StackPanel>
             
             <!-- buttons -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Height="Auto" HorizontalAlignment="Center">
-                <Button x:Name="middleButton" Height="Auto" Width="Auto" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Center" Text=" Buch " Margin="10 ,0, 10, 0"/>
-                        <TextBlock HorizontalAlignment="Center" Text=" hinzufügen " Margin="10 ,0, 10, 0"/>
-                    </StackPanel>
-                </Button>
-                <Button Height="{Binding ElementName=middleButton, Path=ActualHeight}" Width="{Binding ElementName=middleButton, Path=ActualWidth}" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Center" Text=" Person " Margin="10 ,0, 10, 0"/>
-                        <TextBlock HorizontalAlignment="Center" Text=" hinzufügen " Margin="10 ,0, 10, 0"/>
-                    </StackPanel>
-                </Button>
-                <Button Height="{Binding ElementName=middleButton, Path=ActualHeight}" Width="{Binding ElementName=middleButton, Path=ActualWidth}" Content=" Zurück " Margin="10 ,0, 10, 0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="180" Content=" Buch hinzufügen " Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddBookCommand}"/>
+                <Button Width="180" Content=" Person hinzufügen" Style="{StaticResource RoundedButtonStyle}" Command="{Binding AddPersonCommand}"/>
+                <Button Content=" Zurück " Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackCommand}"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" Grid.Column="2" Orientation="Horizontal">
-                <Button FontSize="14" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LoadBackupCommand}">
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding LoadBackupCommand}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Center" Text="Backup" Margin="10 ,0, 10, 0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Laden" Margin="10 ,0, 10, 0"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Backup" />
+                        <TextBlock HorizontalAlignment="Center" Text="Laden"/>
                     </StackPanel>
                 </Button>
-                <Button FontSize="14" Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackUpDatabaseCommand}">
+                <Button Style="{StaticResource RoundedButtonStyle}" Command="{Binding BackUpDatabaseCommand}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Center" Text="Datenbank" Margin="10 ,0, 10, 0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Backup" Margin="10 ,0, 10, 0"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Datenbank"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Backup"/>
                     </StackPanel>
                 </Button>
-                <Button  Style="{StaticResource RoundedButtonStyle}" FontSize="14" Command="{Binding CloseApplicationCommand}" Foreground="{StaticResource Unavailable}" Background="{StaticResource Available}">
+                <Button  Style="{StaticResource RoundedButtonStyle}" Command="{Binding CloseApplicationCommand}" Foreground="{StaticResource Unavailable}" Background="{StaticResource Available}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Center" Text="Programm" Margin="10 ,0, 10, 0"/>
-                        <TextBlock HorizontalAlignment="Center" Text="beenden!" Margin="10 ,0, 10, 0"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Programm"/>
+                        <TextBlock HorizontalAlignment="Center" Text="beenden!"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

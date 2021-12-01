@@ -115,6 +115,21 @@
         <Setter Property="Width" Value="140" />
         <Setter Property="MinWidth" Value="100" />
         <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard x:Name="SB">
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Storyboard.TargetProperty="(Button.FontSize)" Duration="00:00:00.30" From="20" To="18" AutoReverse="True" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="SB"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="IconButton" TargetType="Button">
