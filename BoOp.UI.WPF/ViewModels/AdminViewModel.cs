@@ -42,7 +42,9 @@ namespace BoOp.UI.WPF.ViewModels
 
         //button commands
 
-        public DelegateCommand BackUpDatabase { get; set; }
+        public DelegateCommand BackUpDatabaseCommand { get; set; }
+        public DelegateCommand LoadBackupCommand { get; set; }
+        
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand AddPersonCommand { get; set; }
         public DelegateCommand RemoveBookCommand { get; set; }
@@ -145,7 +147,7 @@ namespace BoOp.UI.WPF.ViewModels
 
             UserRights = user.Rechte;
 
-            BackUpDatabase = new DelegateCommand(
+            BackUpDatabaseCommand = new DelegateCommand(
                 x =>
                 {
                     CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -153,8 +155,6 @@ namespace BoOp.UI.WPF.ViewModels
                     dialog.IsFolderPicker = true;
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
-                        MessageBox.Show("You selected: " + dialog.FileName);
-                      
                         string sourceFile = Directory.GetCurrentDirectory() + @"\SQLiteDB\SQLiteBoOpDB.db";
                         string destinationFile = dialog.FileName;
                         if (File.Exists(sourceFile))
@@ -162,15 +162,50 @@ namespace BoOp.UI.WPF.ViewModels
                             try
                             {
                                 FileInfo i = new FileInfo(sourceFile);
-                                //i.CopyTo(Path.Combine(destinationFile,@"\Backup.db"),true);
-                                File.Copy(sourceFile, destinationFile+@"\SQLite_Backup_Database.db", true);
+                                File.Copy(sourceFile, destinationFile+@"\Datenbankb_Backup_" + DateTime.Now.ToString("g").Replace(":", "-") + ".db", true);
+                                MessageBox.Show("Backup liegt in: " + dialog.FileName, "Erfolg!");
                             }
                             catch (IOException iox)
                             {
-                                Console.WriteLine(iox.Message);
+                                MessageBox.Show("Fehler beim erstellen des Backups :( \n\n" + iox.Message, "Fehler!");
                             }
                         }
                     }
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
+                });
+
+            LoadBackupCommand = new DelegateCommand(
+                x =>
+                {
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\SQLiteBoOpDB.db";
+                    dialog.IsFolderPicker = false;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    {
+                        string destinationFile = Directory.GetCurrentDirectory() + @"\SQLiteDB\SQLiteBoOpDB.db";
+                        string sourceFile = dialog.FileName;
+                        if (File.Exists(sourceFile))
+                        {
+                            try
+                            {
+                                FileInfo i = new FileInfo(sourceFile);
+                                File.Copy(sourceFile, destinationFile, true);
+                                MessageBox.Show("Das Backup wurde erfolgreich geladen! \n\n Ansicht wird Aktualisiert!", "Erfolg!");
+                                _navigationService.ShowAdminView(user);
+                            }
+                            catch (IOException iox)
+                            {
+                                MessageBox.Show("Fehler beim Laden des Backups :( \n\n" + iox.Message, "Fehler!");
+                            }
+                        }
+                    }
+                },
+                y =>
+                {
+                    return user.Rechte >= Rechtelevel.BIBOTEAM;
                 });
 
             BackCommand = new DelegateCommand( 
