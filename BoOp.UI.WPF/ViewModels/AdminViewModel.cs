@@ -220,7 +220,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                     try
                     {
-                        Utils.GenerateMultipleBarcodePDF(tupelList, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                        Utils.GenerateMultipleBarcodePDF(triplelist, false, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
                         MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Bücher gespeichert.");
                         StaticBookPrintList.Clear();
@@ -251,7 +251,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                     try
                     {
-                        Utils.GenerateMultipleBarcodePDF(tupelList, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                        Utils.GenerateMultipleBarcodePDF(triplelist, true, user.VorUndNachname, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
                         MessageBox.Show("Die PDF Datei wurde unter: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\BoOp_PDF_Dateien\\{user.VorUndNachname}\\Ausweise gespeichert.");
                         StaticUserIDPrintList.Clear();
