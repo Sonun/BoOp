@@ -11,6 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920"
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
+             xmlns:common="clr-namespace:BoOp.UI.WPF.Common"
              d:DataContext="{d:DesignInstance Type=viewmodels:BookDetailsViewModel}">
 
     <Grid>
@@ -124,7 +125,7 @@
             
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="3.2*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
@@ -153,17 +154,13 @@
                             <StackPanel>
                                 <Grid Background="{StaticResource DropShadow}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}">
                                     <Grid.ColumnDefinitions >
-                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="3.2*"/>
                                         <ColumnDefinition Width="10*"/>
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0" Margin="5, 5, 0, 0">
-                                        <StackPanel Orientation="Horizontal" >
-                                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Sterne}"/>
-                                            <TextBlock Text="  "/>
-                                            <Image Source="/Assets/Icons/Review/3077106.png" Width="25"/>
-                                        </StackPanel>
+                                        <Image Height="30" Width="140" Source="{Binding RatingPic}"/>
                                     </Label>
 
                                     <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Style="{StaticResource BooklistBookStyle}" Text="{Binding RezensionModel.BasicInfos.Rezensionstext}"/>
@@ -194,15 +191,11 @@
                 <Label>
                     <TextBlock Margin="5" FontSize="16" Style="{StaticResource BooklistBookStyle}"  TextWrapping="Wrap" Text="Bewerte das Buch mit Schmetterlingen!"/>
                 </Label>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Source="/Assets/Icons/Review/3077106.png" Width="20" Margin="5" />
-                    <Image Source="/Assets/Icons/Review/3077106.png" Width="20" Margin="5" />
-                    <Image Source="/Assets/Icons/Review/3077106.png" Width="20" Margin="5" />
-                    <Image Source="/Assets/Icons/Review/3077106.png" Width="20" Margin="5" />
-                    <Image Source="/Assets/Icons/Review/3077106.png" Width="20" Margin="5" />
-                </StackPanel>
                 <Slider x:Name="RaingSlider" Maximum="5" Margin="10" Minimum="1" TickPlacement="Both" Foreground="{StaticResource Primary}" Value="{Binding Rating, UpdateSourceTrigger=PropertyChanged}" IsSnapToTickEnabled="True" TickFrequency="0.5"/>
-                <Label Width="Auto" Content="{Binding ElementName=RaingSlider, Path=Value}" HorizontalAlignment="Center" />
+                <Label Width="Auto" FontWeight="ExtraBold" FontSize="25" Content="{Binding ElementName=RaingSlider, Path=Value}" HorizontalAlignment="Center" />
+
+                <Image Height="30" Width="150" Source="{Binding RatingPic}"/>
+
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" Name="ReviewStackPanel">

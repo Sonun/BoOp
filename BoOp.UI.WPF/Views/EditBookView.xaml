@@ -10,6 +10,7 @@
              xmlns:local="clr-namespace:BoOp.UI.WPF.Views"
              mc:Ignorable="d" 
              xmlns:viewmodels="clr-namespace:BoOp.UI.WPF.ViewModels"
+             xmlns:common="clr-namespace:BoOp.UI.WPF.Common"
              d:DataContext="{d:DesignInstance Type=viewmodels:EditBookViewModel}"
              d:DesignHeight="800" d:DesignWidth="1300">
     
@@ -21,7 +22,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -44,7 +44,6 @@
         <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Altersvorschlag:"/>
         <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Regal:"/>
         <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Exemplare:"/>
-        <Label Grid.Row="10" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Beschreibung:"/>
 
         <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Titel}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Author}" HorizontalAlignment="Left"/>
@@ -55,9 +54,8 @@
         <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Altersvorschlag}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Regal}" HorizontalAlignment="Left"/>
         <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Exemplare}" HorizontalAlignment="Left"/>
-        <TextBox MaxLength="275" Grid.Row="10" Grid.Column="1" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Beschreibung}" HorizontalAlignment="Left"/>
 
-        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="7">
+        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="2*"/>
@@ -65,6 +63,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="10*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center">
@@ -127,9 +126,16 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
+
+            <StackPanel Grid.Row="2" Name="DescriptionStackPanel">
+                <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="Beschreibung:"/>
+                <TextBox TextWrapping="Wrap" Width="{Binding ElementName=DescriptionStackPanel, Path=ActualWidth}" Height="200" MaxLength="275" Style="{StaticResource LoginTextBoxTemplate}" Text="{Binding Beschreibung}" HorizontalAlignment="Left"/>
+
+
+            </StackPanel>
         </Grid>
         
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="3">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding CancelCommand}" Content="Zurück"/>
             <Button Style="{StaticResource RoundedButtonStyle}" TextBlock.FontSize="24" MinHeight="35" MaxHeight="35" Command="{Binding SaveCommand}" Content="Speichern"/>
         </StackPanel>
