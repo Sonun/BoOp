@@ -72,6 +72,8 @@ namespace BoOp.UI.WPF.ViewModels
             Verlag = buch.BasicInfos.Verlag;
             ISBN = buch.BasicInfos.ISBN;
             Beschreibung = buch.BasicInfos.Beschreibung;
+            Schlagwoerter = "";
+            Genres = "";
 
             Auflage = buch.BasicInfos.Auflage.GetValueOrDefault();
             Altersvorschlag = buch.BasicInfos.Altersvorschlag;
