@@ -101,7 +101,10 @@ namespace BoOp.UI.WPF.ViewModels
 
                     var isbn = new string(ISBN.Trim(' ').ToArray());
 
-
+                    if (_coverPath.Trim() == "")
+                    {
+                        CoverPath = "/Assets/Icons/Review/nocover.png";
+                    }
                     var bookModel = new BuchModel
                     {
                         BasicInfos = new BasicBuchModel

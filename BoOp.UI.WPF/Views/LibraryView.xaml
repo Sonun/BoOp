@@ -123,9 +123,6 @@
                                     <TextBlock Grid.Column="2" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.ExemplarBindingForSuperAwsomeWPFLibraryView}"/>
                                     <!--<TextBlock Grid.Column="3" HorizontalAlignment="Left" Style="{StaticResource BooklistBookStyle}" Text="{Binding Model.RezensionenDurschschnitt}"/>-->
                                     <Image HorizontalAlignment="Left" Grid.Column="3" Height="30" Width="150" Source="{Binding RatingPic}" />
-
-
-
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
