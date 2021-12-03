@@ -95,7 +95,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                     if (_titel.Equals("") || _author.Equals("") || _verlag.Equals("") || _isbn.Equals(""))
                     {
-                        MessageBox.Show("Füllen Sie Alle Felder Aus");
+                        MessageBox.Show("Füllen Sie alle Felder Aus!", "Fehler!");
                         return;
                     }
 
@@ -125,7 +125,7 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(e.Message, "Fehler");
                         return;
                     }
 
@@ -156,7 +156,7 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(e.Message, "Fehler");
                         return;
                     }
                     if (AddPrintList)
@@ -182,7 +182,7 @@ namespace BoOp.UI.WPF.ViewModels
                     }
                     catch
                     {
-                        MessageBox.Show("ISBN wurde nicht gefunden, bitte geben sie das Buch händisch ein!");
+                        MessageBox.Show("ISBN wurde nicht gefunden, bitte geben sie das Buch händisch ein!", "Fehler");
                     }
                 });
             LoadPicCommand = new DelegateCommand(

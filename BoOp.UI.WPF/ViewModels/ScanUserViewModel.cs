@@ -29,7 +29,7 @@ namespace BoOp.UI.WPF.ViewModels
         private string _personBarcode;
 
         public string PersonBarcoded { get { return _personBarcode; } set { _personBarcode = value; OnPropertyChanged(); } }
-        public string LogoutWarning { get { return "Sie werden nach \"Weiter\"\nnach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
+        public string LogoutWarning { get { return "      Sie werden nach \"Weiter\"\nnach " + _logoutTimespan + " Minuten wieder ausgeloggt"; } }
         public TextBox ScanBox { get; set; }
 
         public DelegateCommand LoginButtonCommand { get; set; }

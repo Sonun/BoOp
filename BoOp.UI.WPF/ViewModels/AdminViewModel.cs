@@ -167,7 +167,7 @@ namespace BoOp.UI.WPF.ViewModels
                             }
                             catch (IOException iox)
                             {
-                                MessageBox.Show("Fehler beim erstellen des Backups :( \n\n" + iox.Message, "Fehler!");
+                                MessageBox.Show("Fehler beim Erstellen des Backups :( \n\n" + iox.Message, "Fehler!");
                             }
                         }
                     }
@@ -180,7 +180,7 @@ namespace BoOp.UI.WPF.ViewModels
             LoadBackupCommand = new DelegateCommand(
                 x =>
                 {
-                    if (MessageBox.Show("Der jetzige Stand, wird beim Laden überschrieben. \n\nsind sie sicher, dass Sie die Datenbank überschreiben möchten?", "Laden?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Der jetzige Stand wird beim Laden überschrieben. \n\nSind Sie sicher, dass Sie die Datenbank überschreiben möchten?", "Laden?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         CommonOpenFileDialog dialog = new CommonOpenFileDialog();
                         dialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\SQLiteBoOpDB.db";
@@ -202,7 +202,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                                     FileInfo i = new FileInfo(sourceFile);
                                     File.Copy(sourceFile, destinationFile, true);
-                                    MessageBox.Show("Das Backup wurde erfolgreich geladen! \n\n Ansicht wird Aktualisiert!", "Erfolg!");
+                                    MessageBox.Show("Das Backup wurde erfolgreich geladen! \n\nAnsicht wird aktualisiert!", "Erfolg!");
                                     _navigationService.ShowAdminView(user);
                                 }
                                 catch (IOException iox)
@@ -252,7 +252,7 @@ namespace BoOp.UI.WPF.ViewModels
                     //check if there is something to print
                     if (BookPrintList == null || BookPrintList.Count == 0)
                     {
-                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu", "Fehler!");
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten, war Leer. \n\nFügen Sie zuerst Daten zum Drucken hinzu", "Fehler!");
                         return;
                     }
 
@@ -283,7 +283,7 @@ namespace BoOp.UI.WPF.ViewModels
                     //check if there is something to print
                     if(UserIDPrintList == null || UserIDPrintList.Count == 0)
                     {
-                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer, fügen sie zuerst Daten zum Drucken hinzu", "Fehler!");
+                        MessageBox.Show("Die Liste, die Sie Drucken wollten war Leer. \n\nFügen sie zuerst Daten zum Drucken hinzu!", "Fehler!");
                         return;
                     }
 
