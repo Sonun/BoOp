@@ -180,7 +180,7 @@ namespace BoOp.UI.WPF.ViewModels
             LoadBackupCommand = new DelegateCommand(
                 x =>
                 {
-                    if (MessageBox.Show("Der jetzige Stand, wird beim Laden überschrieben. \n\nSind Sie sicher, dass Sie die Datenbank überschreiben möchten?", "Laden?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Der jetzige Stand wird beim Laden überschrieben. \n\nSind Sie sicher, dass Sie die Datenbank überschreiben möchten?", "Laden?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         CommonOpenFileDialog dialog = new CommonOpenFileDialog();
                         dialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\SQLiteBoOpDB.db";
