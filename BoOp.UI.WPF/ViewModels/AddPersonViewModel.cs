@@ -191,7 +191,7 @@ namespace BoOp.UI.WPF.ViewModels
 
                     if (_vorname.Equals("") || _nachname.Equals("") || (_rechteAsInt > 1 && _passwort.Equals("")))
                     {
-                        MessageBox.Show("Bitte fülle alle Nötigen felder aus, bei Benutzern die höher gestellt sind als Leser, muss ein Passwort vergeben werden!");
+                        MessageBox.Show("Bitte fülle alle nötigen Felder aus, bei Benutzern die höher gestellt sind, als ein Leser, muss ein Passwort vergeben werden!");
                         return;
                     }
 
