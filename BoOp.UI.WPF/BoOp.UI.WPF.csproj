@@ -20,6 +20,7 @@
     <None Remove="Assets\Butterflies\4butterflies.png" />
     <None Remove="Assets\Butterflies\5butterflies.png" />
     <None Remove="Assets\Icons\Review\3077106.png" />
+    <None Remove="Assets\Icons\Review\nocover.png" />
     <None Remove="Assets\Icons\Review\schoolbutterfly.png" />
     <None Remove="Assets\Icons\Search\Search_glyph71GrayNoHalo_16x.png" />
     <None Remove="Assets\Icons\Sort\Sort_noHalo_16x.png" />
@@ -65,6 +66,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Icons\Review\3077106.png" />
+    <Resource Include="Assets\Icons\Review\nocover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\Review\schoolbutterfly.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

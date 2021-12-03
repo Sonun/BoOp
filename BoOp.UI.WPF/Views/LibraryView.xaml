@@ -55,7 +55,6 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-
             </Grid>
 
 
@@ -88,9 +87,7 @@
                 </TextBlock>
             </Button>
             <Button Style="{StaticResource SortButton}" Grid.Column="2" >
-                <TextBlock Text="Exemplare (verfügbar)">
-                    <Image Width="16" Height="16" Margin="0, 0, 5, 0"/>
-                </TextBlock>
+                <TextBlock Text="Exemplare (verfügbar)"/>
             </Button>
             <Button Style="{StaticResource SortButton}" Grid.Column="3" Command="{Binding SortRatingCommand}" >
                 <TextBlock Text="Bewertung">

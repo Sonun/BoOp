@@ -138,6 +138,7 @@ namespace BoOp.UI.WPF.ViewModels
             PersonModel = user;
             _navigationService = navigationService;
             _libraryViewModel = libraryViewModel;
+            CoverPath = "/Assets/Icons/Review/nocover.png";
 
             for (int i = 1; i < 6; i++)
             {
@@ -214,13 +215,18 @@ namespace BoOp.UI.WPF.ViewModels
             var rawISBNSplit = book.BasicInfos.ISBN.Split(' ', '-', '.', ',');
             var rawISBN = string.Join("", rawISBNSplit);
 
-            try
+            if (book.BasicInfos.BildPfad != null)
             {
-                if (book.BasicInfos.BildPfad.Equals(""))
-                    throw new ElementNotAvailableException();
-                CoverPath = book.BasicInfos.BildPfad;
+                if (book.BasicInfos.BildPfad.Trim() != "")
+                {
+                    CoverPath = book.BasicInfos.BildPfad;
+                }
+                else
+                {
+                    CoverPath = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
+                }
             }
-            catch
+            else
             {
                 CoverPath = "http://covers.openlibrary.org/b/isbn/" + rawISBN + ".jpg";
             }
