@@ -43,5 +43,20 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <Expander Grid.Row="1" Grid.Column="2" Header="Impressum">
+            <StackPanel>
+                <Label />
+                <Label Content="Middle Endian GmbH" />
+                <Label Content="Fiktive Firma der Friedrich Ebert Berufsschule" />
+                <Label Content="Klasse 11BE10 - Jahrgang 2021" />
+                <Label Content="Team:" />
+                <Label Margin="50, 0" Content="Manuel J." />
+                <Label Margin="50, 0" Content="Dominik v.M."/>
+                <Label Margin="50, 0" Content="Aynur S." />
+                <Label Margin="50, 0" Content="Forian H." />
+                <Label Margin="50, 0" Content="Igor B." />
+            </StackPanel>
+        </Expander>
     </Grid>
 </UserControl>
